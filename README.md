@@ -8,7 +8,7 @@ Open `index.html` locally, or publish this repository with GitHub Pages (`main` 
 
 ## What's included
 
-Evolution 3.0: multiple weapons, XP coin tiers, 6 biomes, cover walls, bosses and mini-bosses, 35+ run upgrades and 21 permanent Hangar upgrades.
+Evolution 4.0 Phase 1 (Combat Reborn) builds on Evolution 3.0: improved joystick movement, stable auto-targeting with limited lead, Dash afterimages, hit reactions, collision detection for fast projectiles, and rendering optimizations. The game still includes multiple weapons, XP coin tiers, 6 biomes, cover walls, bosses, mini-bosses, 36 level-up upgrades, and 21 permanent Hangar upgrades.
 
 ## Save backups and upgrades
 
@@ -25,3 +25,7 @@ Edit `index.html` on the `main` branch. GitHub Pages republishes it to the **sam
 ## Privacy
 
 There are no ads, tracking services, passwords, usernames, emails, or external network calls in this game. Only the repository owner name, repository content and GitHub-hosted website become public if the repository is public. Avoid putting personal information in future commits, README files or filenames.
+
+## Evolution 4.0 release approach
+
+Phase 1 (Combat Reborn) has been tested on portrait and landscape browser viewports. Phases 2–6 (weapons, bosses, progression, biomes, and final polish) are not implemented yet. Save format, storage keys and existing upgrade IDs remain unchanged. A JSON save export is recommended before major updates.
