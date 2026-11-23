@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#060c18">
-<meta name="description" content="Rift Runner Evolution 4.0: six weapons, weapon evolutions, 8 biomes, multi-phase bosses, new enemies, 26 permanent upgrades, achievements, and mobile settings. Offline cosmic survival roguelite.">
+<meta name="description" content="Rift Runner Evolution 5.0: six weapons, weapon evolutions, 8 biomes, multi-phase bosses, new enemies, 26 permanent upgrades, achievements, and mobile settings. Offline cosmic survival roguelite.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>RIFT RUNNER: EVOLUTION — Offline Survival</title>
@@ -115,23 +115,228 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 #settings .panel{max-height:92dvh;overflow-y:auto;scrollbar-width:thin}
 @media (max-height:500px){#menu .secondary{padding:9px;font-size:13px}#menu .primary{padding:11px}#menu .panel{padding:13px}#menu .kicker{margin:6px 0}#settings .panel{padding:12px}}
 </style>
+<style id="evolution5-design">
+/* Evolution 5.0 / ORBITAL COMMAND design language: save-neutral */
+:root{--ink:#edfaff;--muted:#a6bbd5;--cyan:#55e4ff;--line:#56bbeb5b;--panel:#071528f2;--violet:#b88cff}
+html,body{font-family:'Trebuchet MS',system-ui,-apple-system,'Segoe UI',sans-serif;background:#030914}
+#vignette{background:radial-gradient(ellipse at 48% 45%,transparent 35%,rgba(0,3,14,.54) 100%);box-shadow:inset 0 0 90px #0007}
+#hud{padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 0;filter:drop-shadow(0 4px 9px #0007)}
+.hudrow{align-items:flex-start;gap:10px}.hudleft{background:linear-gradient(135deg,#071c36ee,#061326ed);border:1px solid #4db7e353;border-top:2px solid #70e8ffba;padding:12px 13px 13px;border-radius:5px 16px 5px 16px;max-width:255px;box-shadow:inset 0 1px 15px #61cfff13}
+.hlabel{font-size:9px;letter-spacing:1.5px;margin-bottom:6px;color:#d3edff}.track{height:10px;border:1px solid #65a4c17f;border-radius:2px;background:#041222;box-shadow:none;transform:skewX(-8deg)}.fill{border-radius:0;box-shadow:0 0 14px #ff53675d;background:linear-gradient(90deg,#d6395b,#ff9b77)}.xpfill{background:linear-gradient(90deg,#417fff,#56f8f6);box-shadow:0 0 14px #52bcfc66}#xpbox{margin-top:11px}
+#scorebox{padding:9px 11px;background:linear-gradient(140deg,#08192de9,#050f24dd);border:1px solid #507fa461;border-top:2px solid #9bc6ed88;border-radius:5px 13px 5px 13px;min-width:119px}.tinycap{font-size:9px;letter-spacing:1.8px;color:#78bbdb}#killnum{font-size:29px;font-weight:1000;color:#fff;text-shadow:0 0 16px #5fc8ff55}#wave{color:#d4abff;font-size:10px;letter-spacing:2px}#time{font-size:12px}#areaTag{font-size:9px;color:#60e5ee;letter-spacing:1.1px}#weaponBtn{margin-top:8px;border-radius:3px 9px 3px 9px;border-color:#72dfffaa;color:#b4f6ff;padding:8px;background:#092b47;font-size:9px}
+#pauseBtn{background:#06172de8;border:1px solid #5faaca93;border-radius:4px 10px 4px 10px;height:40px;min-width:40px;box-shadow:inset 0 1px #b2e4ff1a}
+#bossbar{margin:9px auto 0;max-width:450px;background:#091327da;padding:7px 12px 11px;border:1px solid #c05aff55;border-radius:4px 12px 4px 12px}.bosslabel{font-size:10px;color:#f6c8ff}
+#banner{font-size:clamp(17px,5vw,28px);color:#f4fcff;letter-spacing:3px;text-shadow:0 2px 15px #3eaeff,0 0 45px #7e4dff}
+#controls #stick{border:1px solid #8aefff77;background:repeating-radial-gradient(circle,#0d33507c 0 2px,#0a21435c 3px 12px);box-shadow:0 0 0 7px #193f5329,inset 0 0 35px #60d4ff25;border-radius:50%;opacity:.81}
+#knob{background:radial-gradient(circle at 30% 25%,#e0ffff,#3fbbec 45%,#0c456b 95%);border:2px solid #aff9ff;box-shadow:0 0 22px #3ddcfca1,inset 0 -5px 10px #08325b}
+#stick:after{font-size:9px;letter-spacing:3px;color:#a6d7ed}
+#actions{gap:10px;grid-template-columns:repeat(2,62px);grid-template-rows:repeat(3,60px)}#actions .action{width:60px;height:60px;border-width:1px;border-radius:18px 6px 18px 6px;background:linear-gradient(142deg,#24557eeb,#071a32f7);box-shadow:inset 0 1px #aff4ff44,inset 0 -6px 17px #01071999,0 5px 15px #000a;color:#ecffff;text-shadow:0 0 12px #71d4f5;font-size:21px;transition:transform .1s}
+#actions .action:active{transform:scale(.92) rotate(-2deg)}#actions #novaBtn{width:73px;height:73px;background:linear-gradient(140deg,#5b3e9a,#130e36);border:1px solid #dd9cff;box-shadow:inset 0 1px #efd7ff66,0 0 25px #933bed55;border-radius:18px 6px 18px 6px}#actions #shieldBtn{border-color:#70ffd7}#actions #gravBtn{border-color:#ffcb77}.cool{background:#030b20e2;color:#9bdcf4;font-size:14px!important}.action small{color:#d4f3ff;font-weight:900;letter-spacing:1.3px}
+.overlay{background:rgba(0,5,18,.54);backdrop-filter:blur(13px) saturate(1.15);-webkit-backdrop-filter:blur(13px) saturate(1.15)}
+.panel{position:relative;isolation:isolate;background:linear-gradient(145deg,#102d48f7 0%,#09172eef 30%,#060d1eed 100%);border:1px solid #5ca5c77d;border-top:2px solid #8bddffbb;border-radius:5px 22px 5px 22px;box-shadow:0 28px 70px #000d,0 0 0 5px #07162876,inset 0 0 55px #7fa7e809;padding:25px 23px;overflow:hidden}
+.panel::before{content:'';position:absolute;top:0;right:0;width:105px;height:105px;background:repeating-linear-gradient(135deg,transparent 0 10px,#56edff13 11px 12px);pointer-events:none;mask-image:linear-gradient(135deg,black,transparent 80%);z-index:-1}
+.panel::after{content:'';position:absolute;left:17px;right:17px;top:7px;height:1px;background:linear-gradient(90deg,transparent,#a4ebff9b,transparent);pointer-events:none}
+#menu{background:radial-gradient(ellipse at 55% 50%,#0c205249,#020711bb 70%)}#menu .panel{width:min(490px,100%);padding:25px 27px;text-align:center}
+#brand{font-size:10px;letter-spacing:4.5px;color:#83dffa;text-transform:uppercase}#brand:before{content:'◆';color:#9c75ed;margin-right:9px}
+.title{font-weight:1000;font-size:clamp(42px,10vw,67px);line-height:.87;letter-spacing:-3px;margin:20px 0 6px;background:linear-gradient(115deg,#f6fdff 18%,#60dfff 49%,#beb4ff 85%);background-clip:text;-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 4px 15px #49bdfc22)}.kicker{font-size:10px;letter-spacing:3.3px;color:#76e9f9;margin:16px 0 17px}#menu .description{color:#b3c9de;font-size:12px;max-width:380px;line-height:1.55;margin-bottom:18px}.instructions{margin-bottom:16px;gap:6px}.chip{padding:6px 9px;border:1px solid #6a9bb35c;background:#071d35a9;border-radius:3px 8px 3px 8px;font-size:10px;color:#c2e7f3}.xpLegend{background:#081c3275;border-radius:3px;border:1px solid #35556f40}
+.primary,.secondary{border-radius:4px 11px 4px 11px;transition:transform .1s,filter .15s,border-color .15s}.primary{color:#041523;background:linear-gradient(105deg,#70f6ff,#3e9fe0);border:1px solid #bdffff;font-size:15px;font-weight:1000;letter-spacing:2px;padding:15px 12px;box-shadow:0 6px 26px #298bdc5d,inset 0 1px #e9ffff}.primary:active,.secondary:active{transform:scale(.98)}.primary:hover,.secondary:hover{filter:brightness(1.09)}.secondary{border:1px solid #5791b887;background:linear-gradient(150deg,#14314c,#091d35);color:#e2f8ff;font-size:12px;letter-spacing:1px;padding:12px;margin-top:9px;box-shadow:inset 0 1px #b1dfff16}.sectiontitle{font-size:clamp(22px,5vw,30px);letter-spacing:.6px;color:#effbff}.sub{font-size:12px;color:#aec5da}
+#menu .foot{font-size:10px;color:#7598b6}#soundBtn{font-size:10px;color:#7be9ff;border-radius:4px 8px 4px 8px}.saveActions button{background:#0b2c49;border-color:#3b8cadb8;border-radius:3px 8px 3px 8px;font-size:10px;color:#bdeeff}.saveNote{font-size:10px;color:#8aa9c2}.shopItem,.achievementItem,.upgrade{background:linear-gradient(110deg,#15334cf2,#0c1b34f0);border:1px solid #4d96bf67;border-left:3px solid #66dcff;border-radius:4px 12px 4px 12px;transition:background .12s,transform .12s}.upgrade:hover{background:linear-gradient(110deg,#205078,#123354);transform:translateX(2px)}.upgradeName{color:#ecffff}.upgradeIcon{color:#a1ebff;text-shadow:0 0 10px #5cdfff44}.upgradeDesc{color:#aac5d7}.shopItem button{border-radius:4px 9px 4px 9px}.shopCategory{color:#88e4ff}.shopItem .miniTrack{border-radius:1px}.shopItem .miniTrack span{background:linear-gradient(90deg,#3e8bda,#71ffff)}#finalScore{color:#7cfaff;text-shadow:0 0 20px #25c8ff7a}
+@media (orientation:landscape){#menu .panel{max-height:95dvh;overflow-y:auto;scrollbar-width:thin}#menu .panel{width:min(630px,100%)}#menu .description{max-width:520px}.instructions{margin-bottom:8px}#actions{right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px))}#hud .hudleft{max-width:240px}#scorebox{min-width:105px}}
+@media (max-height:500px){#menu .panel{padding:12px 20px}#menu .title{font-size:35px;margin:9px 0 2px}#menu .kicker{margin:7px 0}#menu .description{margin-bottom:5px;font-size:11px}#menu .instructions{margin-bottom:5px}.xpLegend{display:none}#menu .secondary{padding:7px 10px;margin-top:5px}#menu .primary{padding:9px}#menu .saveActions{margin:5px 0}#menu .saveActions button{padding:7px}#menu .foot{display:none}#menu .saveNote{display:none}#menu #soundBtn{margin-top:4px;padding:4px 10px}#menu #bestLine{margin-top:5px}#menu #coreLine{margin-top:4px}#actions .action{width:55px;height:55px}#actions #novaBtn{width:65px;height:65px}#actions{grid-template-columns:repeat(2,55px);grid-template-rows:repeat(3,54px)}}
+@media (max-width:450px) and (orientation:portrait){#hud{padding-left:8px;padding-right:8px}.hudleft{padding:9px;max-width:184px}.hlabel{font-size:8px;letter-spacing:1px}#scorebox{min-width:97px;padding:8px 6px}#killnum{font-size:24px}#pauseBtn{width:32px;min-width:32px;height:34px;font-size:16px}#weaponBtn{font-size:8px;padding:6px}#actions{right:calc(9px + env(safe-area-inset-right,0px));bottom:calc(35px + env(safe-area-inset-bottom,0px))}#stick{left:calc(11px + env(safe-area-inset-left,0px))}}
+@media (prefers-reduced-motion:reduce){.primary,.secondary,.upgrade{transition:none!important}#novaBtn.ready{animation:none}}
+
+
+@media (orientation:landscape) and (max-height:550px) and (min-width:650px){
+ #menu .panel{width:min(900px,97vw);max-width:none;max-height:95dvh;display:grid;grid-template-columns:44% 1fr;grid-auto-rows:min-content;align-items:center;gap:7px 20px;padding:15px 22px;text-align:left}
+ #menu #brand{grid-column:1;grid-row:1}
+ #menu .title{grid-column:1;grid-row:2;font-size:clamp(38px,6vw,55px);margin:6px 0}
+ #menu .kicker{grid-column:1;grid-row:3;margin:0;font-size:9px}
+ #menu .description{grid-column:1;grid-row:4;margin:0;max-width:none;line-height:1.42;font-size:11px}
+ #menu .instructions{grid-column:1;grid-row:5;justify-content:flex-start;margin:0;gap:4px}
+ #menu .chip{font-size:9px;padding:4px 6px}
+ #menu .xpLegend{display:none}
+ #menu #coreLine{grid-column:1;grid-row:7;text-align:left;margin:0;font-size:12px}
+ #menu #bestLine{grid-column:1;grid-row:8;text-align:left;margin:0}
+ #menu #soundBtn{grid-column:1;grid-row:9;justify-self:start;margin:0}
+ #menu #startBtn{grid-column:2;grid-row:1 / span 2;margin:0;padding:13px}
+ #menu #hangarBtn{grid-column:2;grid-row:3;margin:0;padding:11px}
+ #menu #achievementsBtn{grid-column:2;grid-row:4;margin:0;padding:11px}
+ #menu #settingsBtn{grid-column:2;grid-row:5;margin:0;padding:11px}
+ #menu .saveActions{grid-column:2;grid-row:6;margin:0}
+ #menu .saveActions button{padding:10px 5px}
+ #menu .saveNote{grid-column:2;grid-row:7;display:block;margin:0;max-width:none;font-size:9px;line-height:1.2}
+ #menu #saveStatus{grid-column:2;grid-row:8;margin:0}
+ #menu .foot{grid-column:2;grid-row:9;display:block;font-size:9px;margin:0}
+}
+
+</style>
 </head>
 <body>
-<canvas id="game" aria-label="Top-down 2D cosmic survival arcade game"></canvas><div id="vignette"></div>
+<canvas id="game" aria-label="Three-quarter pseudo-3D cosmic survival arcade game"></canvas><div id="vignette"></div>
 <div id="hud"><div class="hudrow"><div class="hudleft"><div class="hlabel"><span>HULL INTEGRITY</span><span id="hpText">100 / 100</span></div><div class="track"><div class="fill" id="hpFill"></div></div><div id="xpbox"><div class="hlabel"><span id="levelText">LVL 1</span><span id="xpText">0 / 20 XP</span></div><div class="track" style="height:7px"><div class="fill xpfill" id="xpFill"></div></div></div></div><div id="scorebox"><div class="tinycap">ELIMINATIONS</div><div id="killnum">0</div><div id="wave">WAVE 1</div><div id="time">0:00</div><div id="areaTag">RIFT WASTES</div><button id="weaponBtn" aria-label="Switch weapon">PULSE ▸</button></div><button id="pauseBtn" aria-label="Pause game">Ⅱ</button></div><div id="bossbar"><div class="bosslabel" id="bossName">RIFT GUARDIAN</div><div class="track"><div class="fill" id="bossfill"></div></div></div></div>
 <div id="banner"></div><div id="mapAlert"></div>
 <div id="controls"><div id="moveZone"><div id="stick"><div id="knob"></div></div></div><div id="actions"><button class="action" id="novaBtn" aria-label="Nova ability">✦<small>NOVA</small><div id="novaProgress"><div id="novaInner"></div></div><span class="cool" id="novaCool"></span></button><button class="action" id="dashBtn" aria-label="Dash">➤<small>DASH</small><span class="cool" id="dashCool"></span></button><button class="action" id="shieldBtn" aria-label="Phase shield">⬡<small>SHIELD</small><span class="cool" id="shieldCool"></span></button><button class="action" id="gravBtn" aria-label="Gravity well">◎<small>GRAV</small><span class="cool" id="gravCool"></span></button></div></div>
-<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · FULL OVERHAUL</div><p class="description">Survive eight cosmic biomes with six weapons, evolving powers, smarter enemies, multi-phase bosses and breakable cover. Earn achievements and permanent upgrades while keeping your progress.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">● 1</span><span style="color:#9fa1ff">● 3</span><span style="color:#79ffa5">● 5</span><span style="color:#ffcb60">● 10</span><span style="color:#ff6fcf">✦ 50</span><small>XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ START MISSION</button><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button>
+<div class="overlay" id="menu"><div class="panel"><div id="brand">ORBITAL COMMAND / DIVISION 07</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 5.0 · DIMENSION SHIFT</div><p class="description">Deploy into eight hostile dimensions. Six evolving weapons, elite biome guardians, and a reactor-powered combat suit. Recover Rift Cores and develop your permanent arsenal.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">● 1</span><span style="color:#9fa1ff">● 3</span><span style="color:#79ffa5">● 5</span><span style="color:#ffcb60">● 10</span><span style="color:#ff6fcf">✦ 50</span><small>XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ START MISSION</button><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button>
 <div class="saveActions"><button id="exportSaveBtn" type="button">⬇ EXPORT SAVE</button><button id="importSaveBtn" type="button">⬆ IMPORT SAVE</button></div>
 <input id="importSaveInput" aria-label="Select a Rift Runner save backup" type="file" accept=".json,application/json" hidden>
 <p class="saveNote">Back up Rift Cores, permanent upgrades, achievements and best score. No personal details are included. Import replaces this browser's saved progress.</p>
-<div id="saveStatus" role="status" aria-live="polite"></div><div id="coreLine">◆ 0 RIFT CORES</div><div id="bestLine">BEST RUN · 0 eliminations</div><button id="soundBtn">SOUND: ON</button><div class="foot">Made for phones · One HTML file · Works offline<br>Progress saves in this browser · Export to transfer progress · EVOLUTION 4.0 COMPLETE</div></div></div>
+<div id="saveStatus" role="status" aria-live="polite"></div><div id="coreLine">◆ 0 RIFT CORES</div><div id="bestLine">BEST RUN · 0 eliminations</div><button id="soundBtn">SOUND: ON</button><div class="foot">Made for phones · One HTML file · Works offline<br>Progress saves in this browser · Export to transfer progress · EVOLUTION 5.0 VISUAL SYSTEM</div></div></div>
 <div class="overlay hidden" id="upgrades"><div class="panel"><div class="tinycap" style="color:#81eeff;margin-bottom:9px">ENERGY LEVEL UP</div><h2 class="sectiontitle">Choose an upgrade</h2><p class="sub">Choose one of four powers to shape your build. One free reroll each level.</p><div id="upgradeList" class="upgradeList"></div><button class="secondary" id="rerollBtn" type="button">↻ REROLL OPTIONS · 1 FREE</button><div class="foot" id="buildStats"></div></div></div>
 <div class="overlay hidden" id="hangar"><div class="panel"><div id="evoMode">THE HANGAR</div><h2 class="sectiontitle">PERMANENT EVOLUTION</h2><p class="sub">Earn Rift Cores after each run. Buy upgrades that carry into every future mission.</p><div id="hangarBalance" class="tinycap"></div><div id="hangarProgress" class="shopProgress"></div><div id="shopItems"></div><button class="secondary" id="hangarBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="achievements"><div class="panel"><h2 class="sectiontitle">CHALLENGES</h2><p class="sub" id="achievementCount">Achievements and Rift Core rewards</p><div id="achievementItems"></div><button class="secondary" id="achievementsBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Change mobile performance and accessibility without resetting progress.</p><div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Settings save only on this device.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="pauseOverlay"><div class="panel"><h2 class="sectiontitle">MISSION PAUSED</h2><p class="sub">Your progress is safe while this screen is open.</p><button class="primary" id="resumeBtn">▶ RESUME</button><button class="secondary" id="restartPauseBtn">RESTART RUN</button><button class="secondary" id="pauseSettingsBtn">⚙ SETTINGS</button><button class="secondary" id="quitBtn">MAIN MENU</button></div></div>
 <div class="overlay hidden" id="gameOver"><div class="panel"><div class="tinycap">MISSION REPORT</div><h2 class="sectiontitle" style="margin-top:11px">RIFT COLLAPSED</h2><div id="finalScore">0</div><div class="tinycap">ENEMIES DEFEATED</div><div id="finalStats"></div><div id="earnedLine" style="font-size:15px;font-weight:900;color:#8af2fa;margin:-10px 0 16px"></div><button class="primary" id="retryBtn">↻ PLAY AGAIN</button><button class="secondary" id="menuBtn">MAIN MENU</button></div></div>
+<script id="evolution5-renderer">
+/* RIFT RUNNER EVOLUTION 5.0 — additive, save-neutral pseudo-3D renderer.
+   World physics, enemy AI, upgrades and persistent save logic remain in index.html. */
+(()=>{'use strict';
+const PI2=Math.PI*2, projectScale={a:.93,b:.15,c:-.29,d:.68};
+const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
+const colors=[['#6bdcff','#3e80ae','#0d2946'],['#de78ff','#6e399f','#230f48'],['#a7fff4','#428a9d','#17354f'],['#ffad68','#ad5737','#46251e'],['#dea8ff','#856ac3','#342251'],['#9affbe','#4f936f','#1c4f42'],['#ff776c','#a14f4d','#4c242c'],['#b8b6ff','#6675b1','#252855']];
+let W=0,H=0,ratio=1,ox=0,oy=0,camX=0,camY=0,quality='balanced',context=null;
+function project(x,y,z=0){const dx=x-camX,dy=y-camY;return {x:ox+dx*projectScale.a+dy*projectScale.c,y:oy+dx*projectScale.b+dy*projectScale.d-z};}
+function toWorld(x,y){const {a,b,c,d}=projectScale,det=a*d-b*c;const wx=(d*x-c*y)/det,wy=(-b*x+a*y)/det;const l=Math.hypot(wx,wy)||1;return {x:wx/Math.max(1,l),y:wy/Math.max(1,l)};}
+function visible(x,y,pad=90){const p=project(x,y);return p.x>-pad&&p.x<W+pad&&p.y>-pad&&p.y<H+pad;}
+function line(x1,y1,x2,y2,color,width=1){const c=context;c.strokeStyle=color;c.lineWidth=width;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();}
+function path(points,fill,stroke,width=1){const c=context;if(!points.length)return;c.beginPath();points.forEach((p,i)=>i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y));c.closePath();if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke()}}
+function quad(a,b,c,d,color,edge){path([a,b,c,d],color,edge,1)}
+function ell(x,y,rx,ry,color,alpha=1){const c=context;c.globalAlpha=alpha;c.fillStyle=color;c.beginPath();c.ellipse(x,y,Math.max(.1,rx),Math.max(.1,ry),0,0,PI2);c.fill();c.globalAlpha=1}
+function lit(x,y,r,color,a=.25){if(quality==='low')return;const c=context;const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color);g.addColorStop(1,'transparent');c.globalAlpha=a;c.fillStyle=g;c.fillRect(x-r,y-r,r*2,r*2);c.globalAlpha=1}
+function circleGround(x,y,r,stroke,fill,alpha=1){const c=context;c.save();c.globalAlpha=alpha;c.beginPath();for(let i=0;i<=32;i++){const a=i/32*PI2,p=project(x+Math.cos(a)*r,y+Math.sin(a)*r);i?c.lineTo(p.x,p.y):c.moveTo(p.x,p.y)}c.closePath();if(fill){c.fillStyle=fill;c.fill()}if(stroke){c.strokeStyle=stroke;c.lineWidth=2;c.stroke()}c.restore()}
+function isoBox(x,y,w,h,height,top,front,side,trim){const p=[project(x,y),project(x+w,y),project(x+w,y+h),project(x,y+h)];const q=p.map(v=>({x:v.x,y:v.y-height}));const c=context;const shadow=p.map(v=>({x:v.x+10,y:v.y+11}));path(shadow,'#000a');quad(p[2],p[3],q[3],q[2],front);quad(p[1],p[2],q[2],q[1],side);path(q,top,trim,1.35);if(height>13){const mid={x:(q[3].x+q[2].x)/2,y:(q[3].y+q[2].y)/2};line(q[3].x+5,q[3].y+6,mid.x-6,mid.y+3,trim,1)}return {ground:p,top:q};}
+function tileGrid(s){const c=context,th=s.themes[s.mapIndex],grid=th.grid,range=Math.max(W,H)*1.95;
+ const minX=Math.floor((camX-range)/120)*120,maxX=camX+range,minY=Math.floor((camY-range)/120)*120,maxY=camY+range;
+ c.strokeStyle=grid;c.globalAlpha=.13;c.lineWidth=1;c.beginPath();for(let x=minX;x<maxX;x+=120){let p=project(x,minY),q=project(x,maxY);c.moveTo(p.x,p.y);c.lineTo(q.x,q.y)}for(let y=minY;y<maxY;y+=120){let p=project(minX,y),q=project(maxX,y);c.moveTo(p.x,p.y);c.lineTo(q.x,q.y)}c.stroke();c.globalAlpha=1;
+ c.strokeStyle=grid;c.globalAlpha=.065;c.lineWidth=3;c.beginPath();for(let x=minX;x<maxX;x+=480){let p=project(x,minY),q=project(x,maxY);c.moveTo(p.x,p.y);c.lineTo(q.x,q.y)}for(let y=minY;y<maxY;y+=480){let p=project(minX,y),q=project(maxX,y);c.moveTo(p.x,p.y);c.lineTo(q.x,q.y)}c.stroke();c.globalAlpha=1;
+ if(quality!=='low'){const count=Math.min(70,s.stars.length);for(let i=0;i<count;i++){const st=s.stars[i];if(!visible(st.x,st.y,15))continue;const p=project(st.x,st.y),tw=.35+.15*Math.sin(s.timer*1.4+i);ell(p.x,p.y,st.r,st.r*.45,'#cdefff',tw)}}
+ // World boundary remains a navigable 2D square, projected consistently with collisions.
+ const bound=[project(-1900,-1900),project(1900,-1900),project(1900,1900),project(-1900,1900)];path(bound,null,grid,3);
+}
+function scenery(s,d,i){const color=colors[s.mapIndex],p=project(d.x,d.y);if(!visible(d.x,d.y,120))return;
+ const n=d.size||32,k=d.t||0,theta=d.rot||0,c=context;
+ if(s.mapIndex===2||s.mapIndex===4||s.mapIndex===7){ // light-refracting shards and ancient spires
+  const height=24+n*.9,base=7+n*.13;ell(p.x+9,p.y+10,base*1.9,base*.85,'#0009');
+  path([{x:p.x-base,y:p.y},{x:p.x-3,y:p.y-height},{x:p.x+base*.4,y:p.y-height*.65},{x:p.x+base,y:p.y}],color[1],color[0]);
+  path([{x:p.x-3,y:p.y-height},{x:p.x+base,y:p.y},{x:p.x+base*.3,y:p.y-4}],color[2]);
+  line(p.x-2,p.y-height+5,p.x-2,p.y-8,color[0],1.6);if(quality!=='low'&&i%3===0)lit(p.x,p.y-height*.4,n*.7,color[0],.12);
+ }else if(s.mapIndex===5){ // bio-turbines, roots and seed machines
+  const h=16+n*.5;ell(p.x+7,p.y+9,n*.4,n*.19,'#0008');isoBox(d.x-n*.19,d.y-n*.14,n*.38,n*.28,9,color[1],color[2],color[2],color[0]);
+  line(p.x,p.y-6,p.x-8,p.y-h,color[0],3);line(p.x,p.y-6,p.x+11,p.y-h*.68,color[1],3);
+  ell(p.x-8,p.y-h,6,10,color[0],.66);ell(p.x+11,p.y-h*.68,5,8,'#c0ffd3',.8);
+ }else { // fallen industrial slabs, broken circuit pylons, heat vents
+  const w=n*.48,h=n*.3,height=9+n*(i%5===0?.32:.12);
+  isoBox(d.x-w/2,d.y-h/2,w,h,height,color[1],color[2],'#071628',i%4===0?color[0]:'#31536d');
+  if(i%6===0){line(p.x,p.y-height-4,p.x+6,p.y-height-11,color[0],2);ell(p.x+6,p.y-height-11,2.6,2.6,color[0])}
+ }
+}
+function wall(s,w){if(!visible(w.x+w.w/2,w.y+w.h/2,180))return;
+ const clr=colors[s.mapIndex],a=clamp(w.w/130,0,1),height=(w.height||25)+(w.breakable?8:4)+a*9;
+ const box=isoBox(w.x,w.y,w.w,w.h,height,w.breakable?clr[1]:'#263d52',clr[2],'#102536',w.breakable?'#faafc9':clr[0]);
+ const c=context,t=box.top;line(t[0].x+5,t[0].y+4,t[1].x-5,t[1].y+4,clr[0],1.5);
+ if(w.breakable){line(t[0].x+8,t[0].y+6,t[2].x-8,t[2].y-5,'#ffbbcb',2);line(t[1].x-5,t[1].y+5,t[3].x+7,t[3].y-3,'#bda9fb',1)}
+ else{const p=project(w.x+w.w/2,w.y+w.h/2);ell(p.x,p.y-height,5,2,clr[0],.7)}
+}
+function hazard(s,h){if(!visible(h.x,h.y,h.r+30))return;const p=project(h.x,h.y),col=colors[s.mapIndex][0],pulse=.7+.25*Math.sin(s.timer*2+h.phase);
+ circleGround(h.x,h.y,h.r,col,col,pulse*.11);circleGround(h.x,h.y,h.r*.76,col,null,.28*pulse);
+ for(let j=0;j<4;j++){const a=j*PI2/4+s.timer*.2,q=project(h.x+Math.cos(a)*h.r*.8,h.y+Math.sin(a)*h.r*.8);ell(q.x,q.y,2.5,1.5,col,.45)}
+}
+function rift(s,r){if(!visible(r.x,r.y,r.r+40))return;const p=project(r.x,r.y),clr=colors[s.mapIndex][0];circleGround(r.x,r.y,r.r,clr,'#030916',.65);circleGround(r.x,r.y,r.r*.8,'#93dfff',null,.32);
+ const phase=s.timer*.8+r.phase;for(let k=0;k<5;k++){const a=phase+k*PI2/5,q=project(r.x+Math.cos(a)*r.r*.65,r.y+Math.sin(a)*r.r*.65,Math.sin(phase+k)*3);ell(q.x,q.y,3,2,clr,.6)}if(quality!=='low')lit(p.x,p.y,r.r*.8,clr,.1);
+}
+function cache(s,o){if(o.opened||!visible(o.x,o.y,50))return;const p=project(o.x,o.y),z=10+Math.sin(s.timer*2+o.phase)*4;
+ ell(p.x+7,p.y+9,20,7,'#0009');path([{x:p.x-14,y:p.y-z},{x:p.x,y:p.y-z-22},{x:p.x+14,y:p.y-z},{x:p.x,y:p.y-z+8}],'#7767bf','#e3cdff',1.4);
+ line(p.x,p.y-z-18,p.x,p.y-z+4,'#92ffff',2);lit(p.x,p.y-z,32,'#c499ff',.17);
+}
+function shadow(p,r){ell(p.x+8,p.y+9,r*1.1,r*.34,'#000b');ell(p.x,p.y,r*.85,r*.29,'#12283c',.55)}
+function sprite(s,unit,isPlayer){const c=context,p=project(unit.x,unit.y),r=unit.r||16;
+ const moving=isPlayer?Math.hypot(unit.moveX||0,unit.moveY||0):Math.hypot(unit.vx||0,unit.vy||0)/100;
+ const bob=Math.sin(s.timer*(isPlayer?14:7)+(unit.phase||0))*Math.min(2.8,moving*2.4),height=r*(isPlayer?1.85:unit.boss?1.9:1.53);
+ const col=isPlayer?'#67ebff':unit.col||'#ff9fba';const elite=!!unit.boss;const wide=elite?1.35:1;
+ if(!visible(unit.x,unit.y,125))return;
+ // Low-cost silhouettes during heavy battles keep the gameplay responsive.
+ if((quality==='low'||s.enemies.length>85)&&!isPlayer&&!elite){
+  shadow(p,r);path([{x:p.x-r,y:p.y-r*.7},{x:p.x-r*.6,y:p.y-height},{x:p.x+r*.6,y:p.y-height},{x:p.x+r,y:p.y-r*.7},{x:p.x+r*.48,y:p.y},{x:p.x-r*.48,y:p.y}], '#26364e',col,1.7);
+  path([{x:p.x-r*.48,y:p.y-height+r*.3},{x:p.x+r*.48,y:p.y-height+r*.3},{x:p.x+r*.3,y:p.y-height+r*.7},{x:p.x-r*.3,y:p.y-height+r*.7}],'#0a1a30',col,1.2);
+  ell(p.x,p.y-height+r*.45,3.4,2.1,col);return;
+ }
+ shadow(p,r*(elite?1.45:1));c.save();c.translate(p.x,p.y-bob);if((isPlayer&&unit.invuln>0)||(!isPlayer&&unit.flash>0)){c.globalAlpha=.79}
+ if(isPlayer&&unit.dashing>0)lit(0,-height,70,'#4cdcff',.55);
+ // Stride-animated lower body and two armored boot volumes.
+ const stride=Math.sin(s.timer*13+(unit.phase||0))*Math.min(4,moving*3),legH=r*.95;
+ path([{x:-r*.72,y:-3},{x:-r*.1,y:-3},{x:-r*.17+stride,y:-legH},{x:-r*.63+stride,y:-legH}], '#122b45','#345b76',1);
+ path([{x:r*.1,y:-3},{x:r*.72,y:-3},{x:r*.65-stride,y:-legH},{x:r*.18-stride,y:-legH}], '#0e263f','#345b76',1);
+ path([{x:-r*.7,y:-legH},{x:-r*.2,y:-legH-3},{x:-r*.2,y:-legH-r*.4},{x:-r*.85,y:-legH-r*.25}], '#456b8b','#94bdda',1);
+ path([{x:r*.18,y:-legH-3},{x:r*.72,y:-legH},{x:r*.85,y:-legH-r*.25},{x:r*.22,y:-legH-r*.4}], '#385875','#7aacca',1);
+ // Shoulder plates silhouette, bevels, illuminated chest reactor.
+ const upper=-height*.53;path([{x:-r*wide,y:upper+3},{x:-r*.65,y:upper-r*.57},{x:r*.63,y:upper-r*.57},{x:r*wide,y:upper+3},{x:r*.53,y:upper+r*.46},{x:-r*.53,y:upper+r*.46}],isPlayer?'#233e5e':'#2b334d',col,1.4);
+ path([{x:-r*.62,y:upper-r*.52},{x:0,y:upper-r*.73},{x:r*.61,y:upper-r*.52},{x:r*.48,y:upper+r*.29},{x:-r*.45,y:upper+r*.29}],isPlayer?'#376a92':'#4d4769','#95c4db',1);
+ path([{x:-r*1.02*wide,y:upper-r*.39},{x:-r*.54,y:upper-r*.65},{x:-r*.49,y:upper-r*.05},{x:-r*.9*wide,y:upper+r*.2}],isPlayer?'#4c8fb2':'#69567d',col,1.2);
+ path([{x:r*.54,y:upper-r*.65},{x:r*1.02*wide,y:upper-r*.39},{x:r*.9*wide,y:upper+r*.2},{x:r*.49,y:upper-r*.05}],isPlayer?'#355f86':'#555076',col,1.2);
+ ell(0,upper-r*.02,r*.25,r*.29,isPlayer?'#77faff':col);if(quality!=='low')lit(0,upper,18,col,.22);
+ // Angular helmet with visible dark visor and aerial antennas.
+ path([{x:-r*.49,y:-height+r*.17},{x:-r*.36,y:-height-r*.35},{x:r*.4,y:-height-r*.35},{x:r*.52,y:-height+r*.14},{x:r*.32,y:-height+r*.4},{x:-r*.35,y:-height+r*.4}],isPlayer?'#c3e6ef':elite?'#bb8dcd':'#9eacc7','#12243b',1.5);
+ path([{x:-r*.4,y:-height-r*.04},{x:r*.41,y:-height-r*.04},{x:r*.32,y:-height+r*.27},{x:-r*.32,y:-height+r*.26}],'#081827',col,1);
+ line(-r*.27,-height+r*.11,r*.28,-height+r*.11,col,2.7);
+ line(-r*.32,-height-r*.23,-r*.37,-height-r*.53,col,1.3);
+ // Independent barrel aiming is projected so right/left never reverses visually.
+ if(isPlayer){const a=unit.aim||0,vx=Math.cos(a)*projectScale.a+Math.sin(a)*projectScale.c,vy=Math.cos(a)*projectScale.b+Math.sin(a)*projectScale.d;
+  const len=Math.hypot(vx,vy)||1,dx=vx/len,dy=vy/len,ax=dx*r*.65,ay=upper+dy*r*.2;
+  line(ax,ay,ax+dx*r*1.28,ay+dy*r*.56,'#071a2b',9);line(ax,ay,ax+dx*r*1.28,ay+dy*r*.56,'#8dbbd2',4.8);ell(ax+dx*r*1.35,ay+dy*r*.58,3,3,unit.shotKick>0?'#fff7c3':'#65e9ff');
+  if(unit.shotKick>0){lit(ax+dx*r*1.5,ay+dy*r*.6,22,'#96faff',clamp(unit.shotKick/.105,0,1)*.6)}
+ }
+ if(elite){line(-r*.6,upper-r*.6,-r*.9,upper-r*1.35,col,2.5);line(r*.6,upper-r*.6,r*.9,upper-r*1.35,col,2.5)}
+ if(!isPlayer&&unit.guard>0){c.strokeStyle='#baff87';c.lineWidth=3;c.beginPath();c.ellipse(0,upper,r+7,height*.67,0,0,PI2);c.stroke()}
+ if(isPlayer&&unit.shield>0){c.strokeStyle='#7dffe7';c.lineWidth=3;c.globalAlpha=.8;c.beginPath();c.ellipse(0,-height*.53,r+18,height*.78,0,0,PI2);c.stroke()}
+ if(!isPlayer&&unit.hp<unit.maxHp){const width=r*2.6;c.fillStyle='#07172d';c.fillRect(-width/2,-height-r*.84,width,4);c.fillStyle=col;c.fillRect(-width/2,-height-r*.84,width*clamp(unit.hp/unit.maxHp,0,1),4)}
+ c.restore();
+}
+function projectile(s,b){if(!visible(b.x,b.y,65))return;const p=project(b.x,b.y,8),prev=project(b.x-b.vx*.022,b.y-b.vy*.022,8),clr=b.crit?'#fff3b2':s.weaponTypes[b.weapon||'pulse']?.color||'#88faff';
+ const thick=b.weapon==='rail'?5.5:b.weapon==='void'?6:3;cLine(prev,p,clr,thick);ell(p.x,p.y,b.weapon==='void'?8:4,b.weapon==='void'?6:3,'#e3ffff');if(quality!=='low'&&(b.weapon==='void'||b.weapon==='rail'))lit(p.x,p.y,28,clr,.3);
+}
+function cLine(p,q,col,w){const c=context;c.save();c.shadowBlur=quality==='low'?0:13;c.shadowColor=col;line(p.x,p.y,q.x,q.y,col,w);c.restore()}
+function draw(s){const c=s.ctx;if(!c)return;context=c;W=s.SW;H=s.SH;ratio=s.DPR;quality=s.gameSettings.fx;
+ const cc=colors[s.mapIndex];camX=s.mode==='menu'?Math.sin(performance.now()*.00007)*100:s.camera.x;camY=s.mode==='menu'?Math.cos(performance.now()*.00008)*90:s.camera.y;
+ const shake=s.gameSettings.screenShake&&s.mode==='play'?s.shake:0;ox=W*.5+(shake?(Math.random()-.5)*shake:0);oy=H*(W>H?.51:.53)+(shake?(Math.random()-.5)*shake:0);
+ c.setTransform(ratio,0,0,ratio,0,0);c.clearRect(0,0,W,H);const g=c.createLinearGradient(0,0,0,H);g.addColorStop(0,s.themes[s.mapIndex].center);g.addColorStop(.55,s.themes[s.mapIndex].mid);g.addColorStop(1,s.themes[s.mapIndex].edge);c.fillStyle=g;c.fillRect(0,0,W,H);
+ // Moving nebula haze and perspective floor planes.
+ if(quality!=='low'){lit(W*.68,H*.15,Math.max(W,H)*.75,cc[0],.13);lit(W*.18,H*.75,Math.max(W,H)*.55,cc[1],.14)}
+ tileGrid(s);
+ for(const rf of s.rifts)rift(s,rf);
+ for(const h of s.hazards)hazard(s,h);
+ for(const z of s.zones){circleGround(z.x,z.y,z.r,z.color,z.color,clamp(.47-z.time/z.max*.12,.18,.47));}
+ for(const f of s.enemyFields)circleGround(f.x,f.y,f.r,'#c47cff','#b578ff',clamp(f.life/f.max,0,.2));
+ for(const well of s.wells)circleGround(well.x,well.y,well.r,'#ffc86b','#ffad4e',.24);
+ // Natural ground ordering: wall fronts and actor feet can interleave.
+ const objects=[];
+ for(let i=0;i<s.decos.length;i++){const d=s.decos[i];if(visible(d.x,d.y,145))objects.push({z:project(d.x,d.y).y,x:d.x,t:0,o:d,i})}
+ for(const w of s.walls)if(visible(w.x+w.w/2,w.y+w.h/2,195))objects.push({z:project(w.x+w.w/2,w.y+w.h).y,x:w.x,t:1,o:w});
+ for(const ca of s.caches)if(!ca.opened&&visible(ca.x,ca.y,65))objects.push({z:project(ca.x,ca.y).y,x:ca.x,t:2,o:ca});
+ for(const e of s.enemies)if(!e.dead&&visible(e.x,e.y,130))objects.push({z:project(e.x,e.y).y+3,x:e.x,t:3,o:e});
+ if(s.player)objects.push({z:project(s.player.x,s.player.y).y+3,x:s.player.x,t:4,o:s.player});
+ objects.sort((a,b)=>a.z-b.z||a.t-b.t);
+ for(const ob of objects){if(ob.t===0)scenery(s,ob.o,ob.i);else if(ob.t===1)wall(s,ob.o);else if(ob.t===2)cache(s,ob.o);else sprite(s,ob.o,ob.t===4)}
+ // Combat overlays and pickups float above terrain with actual heights.
+ for(const gd of s.gems){if(!visible(gd.x,gd.y,40))continue;const p=project(gd.x,gd.y,9+Math.sin(gd.phase)*4),clr=gd.heal?'#77ffc1':s.coinTiers[gd.val]?.color||'#7cf2ff';shadow({x:p.x,y:p.y+13},gd.r*.6);
+ path([{x:p.x,y:p.y-gd.r},{x:p.x+gd.r*.78,y:p.y},{x:p.x,y:p.y+gd.r},{x:p.x-gd.r*.78,y:p.y}],clr,'#f0feff',1);
+ if(gd.val>=10||gd.heal){line(p.x,p.y-5,p.x,p.y+5,'#10263b',2);if(gd.heal)line(p.x-4,p.y,p.x+4,p.y,'#10263b',2)}
+ }
+ for(const b of s.bullets)projectile(s,b);
+ for(const b of s.enemyBullets){if(!visible(b.x,b.y,50))continue;const p=project(b.x,b.y,7),clr=b.col||'#ff85ad';ell(p.x,p.y,Math.max(3,b.r),Math.max(2,b.r*.8),clr);if(quality!=='low')lit(p.x,p.y,b.r*3,clr,.27)}
+ for(const beam of s.beams){const p=project(beam.x1,beam.y1,15),q=project(beam.x2,beam.y2,15);c.save();c.globalAlpha=clamp(beam.life/beam.max,0,1);const mid={x:(p.x+q.x)/2+Math.sin(s.timer*67)*9,y:(p.y+q.y)/2+Math.cos(s.timer*63)*11};cLine(p,mid,beam.color,3.5);cLine(mid,q,'#efffff',1.5);c.restore()}
+ for(const ghost of s.dashGhosts){if(!visible(ghost.x,ghost.y,60))continue;const p=project(ghost.x,ghost.y,24);ell(p.x,p.y,18,24,'#56eaff',clamp(ghost.life/ghost.max*.21,0,.21))}
+ for(const ring of s.rings)circleGround(ring.x,ring.y,ring.r,ring.color,null,clamp(ring.life/.65,0,1));
+ for(const part of s.particles){if(!visible(part.x,part.y,24))continue;const p=project(part.x,part.y,5);ell(p.x,p.y,Math.max(1,part.size),Math.max(.8,part.size*.76),part.color,clamp(part.life/part.max,0,1))}
+ for(const text of s.texts){if(!visible(text.x,text.y,120))continue;const p=project(text.x,text.y,35);c.globalAlpha=clamp(text.life/.7,0,1);c.font='800 13px system-ui';c.textAlign='center';c.lineWidth=3;c.strokeStyle='#030b1a';c.strokeText(text.value,p.x,p.y);c.fillStyle=text.color;c.fillText(text.value,p.x,p.y)}c.globalAlpha=1;
+ if(s.player){for(let j=0;j<s.player.droneCount;j++){const a=s.timer*1.7+j*PI2/s.player.droneCount,p=project(s.player.x+Math.cos(a)*66,s.player.y+Math.sin(a)*66,23);path([{x:p.x,y:p.y-9},{x:p.x+9,y:p.y+5},{x:p.x,y:p.y+2},{x:p.x-9,y:p.y+5}],'#86ffed','#e2ffff',1.5)}
+ if(s.player.aura)circleGround(s.player.x,s.player.y,105,'#82d8ff',null,.18)}
+ // Atmospheric fade and camera reticle, kept subtle to preserve combat readability.
+ const shade=c.createLinearGradient(0,0,W,0);shade.addColorStop(0,'rgba(2,7,19,.18)');shade.addColorStop(.3,'transparent');shade.addColorStop(.7,'transparent');shade.addColorStop(1,'rgba(2,7,19,.16)');c.fillStyle=shade;c.fillRect(0,0,W,H);
+}
+window.RIFT5Renderer={draw,toWorld,version:'5.0'};
+})();
+</script>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
@@ -457,7 +662,7 @@ function showUpgrade(isReroll=false){
  $('buildStats').textContent=`RUN BUILD · ${picks} upgrades equipped · ${player.droneCount} orbit drones`;
 }
 $('rerollBtn').addEventListener('click',()=>{if(mode!=='upgrades'||rerollsLeft<=0)return;rerollsLeft--;showUpgrade(true)});
-function dash(){if(mode!=='play'||player.dashCd>0)return;let x=joy.x,y=joy.y;for(const [key,dx,dy] of [['KeyA',-1,0],['ArrowLeft',-1,0],['KeyD',1,0],['ArrowRight',1,0],['KeyW',0,-1],['ArrowUp',0,-1],['KeyS',0,1],['ArrowDown',0,1]])if(keyboard.has(key)){x+=dx;y+=dy}const len=hypot(x,y);if(len>.1){player.dx=x/len;player.dy=y/len}player.dashing=.2;player.dashCd=player.dashBaseCd;player.invuln=Math.max(player.invuln,.35);player.dashTrailClock=0;player.afterDash=.35;player.dashOverclock=1.7;player.moveX=player.dx;player.moveY=player.dy;dashGhosts.push({x:player.x,y:player.y,angle:player.aim,life:.3,max:.3});burst(player.x,player.y,'#67efff',18,150);
+function dash(){if(mode!=='play'||player.dashCd>0)return;let x=joy.x,y=joy.y;for(const [key,dx,dy] of [['KeyA',-1,0],['ArrowLeft',-1,0],['KeyD',1,0],['ArrowRight',1,0],['KeyW',0,-1],['ArrowUp',0,-1],['KeyS',0,1],['ArrowDown',0,1]])if(keyboard.has(key)){x+=dx;y+=dy}if(window.RIFT5Renderer){const worldDash=window.RIFT5Renderer.toWorld(x,y);const strength=Math.min(1,hypot(x,y));x=worldDash.x*strength;y=worldDash.y*strength}const len=hypot(x,y);if(len>.1){player.dx=x/len;player.dy=y/len}player.dashing=.2;player.dashCd=player.dashBaseCd;player.invuln=Math.max(player.invuln,.35);player.dashTrailClock=0;player.afterDash=.35;player.dashOverclock=1.7;player.moveX=player.dx;player.moveY=player.dy;dashGhosts.push({x:player.x,y:player.y,angle:player.aim,life:.3,max:.3});burst(player.x,player.y,'#67efff',18,150);
  if(player.dashPulse){rings.push({x:player.x,y:player.y,r:0,max:114,life:.55,color:'#83fbef'});
   for(const e of enemies)if(!e.dead&&hypot(e.x-player.x,e.y-player.y)<114+e.r&&!rayWall(player.x,player.y,e.x,e.y,3))hitEnemy(e,player.dashPulse,'#80ffec');}
  sfx(510,'triangle',.12,.07)}
@@ -485,6 +690,7 @@ function chooseAutoTarget(){
 }
 // Multi-target electric bursts with proper wall occlusion, separate from Arc's bullet chain.
 function teslaBurst(first){
+ player.aim=Math.atan2(first.y-player.y,first.x-player.x);player.shotKick=.13;
  let previous={x:player.x,y:player.y},target=first;const used=new Set();
  const count=player.evolutions.tesla?6:4;
  for(let i=0;i<count&&target;i++){
@@ -623,6 +829,7 @@ function update(dt){
  }}
  // Input filtering removes stick jitter without introducing noticeable turning delay.
  let mx=joy.x,my=joy.y;if(keyboard.has('KeyA')||keyboard.has('ArrowLeft'))mx-=1;if(keyboard.has('KeyD')||keyboard.has('ArrowRight'))mx+=1;if(keyboard.has('KeyW')||keyboard.has('ArrowUp'))my-=1;if(keyboard.has('KeyS')||keyboard.has('ArrowDown'))my+=1;
+ if(window.RIFT5Renderer){const worldMove=window.RIFT5Renderer.toWorld(mx,my);const strength=Math.min(1,hypot(mx,my));mx=worldMove.x*strength;my=worldMove.y*strength}
  let m=hypot(mx,my);if(m>1){mx/=m;my/=m;m=1}
  if(m<.09){mx=0;my=0;m=0}
  if(m>.1){player.dx=mx/m;player.dy=my/m;if(player.targetId===null)player.aim=Math.atan2(my,mx)}
@@ -776,6 +983,11 @@ for(const rg of rings){ctx.strokeStyle=rg.color;ctx.globalAlpha=clamp(rg.life/.6
 ctx.textAlign='center';ctx.font='900 15px system-ui';for(const t of texts){ctx.globalAlpha=clamp(t.life/.7,0,1);ctx.fillStyle=t.color;ctx.fillText(t.value,t.x,t.y)}ctx.globalAlpha=1;ctx.restore();
 if(mode==='menu'){ctx.fillStyle='rgba(4,9,24,.18)';ctx.fillRect(0,0,SW,SH)}
 }
+// Keep the original gameplay renderer available as a safe fallback.
+const evolution4Renderer=render;
+render=function(){if(!window.RIFT5Renderer){evolution4Renderer();return;}
+ window.RIFT5Renderer.draw({ctx,SW,SH,DPR,mode,player,camera,gameSettings,enemies,walls,decos,stars,rifts,hazards,caches,gems,bullets,enemyBullets,beams,particles,texts,rings,dashGhosts,zones,enemyFields,wells,coinTiers,weaponTypes,themes,mapIndex,shake,timer});
+};
 function frame(now){const dt=Math.min(Math.max((now-last)/1000,0),.034);last=now;if(!document.hidden){if(mode==='play')update(dt);render()}requestAnimationFrame(frame)}requestAnimationFrame(frame);
 function resetJoy(){joy.x=0;joy.y=0;joy.id=null;$('stick').style.left='';$('stick').style.top='';$('stick').style.bottom='';$('stick').style.opacity='.75';$('knob').style.transform='translate(0px,0px)'}
 const zone=$('moveZone');function updateJoy(e){const dx=e.clientX-joy.startX,dy=e.clientY-joy.startY,d=hypot(dx,dy),radius=45,scale=d>radius?radius/d:1;const xx=dx*scale,yy=dy*scale;joy.x=xx/radius;joy.y=yy/radius;$('knob').style.transform=`translate(${xx}px,${yy}px)`}

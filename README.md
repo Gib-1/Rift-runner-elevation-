@@ -6,6 +6,23 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 5.0 — Dimension Shift (visual overhaul)
+
+This release retains the same six weapons, original combat logic, eight biomes, 49 run upgrades, 26 Hangar upgrades, seven achievements, bosses, XP tiers, permanent currencies, and version-1 save format, but reconstructs their presentation:
+
+- **Pseudo-3D:** a consistent angled ground projection with raised wall side faces, perspective floor grids, biome-specific structures, screen-space character elevation, animated shadows and depth-sorted units.
+- **Visual identity:** original armored pilot and enemy silhouettes with armor plating, illuminated visors, weapon attachments, movement bob, environmental glows, floating crystals and refined combat lighting.
+- **Premium UI:** a new Orbital Command title screen, angular glass panels, redesigned mobile HUD, hangar/upgrade cards, mission reports, settings, and touch abilities.
+- **Controls:** joystick and keyboard movement are inversely projected, so screen-left/right/up/down correctly match the angled battlefield; Dash preserves the same mapping.
+- **Effects and performance:** upgraded beam/projectile styling, Tesla aiming feedback, simplified enemy silhouettes in low-effects mode and in exceptionally dense crowds. Existing combat stats remain unchanged.
+- **Offline:** all new art, CSS and JavaScript are embedded inside `index.html`. No external game dependencies or asset downloads.
+
+### Compatibility and verification
+
+The browser save keys `riftrunner_evolution_v1` and `riftrunner_best` are unchanged. The import/export format is still `formatVersion: 1` and older backups with missing achievement/stat fields remain supported. Always export your progress before experimenting with imports.
+
+The standalone build was smoke-tested in headless Chromium at landscape and portrait viewports: starting, pausing, menus, achievements and Hangar, 3.0/4.0-style save migration and backup import/export, all six weapon selections and firing, projected keyboard and synthetic touch movement, abilities, XP leveling, boss HUD, and all eight biome render variants. A renderer-only 100-enemy load check ran without JS errors. Real Android frame rates, full boss-fight playthroughs, and long-duration battle performance are **not** established by these browser checks.
+
 ## Evolution 4.0 — Complete six-phase overhaul
 
 - **Phase 1 — Combat Reborn:** smoother movement, smarter auto-targeting, Dash trails, improved hit feedback and swept projectile collisions.
