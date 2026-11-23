@@ -1,5 +1,17 @@
 # Changelog
 
+## Evolution 4.0 — Endless Horde (separate mode)
+
+- Added a new **∞ ENDLESS HORDE · 2.5× XP** button on the title screen, alongside the unchanged Classic Wave Mode.
+- Created the exclusive **ECLIPSE CITADEL** arena: radial energy lanes, concentric neon rings, custom arena cover, rifts, caches, and distinctive teal/violet lighting; optimized 2D canvas visuals.
+- Endless mode spawns enemies continuously, without waves, pauses for wave clearing, XP-sweep breaks, 35-second Void interludes, or rotating biomes.
+- Difficulty scales with survival time, gradually unlocking more enemy types, higher enemy health and quicker spawn rates; bounded spawning for mobile performance.
+- Added timed supply drops, mini-bosses and occasional major boss encounters without interrupting the horde.
+- Multiplied Endless-only XP earnings by exactly **2.5×**, preserving fractional XP and all 11 coin tiers. Classic XP rates are unchanged.
+- Added an independent persistent Endless elimination record (`stats.bestEndless`) to the existing profile and version-1 JSON backup, with safe defaults for legacy backups. The Classic best score and wave-based achievements are unaffected.
+- Retry respects the current run mode, while the two menu buttons always explicitly choose their corresponding modes.
+- Added automated mode-isolation, arena, XP, timing, threat-scaling and save compatibility tests, with mobile portrait/landscape browser checks.
+
 ## Evolution 4.0 — Aim Tracking, Clear-the-Wave & XP Sweep
 
 - Ship hull continuously faces the locked enemy between shots and points exactly along each projectile/beam during auto-fire (including Tesla Repeater).
