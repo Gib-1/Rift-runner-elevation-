@@ -65,6 +65,15 @@ try:
         preview_html=preview_html.replace(injection_point, """showBalance();$('endlessBestLine').textContent='ENDLESS RECORD · '+meta.stats.bestEndless+' eliminations';
         window.__triggerVoid=()=>{start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];player.invuln=999;update(.02);waveSweepRemaining=.01;update(.02)};
         window.__finishVoid=()=>{voidRemaining=.01;update(.02)};
+        window.__killMilestone=(threshold)=>{
+          start('endless');player.invuln=999;player.droneCount=0;walls=[];enemies=[];
+          spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=999;
+          kills=threshold-1;spawnEnemy('drone',180,0);killed(enemies.at(-1));enemies=[];
+          releaseEndlessKillMilestones();updateHUD();
+          return {bosses:enemies.filter(e=>e.boss&&!e.mini).length,
+            minis:enemies.filter(e=>e.boss&&e.mini).length,
+            pending:endlessMilestoneQueue.length,cap:endlessEnemyCap()};
+        };
         })();""")
         for width,height in ((844,390),(390,844)):
             ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
@@ -108,6 +117,23 @@ try:
             assert not errors,errors
             ctx.close()
             print(f"Passed {width}x{height} Endless arena, nonstop HUD, pause and screenshot checks")
+        # Test-only hook validates each kill milestone and the 1,000-kill raid in Chromium.
+        # Production index.html contains no test hooks.
+        for width,height in ((844,390),(390,844)):
+            ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=ctx.new_page();errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.route(url,lambda route:route.fulfill(content_type="text/html",body=preview_html))
+            pg.goto(url)
+            for threshold,expected in [(65,(0,1)),(115,(1,0)),(1000,(1,2))]:
+                actual=pg.evaluate("n=>__killMilestone(n)",threshold)
+                assert (actual["bosses"],actual["minis"])==expected,(threshold,actual)
+                assert actual["pending"]==0
+                assert actual["bosses"]+actual["minis"]<=actual["cap"]
+            pg.screenshot(path=screenshots/f"endless-1000-kill-bosses-{width}.png")
+            assert not errors,errors
+            ctx.close()
+            print(f"Passed {width}x{height} kill-triggered mini-boss, boss, and triple raid")
         browser.close()
 finally:
     server.shutdown()
