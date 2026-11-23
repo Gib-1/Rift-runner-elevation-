@@ -36,7 +36,7 @@ const t=makeEnv();
 t.run(`
  start();assert.equal(player.maxHp,120);assert.equal(player.damage,25);assert.equal(player.droneCount,1);assert.equal(EVO42_FEATURES.length,35);assert.equal(cameraScale(),.86);
  assert.equal(Object.keys(weaponTypes).length,7);assert.equal(shopData.length,26);assert.equal(upgradeData.length,62);
- assert.equal(MAIN_BIOME_COUNT,8);assert.equal(themes.length,9);assert.equal(coinTiers[150].r,19);
+ assert.equal(MAIN_BIOME_COUNT,8);assert.equal(themes.length,10);assert.equal(coinTiers[150].r,19);
  keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');
 `);
 console.log('Pass: camera, movement, HUD renderer, six weapons, upgrades and eight biomes.');
@@ -194,3 +194,35 @@ t.run(`start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];update
  assert.ok(enemies.length<=90,'Wave population remains bounded under rapid spawning');
 `);
 console.log('Pass: rapid Void combat stays bounded and frame calculations remain finite.');
+
+// ENDLESS HORDE: isolated from normal wave transitions and Void Breaches.
+t.run(`start('endless');const originalBestWave=meta.stats.bestWave;assert.equal(runMode,'endless');assert.equal(mapIndex,ENDLESS_BIOME);
+ assert.equal(themes[mapIndex].name,'ECLIPSE CITADEL');assert.equal(wave,1);
+ assert.equal(wavePhase,'spawn');assert.equal(voidActive,false);assert.equal(endlessBossCount,0);
+ assert.ok(walls.length>=30&&rifts.length>=5&&decos.length>50,'Unique arena geometry exists');
+ assert.equal(insideWall(0,0,175),false,'Spawn center is unobstructed');
+ updateHUD();assert.ok($('wave').textContent.includes('ENDLESS'));assert.ok($('battleMetrics').textContent.includes('2.5× XP'));
+ player.xp=0;player.need=99;gainXp(2);assert.equal(player.xp,5,'XP is 2.5x exactly');
+ gainXp(1);assert.equal(player.xp,7.5,'Fractional XP is retained instead of rounding away rewards');
+ spawnTimer=.001;enemies=[];player.droneCount=0;player.invuln=999;
+ update(.016);assert.ok(enemies.length>0,'Enemy spawns immediately');
+ wavePhase='clear';spawnTimer=0;const oldLength=enemies.length;update(.03);
+ assert.ok(enemies.length>oldLength,'Endless spawning ignores cleared wave phase');
+ assert.equal(wave,1);assert.equal(voidActive,false);
+ render();assert.equal(meta.stats.bestWave,originalBestWave,'Endless must not advance wave achievements');
+`);
+console.log('Pass: independent Endless mode, distinct arena, continuous spawns, HUD and exact 2.5x XP.');
+
+t.run(`start('endless');player.droneCount=0;player.invuln=999;
+ enemies=[];walls=[];spawnTimer=999;endlessBossClock=.01;endlessSupplyClock=.01;
+ update(.03);assert.ok(enemies.some(e=>e.boss),'Elite enemies arrive without wave changes');
+ assert.equal(endlessBossCount,1);assert.equal(wave,1);assert.ok(supplyPods.length===1,'Timed supply drops operate without waves');
+ timer=400;enemies=[];spawnEnemy('tank',160,80);assert.ok(enemies[0].hp>200,'Difficulty scales over survival time');
+ wavePhase='sweep';waveElapsed=24;update(.03);assert.equal(wave,1);assert.equal(voidActive,false);assert.equal(mapIndex,ENDLESS_BIOME);
+ const classicBest=gameBest;kills=87;saveBest();assert.equal(meta.stats.bestEndless,87);assert.equal(gameBest,classicBest);
+ const backup=validateBackup({game:BACKUP_GAME,formatVersion:1,progress:{cores:meta.cores,upgrades:meta.upgrades,best:0,stats:meta.stats}});
+ assert.equal(backup.stats.bestEndless,87);
+ start('normal');assert.equal(runMode,'normal');assert.equal(mapIndex,0);assert.equal(wave,1);
+ player.need=99;player.xp=0;gainXp(2);assert.equal(player.xp,2,'Classic XP is unchanged');
+`);
+console.log('Pass: independent elite/supply timers, growing threat, separate endless high score and legacy-compatible saves.');
