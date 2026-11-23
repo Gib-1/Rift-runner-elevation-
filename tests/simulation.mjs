@@ -36,7 +36,7 @@ const t=makeEnv();
 t.run(`
  start();assert.equal(player.maxHp,120);assert.equal(player.damage,25);assert.equal(player.droneCount,1);assert.equal(EVO42_FEATURES.length,35);assert.equal(cameraScale(),.86);
  assert.equal(Object.keys(weaponTypes).length,7);assert.equal(shopData.length,26);assert.equal(upgradeData.length,62);
- assert.equal(themes.length,8);assert.equal(coinTiers[150].r,19);
+ assert.equal(MAIN_BIOME_COUNT,8);assert.equal(themes.length,9);assert.equal(coinTiers[150].r,19);
  keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');
 `);
 console.log('Pass: camera, movement, HUD renderer, six weapons, upgrades and eight biomes.');
@@ -107,7 +107,7 @@ t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;wave=2;
   if(idx===0)player.hp=10;
   openSupplyPod(p);
   if(idx===0)assert.ok(player.hp>10);
-  if(idx===1)assert.ok(gems.some(g=>g.val===10));
+  if(idx===1)assert.ok(gems.some(g=>g.val===25));
   if(idx===2)assert.ok(player.rapidTime>0);
   if(idx===3)assert.ok(player.magnetTime>0);
   if(idx===4)assert.ok(player.shield>0);
@@ -118,3 +118,39 @@ t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;wave=2;
 `);
 console.log('Pass: 5 distinct supply pickups, camera zoom, low-hull HUD and world rendering.');
 console.log('All Evolution 4.0 Drone Armada simulation checks passed.');
+
+t.run(`start();wave=4;normalTime=95.99;spawnTimer=999;shotTimer=999;player.invuln=999;
+ update(.02);assert.equal(voidActive,true);assert.equal(mapIndex,VOID_BIOME);
+ assert.equal(voidRemaining,VOID_LENGTH);assert.equal(wave,4);
+ assert.ok(enemies.some(e=>e.kind==='voidheart'));
+ assert.equal(coinTiers[2].r,6.5);assert.equal(coinTiers[15].r,10.5);
+ assert.equal(coinTiers[25].r,12);assert.equal(coinTiers[75].r,16);
+ assert.equal(coinTiers[300].r,21);
+ spawnTimer=0;update(.03);assert.ok(enemies.some(e=>['voidrunner','voidlancer'].includes(e.kind)));
+ assert.ok(spawnTimer<.4);render();
+ const boss=enemies.find(e=>e.kind==='voidheart');killed(boss);assert.equal(voidBossCleared,true);assert.ok(gems.some(g=>g.val===150));
+ const before=normalTime;for(let i=0;i<100;i++)update(.02);assert.equal(normalTime,before);
+ voidRemaining=.02;update(.03);assert.equal(voidActive,false);assert.equal(mapIndex,1);
+ assert.equal(wave,5);assert.equal(coinTiers[75].r,16);
+ assert.ok(gems.some(g=>g.val===75),'Void clear gives reward coin');
+ render();assert.equal($('voidTint').style.opacity,'0');
+`);
+console.log('Pass: Void breach starts at biome midpoint, spawns rapid troops and boss, lasts exactly 35 play seconds, restores next zone, and awards coins.');
+
+t.run(`start();wave=4;normalTime=95.99;player.invuln=999;update(.02);
+ voidRemaining=.01;update(.03);assert.equal(mapIndex,1);assert.equal(wave,5);
+ wave=8;normalTime=191.99;update(.03);assert.equal(voidActive,true);assert.equal(voidNextBiome,2);
+ voidRemaining=.01;update(.02);assert.equal(mapIndex,2);assert.equal(wave,9);
+ for(const n of [1,2,3,5,10,15,25,50,75,150,300]){dropCoin(player.x+110,player.y,n)};
+ assert.ok(gems.some(g=>g.val===300));render();
+`);
+console.log('Pass: multiple void intervals, regular biome rotation and all eleven XP tiers render.');
+
+t.run(`start();wave=4;normalTime=95.99;player.invuln=999;update(.02);
+ for(let i=0;i<75;i++)spawnEnemy(i%3?'voidrunner':'voidlancer',100+(i%15)*17,60+(i%5)*10);
+ assert.ok(enemies.length<=82,'Void NPC cap should remain bounded');
+ for(let i=0;i<120;i++){update(.016);render()}
+ assert.ok(voidActive);assert.ok(Number.isFinite(player.hp));assert.ok(Number.isFinite(voidRemaining));
+ assert.ok(enemies.length<=90,'Wave population remains bounded under rapid spawning');
+`);
+console.log('Pass: sustained fast-void-spawn combat stays bounded and frame calculations remain finite.');

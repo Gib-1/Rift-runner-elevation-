@@ -1,5 +1,15 @@
 # Changelog
 
+## Evolution 4.0 — Void Breach Interludes / 11 XP Tiers
+
+- Introduced a 35-second Void Breach between normal biomes, after every four-wave segment. Normal-wave progression pauses during active breach gameplay and resumes at the next original biome without skipping a wave.
+- Added temporary VOID BREACH arena styling, a visible countdown and dark purple vignette. The player ship acquires purely cosmetic animated purple corruption cracks and a pulsing outline, which revert when the event ends.
+- Introduced two fast-spawning enemy variants (Void Runner and ranged Void Lancer) and the Void Heart major boss with unique rapid projectiles, telegraphed danger circles, and reinforcements. Encounter has an active enemy cap for mobile performance.
+- Expanded the coin system from six to eleven denominations: added 2, 15, 25, 75 and rare 300 XP. The 50-XP mini-boss and 150-XP major boss rewards remain. Added new Void mob rewards, supply caches, and extra optional clear bonuses.
+- Adjusted the XP legend, viewport clipping, boss label and countdown positions for portrait/landscape screens.
+- Preserved the entire Drone Armada combat system, previous biome art, weapons, upgrades, version-1 backup validation, and original browser save keys. CI tests cover the 35-second phase, repeated biome transitions, boss spawning and XP tiers, mobile layout, and imports/exports.
+
+
 ## Evolution 4.0 — Drone Armada (35 features)
 
 - Built animated visible orbit drones with individual bolt attacks, turret tracking, visual exhaust, wing rotation, recoil and firing flashes. One starter drone is available immediately; existing drone upgrades add more.

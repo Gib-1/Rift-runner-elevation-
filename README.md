@@ -53,6 +53,15 @@ https://gib-1.github.io/Rift-runner-elevation-/
 34. Low-hull warning overlay
 35. Next-wave countdown
 
+## Evolution 4.0 — Void Breach Interludes and Expanded XP
+
+- Every normal biome rotation (after each four-wave segment), play a dedicated **35-second VOID BREACH** before entering the next of the eight original biomes. The normal wave clock pauses during the breach; your survival timer still advances during active play. Level-up pauses do not consume the 35 seconds.
+- During the breach: a purple Void arena replaces the normal biome, Void Runners and Void Lancers arrive in rapid waves, and **The Void Heart** boss appears immediately with unique projectile patterns and troop summons. To protect mobile performance, this mode limits active enemies.
+- The player ship develops **temporary animated violet corruption cracks** and a purple aura. These effects are cosmetic, and the normal appearance returns afterward.
+- New XP tiers **2, 15, 25, 75 and 300** expand the system to eleven types: 1, 2, 3, 5, 10, 15, 25, 50, 75, 150 and 300. The existing 50-XP mini-boss and 150-XP major boss coins are preserved. Void troops and supply caches provide the new types; defeating The Void Heart earns an extra 75-XP clear reward on exit, with a 300-XP rare reward after every third successful interlude. Rare 300-XP coins can also appear in advanced secret caches.
+- The Void phase is temporary, not a ninth normal biome. All eight existing biomes, six weapons, Drone Armada upgrades, achievements, save keys, version-1 backup compatibility, and user settings remain intact.
+- Designed and tested for portrait and landscape play with no external assets or network dependencies.
+
 ## Evolution 4.0 — Camera, Pathfinding & Power Update
 
 - Camera zoomed out slightly (86% world scale) for better battlefield awareness; interface and touch hitboxes remain unchanged.
