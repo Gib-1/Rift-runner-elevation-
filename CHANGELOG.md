@@ -1,5 +1,14 @@
 # Changelog
 
+## Evolution 5.0
+
+- Projected the combat world onto a three-quarter view, with ground shadows, armored units, raised cover and footprint-based depth ordering.
+- Added orbital-gate title art, command navigation, compact combat instruments and restyled upgrade, Hangar, challenge and mission panels.
+- Added eight biome construction styles, animated gunships and walkers, ballistic trails, branching-target Tesla bolts and Void implosions.
+- Corrected joystick placement relative to the movement zone and accounted for the camera angle in diagonal movement and Dash.
+- Retained both progression keys and version-1 backups. Added isolated regression checks and portrait/landscape browser playtests.
+
+
 ## Evolution 4.0 — Complete (Phases 2–6)
 
 ### Phase 2 — Evolving Arsenal

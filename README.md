@@ -6,6 +6,12 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 5.0
+
+A projected three-quarter battlefield with depth-sorted cover, directional armored units, biome-specific structures and new weapon effects. The command deck features an original orbital gate illustration embedded in the HTML. Open **Save management** on the title screen to transfer progress.
+
+Run `node tests/simulation.mjs` for isolated gameplay and migration checks. With Python Playwright and its Chromium installed, `python tests/browser.py` tests portrait and landscape play, touch positioning, save transfer and dense combat. It saves screenshots and measures headless desktop frame intervals. Physical Android performance requires device testing.
+
 ## Evolution 4.0 — Complete six-phase overhaul
 
 - **Phase 1 — Combat Reborn:** smoother movement, smarter auto-targeting, Dash trails, improved hit feedback and swept projectile collisions.
