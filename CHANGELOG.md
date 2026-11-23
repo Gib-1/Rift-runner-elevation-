@@ -1,5 +1,17 @@
 # Changelog
 
+## Evolution 4.0 — Drone Armada (35 features)
+
+- Built animated visible orbit drones with individual bolt attacks, turret tracking, visual exhaust, wing rotation, recoil and firing flashes. One starter drone is available immediately; existing drone upgrades add more.
+- Added a kill-streak-triggered drone overdrive and a new Guardian Drone interception upgrade.
+- Added 12 other upgrade choices with distinct combat effects, bringing the selection pool to 62, without changing permanent upgrade IDs or prices.
+- Added five temporary supply-pod reward types plus an opening shockwave. Supply pods appear after early wave transitions and expire if ignored.
+- Added boss and pickup direction indicators, on-screen combat combo and wave countdown, configurable camera zoom and a low-health warning.
+- Added a visible "WHAT'S NEW" guide showing all 35 improvements.
+- Reduced drone target scans to around five per second per drone to protect Android performance.
+- Preserved game controls, existing progress keys, version-1 backup format, XP tiers, biomes, boss roster and all existing equipment.
+- Validation: JavaScript syntax; Node gameplay regression tests (targeting, 13 new run upgrades, drone interception, wave pods, existing 4.0 saves, pathfinding); Chromium portrait and landscape screenshots and control navigation; headless 120-enemy simulation with no JavaScript exceptions.
+
 ## Evolution 4.0 — Camera, Pathfinding & Power Update
 
 - Zoomed the world camera out to 86% scale, revealing roughly 16% more world distance while keeping the HUD and touch controls full-sized.

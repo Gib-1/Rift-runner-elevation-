@@ -24,6 +24,9 @@ try:
             page.goto(url,wait_until="domcontentloaded")
             assert "EVOLUTION 4.0" in page.locator(".kicker").inner_text()
             page.screenshot(path=screenshots/f"4.0-menu-{width}.png")
+            page.locator("#featuresBtn").tap()
+            assert page.locator("#featureGuideList li").count()==35
+            page.locator("#featuresBackBtn").tap()
             page.locator("#hangarBtn").tap()
             assert page.locator(".shopItem").count()==26
             page.locator("#hangarBackBtn").tap()
@@ -32,6 +35,8 @@ try:
             page.locator("#achievementsBackBtn").tap()
             page.locator("#settingsBtn").tap()
             page.locator("#fxBtn").tap()
+            page.locator("#zoomBtn").tap()
+            assert "FAR" in page.locator("#zoomBtn").inner_text()
             page.locator("#settingsBackBtn").tap()
             legacy={"game":"rift-runner-evolution","formatVersion":1,"progress":{"cores":47,"best":19,"upgrades":{"armor":2}}}
             page.on("dialog",lambda dialog:dialog.accept())
@@ -43,6 +48,7 @@ try:
             assert (exported["cores"],exported["best"],exported["upgrades"]["armor"])==(47,19,2)
             page.locator("#startBtn").tap()
             page.wait_for_function("document.querySelector('#time').textContent !== '0:00'",timeout=10000)
+            assert "DRONE" in page.locator("#battleMetrics").inner_text()
             for action in ("dashBtn","shieldBtn","gravBtn"):
                 page.locator("#"+action).tap()
             page.screenshot(path=screenshots/f"4.0-game-{width}.png")

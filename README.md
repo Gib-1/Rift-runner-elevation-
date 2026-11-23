@@ -6,6 +6,53 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 4.0 — Drone Armada (35-feature gameplay update)
+
+- **All players start with one orbit drone.** Every drone now has an animated orbit, rotor, thruster, aim swivel, targeting reticle, recoil, muzzle flash and real moving energy bolts. New drones from run or Hangar upgrades fire independently rather than dealing invisible hits. Overdrive triggers briefly after ten eliminations.
+- **Thirteen new optional run upgrades** add Guardian Drone interception, fire/cold/disruption effects, execution damage, critical shockwaves, boss lifesteal, ricochets, Nova residue, enhanced Gravity Well, Dash shock trails, Shield cooldown recovery and milestone healing. There are now **62** run-upgrade options; permanent Hangar remains at **26** unchanged upgrade definitions.
+- **Wave supply pods** offer five useful pickups: hull repair, XP currency, temporary rapid fire, magnetic collection, or a temporary barrier. Opening them also causes a nearby shockwave.
+- **HUD and accessibility:** offscreen boss and cache markers, visible kill streak and next-wave timer, low-health warning, and optional Near/Normal/Far camera zoom saved to the existing options key. The game menu has a **WHAT'S NEW** guide listing all 35 improvements.
+- **Mobile performance:** drone line-of-sight searches run periodically (~5 Hz), not every rendered frame. The existing low-effects option remains supported.
+- **Compatibility:** Existing weapon inventory, enemy pathfinding, cover, 150-XP major boss coins, 50-XP mini-boss coins, six weapons, eight biomes and all existing progression remain. `riftrunner_evolution_v1`, `riftrunner_best`, and portable version-1 save backup format are unchanged.
+
+### The 35 additions
+
+1. Animated floating drone orbits
+2. Animated drone rotor wings
+3. Animated thruster exhaust
+4. Staggered independent drone fire
+5. Tracking drone turrets
+6. Drone recoil and muzzle flashes
+7. Visible moving drone bolts
+8. Drone target-lock reticles
+9. Drone overdrive streak mode
+10. Drone projectile interception
+11. Incendiary rounds
+12. Cryo slow rounds
+13. Armor disruption rounds
+14. Execution bonus damage
+15. Critical shockwaves
+16. Boss siphon repairs
+17. Ricochet shots
+18. Lingering Nova plasma
+19. Crushing Gravity Well
+20. Electrified Dash wake
+21. Shield cooldown recovery on eliminations
+22. Milestone level repairs
+23. Wave supply pod deployments
+24. Supply pod repair cells
+25. Supply pod XP caches
+26. Temporary rapid-fire supply module
+27. Temporary magnet supply module
+28. Temporary barrier supply module
+29. Supply pod opening shockwave
+30. Offscreen boss direction beacon
+31. Offscreen supply cache locator
+32. Kill combo tracker
+33. Adjustable camera zoom
+34. Low-hull warning overlay
+35. Next-wave countdown
+
 ## Evolution 4.0 — Camera, Pathfinding & Power Update
 
 - Camera zoomed out slightly (86% world scale) for better battlefield awareness; interface and touch hitboxes remain unchanged.
