@@ -6,6 +6,14 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Endless Horde — Compact Arena and Faster Hordes
+
+- **Smaller Eclipse Citadel:** the Endless-only movement boundary is now approximately **1,930 × 1,930 world units**, down from the former 3,760 × 3,760 range; rings, cover, caches, and hazards are arranged inside the smaller space. Classic Mode keeps its original map size.
+- **2.5× faster enemy spawning:** the continuous spawn interval is divided by 2.5 compared with the previous Endless build, including as the threat level rises. This is separate from the existing **2.5× XP multiplier**.
+- **Organized horde groups:** squads of 2–8 enemies periodically arrive from one direction, in addition to the nonstop stream. Squad sizes increase with survival threat, but groups stop adding enemies when the population is full.
+- **Mobile-performance guardrails:** active Endless foes are capped at **82** under Balanced Effects, **58** under Low Effects, and the cap can dynamically drop to **52** after sustained slow frames. Spawning pauses at the cap; there is no guarantee of 2.5× more active enemies or an exact FPS on every device. Rendering props were reduced to fit the smaller arena.
+- Existing Classic Waves, the 35-second Void event, weapons, drones, achievements, permanent upgrades, 11 coin types, 2.5× Endless XP, and the separate Endless high score are unchanged. No save migration required.
+
 ## Evolution 4.0 — Endless Horde mode
 
 Two independent run modes are available from the title screen:
