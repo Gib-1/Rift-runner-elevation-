@@ -1,5 +1,14 @@
 # Changelog
 
+## Evolution 4.0 — Aim Tracking, Clear-the-Wave & XP Sweep
+
+- Ship hull continuously faces the locked enemy between shots and points exactly along each projectile/beam during auto-fire (including Tesla Repeater).
+- Regular waves spawn enemies only during their first 19 seconds. After 19 seconds, normal and summoned enemy spawns stop; a wave cannot advance before 24 seconds or while any enemies are alive.
+- On a cleared wave, every uncollected XP coin is drawn toward the player in a visible 1.15-second sweep; any leftover XP is guaranteed to be credited before the next wave or the 35-second Void Breach.
+- XP pickup coins no longer expire mid-wave, and level requirements are now 16 to start with gentler `floor(need * 1.15 + 4)` growth instead of 20 and `floor(need * 1.21 + 6)`.
+- Void Breaches stay exactly 35 seconds, and uncollected XP from the event is secured before changing biomes.
+- Saved progress, the existing backup format, six weapons, eight main biomes, 11 XP tiers, Drone Armada, bosses, and upgrades are preserved.
+
 ## Evolution 4.0 — Void Breach Interludes / 11 XP Tiers
 
 - Introduced a 35-second Void Breach between normal biomes, after every four-wave segment. Normal-wave progression pauses during active breach gameplay and resumes at the next original biome without skipping a wave.

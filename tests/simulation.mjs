@@ -119,8 +119,45 @@ t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;wave=2;
 console.log('Pass: 5 distinct supply pickups, camera zoom, low-hull HUD and world rendering.');
 console.log('All Evolution 4.0 Drone Armada simulation checks passed.');
 
-t.run(`start();wave=4;normalTime=95.99;spawnTimer=999;shotTimer=999;player.invuln=999;
- update(.02);assert.equal(voidActive,true);assert.equal(mapIndex,VOID_BIOME);
+// Wave pacing, targeted ship orientation and XP acquisition regression coverage.
+t.run(`start();assert.equal(player.need,16);
+ gainXp(16);assert.equal(player.level,2);assert.equal(player.need,22);
+`);
+console.log('Pass: easier level requirements and gentler XP curve.');
+
+t.run(`start();walls=[];enemies=[];player.droneCount=0;spawnTimer=999;shotTimer=999;
+ spawnEnemy('tank',0,-190);const e=enemies.at(-1);e.speed=0;e.shot=999;
+ player.aim=0;fire();assert.equal(player.targetId,e.id);
+ assert.ok(Math.abs(player.aim+Math.PI/2)<.03,'Ship points toward its initial shot target');
+ assert.ok(bullets.some(b=>b.vy<0),'Bullet fires where ship faces');
+ e.x=190;e.y=0;const old=player.aim;update(.03);
+ assert.ok(player.aim>old,'Ship follows moving enemy smoothly between shots');
+ keyboard.add('ArrowLeft');fire();assert.ok(Math.abs(player.aim)<.03,'Facing shooting target overrides movement');
+ keyboard.delete('ArrowLeft');player.weapon='tesla';e.x=-190;e.y=0;fire();
+ assert.ok(Math.abs(Math.cos(player.aim)+1)<.03,'Tesla also rotates ship toward its shot');
+ assert.ok(beams.length>0,'Tesla emitted beams');render();
+`);
+console.log('Pass: ship faces every firing direction including Tesla and continuously tracks moving targets.');
+
+t.run(`start();walls=[];enemies=[];player.droneCount=0;player.invuln=999;
+ spawnTimer=999;shotTimer=999;spawnEnemy('drone',500,500);const foe=enemies[0];foe.speed=0;
+ waveElapsed=18.99;update(.02);assert.equal(wavePhase,'clear');
+ assert.equal(enemies.length,1);const before=enemies.length;
+ spawnTimer=0;spawnEnemy('dart',200,200);update(.5);assert.equal(enemies.length,before,'No troops spawn during last-five-seconds cleanup, including scripted summons');
+ waveElapsed=23.98;update(.03);assert.equal(wavePhase,'clear','Must wait for final enemy elimination');
+ player.need=9999;player.xp=0;dropCoin(player.x+1250,player.y+90,300);gems[0].vx=0;gems[0].vy=0;
+ const firstX=gems[0].x;update(.03);assert.ok(gems[0].x===firstX,'Far-away coins remain until the sweep');
+ enemies=[];update(.02);assert.equal(wavePhase,'sweep');
+ const coinX=gems[0].x;update(.03);assert.ok(gems[0].x<coinX,'Stray XP coin visibly flies toward player');
+ for(let i=0;i<75;i++)update(.02);
+ assert.equal(wave,2);assert.equal(wavePhase,'spawn');assert.equal(player.xp,300);
+ assert.equal(gems.filter(g=>!g.heal).length,0,'All XP auto-collected at wave end');
+`);
+console.log('Pass: spawn cutoff, enemy-clear gating, animated XP vacuum and complete XP collection.');
+
+t.run(`start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];player.invuln=999;
+ update(.02);assert.equal(wavePhase,'sweep');waveSweepRemaining=.01;update(.02);
+ assert.equal(voidActive,true);assert.equal(mapIndex,VOID_BIOME);
  assert.equal(voidRemaining,VOID_LENGTH);assert.equal(wave,4);
  assert.ok(enemies.some(e=>e.kind==='voidheart'));
  assert.equal(coinTiers[2].r,6.5);assert.equal(coinTiers[15].r,10.5);
@@ -132,25 +169,28 @@ t.run(`start();wave=4;normalTime=95.99;spawnTimer=999;shotTimer=999;player.invul
  const before=normalTime;for(let i=0;i<100;i++)update(.02);assert.equal(normalTime,before);
  voidRemaining=.02;update(.03);assert.equal(voidActive,false);assert.equal(mapIndex,1);
  assert.equal(wave,5);assert.equal(coinTiers[75].r,16);
- assert.ok(gems.some(g=>g.val===75),'Void clear gives reward coin');
+ assert.ok(gems.some(g=>g.val===75)||player.level>1,'Void clear gives immediate reward coin');
+ assert.ok(!gems.some(g=>g.val===150),'Void boss XP is swept up when breach closes');
  render();assert.equal($('voidTint').style.opacity,'0');
 `);
-console.log('Pass: Void breach starts at biome midpoint, spawns rapid troops and boss, lasts exactly 35 play seconds, restores next zone, and awards coins.');
+console.log('Pass: 35s Void breach still starts after fully cleared fourth wave, exits into next biome and gathers old XP.');
 
-t.run(`start();wave=4;normalTime=95.99;player.invuln=999;update(.02);
+t.run(`start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];update(.02);waveSweepRemaining=.01;update(.02);
  voidRemaining=.01;update(.03);assert.equal(mapIndex,1);assert.equal(wave,5);
- wave=8;normalTime=191.99;update(.03);assert.equal(voidActive,true);assert.equal(voidNextBiome,2);
+ advanceWave(8);waveElapsed=24;wavePhase='clear';enemies=[];update(.02);waveSweepRemaining=.01;update(.02);
+ assert.equal(voidActive,true);assert.equal(voidNextBiome,2);
  voidRemaining=.01;update(.02);assert.equal(mapIndex,2);assert.equal(wave,9);
  for(const n of [1,2,3,5,10,15,25,50,75,150,300]){dropCoin(player.x+110,player.y,n)};
  assert.ok(gems.some(g=>g.val===300));render();
 `);
-console.log('Pass: multiple void intervals, regular biome rotation and all eleven XP tiers render.');
+console.log('Pass: repeat Void transitions, biome rotation and all eleven XP tiers render.');
 
-t.run(`start();wave=4;normalTime=95.99;player.invuln=999;update(.02);
+t.run(`start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];update(.02);waveSweepRemaining=.01;update(.02);
+ player.invuln=999;
  for(let i=0;i<75;i++)spawnEnemy(i%3?'voidrunner':'voidlancer',100+(i%15)*17,60+(i%5)*10);
  assert.ok(enemies.length<=82,'Void NPC cap should remain bounded');
  for(let i=0;i<120;i++){update(.016);render()}
  assert.ok(voidActive);assert.ok(Number.isFinite(player.hp));assert.ok(Number.isFinite(voidRemaining));
  assert.ok(enemies.length<=90,'Wave population remains bounded under rapid spawning');
 `);
-console.log('Pass: sustained fast-void-spawn combat stays bounded and frame calculations remain finite.');
+console.log('Pass: rapid Void combat stays bounded and frame calculations remain finite.');

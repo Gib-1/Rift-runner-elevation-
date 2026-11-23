@@ -62,7 +62,7 @@ try:
         preview_html=(root/"index.html").read_text()
         assert "showBalance();\n})();" in preview_html
         preview_html=preview_html.replace("showBalance();\n})();", """showBalance();
-        window.__triggerVoid=()=>{start();wave=4;normalTime=95.99;player.invuln=999;update(.02)};
+        window.__triggerVoid=()=>{start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];player.invuln=999;update(.02);waveSweepRemaining=.01;update(.02)};
         window.__finishVoid=()=>{voidRemaining=.01;update(.02)};
         })();""")
         for width,height in ((844,390),(390,844)):
