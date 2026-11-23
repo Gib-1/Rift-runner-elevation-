@@ -146,6 +146,30 @@ html,body{font-family:'Trebuchet MS',system-ui,-apple-system,'Segoe UI',sans-ser
 @media (max-width:450px) and (orientation:portrait){#hud{padding-left:8px;padding-right:8px}.hudleft{padding:9px;max-width:184px}.hlabel{font-size:8px;letter-spacing:1px}#scorebox{min-width:97px;padding:8px 6px}#killnum{font-size:24px}#pauseBtn{width:32px;min-width:32px;height:34px;font-size:16px}#weaponBtn{font-size:8px;padding:6px}#actions{right:calc(9px + env(safe-area-inset-right,0px));bottom:calc(35px + env(safe-area-inset-bottom,0px))}#stick{left:calc(11px + env(safe-area-inset-left,0px))}}
 @media (prefers-reduced-motion:reduce){.primary,.secondary,.upgrade{transition:none!important}#novaBtn.ready{animation:none}}
 
+
+@media (orientation:landscape) and (max-height:550px) and (min-width:650px){
+ #menu .panel{width:min(900px,97vw);max-width:none;max-height:95dvh;display:grid;grid-template-columns:44% 1fr;grid-auto-rows:min-content;align-items:center;gap:7px 20px;padding:15px 22px;text-align:left}
+ #menu #brand{grid-column:1;grid-row:1}
+ #menu .title{grid-column:1;grid-row:2;font-size:clamp(38px,6vw,55px);margin:6px 0}
+ #menu .kicker{grid-column:1;grid-row:3;margin:0;font-size:9px}
+ #menu .description{grid-column:1;grid-row:4;margin:0;max-width:none;line-height:1.42;font-size:11px}
+ #menu .instructions{grid-column:1;grid-row:5;justify-content:flex-start;margin:0;gap:4px}
+ #menu .chip{font-size:9px;padding:4px 6px}
+ #menu .xpLegend{display:none}
+ #menu #coreLine{grid-column:1;grid-row:7;text-align:left;margin:0;font-size:12px}
+ #menu #bestLine{grid-column:1;grid-row:8;text-align:left;margin:0}
+ #menu #soundBtn{grid-column:1;grid-row:9;justify-self:start;margin:0}
+ #menu #startBtn{grid-column:2;grid-row:1 / span 2;margin:0;padding:13px}
+ #menu #hangarBtn{grid-column:2;grid-row:3;margin:0;padding:11px}
+ #menu #achievementsBtn{grid-column:2;grid-row:4;margin:0;padding:11px}
+ #menu #settingsBtn{grid-column:2;grid-row:5;margin:0;padding:11px}
+ #menu .saveActions{grid-column:2;grid-row:6;margin:0}
+ #menu .saveActions button{padding:10px 5px}
+ #menu .saveNote{grid-column:2;grid-row:7;display:block;margin:0;max-width:none;font-size:9px;line-height:1.2}
+ #menu #saveStatus{grid-column:2;grid-row:8;margin:0}
+ #menu .foot{grid-column:2;grid-row:9;display:block;font-size:9px;margin:0}
+}
+
 </style>
 </head>
 <body>
