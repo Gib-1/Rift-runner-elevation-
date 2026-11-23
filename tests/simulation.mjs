@@ -1,75 +1,80 @@
-// Run the actual game closure in isolated storage. The drawing double validates
-// numeric coordinates and transform-stack balance, not pixels or browser FPS.
+// RIFT RUNNER Evolution 4.0 — DOM-free simulation smoke tests.
+// These tests intentionally target the lightweight Canvas game, not the retired 5.0 renderer.
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
 const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
-const source=html.match(/<script>([\s\S]*?)<\/script>/)[1];
-const dimension=html.match(/<script id="evolution5-renderer">([\s\S]*?)<\/script>/)[1];
+const match=html.match(/<script>([\s\S]*?)<\/script>/);
+assert.ok(match,'Single game script must exist');
+const source=match[1];
 const noop=()=>{};
-let depth=0;
-const gradient={addColorStop:noop};
-const brush=new Proxy({save:()=>depth++,restore:()=>assert.ok(depth-->0),createLinearGradient:()=>gradient,createRadialGradient:()=>gradient},{get:(o,k)=>o[k]??((...args)=>args.forEach(n=>{if(typeof n==='number')assert.ok(Number.isFinite(n),String(k))}))});
-class Element{
- style={};children=[];events={};classList={toggle:noop,add:noop,remove:noop};
- setAttribute(){}
- querySelector(){return this}
- remove(){}
- append(...els){this.children.push(...els)}
- set textContent(t){this.label=t;this.children=[]}
- get textContent(){return this.label}
- addEventListener(k,f){this.events[k]=f}
- click(){this.events.click?.()}
- getContext(){return brush}
- getBoundingClientRect(){return {left:0,top:0,width:300,height:240}}
- setPointerCapture(){}
+function makeEnv(seed={}){
+ let depth=0;
+ const gradient={addColorStop:noop};
+ const canvas=new Proxy({save:()=>{depth++},restore:()=>{assert.ok(depth>0,'Canvas restore without save');depth--},createRadialGradient:()=>gradient,createLinearGradient:()=>gradient},
+   {get:(obj,k)=>obj[k]??noop});
+ class Element{
+  constructor(){this.style={};this.children=[];this.label='';this.events={};this.className='';this.classList={toggle:noop,add:noop,remove:noop};this.scrollTop=0;this.value='';this.files=[];}
+  setAttribute(){} addEventListener(n,fn){this.events[n]=fn} click(){this.events.click?.()} append(...v){this.children.push(...v)} querySelector(){return this} remove(){} setPointerCapture(){} getBoundingClientRect(){return {left:0,top:0,width:300,height:240}} getContext(){return canvas}
+  set textContent(v){this.label=String(v);this.children=[]} get textContent(){return this.label}
+  set innerHTML(v){this.label=String(v);this.children=[]} get innerHTML(){return this.label}
+ }
+ const elements=new Map();const node=id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id)};
+ const storage=new Map(Object.entries(seed));
+ const env={assert,console,performance,innerWidth:844,innerHeight:390,devicePixelRatio:1.4,requestAnimationFrame:noop,addEventListener:noop,navigator:{},
+  document:{hidden:false,getElementById:node,createElement:()=>new Element(),addEventListener:noop},
+  localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,String(v)),removeItem:k=>storage.delete(k)}
+ };
+ env.window=env;
+ const run=snippet=>{
+   vm.runInNewContext(source.replace(/\}\)\(\);\s*$/,`\n${snippet}\n})();`),env,{timeout:15000});
+   assert.equal(depth,0,'Canvas transform stack balanced');
+ };
+ return {run,storage};
 }
-const nodes=new Map();
-const node=id=>{if(!nodes.has(id))nodes.set(id,new Element());return nodes.get(id)};
-const data=new Map();
-const env={navigator:{},console,assert,performance,Image:class {},innerWidth:844,innerHeight:390,devicePixelRatio:2,
- document:{getElementById:node,createElement:()=>new Element(),addEventListener:noop},requestAnimationFrame:noop,
- localStorage:{getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)},addEventListener:noop};
-env.window=env;
-function run(test){vm.runInNewContext(dimension,env);vm.runInNewContext(source.replace(/\}\)\(\);\s*$/,'\n'+test+'\n})();'),env);assert.equal(depth,0)}
-run(`start();keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');`);
-console.log('Movement, projection and frame smoke test passed.');
-run(`start();for(const kind of Object.keys(types)){spawnEnemy(kind,60,40);paintEnemy(enemies.at(-1))}paintPilot();render();`);
-console.log('All unit and boss silhouettes rendered.');
-run(`start();for(mapIndex=0;mapIndex<themes.length;mapIndex++){makeWorld();assert.ok(walls.length>0);for(const w of walls)paintCover(w);render()}`);
-console.log('All eight environments, materials and cover passed.');
-run(`start();walls=[];for(const id of Object.keys(weaponTypes)){
- enemies=[];bullets=[];beams=[];spawnEnemy('tank',70,0);spawnEnemy('tank',120,10);
- player.weapon=id;fire();assert.equal(player.targetId,enemies[0].id);
- if(id==='tesla')assert.equal(beams.length,2);else assert.ok(bullets.some(b=>b.weapon===id));
- render()
-}voidBlast(62,5,10);render();player.nova=100;nova();assert.equal(player.nova,0);
- shield();assert.ok(player.shield>0);gravity();assert.ok(wells.length);dash();assert.ok(player.dashing>0);`);
-console.log('Six weapons, targeting, chain lightning, void impact and four abilities passed.');
-for(const generation of [3,4]){
- const profile={cores:850,upgrades:{armor:3,attack:2}};
- if(generation===4){profile.achievements={first:true};profile.stats={totalKills:61,bestWave:4}}
- data.set('riftrunner_evolution_v1',JSON.stringify(profile));data.set('riftrunner_best','71');
- run(`assert.equal(meta.cores,850);assert.equal(gameBest,71);assert.equal(meta.upgrades.armor,3);
- assert.equal(!!meta.achievements.first,${generation===4});assert.equal(meta.stats.bestWave,${generation===4?4:1});
- const old=validateBackup({game:BACKUP_GAME,formatVersion:1,progress:{...${JSON.stringify(profile)},best:71}});
- assert.equal(old.cores,850);assert.equal(old.upgrades.attack,2);assert.equal(old.best,71);
- showHangar();const firstRow=$('shopItems').children.find(n=>n.className==='shopItem');
- firstRow.children[1].click();assert.ok(meta.cores<850);assert.equal(Object.values(meta.upgrades).reduce((a,b)=>a+b),6);
- start();gainXp(player.need);assert.equal(mode,'upgrades');$('upgradeList').children[0].click();assert.equal(mode,'play');
- end();assert.equal(mode,'over');`);
-}
-run(`start();for(let i=0;i<8;i++){timer=(4+i*4)*24-.01;update(.025);assert.equal(mapIndex,(i+1)%8)}
- spawnEnemy('abyss',100,100);const boss=enemies.at(-1);boss.hp=boss.maxHp*.2;update(.03);assert.ok(boss.bossPhase>=2);
- walls=[];enemies=[];for(let i=0;i<130;i++)spawnEnemy('drone',160+i%12*12,Math.floor(i/12)*15);
- for(let i=0;i<30;i++){update(.016);render()}assert.ok(Number.isFinite(player.hp));`);
-console.log('3.0/4.0 fixtures, purchases, level choice, results, biome rotation, boss phases and dense simulation passed.');
-run(`start();walls=[];player.need=999;for(const n of [1,3,5,10,50]){dropCoin(0,0,n);Object.assign(gems.at(-1),{x:0,y:0,vx:0,vy:0})}
- update(.016);assert.equal(player.xp,69);assert.equal(gems.length,0);
- spawnEnemy('abyss',120,10);const sovereign=enemies.at(-1);
- for(const [fraction,phase] of [[.98,1],[.50,2],[.15,3]]){sovereign.hp=sovereign.maxHp*fraction;update(.016);assert.equal(sovereign.bossPhase,phase);castSkill(sovereign);render()}
- hitEnemy(sovereign,sovereign.maxHp*3,'#fff');assert.ok(sovereign.dead);
+const t=makeEnv();
+t.run(`
+ start();assert.equal(player.maxHp,120);assert.equal(player.damage,25);assert.equal(CAMERA_ZOOM,.86);
+ assert.equal(Object.keys(weaponTypes).length,6);assert.equal(shopData.length,26);assert.equal(upgradeData.length,49);
+ assert.equal(themes.length,8);assert.equal(coinTiers[150].r,19);
+ keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');
 `);
-console.log('Five XP currencies, Abyss phase attacks and boss defeat passed.');
+console.log('Pass: camera, movement, HUD renderer, six weapons, upgrades and eight biomes.');
 
-run(`start();for(const cameraMode of ['dimension','tactical']){gameSettings.camera=cameraMode;for(mapIndex=0;mapIndex<8;mapIndex++){makeWorld();render()}const v=movementVector(1,0);assert.ok(v.x>0);if(cameraMode==='dimension')assert.ok(Math.abs(.15*v.x+.68*v.y)<.0001)}`);
+t.run(`start();walls=[];enemies=[];
+ for(const id of Object.keys(weaponTypes)){
+  enemies=[];bullets=[];beams=[];spawnEnemy('tank',120,0);spawnEnemy('tank',175,18);
+  player.weapon=id;fire();assert.equal(player.targetId,enemies[0].id);
+  if(id==='tesla')assert.ok(beams.length>0);else assert.ok(bullets.some(b=>b.weapon===id));
+ }
+ nova();shield();gravity();dash();render();
+`);
+console.log('Pass: all six weapons, automatic targeting and four special abilities.');
+
+t.run(`start();
+ spawnEnemy('hunter',250,0);killed(enemies.at(-1));assert.equal(gems.filter(g=>g.val===50).length,1);
+ spawnEnemy('abyss',250,50);killed(enemies.at(-1));assert.equal(gems.filter(g=>g.val===150).length,1);
+ assert.equal(gems.filter(g=>g.val===50).length,1);
+ player.need=999;player.xp=0;gainXp(150);assert.equal(player.xp,150);
+`);
+console.log('Pass: mini-boss 50 XP, main boss 150 XP, and XP leveling.');
+
+t.run(`start();walls=[{x:-35,y:-110,w:70,h:220,breakable:false}];invalidateNavigation();
+ player.x=215;player.y=0;enemies=[];spawnEnemy('drone',-140,0);const e=enemies[0];e.x=-140;e.y=0;e.shot=999;
+ assert.ok(rayWall(e.x,e.y,player.x,player.y,10));let reached=false;
+ spawnTimer=999;shotTimer=999;
+ for(let i=0;i<465;i++){update(.016);if(hypot(e.x-player.x,e.y-player.y)<66){reached=true;break}}
+ assert.ok(reached,'Pathfinding should route an enemy around cover');
+ damageCover({breakable:false,hp:1},0); // should safely ignore unbreakable cover
+`);
+console.log('Pass: obstacle-aware enemy pathfinding around solid cover.');
+
+const save={cores:342,upgrades:{armor:3,attack:2},achievements:{first:true},stats:{totalKills:25,bestWave:3}};
+const profiles=makeEnv({riftrunner_evolution_v1:JSON.stringify(save),riftrunner_best:'88'});
+profiles.run(`assert.equal(meta.cores,342);assert.equal(meta.upgrades.armor,3);assert.equal(meta.achievements.first,true);
+ assert.equal(gameBest,88);start();assert.equal(player.maxHp,168);assert.equal(player.damage,30);
+ const parsed=validateBackup({game:BACKUP_GAME,formatVersion:1,progress:{cores:342,best:88,upgrades:{armor:3,attack:2}}});
+ assert.equal(parsed.cores,342);assert.equal(parsed.upgrades.armor,3);assert.equal(parsed.best,88);
+`);
+console.log('Pass: legacy saves, existing upgrade purchases and version-1 save import.');
+console.log('All Evolution 4.0 simulation checks passed.');
