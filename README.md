@@ -6,6 +6,14 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 4.0 — Targeted Flight, Wave Clearance & XP Sweep
+
+- **Ship turns toward the firing target:** the player craft follows its current target between auto-shots, and its nose snaps to the actual firing direction when a projectile or Tesla beam is fired. Moving and dashing do not force the ship to face away from an enemy it is shooting.
+- **Wave spawns end before transition:** regular enemy spawning runs for 19 seconds, then stops (including enemy summoning). The wave must reach at least 24 seconds *and* all remaining enemies must be defeated before progressing; fights never skip living enemies. Void Breaches continue to have their original 35-second time limit and fast spawns.
+- **Guaranteed end-of-wave XP sweep:** all remaining XP coins fly rapidly toward the player for 1.15 seconds and are fully collected before the next wave or Void Breach. Uncollected XP coins no longer expire mid-wave; emergency pickup aggregation guarantees none remain stranded offscreen. Healing orbs are handled separately.
+- **Faster leveling:** starting XP requirement falls from 20 to 16 and subsequent requirements grow by `floor(previous * 1.15 + 4)` instead of `floor(previous * 1.21 + 6)`. All 11 existing coin types and boss values stay unchanged.
+- **Save compatibility:** original `riftrunner_evolution_v1`, `riftrunner_best`, options key, permanent upgrades, and version-1 export/import format remain unchanged. These gameplay changes affect only in-run state.
+
 ## Evolution 4.0 — Drone Armada (35-feature gameplay update)
 
 - **All players start with one orbit drone.** Every drone now has an animated orbit, rotor, thruster, aim swivel, targeting reticle, recoil, muzzle flash and real moving energy bolts. New drones from run or Hangar upgrades fire independently rather than dealing invisible hits. Overdrive triggers briefly after ten eliminations.
