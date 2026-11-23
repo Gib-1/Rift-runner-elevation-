@@ -29,6 +29,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # Artifact metadata can take several seconds to become visible to deploy-pages.
+      - name: Wait for artifact indexing
+        run: sleep 12
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
