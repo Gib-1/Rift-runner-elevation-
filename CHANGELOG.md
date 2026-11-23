@@ -1,5 +1,16 @@
 # Changelog
 
+## Evolution 5.0 — Dimension Shift
+
+- Added a self-contained three-quarter pseudo-3D Canvas renderer, including consistent world projection, feet-based depth sorting and raised sci-fi cover.
+- Added volumetric-looking player and enemy armor sprites with feet shadows, movement animation, helmets, shoulders, reactors and directional weapon attachments.
+- Added biome-specific industrial debris, crystals, bio-structures, atmospheric haze, hazard markings and projected combat effects.
+- Redesigned main menu, gameplay HUD, touch actions, upgrade cards, Hangar, achievement lists, pause and mission-results overlays with an angular military sci-fi design language.
+- Corrected world movement and Dash to match screen-space joystick/keyboard directions under the angled camera.
+- Improved Tesla weapon facing and muzzle feedback, with a simplified enemy rendering path for low-effects mode and dense encounters.
+- Retained all existing weapons, AI, upgrade IDs, XP rewards, achievements, save keys and version-1 export/import behavior.
+- Executed automated headless-Chromium viewport, control, save-compatibility, weapon, HUD, and 100-entity render checks; physical Android FPS is not yet measured.
+
 ## Evolution 4.0 — Complete (Phases 2–6)
 
 ### Phase 2 — Evolving Arsenal
