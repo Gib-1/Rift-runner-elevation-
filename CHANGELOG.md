@@ -1,23 +1,38 @@
 # Changelog
 
+## Evolution 4.0 — Complete (Phases 2–6)
+
+### Phase 2 — Evolving Arsenal
+- Added Tesla Repeater: instantaneous lightning chains between visible nearby targets.
+- Added Void Cannon: slow explosive rounds that pull and damage nearby enemies.
+- Added a unique evolution option for each of the six unlockable weapons.
+
+### Phase 3 — Enemy Uprising
+- Added three enemy variants: Strider, Sapper and Nullifier.
+- Added Rift Hunter mini-boss with teleport and projectile attacks.
+- Added Abyss Sovereign main boss with health-triggered three-phase combat and telegraphed special attacks.
+
+### Phase 4 — Progression 2.0
+- Added six run upgrades and six weapon evolutions (49 total run-upgrade options).
+- Added five permanent Hangar upgrades (26 total), retaining existing upgrade IDs and purchase costs.
+- Added seven persistent achievements, one-time Rift Core rewards, achievements screen and cumulative challenge statistics.
+- Expanded portable version-1 backups to optionally include achievements/statistics while remaining backward compatible with older backups.
+
+### Phase 5 — World Expansion
+- Added Obsidian Depths and Astral Graveyard for eight total biomes.
+- Added breakable mineral cover, scattered secret caches, and biome-specific lava-pulse/gravity hazards.
+
+### Phase 6 — Mobile Polish
+- Updated game menu, description and Hangar sorting.
+- Added Settings for performance effects, screen shake, combat text and sound.
+- Retained single-file offline gameplay and original save keys.
+- Browser-tested portrait and landscape gameplay, legacy saves, export/import, boss phases, weapons, achievements, walls and combat stress.
+
 ## Evolution 4.0 — Phase 1: Combat Reborn
+- Smoother joystick acceleration and directional movement, smarter automatic targeting and lead prediction.
+- Dash afterimages and improved combat impact effects.
+- Improved fast-projectile collision and mobile canvas rendering costs.
 
-- Smoother analog movement with input filtering and responsive slowing.
-- Enhanced automatic targeting with stable target lock, boss consideration, line-of-sight checks and limited leading of moving targets.
-- Dash afterimages, momentum continuity and a brief post-Dash speed boost without changing cooldown upgrades.
-- Hit reactions, muzzle effects, critical indicators and high-speed projectile path collision.
-- Cached biome background gradients, adaptive canvas pixel density and bounded particle counts to reduce mobile rendering load.
-- Preserved weapons, biomes, enemies, bosses, XP drops, 36 level-up upgrades, 21 permanent upgrades, save keys and backup format.
-- No systems from Phases 2–6 have been added.
-
-## Official website build (Evolution 3.0 foundation)
-
-- Added **Export Save** to download a portable JSON backup.
-- Added **Import Save** with validation, replacement confirmation and mobile file picker.
-- Preserved existing browser save keys and all Evolution 3.0 gameplay.
-- Prepared a stable `index.html` and GitHub Pages publication structure.
-
-## Evolution 3.0
-
-- Expanded level-up and permanent Hangar upgrades, with advanced combat and defensive systems.
-- Retained Evolution 2.0 XP tiers, boss abilities, enemy variety, six biomes and solid walls.
+## Official Website Build (Evolution 3.0)
+- Added portable Export Save and Import Save with validation and confirmation.
+- Preserved original XP coin tiers, cover, bosses, biomes, weapon selections, run and permanent upgrades.

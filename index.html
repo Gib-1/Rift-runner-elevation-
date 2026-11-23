@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="theme-color" content="#060c18">
-<meta name="description" content="Rift Runner Evolution 4.0 Phase 1: improved movement, stable auto-targeting, dash trails, responsive combat effects, and 36 level-up upgrades, 21 permanent hangar upgrades, orbit drones, critical hits, new player builds, 5 XP tiers, 6 biomes and boss battles. Offline survival roguelite.">
+<meta name="description" content="Rift Runner Evolution 4.0: six weapons, weapon evolutions, 8 biomes, multi-phase bosses, new enemies, 26 permanent upgrades, achievements, and mobile settings. Offline cosmic survival roguelite.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <title>RIFT RUNNER: EVOLUTION — Offline Survival</title>
@@ -107,45 +107,61 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 #saveStatus{font-size:11px;line-height:1.4;min-height:16px;color:#81eac1;margin:5px auto 0;max-width:320px}
 #saveStatus.error{color:#ffadb8}
 @media(max-width:350px){.saveActions button{font-size:10px;letter-spacing:0}}
+#achievements .panel{max-height:92dvh;overflow-y:auto;scrollbar-width:thin}
+.achievementItem{display:flex;align-items:center;text-align:left;padding:12px;margin:9px 0;border:1px solid #426383;border-radius:12px;background:#142842}
+.achievementItem .details{display:flex;flex-direction:column;gap:5px}
+.achievementItem strong{font-size:14px}.achievementItem small{font-size:11px;color:#adc9df;line-height:1.35}
+.settingList{display:flex;flex-direction:column;gap:3px;margin:14px 0}.settingList button{margin-top:6px}
+#settings .panel{max-height:92dvh;overflow-y:auto;scrollbar-width:thin}
+@media (max-height:500px){#menu .secondary{padding:9px;font-size:13px}#menu .primary{padding:11px}#menu .panel{padding:13px}#menu .kicker{margin:6px 0}#settings .panel{padding:12px}}
 </style>
 </head>
 <body>
-<canvas id="game" aria-label="3D-style 2D sci-fi survival game"></canvas><div id="vignette"></div>
+<canvas id="game" aria-label="Top-down 2D cosmic survival arcade game"></canvas><div id="vignette"></div>
 <div id="hud"><div class="hudrow"><div class="hudleft"><div class="hlabel"><span>HULL INTEGRITY</span><span id="hpText">100 / 100</span></div><div class="track"><div class="fill" id="hpFill"></div></div><div id="xpbox"><div class="hlabel"><span id="levelText">LVL 1</span><span id="xpText">0 / 20 XP</span></div><div class="track" style="height:7px"><div class="fill xpfill" id="xpFill"></div></div></div></div><div id="scorebox"><div class="tinycap">ELIMINATIONS</div><div id="killnum">0</div><div id="wave">WAVE 1</div><div id="time">0:00</div><div id="areaTag">RIFT WASTES</div><button id="weaponBtn" aria-label="Switch weapon">PULSE ▸</button></div><button id="pauseBtn" aria-label="Pause game">Ⅱ</button></div><div id="bossbar"><div class="bosslabel" id="bossName">RIFT GUARDIAN</div><div class="track"><div class="fill" id="bossfill"></div></div></div></div>
 <div id="banner"></div><div id="mapAlert"></div>
 <div id="controls"><div id="moveZone"><div id="stick"><div id="knob"></div></div></div><div id="actions"><button class="action" id="novaBtn" aria-label="Nova ability">✦<small>NOVA</small><div id="novaProgress"><div id="novaInner"></div></div><span class="cool" id="novaCool"></span></button><button class="action" id="dashBtn" aria-label="Dash">➤<small>DASH</small><span class="cool" id="dashCool"></span></button><button class="action" id="shieldBtn" aria-label="Phase shield">⬡<small>SHIELD</small><span class="cool" id="shieldCool"></span></button><button class="action" id="gravBtn" aria-label="Gravity well">◎<small>GRAV</small><span class="cool" id="gravCool"></span></button></div></div>
-<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · COMBAT REBORN</div><p class="description">Experience smoother movement, smarter automatic shooting, responsive Dash trails and improved impact effects across 6 biomes. Your weapons, bosses and permanent upgrades are all preserved.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">● 1</span><span style="color:#9fa1ff">● 3</span><span style="color:#79ffa5">● 5</span><span style="color:#ffcb60">● 10</span><span style="color:#ff6fcf">✦ 50</span><small>XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ START MISSION</button><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button>
+<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · FULL OVERHAUL</div><p class="description">Survive eight cosmic biomes with six weapons, evolving powers, smarter enemies, multi-phase bosses and breakable cover. Earn achievements and permanent upgrades while keeping your progress.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">● 1</span><span style="color:#9fa1ff">● 3</span><span style="color:#79ffa5">● 5</span><span style="color:#ffcb60">● 10</span><span style="color:#ff6fcf">✦ 50</span><small>XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ START MISSION</button><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button>
 <div class="saveActions"><button id="exportSaveBtn" type="button">⬇ EXPORT SAVE</button><button id="importSaveBtn" type="button">⬆ IMPORT SAVE</button></div>
 <input id="importSaveInput" aria-label="Select a Rift Runner save backup" type="file" accept=".json,application/json" hidden>
-<p class="saveNote">Back up Rift Cores, permanent upgrades and best score. No personal details are included. Import replaces this browser's saved progress.</p>
-<div id="saveStatus" role="status" aria-live="polite"></div><div id="coreLine">◆ 0 RIFT CORES</div><div id="bestLine">BEST RUN · 0 eliminations</div><button id="soundBtn">SOUND: ON</button><div class="foot">Made for phones · One HTML file · Works offline<br>Progress saves in this browser · Export to transfer progress · EVOLUTION 4.0 PHASE 1</div></div></div>
+<p class="saveNote">Back up Rift Cores, permanent upgrades, achievements and best score. No personal details are included. Import replaces this browser's saved progress.</p>
+<div id="saveStatus" role="status" aria-live="polite"></div><div id="coreLine">◆ 0 RIFT CORES</div><div id="bestLine">BEST RUN · 0 eliminations</div><button id="soundBtn">SOUND: ON</button><div class="foot">Made for phones · One HTML file · Works offline<br>Progress saves in this browser · Export to transfer progress · EVOLUTION 4.0 COMPLETE</div></div></div>
 <div class="overlay hidden" id="upgrades"><div class="panel"><div class="tinycap" style="color:#81eeff;margin-bottom:9px">ENERGY LEVEL UP</div><h2 class="sectiontitle">Choose an upgrade</h2><p class="sub">Choose one of four powers to shape your build. One free reroll each level.</p><div id="upgradeList" class="upgradeList"></div><button class="secondary" id="rerollBtn" type="button">↻ REROLL OPTIONS · 1 FREE</button><div class="foot" id="buildStats"></div></div></div>
 <div class="overlay hidden" id="hangar"><div class="panel"><div id="evoMode">THE HANGAR</div><h2 class="sectiontitle">PERMANENT EVOLUTION</h2><p class="sub">Earn Rift Cores after each run. Buy upgrades that carry into every future mission.</p><div id="hangarBalance" class="tinycap"></div><div id="hangarProgress" class="shopProgress"></div><div id="shopItems"></div><button class="secondary" id="hangarBackBtn">← BACK</button></div></div>
-<div class="overlay hidden" id="pauseOverlay"><div class="panel"><h2 class="sectiontitle">MISSION PAUSED</h2><p class="sub">Your progress is safe while this screen is open.</p><button class="primary" id="resumeBtn">▶ RESUME</button><button class="secondary" id="restartPauseBtn">RESTART RUN</button><button class="secondary" id="quitBtn">MAIN MENU</button></div></div>
+<div class="overlay hidden" id="achievements"><div class="panel"><h2 class="sectiontitle">CHALLENGES</h2><p class="sub" id="achievementCount">Achievements and Rift Core rewards</p><div id="achievementItems"></div><button class="secondary" id="achievementsBackBtn">← BACK</button></div></div>
+<div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Change mobile performance and accessibility without resetting progress.</p><div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Settings save only on this device.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
+<div class="overlay hidden" id="pauseOverlay"><div class="panel"><h2 class="sectiontitle">MISSION PAUSED</h2><p class="sub">Your progress is safe while this screen is open.</p><button class="primary" id="resumeBtn">▶ RESUME</button><button class="secondary" id="restartPauseBtn">RESTART RUN</button><button class="secondary" id="pauseSettingsBtn">⚙ SETTINGS</button><button class="secondary" id="quitBtn">MAIN MENU</button></div></div>
 <div class="overlay hidden" id="gameOver"><div class="panel"><div class="tinycap">MISSION REPORT</div><h2 class="sectiontitle" style="margin-top:11px">RIFT COLLAPSED</h2><div id="finalScore">0</div><div class="tinycap">ENEMIES DEFEATED</div><div id="finalStats"></div><div id="earnedLine" style="font-size:15px;font-weight:900;color:#8af2fa;margin:-10px 0 16px"></div><button class="primary" id="retryBtn">↻ PLAY AGAIN</button><button class="secondary" id="menuBtn">MAIN MENU</button></div></div>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const TWO=Math.PI*2,rand=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),hypot=Math.hypot;
 let SW=innerWidth,SH=innerHeight,DPR=1,last=performance.now(),mode='menu',soundOn=true,audio=null;
-const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),pause:$('pauseOverlay'),over:$('gameOver')};
-let player,enemies=[],bullets=[],enemyBullets=[],gems=[],particles=[],texts=[],rings=[],dashGhosts=[],rifts=[],stars=[],decos=[],hazards=[],wells=[],walls=[],zones=[],enemyFields=[],camera={x:0,y:0},timer=0,wave=1,kills=0,spawnTimer=0,shotTimer=0,levelQueue=0,bannerTime=0,bannerLabel='',hudTimer=0,shake=0,killCombo=0,mapAlertTime=0,mapIndex=0,bossesDefeated=0,miniDefeated=0,banked=true,coresEarned=0,nextEnemyId=0;
+let gameSettings={fx:'balanced',screenShake:true,damageNumbers:true};
+try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null');if(saved&&typeof saved==='object'){
+ gameSettings.fx=saved.fx==='low'?'low':'balanced';gameSettings.screenShake=saved.screenShake!==false;
+ gameSettings.damageNumbers=saved.damageNumbers!==false;soundOn=saved.sound!==false}}catch(e){}
+function saveSettings(){try{localStorage.setItem('riftrunner_options_v1',JSON.stringify({...gameSettings,sound:soundOn}))}catch(e){}}
+const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),achievements:$('achievements'),settings:$('settings'),pause:$('pauseOverlay'),over:$('gameOver')};
+let player,enemies=[],bullets=[],enemyBullets=[],gems=[],particles=[],texts=[],rings=[],beams=[],dashGhosts=[],caches=[],rifts=[],stars=[],decos=[],hazards=[],wells=[],walls=[],zones=[],enemyFields=[],camera={x:0,y:0},timer=0,wave=1,kills=0,spawnTimer=0,shotTimer=0,levelQueue=0,bannerTime=0,bannerLabel='',hudTimer=0,shake=0,killCombo=0,mapAlertTime=0,mapIndex=0,bossesDefeated=0,miniDefeated=0,banked=true,coresEarned=0,nextEnemyId=0;
 let gameBest=0;try{gameBest=+(localStorage.getItem('riftrunner_best')||0)||0}catch(e){};
 $('bestLine').textContent=`BEST RUN · ${gameBest} eliminations`;
 const joy={x:0,y:0,id:null,startX:0,startY:0};const keyboard=new Set();
 // Cap expensive high-density canvas pixels on large screens while retaining crisp phone graphics.
 let bgGradient=null,bgCacheKey='';
-function resize(){SW=innerWidth;SH=innerHeight;DPR=Math.min(devicePixelRatio||1,SW*SH>850000?1.4:SW*SH>440000?1.65:1.85);canvas.width=Math.max(1,Math.floor(SW*DPR));canvas.height=Math.max(1,Math.floor(SH*DPR));ctx.setTransform(DPR,0,0,DPR,0,0);bgCacheKey=''}window.addEventListener('resize',resize);resize();
+function resize(){SW=innerWidth;SH=innerHeight;DPR=Math.min(devicePixelRatio||1,gameSettings.fx==='low'?1.1:SW*SH>850000?1.4:SW*SH>440000?1.65:1.85);canvas.width=Math.max(1,Math.floor(SW*DPR));canvas.height=Math.max(1,Math.floor(SH*DPR));ctx.setTransform(DPR,0,0,DPR,0,0);bgCacheKey=''}window.addEventListener('resize',resize);resize();
 const themes=[
  {name:'RIFT WASTES',center:'#142449',mid:'#09172b',edge:'#030916',grid:'#4db1f2',rift:192,deco:'#183b5e',hazard:'#65c4f7',wall:'#1d486b'},
  {name:'NEON RUINS',center:'#31134d',mid:'#160e36',edge:'#08071a',grid:'#cc75ff',rift:294,deco:'#4b2467',hazard:'#f39dfc',wall:'#583478'},
  {name:'FROZEN VOID',center:'#0c3b4c',mid:'#081e33',edge:'#040d19',grid:'#6ce1de',rift:178,deco:'#1b5770',hazard:'#7dffdf',wall:'#28677b'},
  {name:'ASHEN FOUNDRY',center:'#4d291e',mid:'#241421',edge:'#0e0b16',grid:'#ff9354',rift:19,deco:'#683a2d',hazard:'#ff9057',wall:'#694036'},
  {name:'CRYSTAL NEXUS',center:'#36234f',mid:'#171b42',edge:'#090a1d',grid:'#e6a8ff',rift:274,deco:'#533c80',hazard:'#dd90ff',wall:'#64509b'},
- {name:'VERDANT ABYSS',center:'#123f39',mid:'#082d2f',edge:'#041316',grid:'#88ffb3',rift:134,deco:'#235b4b',hazard:'#a1ff84',wall:'#346c54'}
+ {name:'VERDANT ABYSS',center:'#123f39',mid:'#082d2f',edge:'#041316',grid:'#88ffb3',rift:134,deco:'#235b4b',hazard:'#a1ff84',wall:'#346c54'},
+ {name:'OBSIDIAN DEPTHS',center:'#54221f',mid:'#270d19',edge:'#100612',grid:'#ff745f',rift:9,deco:'#6b2d2b',hazard:'#ff542e',wall:'#783e40'},
+ {name:'ASTRAL GRAVEYARD',center:'#1d2d60',mid:'#111337',edge:'#07091c',grid:'#aba0ff',rift:257,deco:'#44447e',hazard:'#b4c3ff',wall:'#555a94'}
 ];
 const coinTiers={1:{color:'#64dfff',r:6},3:{color:'#9fa1ff',r:7},5:{color:'#79ffa5',r:8},10:{color:'#ffcb60',r:10},50:{color:'#ff6fcf',r:14}};
-const weaponTypes={pulse:{name:'PULSE',color:'#71eaff'},arc:{name:'ARC REPEATER',color:'#d8aaff'},scatter:{name:'SCATTER',color:'#ffca68'},rail:{name:'RAIL LANCE',color:'#90ffb6'}};
+const weaponTypes={pulse:{name:'PULSE',color:'#71eaff'},arc:{name:'ARC REPEATER',color:'#d8aaff'},scatter:{name:'SCATTER',color:'#ffca68'},rail:{name:'RAIL LANCE',color:'#90ffb6'},tesla:{name:'TESLA REPEATER',color:'#84d9ff'},void:{name:'VOID CANNON',color:'#c992ff'}};
 const shopData=[
  // Existing four upgrades retain their original IDs, levels and cost curves.
  {id:'attack',group:'COMBAT',name:'Reactor Calibration',desc:'+8% starting weapon damage per level',price:18,inc:16},
@@ -168,20 +184,47 @@ const shopData=[
  {id:'thrusters',group:'UTILITY',name:'Permanent Thrusters',desc:'+5% movement speed per level',price:16,inc:14},
  {id:'magnet',group:'UTILITY',name:'Core Collector',desc:'+22 XP coin collection radius per level',price:12,inc:10},
  {id:'droneCore',group:'UTILITY',name:'Orbit Drone Bay',desc:'Start with 1 drone at LV 1, 2 at LV 3, and 3 at LV 5',price:45,inc:36},
- {id:'salvage',group:'UTILITY',name:'Rift Salvage',desc:'+6% Rift Cores awarded at the end of a run per level',price:34,inc:26}
+ {id:'salvage',group:'UTILITY',name:'Rift Salvage',desc:'+6% Rift Cores awarded at the end of a run per level',price:34,inc:26},
+ {id:'execution',group:'COMBAT',name:'Elite Breaker',desc:'+5.5% starting boss damage per level',price:32,inc:22},
+ {id:'droneTech',group:'COMBAT',name:'Drone Algorithms',desc:'+10% orbit drone damage per level',price:30,inc:20},
+ {id:'nanoPulse',group:'DEFENSE',name:'Hull Weave',desc:'+0.12 HP regeneration per second per level',price:29,inc:20},
+ {id:'barrierCore',group:'ABILITIES',name:'Phase Fortifier',desc:'+0.16 seconds Shield duration per level',price:28,inc:20},
+ {id:'novaRate',group:'ABILITIES',name:'Energy Recapture',desc:'+8% passive and kill-based Nova energy gain per level',price:30,inc:22}
 ];
 // Keep the original save key: older Evolution versions load all previously purchased upgrades.
-let meta={cores:0,upgrades:Object.fromEntries(shopData.map(v=>[v.id,0]))};
+const achievementData=[
+ {id:'first',name:'First Contact',desc:'Defeat your first enemy.',goal:1,field:'totalKills',reward:10},
+ {id:'fifty',name:'Combat Initiate',desc:'Defeat 50 enemies across runs.',goal:50,field:'totalKills',reward:25},
+ {id:'veteran',name:'Rift Veteran',desc:'Defeat 250 enemies across runs.',goal:250,field:'totalKills',reward:80},
+ {id:'boss',name:'Boss Breaker',desc:'Defeat one major boss.',goal:1,field:'bossWins',reward:30},
+ {id:'survivor',name:'Endurance',desc:'Reach Wave 8 in a run.',goal:8,field:'bestWave',reward:45},
+ {id:'arsenal',name:'Arsenal Specialist',desc:'Unlock four different weapons in one run.',goal:4,field:'maxWeapons',reward:35},
+ {id:'abyss',name:'Sovereign Slayer',desc:'Defeat the Abyss Sovereign.',goal:1,field:'abyssWins',reward:125}
+];
+let meta={cores:0,upgrades:Object.fromEntries(shopData.map(v=>[v.id,0])),achievements:{},stats:{totalKills:0,bossWins:0,bestWave:1,maxWeapons:1,abyssWins:0}};
 try{const v=JSON.parse(localStorage.getItem('riftrunner_evolution_v1')||'null');if(v&&typeof v==='object'){
  meta.cores=Math.max(0,Math.floor(+v.cores||0));
  for(const k of Object.keys(meta.upgrades))meta.upgrades[k]=clamp(Math.floor(+(v.upgrades||{})[k]||0),0,5);
+ if(v.achievements&&typeof v.achievements==='object'&&!Array.isArray(v.achievements))for(const achievement of achievementData)meta.achievements[achievement.id]=v.achievements[achievement.id]===true;
+ if(v.stats&&typeof v.stats==='object'&&!Array.isArray(v.stats))for(const k of Object.keys(meta.stats))meta.stats[k]=clamp(Math.floor(+(v.stats[k]||0)),k==='bestWave'||k==='maxWeapons'?1:0,1000000000);
 }}catch(e){}
 function persist(){try{localStorage.setItem('riftrunner_evolution_v1',JSON.stringify(meta))}catch(e){}}
+function tryAchievements(){for(const a of achievementData){if(meta.achievements[a.id]||meta.stats[a.field]<a.goal)continue;
+ meta.achievements[a.id]=true;meta.cores+=a.reward;persist();showBalance();banner('ACHIEVEMENT · '+a.name.toUpperCase());floater(player?.x||0,(player?.y||0)-64,'◆ +'+a.reward+' RIFT CORES','#ffd587');sfx(970,'triangle',.2,.07)}}
+function showAchievements(){const list=$('achievementItems');list.textContent='';let done=0;
+ for(const a of achievementData){const earned=!!meta.achievements[a.id];if(earned)done++;
+  const row=document.createElement('div');row.className='achievementItem';const text=document.createElement('div');text.className='details';
+  const name=document.createElement('strong');name.textContent=(earned?'✓ ':'◇ ')+a.name;
+  const desc=document.createElement('small');desc.textContent=a.desc;
+  const progress=document.createElement('small');progress.textContent=`${Math.min(a.goal,meta.stats[a.field]||0)} / ${a.goal} · ◆ ${a.reward} CORES ${earned?'· CLAIMED':'· REWARD'}`;
+  text.append(name,desc,progress);row.append(text);list.append(row)}
+ $('achievementCount').textContent=`${done} / ${achievementData.length} achievements completed`;
+ setMode('achievements')}
 function showBalance(){ $('coreLine').textContent=`◆ ${meta.cores} RIFT CORES`; $('hangarBalance').textContent=`◆ ${meta.cores} RIFT CORES AVAILABLE`}
 function showHangar(){
  showBalance();
  const box=$('shopItems');box.textContent='';let currentGroup='';let owned=0;
- for(const item of shopData){
+ for(const item of [...shopData].sort((a,b)=>['COMBAT','DEFENSE','ABILITIES','UTILITY'].indexOf(a.group)-['COMBAT','DEFENSE','ABILITIES','UTILITY'].indexOf(b.group))){
   const lvl=meta.upgrades[item.id];owned+=lvl;
   if(item.group!==currentGroup){currentGroup=item.group;const header=document.createElement('h3');header.className='shopCategory';header.textContent=currentGroup;box.append(header)}
   const cost=item.price+lvl*item.inc;
@@ -205,18 +248,35 @@ function showHangar(){
 }
 function bankRun(){if(banked||!player)return coresEarned;banked=true;
  const base=Math.floor(kills/3)+Math.max(0,wave-1)*3+bossesDefeated*15+miniDefeated*7;
- coresEarned=Math.floor(base*(1+(meta.upgrades.salvage||0)*.06));meta.cores+=coresEarned;persist();showBalance();return coresEarned}
+ coresEarned=Math.floor(base*(1+(meta.upgrades.salvage||0)*.06+(player.coreBonus||0)));meta.cores+=coresEarned;persist();showBalance();return coresEarned}
 // Solid walls: circle movement resolution + swept shots so high-speed rounds cannot clip through cover.
 function insideWall(x,y,r=0){for(const w of walls){const nx=clamp(x,w.x,w.x+w.w),ny=clamp(y,w.y,w.y+w.h);if((x-nx)**2+(y-ny)**2<(r+1)**2)return true}return false}
 function rayWall(x1,y1,x2,y2,r=0){for(const w of walls){const left=w.x-r,right=w.x+w.w+r,top=w.y-r,bottom=w.y+w.h+r;
  let lo=0,hi=1,dx=x2-x1,dy=y2-y1,ok=true;
  for(const [a,d,min,max] of [[x1,dx,left,right],[y1,dy,top,bottom]]){if(Math.abs(d)<1e-8){if(a<min||a>max){ok=false;break}}else{let u=(min-a)/d,v=(max-a)/d;if(u>v)[u,v]=[v,u];lo=Math.max(lo,u);hi=Math.min(hi,v);if(lo>hi){ok=false;break}}}
  if(ok&&hi>=0&&lo<=1)return true}return false}
+// Returns the first cover hit, including entry distance, to support destructible objects.
+function wallImpact(x1,y1,x2,y2,r=0){let result=null,best=Infinity;
+ for(const w of walls){const left=w.x-r,right=w.x+w.w+r,top=w.y-r,bottom=w.y+w.h+r;
+  let lo=0,hi=1,dx=x2-x1,dy=y2-y1,ok=true;
+  for(const [a,d,min,max] of [[x1,dx,left,right],[y1,dy,top,bottom]]){
+   if(Math.abs(d)<1e-8){if(a<min||a>max){ok=false;break}}
+   else{let u=(min-a)/d,v=(max-a)/d;if(u>v)[u,v]=[v,u];lo=Math.max(lo,u);hi=Math.min(hi,v);if(lo>hi){ok=false;break}}}
+  if(ok&&hi>=0&&lo<=1&&lo<best){best=lo;result={wall:w,t:Math.max(0,lo)}}
+ }
+ return result;
+}
+function damageCover(w,damage){if(!w.breakable)return;w.hp-=damage;
+ if(w.hp>0)return;
+ const x=w.x+w.w/2,y=w.y+w.h/2;walls.splice(walls.indexOf(w),1);
+ burst(x,y,themes[mapIndex].grid,18,160);rings.push({x,y,r:0,max:70,life:.5,color:themes[mapIndex].grid});
+ dropCoin(x,y,1);dropCoin(x,y,3);
+}
 function moveSolid(obj,dx,dy){const steps=Math.max(1,Math.ceil(Math.max(Math.abs(dx),Math.abs(dy))/16));for(let i=0;i<steps;i++){
  if(Math.abs(dx)>1e-9){obj.x=clamp(obj.x+dx/steps,-1880+obj.r,1880-obj.r);for(const w of walls)if(obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h&&obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w)obj.x=(dx>=0?w.x-obj.r:w.x+w.w+obj.r)}
  if(Math.abs(dy)>1e-9){obj.y=clamp(obj.y+dy/steps,-1880+obj.r,1880-obj.r);for(const w of walls)if(obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w&&obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h)obj.y=(dy>=0?w.y-obj.r:w.y+w.h+obj.r)}
  }}
-function makeWorld(){const theme=themes[mapIndex];stars=[];rifts=[];decos=[];hazards=[];walls=[];zones=[];enemyFields=[];
+function makeWorld(){const theme=themes[mapIndex];stars=[];rifts=[];decos=[];hazards=[];walls=[];caches=[];zones=[];enemyFields=[];
  for(let i=0;i<300;i++)stars.push({x:rand(-2200,2200),y:rand(-2200,2200),r:rand(.6,2.2),a:rand(.14,.6)});
  for(let i=0;i<28;i++){let x=rand(-1770,1770),y=rand(-1770,1770);if(hypot(x,y)<220)continue;rifts.push({x,y,r:rand(26,72),phase:rand(0,TWO),hue:theme.rift})}
  for(let i=0;i<115;i++)decos.push({x:rand(-1880,1880),y:rand(-1880,1880),size:rand(16,80),rot:rand(0,TWO),t:Math.random()});
@@ -230,24 +290,29 @@ function makeWorld(){const theme=themes[mapIndex];stars=[];rifts=[];decos=[];haz
    const px=player?.x||0,py=player?.y||0;
    if(hypot(x-px,y-py)<165||hypot(x,y)<105)continue;
    if(walls.some(t=>block.x<t.x+t.w+52&&block.x+block.w+52>t.x&&block.y<t.y+t.h+52&&block.y+block.h+52>t.y))continue;
+   // Some objects are fragile mineral cover. Shooting them clears a lane and yields a little XP.
+   block.breakable=walls.length%7===0;block.hp=block.breakable?Math.round(42+wave*2.5):Infinity;block.maxHp=block.hp;
    walls.push(block)
  }
+ for(let i=0;i<9;i++){const a=rand(0,TWO),r=rand(280,1720),x=Math.cos(a)*r,y=Math.sin(a)*r;
+  if(insideWall(x,y,36)||hypot(x-(player?.x||0),y-(player?.y||0))<230)continue;
+  caches.push({x,y,r:17,opened:false,phase:rand(0,TWO)})}
 }
 makeWorld();
 function reset(){banked=false;coresEarned=0;bossesDefeated=0;miniDefeated=0;nextEnemyId=0;mapIndex=0;mapAlertTime=0;$('mapAlert').textContent='';
  const u=meta.upgrades,h=u.armor,d=u.attack,t=u.thrusters,m=u.magnet;
  player={x:0,y:0,r:17,hp:100+h*12,maxHp:100+h*12,speed:225*(1+t*.05),damage:20*(1+d*.08),fire:.43*(1-u.firing*.04),shots:1,bulletSpeed:690*(1+u.ballistics*.06),magnet:116+m*22,
   level:1,xp:0,need:20,invuln:0,dashCd:0,dashBaseCd:3.4-u.dashCore*.18,dashing:0,dx:1,dy:0,aim:0,moveX:0,moveY:0,dashTrailClock:0,afterDash:0,targetId:null,shotKick:0,
-  nova:100,novaDmg:62*(1+u.novaCore*.09),novaRadius:210,novaGain:1,novaKillBonus:u.novaFuel*.5,
-  regen:u.repair*.15,shield:0,shieldCd:0,shieldBaseCd:14-u.shieldCore*.7,shieldDuration:2.5+u.shieldTime*.14,
+  nova:100,novaDmg:62*(1+u.novaCore*.09),novaRadius:210,novaGain:1+u.novaRate*.08,novaKillBonus:u.novaFuel*.5,
+  regen:u.repair*.15+u.nanoPulse*.12,shield:0,shieldCd:0,shieldBaseCd:14-u.shieldCore*.7,shieldDuration:2.5+u.shieldTime*.14+u.barrierCore*.16,
   gravCd:0,gravityBaseCd:15-u.gravityCore*.65,gravityDuration:3.2,
   weapon:'pulse',unlocked:['pulse'],critChance:u.critical*.03,critMult:1.5+u.criticalPower*.1,
   damageReduction:u.plating*.04,dodgeChance:u.evade*.02,healBonus:u.recovery*5,pierce:0,bulletSize:1,
-  targetRange:660+u.range*28,droneCount:Math.min(3,Math.ceil(u.droneCore/2)),droneDamage:1,droneTick:.42,
+  targetRange:660+u.range*28,droneCount:Math.min(3,Math.ceil(u.droneCore/2)),droneDamage:1+u.droneTech*.1,droneTick:.42,
   aura:0,auraTick:0,thorns:0,shieldReflect:0,shieldReflectTimer:0,killHeal:0,killHealCount:0,
-  bossDamage:1,runUpgrades:{}};
- enemies=[];bullets=[];enemyBullets=[];gems=[];particles=[];texts=[];rings=[];dashGhosts=[];wells=[];zones=[];enemyFields=[];timer=0;wave=1;kills=0;spawnTimer=.7;shotTimer=.4;levelQueue=0;camera.x=0;camera.y=0;shake=0;killCombo=0;makeWorld();banner('WAVE 1 · RIFT WASTES');updateHUD()}
-function setMode(m){mode=m;ui.hud.style.display=m==='menu'||m==='hangar'?'none':'block';ui.controls.style.display=m==='play'?'block':'none';for(const k of ['menu','upgrades','pause','over','hangar'])ui[k].classList.toggle('hidden',m!==k);if(m!=='play')resetJoy()}
+  bossDamage:1+u.execution*.055,evolutions:{},runUpgrades:{},coreBonus:0,killStreak:0,comboTick:0,adrenaline:0,adrenalineTime:0,novaCrit:0,novaEcho:0,echoPending:0,shieldPulse:0,dashOverclock:0,dashPower:0};
+ enemies=[];bullets=[];enemyBullets=[];gems=[];particles=[];texts=[];rings=[];beams=[];dashGhosts=[];wells=[];zones=[];enemyFields=[];timer=0;wave=1;kills=0;spawnTimer=.7;shotTimer=.4;levelQueue=0;camera.x=0;camera.y=0;shake=0;killCombo=0;makeWorld();banner('WAVE 1 · RIFT WASTES');updateHUD()}
+function setMode(m){mode=m;ui.hud.style.display=['play','pause','upgrades','over'].includes(m)?'block':'none';ui.controls.style.display=m==='play'?'block':'none';for(const k of ['menu','upgrades','pause','over','hangar','achievements','settings'])ui[k].classList.toggle('hidden',m!==k);if(m!=='play')resetJoy()}
 function start(){if(!banked)bankRun();reset();setMode('play');audioInit();sfx(440,'sine',.1,.08)}
 function goMenu(){if(!banked)bankRun();setMode('menu');$('bestLine').textContent=`BEST RUN · ${gameBest} eliminations`;showBalance()}
 function saveBest(){if(kills>gameBest){gameBest=kills;try{localStorage.setItem('riftrunner_best',String(gameBest))}catch(e){}}}
@@ -258,41 +323,43 @@ function banner(v){bannerLabel=v;bannerTime=2.1;$('banner').textContent=v;$('ban
 function fmtTime(t){const s=Math.floor(t);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 function audioInit(){if(!soundOn)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}catch(e){soundOn=false}}
 function sfx(freq=440,type='sine',dur=.09,vol=.035){if(!soundOn||!audio)return;try{const o=audio.createOscillator(),g=audio.createGain(),t=audio.currentTime;o.type=type;o.frequency.setValueAtTime(freq,t);o.frequency.exponentialRampToValueAtTime(Math.max(50,freq*.65),t+dur);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);o.connect(g);g.connect(audio.destination);o.start(t);o.stop(t+dur+.01)}catch(e){}}
-function burst(x,y,color,n=9,power=130){const max=SW*SH>850000?150:210;for(let i=0;i<n&&particles.length<max;i++){const a=rand(0,TWO),v=rand(30,power),life=rand(.22,.68);particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life,max:life,size:rand(1.6,4.8),color})}}
-function floater(x,y,value,color='#fbd6eb'){texts.push({x,y,value,life:.68,vy:-44,color});if(texts.length>55)texts.shift()}
+function burst(x,y,color,n=9,power=130){if(gameSettings.fx==='low')n=Math.max(1,Math.ceil(n*.45));const max=gameSettings.fx==='low'?85:SW*SH>850000?150:210;for(let i=0;i<n&&particles.length<max;i++){const a=rand(0,TWO),v=rand(30,power),life=rand(.22,.68);particles.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life,max:life,size:rand(1.6,4.8),color})}}
+function floater(x,y,value,color='#fbd6eb'){if(!gameSettings.damageNumbers)return;texts.push({x,y,value,life:.68,vy:-44,color});if(texts.length>55)texts.shift()}
 const types={
  drone:{hp:40,r:16,speed:92,dmg:10,col:'#fa739a'},dart:{hp:26,r:12,speed:155,dmg:8,col:'#ffad67'},tank:{hp:125,r:27,speed:56,dmg:16,col:'#9b84ff'},shooter:{hp:54,r:18,speed:75,dmg:9,col:'#75d5ff'},
  wisp:{hp:32,r:13,speed:128,dmg:11,col:'#a4fffd'},splitter:{hp:72,r:23,speed:89,dmg:12,col:'#dffb73'},sniper:{hp:48,r:16,speed:60,dmg:13,col:'#ff9a70'},leech:{hp:80,r:20,speed:110,dmg:13,col:'#f584ee'},
  charger:{hp:86,r:19,speed:103,dmg:18,col:'#ff684c'},bomber:{hp:38,r:18,speed:125,dmg:15,col:'#ffdf6d'},orbiter:{hp:68,r:16,speed:107,dmg:10,col:'#9bc0ff'},
  bulwark:{hp:185,r:29,speed:57,dmg:18,col:'#ddb0fa'},stalker:{hp:60,r:16,speed:130,dmg:13,col:'#86f6d0'},mender:{hp:88,r:20,speed:73,dmg:8,col:'#60f4b9'},miner:{hp:58,r:17,speed:83,dmg:11,col:'#eabf7f'},
+ strider:{hp:55,r:14,speed:165,dmg:12,col:'#ff91d6'},sapper:{hp:69,r:18,speed:97,dmg:10,col:'#ffa16b'},nullifier:{hp:112,r:21,speed:79,dmg:12,col:'#93c6f2'},
+ hunter:{hp:640,r:34,speed:138,dmg:20,col:'#ff88d6',boss:true,mini:true,name:'RIFT HUNTER'},
  ravager:{hp:470,r:36,speed:112,dmg:22,col:'#ff735d',boss:true,mini:true,name:'RIFT RAVAGER'},sentinel:{hp:560,r:38,speed:64,dmg:22,col:'#a8ff78',boss:true,mini:true,name:'IRON SENTINEL'},
  boss:{hp:900,r:48,speed:62,dmg:24,col:'#f1a8ff',boss:true,name:'RIFT GUARDIAN'},colossus:{hp:1500,r:61,speed:39,dmg:29,col:'#ffb866',boss:true,name:'THE COLOSSUS'},
  phantom:{hp:1200,r:43,speed:99,dmg:19,col:'#86ffc4',boss:true,name:'VOID PHANTOM'},tempest:{hp:1120,r:49,speed:93,dmg:21,col:'#83c7ff',boss:true,name:'STORM EMPRESS'},
- brood:{hp:1520,r:53,speed:55,dmg:23,col:'#adfb78',boss:true,name:'BROODMOTHER'},voidking:{hp:1600,r:56,speed:68,dmg:27,col:'#e88dff',boss:true,name:'VOID SOVEREIGN'}
+ brood:{hp:1520,r:53,speed:55,dmg:23,col:'#adfb78',boss:true,name:'BROODMOTHER'},voidking:{hp:1600,r:56,speed:68,dmg:27,col:'#e88dff',boss:true,name:'VOID SOVEREIGN'},abyss:{hp:1900,r:58,speed:71,dmg:26,col:'#d38dff',boss:true,name:'ABYSS SOVEREIGN'}
 };
-const majorBosses=['boss','colossus','phantom','tempest','brood','voidking'];
-const miniBosses=['ravager','sentinel'];
+const majorBosses=['boss','colossus','abyss','phantom','tempest','brood','voidking'];
+const miniBosses=['ravager','hunter','sentinel'];
 function spawnEnemy(kind,x0,y0){if(enemies.length>138||!player)return;
- if(!kind){const pool=['drone','drone','drone','dart'];if(wave>=2)pool.push('shooter','splitter','bomber');if(wave>=3)pool.push('tank','wisp','charger');if(wave>=4)pool.push('orbiter','stalker');if(wave>=5)pool.push('sniper','leech','bulwark');if(wave>=6)pool.push('mender','miner');kind=pool[Math.floor(Math.random()*pool.length)]}
+ if(!kind){const pool=['drone','drone','drone','dart'];if(wave>=2)pool.push('shooter','splitter','bomber');if(wave>=3)pool.push('tank','wisp','charger');if(wave>=4)pool.push('orbiter','stalker');if(wave>=5)pool.push('sniper','leech','bulwark');if(wave>=6)pool.push('mender','miner','strider');if(wave>=7)pool.push('sapper');if(wave>=8)pool.push('nullifier');kind=pool[Math.floor(Math.random()*pool.length)]}
  const spec=types[kind];if(!spec)return;const a=rand(0,TWO),r=Math.max(SW,SH)*.68+rand(70,190);const hp=spec.hp*(1+Math.max(0,wave-1)*.12);
  let x=x0??clamp(player.x+Math.cos(a)*r,-1770,1770),y=y0??clamp(player.y+Math.sin(a)*r,-1770,1770);
  if(insideWall(x,y,spec.r+8)){for(let i=0;i<12;i++){const theta=rand(0,TWO);const cx=x+Math.cos(theta)*rand(50,140),cy=y+Math.sin(theta)*rand(50,140);if(!insideWall(cx,cy,spec.r+8)){x=cx;y=cy;break}}}
- enemies.push({id:++nextEnemyId,kind,x,y,r:spec.r,hp,maxHp:hp,speed:spec.speed*(1+Math.min(wave*.024,.27)),damage:spec.dmg,col:spec.col,boss:!!spec.boss,mini:!!spec.mini,phase:rand(0,TWO),shot:rand(.6,2.1),skill:rand(2.8,5),teleport:rand(2,4),mineTimer:rand(2,4),avoid:0,avoidSign:Math.random()<.5?1:-1,flash:0,hitPulse:0,vx:0,vy:0,dead:false})
+ enemies.push({id:++nextEnemyId,kind,x,y,r:spec.r,hp,maxHp:hp,speed:spec.speed*(1+Math.min(wave*.024,.27)),damage:spec.dmg,col:spec.col,boss:!!spec.boss,mini:!!spec.mini,phase:rand(0,TWO),shot:rand(.6,2.1),skill:rand(2.8,5),bossPhase:1,teleport:rand(2,4),mineTimer:rand(2,4),avoid:0,avoidSign:Math.random()<.5?1:-1,flash:0,hitPulse:0,vx:0,vy:0,dead:false})
 }
 function gainXp(amount){player.xp+=amount;while(player.xp>=player.need){player.xp-=player.need;player.level++;player.need=Math.floor(player.need*1.21+6);levelQueue++}if(levelQueue&&mode==='play')showUpgrade()}
 function dropCoin(x,y,value){if(gems.length>=650)return;const tier=coinTiers[value];const a=rand(0,TWO),dist=rand(10,value===50?57:40);let gx=x+Math.cos(a)*dist,gy=y+Math.sin(a)*dist;
  if(insideWall(gx,gy,tier.r)){gx=x;gy=y}gems.push({x:gx,y:gy,r:tier.r,val:value,life:27,phase:rand(0,TWO),vx:Math.cos(a)*rand(13,50),vy:Math.sin(a)*rand(13,50)})}
 function dropValue(e){if(e.boss)return 50;
  if(e.kind==='bulwark'||e.kind==='mender')return 10;
- if(['tank','leech','sniper','charger','stalker','miner'].includes(e.kind))return Math.random()<.19?10:5;
- if(['shooter','splitter','orbiter','wisp'].includes(e.kind))return Math.random()<.16?5:3;
+ if(['tank','leech','sniper','charger','stalker','miner','sapper','nullifier'].includes(e.kind))return Math.random()<.19?10:5;
+ if(['shooter','splitter','orbiter','wisp','strider'].includes(e.kind))return Math.random()<.16?5:3;
  if(e.kind==='bomber')return Math.random()<.22?3:1;
  return wave>6&&Math.random()<.18?3:1}
-function killed(e){if(e.dead)return;e.dead=true;kills++;player.nova=clamp(player.nova+(e.boss?8:3.9)*player.novaGain+player.novaKillBonus,0,100);
+function killed(e){if(e.dead)return;e.dead=true;kills++;meta.stats.totalKills++;if(meta.stats.totalKills%5===0)persist();tryAchievements();if(player.adrenaline)player.adrenalineTime=2;player.nova=clamp(player.nova+(e.boss?8:3.9)*player.novaGain+player.novaKillBonus,0,100);
  if(player.killHeal){player.killHealCount++;if(player.killHealCount>=5){player.killHealCount=0;
   const amount=Math.min(player.killHeal,player.maxHp-player.hp);player.hp+=amount;
   if(amount>0)floater(player.x,player.y-36,`+${Math.round(amount)} REPAIR`,'#91ffd7');}}burst(e.x,e.y,e.col,e.boss?40:9,e.boss?240:130);
- if(e.boss){if(e.mini)miniDefeated++;else bossesDefeated++;banner(`${types[e.kind].name} DEFEATED`);shake=17;sfx(280,'sawtooth',.34,.12)}
+ if(e.boss){if(e.mini)miniDefeated++;else {bossesDefeated++;meta.stats.bossWins++;if(e.kind==='abyss')meta.stats.abyssWins++;}tryAchievements();banner(`${types[e.kind].name} DEFEATED`);shake=17;sfx(280,'sawtooth',.34,.12)}
  if(e.kind==='splitter'){spawnEnemy('dart',clamp(e.x-28,-1800,1800),e.y);spawnEnemy('dart',clamp(e.x+28,-1800,1800),e.y)}
  // Every regular enemy produces 2–4 individual coins. Only mini/main bosses create 50-XP coins.
  const count=e.boss?(e.mini?2:3+Math.floor(Math.random()*2)):2+Math.floor(Math.random()*3),value=dropValue(e);
@@ -339,9 +406,24 @@ const upgradeData=[
 {id:'aura',cat:'TECH',ic:'ϟ',name:'Ion Storm Aura',desc:'Nearby enemies take continuous electric damage.',apply:()=>player.aura=Math.min(3,player.aura+1),ok:()=>player.aura<3},
 {id:'railUnlock',ic:'⌁',name:'UNLOCK · RAIL LANCE',desc:'Piercing, high-powered shots. Tap WEAPON to equip.',apply:()=>unlockWeapon('rail'),ok:()=>!player.unlocked.includes('rail')},
 {id:'scatterUnlock',ic:'✷',name:'UNLOCK · SCATTER CANNON',desc:'Fire a devastating spread of projectiles.',apply:()=>unlockWeapon('scatter'),ok:()=>!player.unlocked.includes('scatter')},
-{id:'arcUnlock',ic:'ϟ',name:'UNLOCK · ARC REPEATER',desc:'Rapid shots that chain lightning to nearby foes.',apply:()=>unlockWeapon('arc'),ok:()=>!player.unlocked.includes('arc')}
+{id:'arcUnlock',ic:'ϟ',name:'UNLOCK · ARC REPEATER',desc:'Rapid shots that chain lightning to nearby foes.',apply:()=>unlockWeapon('arc'),ok:()=>!player.unlocked.includes('arc')},
+{id:'teslaUnlock',cat:'WEAPON',ic:'ϟ',name:'UNLOCK · TESLA REPEATER',desc:'Fast arcs chain across multiple nearby targets.',apply:()=>unlockWeapon('tesla'),ok:()=>!player.unlocked.includes('tesla')},
+{id:'voidUnlock',cat:'WEAPON',ic:'◉',name:'UNLOCK · VOID CANNON',desc:'Slow gravitational shells detonate into damaging shockwaves.',apply:()=>unlockWeapon('void'),ok:()=>!player.unlocked.includes('void')},
+{id:'pulseEvo',cat:'WEAPON EVOLUTION',ic:'✦',name:'EVOLVE · Pulse Barrage',desc:'Pulse fires two extra rounds at slightly higher damage.',apply:()=>player.evolutions.pulse=true,ok:()=>player.unlocked.includes('pulse')&&!player.evolutions.pulse&&player.level>=5},
+{id:'arcEvo',cat:'WEAPON EVOLUTION',ic:'ϟ',name:'EVOLVE · Chain Conductor',desc:'Arc lightning chains to more enemies.',apply:()=>player.evolutions.arc=true,ok:()=>player.unlocked.includes('arc')&&!player.evolutions.arc&&player.level>=5},
+{id:'scatterEvo',cat:'WEAPON EVOLUTION',ic:'✷',name:'EVOLVE · Shrapnel Storm',desc:'Scatter shots gain two extra pellets and improved spread.',apply:()=>player.evolutions.scatter=true,ok:()=>player.unlocked.includes('scatter')&&!player.evolutions.scatter&&player.level>=5},
+{id:'railEvo',cat:'WEAPON EVOLUTION',ic:'➴',name:'EVOLVE · Railstorm',desc:'Rail shots deal more damage and pierce additional enemies.',apply:()=>player.evolutions.rail=true,ok:()=>player.unlocked.includes('rail')&&!player.evolutions.rail&&player.level>=5},
+{id:'teslaEvo',cat:'WEAPON EVOLUTION',ic:'✺',name:'EVOLVE · Lightning Web',desc:'Tesla arcs reach two additional targets.',apply:()=>player.evolutions.tesla=true,ok:()=>player.unlocked.includes('tesla')&&!player.evolutions.tesla&&player.level>=5},
+{id:'voidEvo',cat:'WEAPON EVOLUTION',ic:'◎',name:'EVOLVE · Black Hole Core',desc:'Void blasts have larger, stronger explosions.',apply:()=>player.evolutions.void=true,ok:()=>player.unlocked.includes('void')&&!player.evolutions.void&&player.level>=5},
+{id:'adrenaline',cat:'SYNERGY',ic:'➤',name:'Hunter Instinct',desc:'Eliminations boost movement speed for 2 seconds.',apply:()=>player.adrenaline=Math.min(.36,player.adrenaline+.12),ok:()=>player.adrenaline<.36},
+{id:'novaCrit',cat:'SYNERGY',ic:'✧',name:'Critical Dynamo',desc:'Critical hits recharge your Nova.',apply:()=>player.novaCrit=Math.min(8,player.novaCrit+2),ok:()=>player.novaCrit<8},
+{id:'novaEcho',cat:'SYNERGY',ic:'✺',name:'Echo Nova',desc:'Nova releases a second smaller blast after a delay.',apply:()=>player.novaEcho=Math.min(3,player.novaEcho+1),ok:()=>player.novaEcho<3},
+{id:'shieldPulse',cat:'SYNERGY',ic:'⬡',name:'Barrier Shock',desc:'Activating Shield damages nearby enemies.',apply:()=>player.shieldPulse=Math.min(100,player.shieldPulse+25),ok:()=>player.shieldPulse<100},
+{id:'dashPower',cat:'SYNERGY',ic:'◈',name:'Dash Overclock',desc:'After a Dash, attacks deal +20% damage briefly.',apply:()=>player.dashPower=Math.min(3,player.dashPower+1),ok:()=>player.dashPower<3},
+{id:'scavenger',cat:'UTILITY',ic:'◆',name:'Rift Scavenger',desc:'Gain +15% extra Rift Cores at run end.',apply:()=>player.coreBonus=Math.min(.75,player.coreBonus+.15),ok:()=>player.coreBonus<.75}
+
 ];
-function unlockWeapon(id){if(!player.unlocked.includes(id))player.unlocked.push(id);player.weapon=id;banner(weaponTypes[id].name+' UNLOCKED')}
+function unlockWeapon(id){if(!player.unlocked.includes(id))player.unlocked.push(id);meta.stats.maxWeapons=Math.max(meta.stats.maxWeapons,player.unlocked.length);tryAchievements();player.weapon=id;banner(weaponTypes[id].name+' UNLOCKED')}
 function cycleWeapon(){if(mode!=='play')return;const i=player.unlocked.indexOf(player.weapon);player.weapon=player.unlocked[(i+1)%player.unlocked.length];shotTimer=.1;updateHUD();sfx(540,'triangle',.07,.045)}
 let rerollsLeft=1;
 function showUpgrade(isReroll=false){
@@ -353,6 +435,8 @@ function showUpgrade(isReroll=false){
  let opts=available.slice(0,4);
  const locked=available.filter(u=>u.id.endsWith('Unlock'));
  if(locked.length&&!opts.some(u=>u.id.endsWith('Unlock'))){opts[0]=locked[Math.floor(Math.random()*locked.length)]}
+ const evolutions=available.filter(u=>u.cat==='WEAPON EVOLUTION');
+ if(evolutions.length&&player.level%3===0&&!opts.some(u=>u.cat==='WEAPON EVOLUTION'))opts[1]=evolutions[Math.floor(Math.random()*evolutions.length)];
  const list=$('upgradeList');list.textContent='';
  for(const u of opts){
   const b=document.createElement('button');b.className='upgrade';
@@ -373,14 +457,17 @@ function showUpgrade(isReroll=false){
  $('buildStats').textContent=`RUN BUILD · ${picks} upgrades equipped · ${player.droneCount} orbit drones`;
 }
 $('rerollBtn').addEventListener('click',()=>{if(mode!=='upgrades'||rerollsLeft<=0)return;rerollsLeft--;showUpgrade(true)});
-function dash(){if(mode!=='play'||player.dashCd>0)return;let x=joy.x,y=joy.y;for(const [key,dx,dy] of [['KeyA',-1,0],['ArrowLeft',-1,0],['KeyD',1,0],['ArrowRight',1,0],['KeyW',0,-1],['ArrowUp',0,-1],['KeyS',0,1],['ArrowDown',0,1]])if(keyboard.has(key)){x+=dx;y+=dy}const len=hypot(x,y);if(len>.1){player.dx=x/len;player.dy=y/len}player.dashing=.2;player.dashCd=player.dashBaseCd;player.invuln=Math.max(player.invuln,.35);player.dashTrailClock=0;player.afterDash=.35;player.moveX=player.dx;player.moveY=player.dy;dashGhosts.push({x:player.x,y:player.y,angle:player.aim,life:.3,max:.3});burst(player.x,player.y,'#67efff',18,150);
+function dash(){if(mode!=='play'||player.dashCd>0)return;let x=joy.x,y=joy.y;for(const [key,dx,dy] of [['KeyA',-1,0],['ArrowLeft',-1,0],['KeyD',1,0],['ArrowRight',1,0],['KeyW',0,-1],['ArrowUp',0,-1],['KeyS',0,1],['ArrowDown',0,1]])if(keyboard.has(key)){x+=dx;y+=dy}const len=hypot(x,y);if(len>.1){player.dx=x/len;player.dy=y/len}player.dashing=.2;player.dashCd=player.dashBaseCd;player.invuln=Math.max(player.invuln,.35);player.dashTrailClock=0;player.afterDash=.35;player.dashOverclock=1.7;player.moveX=player.dx;player.moveY=player.dy;dashGhosts.push({x:player.x,y:player.y,angle:player.aim,life:.3,max:.3});burst(player.x,player.y,'#67efff',18,150);
  if(player.dashPulse){rings.push({x:player.x,y:player.y,r:0,max:114,life:.55,color:'#83fbef'});
   for(const e of enemies)if(!e.dead&&hypot(e.x-player.x,e.y-player.y)<114+e.r&&!rayWall(player.x,player.y,e.x,e.y,3))hitEnemy(e,player.dashPulse,'#80ffec');}
  sfx(510,'triangle',.12,.07)}
-function nova(){if(mode!=='play'||player.nova<100)return;player.nova=0;shake=13;rings.push({x:player.x,y:player.y,r:0,max:player.novaRadius,life:.65,color:'#da95ff'});
+function nova(){if(mode!=='play'||player.nova<100)return;player.nova=0;if(player.novaEcho)player.echoPending=.78;shake=13;rings.push({x:player.x,y:player.y,r:0,max:player.novaRadius,life:.65,color:'#da95ff'});
  for(let i=0;i<56;i++){let a=rand(0,TWO),r=rand(15,65);particles.push({x:player.x+Math.cos(a)*r,y:player.y+Math.sin(a)*r,vx:Math.cos(a)*rand(120,390),vy:Math.sin(a)*rand(120,390),life:.6,max:.6,size:rand(2,6),color:'#d99aff'})}
  for(const e of enemies){const dist=hypot(player.x-e.x,player.y-e.y);if(dist<player.novaRadius+e.r){hitEnemy(e,player.novaDmg*(e.boss?.65:1),'#d99aff');e.flash=.3;const force=80/(dist+20);e.x+=(e.x-player.x)*force;e.y+=(e.y-player.y)*force;if(e.hp<=0)killed(e)}}sfx(135,'sawtooth',.46,.18)}
-function shield(){if(mode!=='play'||player.shieldCd>0)return;player.shield=player.shieldDuration;player.shieldCd=Math.max(4.5,player.shieldBaseCd-(player.shieldBoost||0)*2);rings.push({x:player.x,y:player.y,r:0,max:110,life:.65,color:'#7dffc8'});sfx(730,'sine',.2,.05)}
+function shield(){if(mode!=='play'||player.shieldCd>0)return;
+ if(player.shieldPulse){rings.push({x:player.x,y:player.y,r:0,max:115,life:.5,color:'#89ffe9'});
+  for(const e of enemies)if(!e.dead&&hypot(e.x-player.x,e.y-player.y)<115+e.r&&!rayWall(player.x,player.y,e.x,e.y,2))hitEnemy(e,player.shieldPulse,'#93fff0')}
+ player.shield=player.shieldDuration;player.shieldCd=Math.max(4.5,player.shieldBaseCd-(player.shieldBoost||0)*2);rings.push({x:player.x,y:player.y,r:0,max:110,life:.65,color:'#7dffc8'});sfx(730,'sine',.2,.05)}
 function gravity(){if(mode!=='play'||player.gravCd>0)return;player.gravCd=Math.max(6,player.gravityBaseCd);const a=player.aim||0;let x=clamp(player.x+Math.cos(a)*155,-1800,1800),y=clamp(player.y+Math.sin(a)*155,-1800,1800);if(insideWall(x,y,18)){x=player.x;y=player.y}wells.push({x,y,r:190+(player.gravBoost||0)*25,life:player.gravityDuration,max:player.gravityDuration,damage:14+(player.gravBoost||0)*7});rings.push({x,y,r:0,max:70,life:.65,color:'#ffc965'});sfx(230,'triangle',.18,.07)}
 // Targeting favors unobstructed nearby threats and keeps a lock through small range changes.
 function chooseAutoTarget(){
@@ -396,12 +483,44 @@ function chooseAutoTarget(){
  }
  return locked&&lockedScore<=bestScore*1.38?locked:best;
 }
+// Multi-target electric bursts with proper wall occlusion, separate from Arc's bullet chain.
+function teslaBurst(first){
+ let previous={x:player.x,y:player.y},target=first;const used=new Set();
+ const count=player.evolutions.tesla?6:4;
+ for(let i=0;i<count&&target;i++){
+  if(used.has(target.id))break;
+  used.add(target.id);
+  beams.push({x1:previous.x,y1:previous.y,x2:target.x,y2:target.y,life:.16,max:.16,color:'#85dfff'});
+  hitEnemy(target,player.damage*(i===0?.98:.74)*Math.pow(.84,i),'#9de8ff',i===0&&Math.random()<player.critChance);
+  previous={x:target.x,y:target.y};
+  let next=null,nearest=215*215;
+  for(const e of enemies){if(e.dead||used.has(e.id))continue;
+   const d=(e.x-previous.x)**2+(e.y-previous.y)**2;
+   if(d<nearest&&!rayWall(previous.x,previous.y,e.x,e.y,2)){nearest=d;next=e}}
+  target=next;
+ }
+ burst(player.x,player.y,'#80dfff',4,70);sfx(710,'sawtooth',.07,.021);
+}
+function voidBlast(x,y,baseDamage){
+ const radius=player.evolutions.void?147:103;
+ rings.push({x,y,r:0,max:radius,life:.58,color:'#b584ff'});
+ for(const e of enemies){if(e.dead)continue;const d=hypot(e.x-x,e.y-y);
+  if(d>radius+e.r||rayWall(x,y,e.x,e.y,2))continue;
+  const damage=baseDamage*(player.evolutions.void?1.25:1)*(.65+.35*Math.max(0,1-d/radius));
+  hitEnemy(e,damage,'#d2a2ff');
+  if(!e.dead&&d>8)moveSolid(e,(x-e.x)/d*22,(y-e.y)/d*22);
+ }
+ burst(x,y,'#bb8bff',12,105);sfx(205,'triangle',.1,.027);
+}
 function fire(){
  const target=chooseAutoTarget();
  if(!target){player.targetId=null;return}
  player.targetId=target.id;
- const w=player.weapon;let count=player.shots,spread=.12,dmg=player.damage,spd=player.bulletSpeed,life=.95,pierce=player.pierce||0;
- if(w==='arc'){dmg*=.76;spd*=1.15}else if(w==='scatter'){count=Math.max(5,player.shots+3);spread=.18;dmg*=.55;spd*=.78;life=.64}else if(w==='rail'){count=1;dmg*=2.65;spd*=1.4;life=1.1;pierce+=3}
+ const w=player.weapon; if(w==='tesla'){teslaBurst(target);return}
+ let count=player.shots,spread=.12,dmg=player.damage,spd=player.bulletSpeed,life=.95,pierce=player.pierce||0;
+ if(w==='arc'){dmg*=.76;spd*=1.15}else if(w==='scatter'){count=Math.max(5,player.shots+3+(player.evolutions.scatter?2:0));spread=player.evolutions.scatter?.15:.18;dmg*=.55;spd*=.78;life=.64}else if(w==='rail'){count=1;dmg*=player.evolutions.rail?3.35:2.65;spd*=1.4;life=1.1;pierce+=player.evolutions.rail?5:3}
+ else if(w==='void'){count=1;dmg*=1.42;spd*=.71;life=1.2;pierce=0}
+ if(w==='pulse'&&player.evolutions.pulse){count+=2;dmg*=1.15}
  // Lead moving enemies slightly, but never aim through a wall to do it.
  const distance=hypot(target.x-player.x,target.y-player.y),lead=clamp(distance/spd,0,.33)*.68;
  let tx=target.x+(target.vx||0)*lead,ty=target.y+(target.vy||0)*lead;
@@ -409,14 +528,14 @@ function fire(){
  const angle=Math.atan2(ty-player.y,tx-player.x);player.aim=angle;player.shotKick=.105;
  for(let i=0;i<count&&bullets.length<240;i++){
   const a=angle+(i-(count-1)/2)*spread;
-  bullets.push({x:player.x+Math.cos(a)*20,y:player.y+Math.sin(a)*20,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,life,damage:dmg,r:(w==='rail'?7:w==='scatter'?4:5)*player.bulletSize,weapon:w,pierce,crit:Math.random()<player.critChance,hit:[]})
+  bullets.push({x:player.x+Math.cos(a)*20,y:player.y+Math.sin(a)*20,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,life,damage:dmg,r:(w==='rail'?7:w==='scatter'?4:w==='void'?9:5)*player.bulletSize,weapon:w,pierce,crit:Math.random()<player.critChance,hit:[]})
  }
  burst(player.x+Math.cos(angle)*20,player.y+Math.sin(angle)*20,weaponTypes[w].color,3,50);
  sfx(w==='rail'?350:640,'triangle',.035,.013)
 }
 function hitEnemy(e,amt,color,critical=false){
  if(e.dead)return;
- e.hp-=amt*(e.boss?player.bossDamage:1);e.flash=.12;e.hitPulse=.17;
+ if(critical&&player.novaCrit)player.nova=clamp(player.nova+player.novaCrit,0,100);e.hp-=amt*(e.boss?player.bossDamage:1)*(player.dashOverclock>0?1+player.dashPower*.2:1);e.flash=.12;e.hitPulse=.17;
  burst(e.x,e.y,color,critical?5:2,critical?105:68);
  if(critical)floater(e.x,e.y-e.r-17,'CRIT','#ffe8a2');
  if(e.hp<=0)killed(e)
@@ -459,16 +578,33 @@ function castSkill(e){switch(e.kind){
  case 'brood':for(let i=0;i<4;i++)spawnEnemy(i%2?'splitter':'dart',e.x+rand(-110,110),e.y+rand(-110,110));e.hp=Math.min(e.maxHp,e.hp+e.maxHp*.025);burst(e.x,e.y,'#b8ff7f',16,100);break;
  case 'voidking':enemyFields.push({x:player.x,y:player.y,r:174,life:3.7,max:3.7});shootPattern(e,10,225,12,true);break;
  case 'sentinel':warnZone(e.x,e.y,180,1.15,21,e.col);shootPattern(e,8,205,9,true);e.guard=2.8;break;
+ case 'hunter':{
+  const a=rand(0,TWO),r=rand(110,185),tx=clamp(player.x+Math.cos(a)*r,-1800,1800),ty=clamp(player.y+Math.sin(a)*r,-1800,1800);
+  if(!insideWall(tx,ty,e.r+8)){burst(e.x,e.y,e.col,12,90);e.x=tx;e.y=ty;burst(tx,ty,e.col,12,90)}
+  shootPattern(e,5,295,12,false,.2);warnZone(player.x,player.y,71,.9,16,e.col);break}
+ case 'abyss':{
+  const stage=e.bossPhase||1;const a=rand(0,TWO);
+  warnZone(player.x,player.y,84+stage*10,1.12,15+stage*3,e.col);
+  if(stage>=2){shootPattern(e,8+stage*3,210+stage*20,10+stage*2,true);
+   for(let i=0;i<Math.min(3,stage+1);i++)spawnEnemy(i%2?'strider':'wisp',e.x+rand(-125,125),e.y+rand(-125,125))}
+  if(stage>=3){enemyFields.push({x:player.x+Math.cos(a)*75,y:player.y+Math.sin(a)*75,r:148,life:3,max:3});beginCharge(e)}
+  break}
+ 
  } }
 function updateCharge(e,dt){if(!e.charge)return false;const c=e.charge;if(c.windup>0){c.windup-=dt;return true}if(c.time>0){c.time-=dt;moveSolid(e,c.vx*e.speed*5.5*dt,c.vy*e.speed*5.5*dt);if(hypot(e.x-player.x,e.y-player.y)<e.r+player.r+10)hurt(e.damage*1.2);if(Math.random()<.5)burst(e.x,e.y,e.col,2,35);return true}e.charge=null;return false}
 
 function update(dt){
  timer+=dt;const newWave=1+Math.floor(timer/24);
- if(newWave>wave){wave=newWave;banner('WAVE '+wave);
+ if(newWave>wave){wave=newWave;meta.stats.bestWave=Math.max(meta.stats.bestWave,wave);if(wave%3===0)persist();tryAchievements();banner('WAVE '+wave);
  if((wave-1)%4===0){mapIndex=(mapIndex+1)%themes.length;makeWorld();$('mapAlert').textContent='NEW ZONE · '+themes[mapIndex].name;mapAlertTime=2.5;banner('ENTERING '+themes[mapIndex].name)}
  if(wave%4===0){spawnEnemy(majorBosses[(Math.floor(wave/4)-1)%majorBosses.length]);banner('BOSS INCOMING')}
  else if(wave%3===0){spawnEnemy(miniBosses[(Math.floor(wave/3)-1)%miniBosses.length]);banner('MINI-BOSS INCOMING')}
  player.hp=Math.min(player.maxHp,player.hp+9)}
+ player.adrenalineTime=Math.max(0,player.adrenalineTime-dt);player.dashOverclock=Math.max(0,player.dashOverclock-dt);
+ if(player.echoPending>0){player.echoPending-=dt;if(player.echoPending<=0){
+  const radius=player.novaRadius*.72;rings.push({x:player.x,y:player.y,r:0,max:radius,life:.5,color:'#ddaaff'});
+  for(const e of enemies)if(!e.dead&&hypot(player.x-e.x,player.y-e.y)<radius+e.r&&!rayWall(player.x,player.y,e.x,e.y,2))hitEnemy(e,player.novaDmg*(.25+.12*player.novaEcho),'#edafff')
+ }}
  player.dashCd=Math.max(0,player.dashCd-dt);player.dashing=Math.max(0,player.dashing-dt);player.afterDash=Math.max(0,player.afterDash-dt);player.shotKick=Math.max(0,player.shotKick-dt);player.invuln=Math.max(0,player.invuln-dt);player.shield=Math.max(0,player.shield-dt);player.shieldCd=Math.max(0,player.shieldCd-dt);player.gravCd=Math.max(0,player.gravCd-dt);player.nova=clamp(player.nova+dt*.65*player.novaGain,0,100);
  player.hp=Math.min(player.maxHp,player.hp+player.regen*dt);
  player.shieldReflectTimer=Math.max(0,player.shieldReflectTimer-dt);
@@ -492,39 +628,54 @@ function update(dt){
  if(m>.1){player.dx=mx/m;player.dy=my/m;if(player.targetId===null)player.aim=Math.atan2(my,mx)}
  const response=1-Math.exp(-(m>.1?25:30)*dt);
  player.moveX+=(mx-player.moveX)*response;player.moveY+=(my-player.moveY)*response;
- let slow=1;if(mapIndex===2||mapIndex===5)for(const h of hazards)if(hypot(player.x-h.x,player.y-h.y)<h.r)slow=mapIndex===2?.69:.76;
+ let slow=1;if([2,5,7].includes(mapIndex))for(const h of hazards)if(hypot(player.x-h.x,player.y-h.y)<h.r){slow=mapIndex===2?.69:mapIndex===7?.78:.76;
+  if(mapIndex===7){const d=hypot(h.x-player.x,h.y-player.y)||1;moveSolid(player,(h.x-player.x)/d*21*dt,(h.y-player.y)/d*21*dt)}
+ }
  for(const f of enemyFields){f.life-=dt;if(hypot(player.x-f.x,player.y-f.y)<f.r){slow*=.66;const d=hypot(f.x-player.x,f.y-player.y)||1;moveSolid(player,(f.x-player.x)/d*48*dt,(f.y-player.y)/d*48*dt)}}enemyFields=enemyFields.filter(f=>f.life>0);
- const boost=player.afterDash>0&&player.dashing<=0?1.1:1;
+ const boost=(player.afterDash>0&&player.dashing<=0?1.1:1)*(player.adrenalineTime>0?1+player.adrenaline:1);
  const vx=player.dashing>0?player.dx*player.speed*4.7:player.moveX*player.speed*slow*boost;
  const vy=player.dashing>0?player.dy*player.speed*4.7:player.moveY*player.speed*slow*boost;
  moveSolid(player,vx*dt,vy*dt);
  if(player.dashing>0){player.dashTrailClock-=dt;if(player.dashTrailClock<=0){player.dashTrailClock=.035;dashGhosts.push({x:player.x,y:player.y,angle:player.aim,life:.28,max:.28});if(dashGhosts.length>14)dashGhosts.shift()}if(Math.random()<.5)burst(player.x,player.y,'#60dcff',1,36)}
- for(const ghost of dashGhosts)ghost.life-=dt;dashGhosts=dashGhosts.filter(ghost=>ghost.life>0);
+ for(const ghost of dashGhosts)ghost.life-=dt;dashGhosts=dashGhosts.filter(ghost=>ghost.life>0);for(const b of beams)b.life-=dt;beams=beams.filter(b=>b.life>0);
 
  player.hazardCooldown=Math.max(0,(player.hazardCooldown||0)-dt);
- if([1,3,4].includes(mapIndex)&&player.hazardCooldown<=0){for(const h of hazards)if(hypot(player.x-h.x,player.y-h.y)<h.r){if(mapIndex===4||mapIndex===3||Math.sin(timer*1.6)>0.7){hurt(mapIndex===3?9:7);player.hazardCooldown=.85;break}}}
+ if([1,3,4,6].includes(mapIndex)&&player.hazardCooldown<=0){for(const h of hazards)if(hypot(player.x-h.x,player.y-h.y)<h.r){
+  if(mapIndex===6?Math.sin(timer*2.1+h.phase)>.45:mapIndex===4||mapIndex===3||Math.sin(timer*1.6)>0.7){hurt(mapIndex===6?11:mapIndex===3?9:7);player.hazardCooldown=.85;break}}}
+ for(const cache of caches){if(cache.opened)continue;if(hypot(player.x-cache.x,player.y-cache.y)<player.r+cache.r+9){cache.opened=true;dropCoin(cache.x,cache.y,3);dropCoin(cache.x+9,cache.y-8,5);burst(cache.x,cache.y,'#d7d6ff',12,95);floater(cache.x,cache.y-25,'SECRET CACHE','#ffdaa5');sfx(920,'triangle',.14,.03)}}
+
  spawnTimer-=dt;if(spawnTimer<=0&&enemies.length<110){spawnEnemy();if(wave>=6&&Math.random()<.3)spawnEnemy();spawnTimer=Math.max(.3,1.27-wave*.092)*rand(.85,1.25)}
- shotTimer-=dt;if(shotTimer<=0){fire();const factor=player.weapon==='arc'?.68:player.weapon==='scatter'?1.62:player.weapon==='rail'?2:1;shotTimer=player.fire*factor}
+ shotTimer-=dt;if(shotTimer<=0){fire();const factor=player.weapon==='arc'?.68:player.weapon==='scatter'?1.62:player.weapon==='rail'?2:player.weapon==='tesla'?.82:player.weapon==='void'?1.88:1;shotTimer=player.fire*factor}
  for(const well of wells){well.life-=dt;for(const e of enemies){if(e.dead)continue;const dx=well.x-e.x,dy=well.y-e.y,d=hypot(dx,dy)||1;if(d<well.r){const force=(1-d/well.r)*180*dt;moveSolid(e,dx/d*force,dy/d*force);hitEnemy(e,well.damage*dt,'#ffc86b')}}}wells=wells.filter(w=>w.life>0);
  for(const z of zones){z.time-=dt;if(z.time<=0){if(hypot(z.x-player.x,z.y-player.y)<z.r+player.r)hurt(z.damage);burst(z.x,z.y,z.color,26,190);rings.push({x:z.x,y:z.y,r:0,max:z.r,life:.65,color:z.color})}}zones=zones.filter(z=>z.time>0);
  for(const e of enemies){if(e.dead)continue;const oldEnemyX=e.x,oldEnemyY=e.y;e.flash=Math.max(0,e.flash-dt);e.hitPulse=Math.max(0,(e.hitPulse||0)-dt);e.phase+=dt*2.2;let dx=player.x-e.x,dy=player.y-e.y,dist=hypot(dx,dy)||1;
- if(e.boss){e.skill-=dt;if(e.skill<=0){castSkill(e);e.skill=e.mini?6.6:6.1}}
+ if(e.boss){
+  if(e.kind==='abyss'){
+   const phase=e.hp/e.maxHp<.34?3:e.hp/e.maxHp<.67?2:1;
+   if(phase>e.bossPhase){e.bossPhase=phase;banner('ABYSS SOVEREIGN · PHASE '+phase);rings.push({x:e.x,y:e.y,r:0,max:175,life:.65,color:'#f2a9ff'});e.skill=Math.min(e.skill,.8)}
+  }
+  e.skill-=dt;if(e.skill<=0){castSkill(e);e.skill=e.kind==='abyss'?Math.max(3.4,6.4-e.bossPhase):e.kind==='hunter'?4.5:e.mini?6.6:6.1}}
+
  if(e.kind==='mender'){e.mineTimer-=dt;if(e.mineTimer<=0){for(const target of enemies)if(!target.dead&&hypot(e.x-target.x,e.y-target.y)<165){target.hp=Math.min(target.maxHp,target.hp+18);target.flash=.18}rings.push({x:e.x,y:e.y,r:0,max:165,life:.65,color:'#91ffc3'});e.mineTimer=4.4}}
  if(e.kind==='miner'){e.mineTimer-=dt;if(e.mineTimer<=0){warnZone(e.x,e.y,65,1.35,13,e.col);e.mineTimer=3.8}}
+ if(e.kind==='sapper'){e.mineTimer-=dt;if(e.mineTimer<=0){warnZone(player.x+rand(-35,35),player.y+rand(-35,35),64,1.18,15,e.col);e.mineTimer=3.5}}
+ if(e.kind==='nullifier'){e.mineTimer-=dt;if(e.mineTimer<=0){for(const nearby of enemies)if(!nearby.dead&&nearby.id!==e.id&&hypot(nearby.x-e.x,nearby.y-e.y)<145){nearby.guard=Math.max(nearby.guard||0,1.8)}rings.push({x:e.x,y:e.y,r:0,max:145,life:.65,color:'#8bd3ff'});e.mineTimer=5}}
+
  if(e.kind==='bomber'&&dist<105&&!e.boom){e.boom=1.0;warnZone(e.x,e.y,95,1,17,e.col)}
  if(e.boom){e.boom-=dt;e.vx=0;e.vy=0;if(e.boom<=0){e.dead=true;burst(e.x,e.y,e.col,26,145)}continue}
  if(['wisp','phantom','stalker'].includes(e.kind)){e.teleport-=dt;if(e.teleport<=0&&dist>115){const a=rand(0,TWO),r=e.kind==='phantom'?235:150;let tx=clamp(player.x+Math.cos(a)*r,-1800,1800),ty=clamp(player.y+Math.sin(a)*r,-1800,1800);if(!insideWall(tx,ty,e.r+5)){e.x=tx;e.y=ty;burst(e.x,e.y,e.col,11,100)}e.teleport=e.kind==='phantom'?4.8:e.kind==='stalker'?5:6;dx=player.x-e.x;dy=player.y-e.y;dist=hypot(dx,dy)||1}}
  if(!updateCharge(e,dt)){
  let dirX=dx/dist,dirY=dy/dist,step=e.speed*dt;
- if(['shooter','sniper','orbiter','miner','mender'].includes(e.kind)&&dist<340)step*=-.58;
+ if(['shooter','sniper','orbiter','miner','mender','nullifier'].includes(e.kind)&&dist<340)step*=-.58;
  if(e.kind==='orbiter'&&dist<420){dirX=(dx/dist)*.32+(-dy/dist)*.9;dirY=(dy/dist)*.32+(dx/dist)*.9}
+ if(e.kind==='strider'){const sway=Math.sin(timer*6+e.phase)*.9;dirX=dx/dist+(-dy/dist)*sway;dirY=dy/dist+(dx/dist)*sway}
  if(e.boss&&dist<110)step*=.25;
  if(e.avoid>0){e.avoid-=dt;const ox=dirX,oy=dirY;dirX=ox*.34+(-oy)*e.avoidSign*.91;dirY=oy*.34+ox*e.avoidSign*.91}
  const preX=e.x,preY=e.y;moveSolid(e,dirX*step,dirY*step);
  if(Math.abs(step)>.3&&hypot(e.x-preX,e.y-preY)<Math.abs(step)*.31&&e.avoid<=0){e.avoid=rand(.85,1.4);e.avoidSign*=-1}
  }
  dx=player.x-e.x;dy=player.y-e.y;dist=hypot(dx,dy)||1;
- if(['shooter','sniper','orbiter','boss','colossus','phantom','tempest','brood','voidking','sentinel'].includes(e.kind)&&dist<720&&!rayWall(e.x,e.y,player.x,player.y,5)){
+ if(['shooter','sniper','orbiter','boss','colossus','phantom','tempest','brood','voidking','sentinel','hunter','abyss','nullifier'].includes(e.kind)&&dist<720&&!rayWall(e.x,e.y,player.x,player.y,5)){
  e.shot-=dt;if(e.shot<=0){const kind=e.kind;
  if(kind==='colossus')shootPattern(e,12,195,11,true);
  else if(kind==='tempest')shootPattern(e,5,290,12,false,.19);
@@ -533,9 +684,12 @@ function update(dt){
  else if(kind==='phantom')shootPattern(e,3,340,14,false,.33);
  else if(kind==='brood')shootPattern(e,4,195,11,false,.23);
  else if(kind==='sentinel')shootPattern(e,3,250,12,false,.3);
+ else if(kind==='abyss')shootPattern(e,e.bossPhase>=3?7:5,260,13,false,.21);
+ else if(kind==='hunter')shootPattern(e,3,305,11,false,.24);
+ else if(kind==='nullifier')shootPattern(e,2,235,9,false,.4);
  else if(kind==='sniper')shootPattern(e,1,440,14);
  else shootPattern(e,1,270,9);
- e.shot=kind==='boss'?2.25:kind==='colossus'?2.8:kind==='phantom'?1.65:kind==='sniper'?2.5:kind==='tempest'?2:kind==='voidking'?2.25:2.7}}
+ e.shot=kind==='boss'?2.25:kind==='colossus'?2.8:kind==='phantom'?1.65:kind==='sniper'?2.5:kind==='tempest'?2:kind==='voidking'?2.25:kind==='abyss'?Math.max(1.2,2.7-(e.bossPhase-1)*.35):kind==='hunter'?2.1:2.7}}
  if(dist<player.r+e.r-4){if(player.dashing>0)hitEnemy(e,55*dt*10,'#76fff1');else{const vulnerable=player.invuln<=0&&player.shield<=0;hurt(e.damage);if(e.kind==='leech'&&vulnerable)e.hp=Math.min(e.maxHp,e.hp+10)}moveSolid(e,-dx/dist*28*dt,-dy/dist*28*dt)}
  // Store actual motion for projectile leading on the next shot.
  e.vx=clamp((e.x-oldEnemyX)/Math.max(dt,.001),-650,650);
@@ -543,10 +697,22 @@ function update(dt){
  }
  enemies=enemies.filter(e=>!e.dead);
  for(const b of bullets){const ox=b.x,oy=b.y;b.x+=b.vx*dt;b.y+=b.vy*dt;b.life-=dt;if(b.life<=0)continue;
- if(rayWall(ox,oy,b.x,b.y,b.r)){b.life=0;burst(b.x,b.y,weaponTypes[b.weapon].color,2,30);continue}
+ const cover=wallImpact(ox,oy,b.x,b.y,b.r);
+ if(cover){b.life=0;const cx=ox+(b.x-ox)*cover.t,cy=oy+(b.y-oy)*cover.t;
+  damageCover(cover.wall,b.damage*(b.crit?player.critMult:1));
+  if(b.weapon==='void')voidBlast(cx,cy,b.damage*.65);else burst(cx,cy,weaponTypes[b.weapon].color,3,60);continue}
  for(const e of enemies){if(e.dead||b.hit.includes(e.id))continue;
  if(segmentCircleHit(ox,oy,b.x,b.y,e.x,e.y,e.r+b.r)){b.hit.push(e.id);hitEnemy(e,b.damage*(b.crit?player.critMult:1)*(e.guard?.55:1),b.crit?'#fff0a2':weaponTypes[b.weapon].color,b.crit);
- if(b.weapon==='arc'){let target=null,best=165*165;for(const other of enemies){if(other.dead||other.id===e.id||rayWall(e.x,e.y,other.x,other.y,2))continue;const d=(other.x-e.x)**2+(other.y-e.y)**2;if(d<best){best=d;target=other}}if(target){hitEnemy(target,b.damage*(b.crit?player.critMult:1)*.6,'#ddbeff');rings.push({x:target.x,y:target.y,r:0,max:24,life:.33,color:'#bfa4ff'})}}
+ if(b.weapon==='arc'){const hitSet=new Set([e.id]);let last=e;
+ for(let chain=0;chain<(player.evolutions.arc?3:1);chain++){
+  let otherTarget=null,best=165*165;
+  for(const other of enemies){if(other.dead||hitSet.has(other.id)||rayWall(last.x,last.y,other.x,other.y,2))continue;
+   const d=(other.x-last.x)**2+(other.y-last.y)**2;if(d<best){best=d;otherTarget=other}}
+  if(!otherTarget)break;hitSet.add(otherTarget.id);
+  hitEnemy(otherTarget,b.damage*(b.crit?player.critMult:1)*.6*Math.pow(.8,chain),'#ddbeff');
+  beams.push({x1:last.x,y1:last.y,x2:otherTarget.x,y2:otherTarget.y,life:.13,max:.13,color:'#d6a7ff'});last=otherTarget;
+ }}
+ if(b.weapon==='void'){voidBlast(e.x,e.y,b.damage*.78);b.life=0;break}
  if(b.pierce>0){b.pierce--;b.damage*=.8}else b.life=0;if(b.life<=0)break}}}
  bullets=bullets.filter(b=>b.life>0);enemies=enemies.filter(e=>!e.dead);
  for(const e of enemies)if(e.guard>0)e.guard=Math.max(0,e.guard-dt);
@@ -564,23 +730,26 @@ function update(dt){
 function updateHUD(){if(!player)return;
  $('hpText').textContent=`${Math.ceil(player.hp)} / ${Math.ceil(player.maxHp)}`;$('hpFill').style.width=clamp(player.hp/player.maxHp*100,0,100)+'%';$('xpText').textContent=`${Math.floor(player.xp)} / ${player.need} XP`;$('levelText').textContent=`LVL ${player.level}`;$('xpFill').style.width=clamp(player.xp/player.need*100,0,100)+'%';$('killnum').textContent=kills;$('wave').textContent='WAVE '+wave;$('time').textContent=fmtTime(timer);$('areaTag').textContent=themes[mapIndex].name;$('weaponBtn').textContent=weaponTypes[player.weapon].name+' ▸';
  for(const [id,cd] of [['dashCool',player.dashCd],['shieldCool',player.shieldCd],['gravCool',player.gravCd]]){const el=$(id);el.style.display=cd>.1?'flex':'none';el.textContent=cd.toFixed(1)}
- $('novaInner').style.width=player.nova+'%';$('novaBtn').classList.toggle('ready',player.nova>=100);$('novaCool').style.display='none';const boss=enemies.find(e=>e.boss&&!e.mini&&!e.dead)||enemies.find(e=>e.boss&&!e.dead);$('bossbar').style.display=boss?'block':'none';if(boss){$('bossfill').style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';$('bossName').textContent=types[boss.kind].name}
+ $('novaInner').style.width=player.nova+'%';$('novaBtn').classList.toggle('ready',player.nova>=100);$('novaCool').style.display='none';const boss=enemies.find(e=>e.boss&&!e.mini&&!e.dead)||enemies.find(e=>e.boss&&!e.dead);$('bossbar').style.display=boss?'block':'none';if(boss){$('bossfill').style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';$('bossName').textContent=types[boss.kind].name+(boss.kind==='abyss'?' · PHASE '+boss.bossPhase:'')}
 }
 
 function poly(x,y,r,n,rot){ctx.beginPath();for(let i=0;i<n;i++){const a=rot+i*TWO/n;const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;i?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath()}
 function drawBackground(){const key=mapIndex+':'+SW+':'+SH;if(bgCacheKey!==key){const th=themes[mapIndex];bgGradient=ctx.createRadialGradient(SW*.52,SH*.36,20,SW*.52,SH*.5,Math.max(SW,SH)*.8);bgGradient.addColorStop(0,th.center);bgGradient.addColorStop(.65,th.mid);bgGradient.addColorStop(1,th.edge);bgCacheKey=key}ctx.fillStyle=bgGradient;ctx.fillRect(0,0,SW,SH)}
-function render(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,SW,SH);drawBackground();const cx=mode==='menu'?Math.sin(performance.now()*.00009)*100:camera.x,cy=mode==='menu'?Math.cos(performance.now()*.00007)*80:camera.y;ctx.save();ctx.translate(Math.round(SW/2-cx+rand(-shake,shake)),Math.round(SH/2-cy+rand(-shake,shake)));
+function render(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,SW,SH);drawBackground();const cx=mode==='menu'?Math.sin(performance.now()*.00009)*100:camera.x,cy=mode==='menu'?Math.cos(performance.now()*.00007)*80:camera.y;ctx.save();ctx.translate(Math.round(SW/2-cx+(gameSettings.screenShake?rand(-shake,shake):0)),Math.round(SH/2-cy+(gameSettings.screenShake?rand(-shake,shake):0)));
 const l=cx-SW/2-70,r=cx+SW/2+70,t=cy-SH/2-70,b=cy+SH/2+70;ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.14;ctx.lineWidth=1;ctx.beginPath();for(let x=Math.floor(l/75)*75;x<r;x+=75){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/75)*75;y<b;y+=75){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.globalAlpha=1;ctx.strokeStyle='rgba(89,215,254,.08)';ctx.beginPath();for(let x=Math.floor(l/450)*450;x<r;x+=450){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/450)*450;y<b;y+=450){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.36;ctx.lineWidth=9;ctx.strokeRect(-1900,-1900,3800,3800);ctx.globalAlpha=1;
 for(const s of stars){if(s.x<l||s.x>r||s.y<t||s.y>b)continue;ctx.globalAlpha=s.a;ctx.fillStyle='#9ed8ff';ctx.fillRect(s.x,s.y,s.r,s.r)}ctx.globalAlpha=1;
 for(const d of decos){if(d.x<l-80||d.x>r+80||d.y<t-80||d.y>b+80)continue;ctx.save();ctx.translate(d.x,d.y);ctx.rotate(d.rot);ctx.fillStyle=d.t>.5?themes[mapIndex].deco:'#13213a';ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.58;ctx.lineWidth=1.5;ctx.fillRect(-d.size/2,-d.size/2,d.size,d.size*.55);ctx.strokeRect(-d.size/2,-d.size/2,d.size,d.size*.55);ctx.globalAlpha=1;ctx.restore()}
 // Raised, solid cover walls: face shading, edge highlights, material seams.
-for(const w of walls){if(w.x>r+30||w.x+w.w<l-30||w.y>b+30||w.y+w.h<t-30)continue;ctx.save();ctx.shadowBlur=15;ctx.shadowColor='#000b';ctx.fillStyle='#07101e';ctx.fillRect(w.x+5,w.y+9,w.w,w.h);ctx.shadowBlur=0;ctx.fillStyle=themes[mapIndex].wall;ctx.fillRect(w.x,w.y,w.w,w.h);ctx.fillStyle='#071326aa';ctx.fillRect(w.x+5,w.y+6,w.w-10,w.h-12);ctx.strokeStyle=themes[mapIndex].grid;ctx.lineWidth=2.3;ctx.strokeRect(w.x,w.y,w.w,w.h);ctx.globalAlpha=.5;ctx.beginPath();if(w.w>w.h){ctx.moveTo(w.x+12,w.y+w.h/2);ctx.lineTo(w.x+w.w-12,w.y+w.h/2)}else{ctx.moveTo(w.x+w.w/2,w.y+12);ctx.lineTo(w.x+w.w/2,w.y+w.h-12)}ctx.stroke();ctx.globalAlpha=1;ctx.restore()}
+for(const w of walls){if(w.x>r+30||w.x+w.w<l-30||w.y>b+30||w.y+w.h<t-30)continue;ctx.save();ctx.shadowBlur=15;ctx.shadowColor='#000b';ctx.fillStyle='#07101e';ctx.fillRect(w.x+5,w.y+9,w.w,w.h);ctx.shadowBlur=0;ctx.fillStyle=themes[mapIndex].wall;ctx.fillRect(w.x,w.y,w.w,w.h);ctx.fillStyle='#071326aa';ctx.fillRect(w.x+5,w.y+6,w.w-10,w.h-12);ctx.strokeStyle=themes[mapIndex].grid;ctx.lineWidth=2.3;ctx.strokeRect(w.x,w.y,w.w,w.h);if(w.breakable){ctx.strokeStyle='#ffa9ae';ctx.lineWidth=2;ctx.globalAlpha=.7;ctx.beginPath();ctx.moveTo(w.x+w.w*.2,w.y+4);ctx.lineTo(w.x+w.w*.56,w.y+w.h*.55);ctx.lineTo(w.x+w.w*.82,w.y+w.h-3);ctx.stroke();ctx.globalAlpha=1}
+ ctx.globalAlpha=.5;ctx.beginPath();if(w.w>w.h){ctx.moveTo(w.x+12,w.y+w.h/2);ctx.lineTo(w.x+w.w-12,w.y+w.h/2)}else{ctx.moveTo(w.x+w.w/2,w.y+12);ctx.lineTo(w.x+w.w/2,w.y+w.h-12)}ctx.stroke();ctx.globalAlpha=1;ctx.restore()}
 
 for(const rf of rifts){if(rf.x<l-130||rf.x>r+130||rf.y<t-130||rf.y>b+130)continue;const pul=Math.sin(performance.now()*.0008+rf.phase)*.12;ctx.strokeStyle=`hsla(${rf.hue},90%,67%,.22)`;ctx.lineWidth=3;ctx.beginPath();ctx.arc(rf.x,rf.y,rf.r*(1+pul),0,TWO);ctx.stroke();ctx.beginPath();ctx.arc(rf.x,rf.y,rf.r*.54,0,TWO);ctx.stroke();ctx.fillStyle=`hsla(${rf.hue},90%,55%,.07)`;ctx.beginPath();ctx.arc(rf.x,rf.y,rf.r*.55,0,TWO);ctx.fill()}
 for(const h of hazards){if(h.x<l-95||h.x>r+95||h.y<t-95||h.y>b+95)continue;const pulse=.5+.5*Math.sin(performance.now()*.002+h.phase);ctx.fillStyle=themes[mapIndex].hazard;ctx.globalAlpha=.035+pulse*.09;ctx.beginPath();ctx.arc(h.x,h.y,h.r,0,TWO);ctx.fill();ctx.strokeStyle=themes[mapIndex].hazard;ctx.globalAlpha=.22+pulse*.2;ctx.lineWidth=2;ctx.stroke();ctx.globalAlpha=1}
 for(const f of enemyFields){ctx.save();ctx.globalAlpha=clamp(f.life/f.max,0,1)*.4;ctx.fillStyle='#b36dff';ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,TWO);ctx.fill();ctx.strokeStyle='#efb4ff';ctx.lineWidth=3;ctx.stroke();ctx.restore()}
 for(const z of zones){ctx.save();ctx.globalAlpha=.35+.4*(1-z.time/z.max);ctx.fillStyle=z.color;ctx.beginPath();ctx.arc(z.x,z.y,z.r,0,TWO);ctx.fill();ctx.strokeStyle=z.color;ctx.lineWidth=3;ctx.setLineDash([12,7]);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#fff9';ctx.beginPath();ctx.arc(z.x,z.y,z.r*.07,0,TWO);ctx.fill();ctx.restore()}
 for(const well of wells){ctx.strokeStyle='#ffc969';ctx.lineWidth=3;ctx.globalAlpha=clamp(well.life/well.max,0,1)*.8;ctx.beginPath();ctx.arc(well.x,well.y,well.r*(1+Math.sin(performance.now()*.005)*.04),0,TWO);ctx.stroke();ctx.globalAlpha=1}
+for(const cache of caches){if(cache.opened||cache.x<l-30||cache.x>r+30||cache.y<t-30||cache.y>b+30)continue;
+ ctx.save();ctx.translate(cache.x,cache.y);ctx.rotate(timer*.35+cache.phase);ctx.shadowBlur=15;ctx.shadowColor='#c8afff';ctx.fillStyle='#5f487c';ctx.strokeStyle='#d9c6ff';ctx.lineWidth=2;ctx.fillRect(-11,-11,22,22);ctx.strokeRect(-11,-11,22,22);ctx.restore()}
 for(const g of gems){if(g.x<l-26||g.x>r+26||g.y<t-26||g.y>b+26)continue;const c=g.heal?'#6cffb5':coinTiers[g.val].color;ctx.save();ctx.translate(g.x,g.y+Math.sin(g.phase)*2.5);ctx.shadowBlur=g.val===50?20:11;ctx.shadowColor=c;ctx.fillStyle=c;ctx.strokeStyle='#e9faff';ctx.lineWidth=g.val===50?2:1;
  if(g.heal){ctx.beginPath();ctx.arc(0,0,g.r,0,TWO);ctx.fill();ctx.fillStyle='#064336';ctx.fillRect(-2,-7,4,14);ctx.fillRect(-7,-2,14,4)}
  else{poly(0,0,g.r,6,Math.PI/6);ctx.fill();ctx.stroke();ctx.fillStyle='#09192c';ctx.beginPath();ctx.arc(0,0,g.r*.63,0,TWO);ctx.fill();if(g.val>=3){ctx.font=`900 ${g.val===50?11:g.val===10?10:9}px system-ui`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=c;ctx.fillText(String(g.val),0,.3)}else{ctx.fillStyle=c;ctx.beginPath();ctx.arc(0,0,2,0,TWO);ctx.fill()}}
@@ -588,9 +757,11 @@ for(const g of gems){if(g.x<l-26||g.x>r+26||g.y<t-26||g.y>b+26)continue;const c=
 
 for(const p of particles){ctx.globalAlpha=clamp(p.life/p.max,0,1);ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,TWO);ctx.fill()}ctx.globalAlpha=1;
 for(const b of bullets){ctx.strokeStyle=b.crit?'#ffe7a0':weaponTypes[b.weapon||'pulse'].color;ctx.lineWidth=(b.weapon==='rail'?7:4)*player.bulletSize;ctx.shadowBlur=12;ctx.shadowColor=b.crit?'#ffde75':weaponTypes[b.weapon||'pulse'].color;ctx.beginPath();ctx.moveTo(b.x-b.vx*.022,b.y-b.vy*.022);ctx.lineTo(b.x,b.y);ctx.stroke()}ctx.shadowBlur=0;
+for(const beam of beams){ctx.save();ctx.globalAlpha=clamp(beam.life/beam.max,0,1);ctx.strokeStyle=beam.color;ctx.shadowBlur=16;ctx.shadowColor=beam.color;ctx.lineWidth=3;
+ ctx.beginPath();ctx.moveTo(beam.x1,beam.y1);const mx=(beam.x1+beam.x2)*.5+Math.sin(timer*48)*9,my=(beam.y1+beam.y2)*.5+Math.cos(timer*54)*9;ctx.lineTo(mx,my);ctx.lineTo(beam.x2,beam.y2);ctx.stroke();ctx.restore()}
 for(const b of enemyBullets){ctx.fillStyle=b.col||'#ff92cc';ctx.shadowBlur=12;ctx.shadowColor=b.col||'#ff4a9d';ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,TWO);ctx.fill()}ctx.shadowBlur=0;
 for(const e of enemies){if(e.x<l-90||e.x>r+90||e.y<t-90||e.y>b+90)continue;ctx.save();ctx.translate(e.x,e.y);if(e.hitPulse>0){const scale=1+e.hitPulse*.65;ctx.scale(scale,scale)}ctx.rotate(Math.atan2(player.y-e.y,player.x-e.x));ctx.shadowBlur=e.boss?25:10;ctx.shadowColor=e.col;ctx.fillStyle=e.flash>0?'#ffffff':e.col;ctx.strokeStyle='#fff8';ctx.lineWidth=2;
-if(['drone','shooter','sniper','leech','mender','miner','orbiter'].includes(e.kind)){poly(0,0,e.r,6,Math.PI/6);ctx.fill();ctx.stroke();ctx.fillStyle='#172642';poly(0,0,e.r*.48,6,Math.PI/6);ctx.fill()}else if(['dart','wisp','charger','stalker','bomber'].includes(e.kind)){poly(0,0,e.r+2,3,0);ctx.fill();ctx.stroke()}else if(['tank','splitter','bulwark'].includes(e.kind)){poly(0,0,e.r,8,Math.PI/8);ctx.fill();ctx.stroke();ctx.fillStyle='#1a2354';poly(0,0,e.r*.62,8,Math.PI/8);ctx.fill()}else{poly(0,0,e.r,10,Math.PI/10+e.phase*.2);ctx.fill();ctx.stroke();ctx.fillStyle='#37204c';poly(0,0,e.r*.65,7,e.phase*.4);ctx.fill();ctx.fillStyle='#f7ddff';ctx.beginPath();ctx.arc(0,0,11,0,TWO);ctx.fill()}
+if(['drone','shooter','sniper','leech','mender','miner','orbiter','sapper','nullifier'].includes(e.kind)){poly(0,0,e.r,6,Math.PI/6);ctx.fill();ctx.stroke();ctx.fillStyle='#172642';poly(0,0,e.r*.48,6,Math.PI/6);ctx.fill()}else if(['dart','wisp','charger','stalker','bomber','strider'].includes(e.kind)){poly(0,0,e.r+2,3,0);ctx.fill();ctx.stroke()}else if(['tank','splitter','bulwark'].includes(e.kind)){poly(0,0,e.r,8,Math.PI/8);ctx.fill();ctx.stroke();ctx.fillStyle='#1a2354';poly(0,0,e.r*.62,8,Math.PI/8);ctx.fill()}else{poly(0,0,e.r,10,Math.PI/10+e.phase*.2);ctx.fill();ctx.stroke();ctx.fillStyle='#37204c';poly(0,0,e.r*.65,7,e.phase*.4);ctx.fill();ctx.fillStyle='#f7ddff';ctx.beginPath();ctx.arc(0,0,11,0,TWO);ctx.fill()}
 ctx.shadowBlur=0;if(e.guard>0){ctx.strokeStyle='#beff89';ctx.lineWidth=4;ctx.beginPath();ctx.arc(0,0,e.r+8,0,TWO);ctx.stroke()}if(e.charge&&e.charge.windup>0){ctx.strokeStyle=e.col;ctx.lineWidth=4;ctx.globalAlpha=.9;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(e.charge.vx*210,e.charge.vy*210);ctx.stroke();ctx.globalAlpha=1}if(e.hp<e.maxHp){ctx.fillStyle='#081325';ctx.fillRect(-e.r,-e.r-14,e.r*2,4);ctx.fillStyle=e.col;ctx.fillRect(-e.r,-e.r-14,e.r*2*Math.max(0,e.hp/e.maxHp),4)}ctx.restore()}
 if(player){
  // Short, inexpensive afterimages improve directional Dash readability.
@@ -618,7 +789,7 @@ function saveFeedback(message,error=false){const el=$('saveStatus');el.textConte
 function exportGameSave(){
  try{
   const backup={game:BACKUP_GAME,formatVersion:BACKUP_VERSION,exportedAt:new Date().toISOString(),
-   progress:{cores:meta.cores,upgrades:{...meta.upgrades},best:gameBest}};
+   progress:{cores:meta.cores,upgrades:{...meta.upgrades},best:gameBest,achievements:{...meta.achievements},stats:{...meta.stats}}};
   const blob=new Blob([JSON.stringify(backup,null,2)+'\n'],{type:'application/json'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;
   a.download='rift-runner-evolution-save-'+new Date().toISOString().slice(0,10)+'.json';
@@ -633,7 +804,12 @@ function validateBackup(input){
  if(!data||typeof data!=='object'||Array.isArray(data)||!checkedInt(data.cores,1000000000)||!checkedInt(data.best,1000000000)||!data.upgrades||typeof data.upgrades!=='object'||Array.isArray(data.upgrades))throw new Error('This save is invalid or damaged.');
  const upgrades={};
  for(const item of shopData){const val=data.upgrades[item.id]??0;if(!checkedInt(val,5))throw new Error('Invalid upgrade level: '+item.name);upgrades[item.id]=val}
- return {cores:data.cores,upgrades,best:data.best};
+ const achievements={},stats={};
+ if(data.achievements!==undefined&&(typeof data.achievements!=='object'||!data.achievements||Array.isArray(data.achievements)))throw new Error('Invalid achievements.');
+ if(data.stats!==undefined&&(typeof data.stats!=='object'||!data.stats||Array.isArray(data.stats)))throw new Error('Invalid challenge statistics.');
+ for(const a of achievementData){const value=data.achievements?.[a.id]??false;if(typeof value!=='boolean')throw new Error('Invalid achievement progress.');achievements[a.id]=value}
+ for(const key of Object.keys(meta.stats)){const value=data.stats?.[key]??(key==='bestWave'||key==='maxWeapons'?1:0);if(!checkedInt(value,1000000000))throw new Error('Invalid challenge statistics.');stats[key]=value}
+ return {cores:data.cores,upgrades,best:data.best,achievements,stats};
 }
 async function importGameSave(event){
  const file=event.target.files&&event.target.files[0];event.target.value='';if(!file)return;
@@ -644,17 +820,32 @@ async function importGameSave(event){
   const proceed=confirm('Import this RIFT RUNNER backup?\n\nRift Cores: '+parsed.cores+'\nUpgrade levels: '+total+'\nBest eliminations: '+parsed.best+'\n\nThis REPLACES the saved progress in this browser. Export your current save first if you want a backup.');
   if(!proceed){saveFeedback('Import canceled. Your progress was not changed.');return}
   try{
-   localStorage.setItem('riftrunner_evolution_v1',JSON.stringify({cores:parsed.cores,upgrades:parsed.upgrades}));
+   localStorage.setItem('riftrunner_evolution_v1',JSON.stringify({cores:parsed.cores,upgrades:parsed.upgrades,achievements:parsed.achievements,stats:parsed.stats}));
    localStorage.setItem('riftrunner_best',String(parsed.best));
   }catch(error){throw new Error('Browser storage is blocked. Import was not completed.')}
-  meta={cores:parsed.cores,upgrades:parsed.upgrades};gameBest=parsed.best;
+  meta={cores:parsed.cores,upgrades:parsed.upgrades,achievements:parsed.achievements,stats:parsed.stats};gameBest=parsed.best;
   $('bestLine').textContent='BEST RUN · '+gameBest+' eliminations';showBalance();
   saveFeedback('Backup imported. Permanent upgrades and Rift Cores restored.');
  }catch(error){saveFeedback(error instanceof SyntaxError?'Invalid JSON: choose a RIFT RUNNER backup file.':(error.message||'Save import failed.'),true)}
 }
 
 $('exportSaveBtn').addEventListener('click',exportGameSave);$('importSaveBtn').addEventListener('click',()=>{$('importSaveInput').click()});$('importSaveInput').addEventListener('change',importGameSave);
-$('weaponBtn').addEventListener('click',cycleWeapon);$('hangarBtn').addEventListener('click',showHangar);$('hangarBackBtn').addEventListener('click',goMenu);$('startBtn').addEventListener('click',start);$('retryBtn').addEventListener('click',start);$('restartPauseBtn').addEventListener('click',start);$('quitBtn').addEventListener('click',goMenu);$('menuBtn').addEventListener('click',goMenu);$('pauseBtn').addEventListener('click',togglePause);$('resumeBtn').addEventListener('click',togglePause);$('soundBtn').addEventListener('click',()=>{soundOn=!soundOn;$('soundBtn').textContent='SOUND: '+(soundOn?'ON':'OFF');if(soundOn)audioInit()});
+$('weaponBtn').addEventListener('click',cycleWeapon);$('hangarBtn').addEventListener('click',showHangar);$('achievementsBtn').addEventListener('click',showAchievements);$('achievementsBackBtn').addEventListener('click',goMenu);$('hangarBackBtn').addEventListener('click',goMenu);$('startBtn').addEventListener('click',start);$('retryBtn').addEventListener('click',start);$('restartPauseBtn').addEventListener('click',start);$('quitBtn').addEventListener('click',goMenu);$('menuBtn').addEventListener('click',goMenu);$('pauseBtn').addEventListener('click',togglePause);$('resumeBtn').addEventListener('click',togglePause);let settingsReturnMode='menu';
+function refreshSettings(){
+ $('fxBtn').textContent='VISUAL EFFECTS: '+gameSettings.fx.toUpperCase();
+ $('shakeBtn').textContent='SCREEN SHAKE: '+(gameSettings.screenShake?'ON':'OFF');
+ $('damageNumsBtn').textContent='COMBAT TEXT: '+(gameSettings.damageNumbers?'ON':'OFF');
+ $('soundBtn').textContent='SOUND: '+(soundOn?'ON':'OFF');
+ $('settingsSoundBtn').textContent='SOUND: '+(soundOn?'ON':'OFF');
+}
+function openSettings(){settingsReturnMode=mode==='pause'?'pause':'menu';refreshSettings();setMode('settings')}
+function toggleSound(){soundOn=!soundOn;if(soundOn)audioInit();saveSettings();refreshSettings()}
+$('settingsBtn').addEventListener('click',openSettings);$('pauseSettingsBtn').addEventListener('click',openSettings);
+$('settingsBackBtn').addEventListener('click',()=>setMode(settingsReturnMode));
+$('fxBtn').addEventListener('click',()=>{gameSettings.fx=gameSettings.fx==='low'?'balanced':'low';saveSettings();resize();refreshSettings()});
+$('shakeBtn').addEventListener('click',()=>{gameSettings.screenShake=!gameSettings.screenShake;saveSettings();refreshSettings()});
+$('damageNumsBtn').addEventListener('click',()=>{gameSettings.damageNumbers=!gameSettings.damageNumbers;saveSettings();refreshSettings()});
+$('soundBtn').addEventListener('click',toggleSound);$('settingsSoundBtn').addEventListener('click',toggleSound);refreshSettings();
 window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code))e.preventDefault();keyboard.add(e.code);if(e.repeat)return;if(e.code==='Space')dash();if(e.code==='KeyE')nova();if(e.code==='KeyQ')shield();if(e.code==='KeyR')gravity();if(e.code==='KeyF')cycleWeapon();if(e.code==='Escape')togglePause();if(e.code==='Enter'&&['menu','over'].includes(mode))start()});window.addEventListener('keyup',e=>keyboard.delete(e.code));window.addEventListener('blur',()=>{keyboard.clear();if(mode==='play')setMode('pause')});document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode==='play')setMode('pause')});
 window.addEventListener('contextmenu',e=>e.preventDefault());
 showBalance();

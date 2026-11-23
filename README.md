@@ -1,31 +1,39 @@
 # RIFT RUNNER: EVOLUTION
 
-A self-contained, offline-capable, mobile-friendly browser survival game.
+A mobile-first, single-file cosmic survival roguelite. Play in a modern browser, or open the published GitHub Pages website.
 
-## Play
+## Official website
 
-Open `index.html` locally, or publish this repository with GitHub Pages (`main` branch, `/ (root)` folder). No installs, libraries, accounts, analytics, or external assets are required to play.
+https://gib-1.github.io/Rift-runner-elevation-/
 
-## What's included
+## Evolution 4.0 — Complete six-phase overhaul
 
-Evolution 4.0 Phase 1 (Combat Reborn) builds on Evolution 3.0: improved joystick movement, stable auto-targeting with limited lead, Dash afterimages, hit reactions, collision detection for fast projectiles, and rendering optimizations. The game still includes multiple weapons, XP coin tiers, 6 biomes, cover walls, bosses, mini-bosses, 36 level-up upgrades, and 21 permanent Hangar upgrades.
+- **Phase 1 — Combat Reborn:** smoother movement, smarter auto-targeting, Dash trails, improved hit feedback and swept projectile collisions.
+- **Phase 2 — Evolving Arsenal:** two more unlockable weapons (Tesla Repeater and Void Cannon) and six weapon-specific evolutions for the full arsenal.
+- **Phase 3 — Enemy Uprising:** Strider, Sapper and Nullifier enemy types, Rift Hunter mini-boss and Abyss Sovereign major boss with three health-based phases.
+- **Phase 4 — Progression 2.0:** 49 run-level upgrade choices in the upgrade pool, 26 permanent Hangar upgrades, and seven unlockable achievements with one-time Rift Core rewards.
+- **Phase 5 — World Expansion:** eight rotating biomes, including Obsidian Depths and Astral Graveyard; unique hazards, destructible cover and hidden supply caches.
+- **Phase 6 — Mobile Polish:** an updated menu, organized Hangar, achievements screen, performance/visual effects settings, screen shake and combat text toggles, save compatibility checks.
 
-## Save backups and upgrades
+Existing weapons, abilities, bosses, five XP coin tiers, and the original six biomes remain playable. Android portrait and landscape modes are supported. The game does not require an account, external assets, or a download when played on the official site.
 
-From the main menu choose **EXPORT SAVE** to download a `.json` backup. The file contains only earned Rift Cores, permanent upgrade levels, and your highest elimination count. It does not contain an account name, personal information, or in-run state.
+## Controls
 
-On the new website, choose **IMPORT SAVE** and select your `.json` file. Review and confirm the replacement. **Import replaces the website's current saved progress.** Export first if you want to preserve it. The current game keeps the same storage keys used in Evolution 3.0: `riftrunner_evolution_v1` and `riftrunner_best`.
+- **Mobile:** drag in the left area to move; tap the Dash, Nova, Shield and Gravity buttons. Shooting targets automatically. Tap the weapon button in the HUD to switch unlocked weapons.
+- **Desktop:** WASD / arrow keys move; Space = Dash; E = Nova; Q = Shield; R = Gravity; F = switch weapon; Escape = pause.
 
-**Migrating from a previous downloaded game:** Download and open this updated official HTML version using the **same browser and storage context** where Evolution 3.0 has your existing progress; if the save appears, export it here, then import into the website. Because browsers can isolate `file://` files (and may block local storage), old progress is not guaranteed to appear automatically. If it does not appear, keep the original file and browser data; do not delete it, clear storage or overwrite your only saved progress. Game upgrades and settings continue saving automatically in the browser where you play.
+## Saves and backups
 
-## Updating this project
+Browser progress is saved automatically in `riftrunner_evolution_v1` (Rift Cores, permanent upgrades, achievements and cumulative challenge statistics) and `riftrunner_best` (best eliminations). Additional visual settings are in `riftrunner_options_v1`. Existing Evolution 3.0 save keys and upgrades remain supported; missing newly added upgrade and achievement fields default safely.
 
-Edit `index.html` on the `main` branch. GitHub Pages republishes it to the **same URL**. Existing saved progress on that website stays in the browser under the same domain and save keys; take a backup before major changes.
+Select **EXPORT SAVE** to download a `.json` backup, or **IMPORT SAVE** to restore one. The portable save format remains version 1, with optional new achievement/statistic fields; old version-1 backup files are still accepted. **Import replaces current saved progress** — export your website progress before importing to avoid losing it.
+
+Opening downloaded HTML files can use different storage than a GitHub Pages site; do not delete an older file or clear browser data until your old save has been safely exported and imported.
+
+## Updating the game
+
+Update `index.html` in the repository's `main` branch after testing. A GitHub Actions workflow publishes the branch to the same permanent website address. Use a separate branch for development and verify browser tests before merging.
 
 ## Privacy
 
-There are no ads, tracking services, passwords, usernames, emails, or external network calls in this game. Only the repository owner name, repository content and GitHub-hosted website become public if the repository is public. Avoid putting personal information in future commits, README files or filenames.
-
-## Evolution 4.0 release approach
-
-Phase 1 (Combat Reborn) has been tested on portrait and landscape browser viewports. Phases 2–6 (weapons, bosses, progression, biomes, and final polish) are not implemented yet. Save format, storage keys and existing upgrade IDs remain unchanged. A JSON save export is recommended before major updates.
+No account registration, login, analytics, advertising, personal data collection or external asset requests are built into the game. Backup files contain game progress and an export timestamp, not names or contact information. GitHub profile details and public repository commit history are visible through GitHub and separate from game saves.
