@@ -1,26 +1,15 @@
 # Changelog
 
-## Evolution 5.0 — Dimension Shift
+## Evolution 4.0 — Camera, Pathfinding & Power Update
 
-- Added a self-contained three-quarter pseudo-3D Canvas renderer, including consistent world projection, feet-based depth sorting and raised sci-fi cover.
-- Added volumetric-looking player and enemy armor sprites with feet shadows, movement animation, helmets, shoulders, reactors and directional weapon attachments.
-- Added biome-specific industrial debris, crystals, bio-structures, atmospheric haze, hazard markings and projected combat effects.
-- Redesigned main menu, gameplay HUD, touch actions, upgrade cards, Hangar, achievement lists, pause and mission-results overlays with an angular military sci-fi design language.
-- Corrected world movement and Dash to match screen-space joystick/keyboard directions under the angled camera.
-- Improved Tesla weapon facing and muzzle feedback, with a simplified enemy rendering path for low-effects mode and dense encounters.
-- Retained all existing weapons, AI, upgrade IDs, XP rewards, achievements, save keys and version-1 export/import behavior.
-- Executed automated headless-Chromium viewport, control, save-compatibility, weapon, HUD, and 100-entity render checks; physical Android FPS is not yet measured.
+- Zoomed the world camera out to 86% scale, revealing roughly 16% more world distance while keeping the HUD and touch controls full-sized.
+- Added shared flow-field navigation for enemies to route around blocked line-of-sight cover. Rebuilds only when the player's navigation cell changes or destructible cover is removed; regular obstacle collision and enemy abilities remain intact.
+- Buffed starting HP (120), base weapon damage (25), movement, shot speed, Nova and pickup radius; all six weapons benefit and several weapon-specific modifiers are increased.
+- Strengthened numerical effects for 25 permanent Hangar bonuses and 17 common run upgrades. Upgrade prices, IDs, unlock conditions, level limits, and saved player progress remain unchanged.
+- Major bosses drop one guaranteed golden 150-XP coin; mini-bosses drop one 50-XP coin. Ordinary enemies still drop 2–4 low-value coins. High-value rewards take priority when the pickup pool is full.
+- Expanded XP coin legend, visuals and pickup sounds for the new 150-XP tier.
+- Kept Evolution 4.0's gameplay engine, eight biomes, all bosses, save storage keys and portable version-1 save compatibility.
 
-### Command deck and tactical camera
-
-- Projected the combat world onto a three-quarter view, with ground shadows, armored units, raised cover and footprint-based depth ordering.
-- Added orbital-gate title art, command navigation, compact combat instruments and restyled upgrade, Hangar, challenge and mission panels.
-- Added eight biome construction styles, animated gunships and walkers, ballistic trails, branching-target Tesla bolts and Void implosions.
-- Corrected joystick placement relative to the movement zone and accounted for the camera angle in diagonal movement and Dash.
-- Retained both progression keys and version-1 backups. Added isolated regression checks and portrait/landscape browser playtests.
-
-
-Choose **Settings → Camera** to switch between the Dimension Shift and Tactical views. Both share the same combat simulation and save.
 
 ## Evolution 4.0 — Complete (Phases 2–6)
 
