@@ -58,6 +58,33 @@ try:
             assert not errors,errors
             context.close()
             print(f"Passed {width}x{height} browser menus, import/export, combat controls, and screenshots")
+        # Render the short interlude in a real browser without putting test hooks in production code.
+        preview_html=(root/"index.html").read_text()
+        assert "showBalance();\n})();" in preview_html
+        preview_html=preview_html.replace("showBalance();\n})();", """showBalance();
+        window.__triggerVoid=()=>{start();wave=4;normalTime=95.99;player.invuln=999;update(.02)};
+        window.__finishVoid=()=>{voidRemaining=.01;update(.02)};
+        })();""")
+        for width,height in ((844,390),(390,844)):
+            ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=ctx.new_page()
+            errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.route(url,lambda route:route.fulfill(content_type="text/html",body=preview_html))
+            pg.goto(url)
+            pg.evaluate("__triggerVoid()")
+            pg.wait_for_timeout(200)
+            assert "VOID BREACH" in pg.locator("#areaTag").inner_text()
+            assert pg.locator("#voidClock").is_visible()
+            assert "35s LEFT" in pg.locator("#voidClock").inner_text()
+            assert "THE VOID HEART" in pg.locator("#bossName").inner_text()
+            pg.screenshot(path=screenshots/f"void-breach-{width}.png")
+            pg.evaluate("__finishVoid()")
+            pg.wait_for_timeout(180)
+            assert "NEON RUINS" in pg.locator("#areaTag").inner_text()
+            assert not pg.locator("#voidClock").is_visible()
+            assert not errors, errors
+            ctx.close()
         browser.close()
 finally:
     server.shutdown()
