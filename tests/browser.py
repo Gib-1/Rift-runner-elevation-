@@ -1,6 +1,7 @@
 """Run with Playwright and Chromium installed. Uses disposable browser profiles."""
 import json
 import statistics
+import shutil
 import threading
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -14,7 +15,7 @@ url = f"http://127.0.0.1:{server.server_port}"
 shots = Path("screenshots")
 shots.mkdir(exist_ok=True)
 with sync_playwright() as playwright:
-    browser = playwright.chromium.launch(args=["--no-sandbox"])
+    browser = playwright.chromium.launch(executable_path=shutil.which("google-chrome") or shutil.which("chromium"), args=["--no-sandbox"])
     for width, height in [(844, 390), (390, 844)]:
         context = browser.new_context(viewport={"width": width, "height": height}, has_touch=True)
         page = context.new_page()
@@ -35,7 +36,7 @@ with sync_playwright() as playwright:
         fixture = {"game":"rift-runner-evolution","formatVersion":1,"progress":{"cores":47,"best":19,"upgrades":{"armor":2}}}
         page.on("dialog", lambda dialog: dialog.accept())
         page.locator("#importSaveInput").set_input_files({"name":"legacy.json","mimeType":"application/json","buffer":json.dumps(fixture).encode()})
-        page.locator("#saveStatus").get_by_text("Backup imported.", exact=False).wait_for()
+        page.wait_for_function("document.querySelector('#saveStatus').textContent.includes('Backup imported.')")
         with page.expect_download() as download:
             page.locator("#exportSaveBtn").tap()
         restored = json.loads(Path(download.value.path()).read_text())["progress"]
