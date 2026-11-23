@@ -60,8 +60,9 @@ try:
             print(f"Passed {width}x{height} browser menus, import/export, combat controls, and screenshots")
         # Render the short interlude in a real browser without putting test hooks in production code.
         preview_html=(root/"index.html").read_text()
-        assert "showBalance();\n})();" in preview_html
-        preview_html=preview_html.replace("showBalance();\n})();", """showBalance();
+        injection_point="showBalance();$('endlessBestLine').textContent='ENDLESS RECORD · '+meta.stats.bestEndless+' eliminations';\n})();"
+        assert injection_point in preview_html
+        preview_html=preview_html.replace(injection_point, """showBalance();$('endlessBestLine').textContent='ENDLESS RECORD · '+meta.stats.bestEndless+' eliminations';
         window.__triggerVoid=()=>{start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];player.invuln=999;update(.02);waveSweepRemaining=.01;update(.02)};
         window.__finishVoid=()=>{voidRemaining=.01;update(.02)};
         })();""")
