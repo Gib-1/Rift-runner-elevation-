@@ -1,5 +1,16 @@
 # Changelog
 
+## Evolution 4.0 — 5× Endless Spawning & Kill-Milestone Boss Encounters
+
+- Increased nonstop Endless enemy spawn-rate multiplier from **2.5× to 5×** the original baseline while keeping 2.5× XP rewards unchanged. Used a bounded catch-up loop to prevent lag-induced runaway spawns.
+- Added recurring **65-kill mini-boss** and **115-kill major-boss** encounters using rotating existing elite types.
+- Added a repeatable **1,000-kill triple threat**: Abyss Sovereign plus two mini-bosses appearing together (also at 2,000 and later thousand-kill milestones).
+- Replaced the previous time-based Endless elite spawns with kill-driven encounters. Timed supply drops remain available.
+- Reserved eight population slots for elites under the existing 82/58 active-enemy caps and queued boss milestones when capacity is temporarily exhausted so encounters are not lost.
+- Updated the Endless menu description and live HUD elite counter; Classic waves, Void Breaches, pathfinding, drones, difficulty, 11 XP coin values, permanent upgrades, game saves and export/import compatibility remain unchanged.
+- Expanded automated tests for 65/115/1,000 kill milestones, repeated triggers, capped queues, mode isolation, and Classic regression coverage.
+
+
 ## Evolution 4.0 — Compact Endless Horde / 2.5× Spawning
 
 - Reduced Endless's dedicated Eclipse Citadel arena to approximately **1,930 × 1,930** world units, with interior concentric rings, redesigned cover, hazards, caches, and a visible perimeter. Normal mode's arena dimensions are unchanged.
