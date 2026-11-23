@@ -3,7 +3,9 @@
 import fs from 'node:fs';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
-const source=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const source=html.match(/<script>([\s\S]*?)<\/script>/)[1];
+const dimension=html.match(/<script id="evolution5-renderer">([\s\S]*?)<\/script>/)[1];
 const noop=()=>{};
 let depth=0;
 const gradient={addColorStop:noop};
@@ -29,7 +31,7 @@ const env={navigator:{},console,assert,performance,Image:class {},innerWidth:844
  document:{getElementById:node,createElement:()=>new Element(),addEventListener:noop},requestAnimationFrame:noop,
  localStorage:{getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)},addEventListener:noop};
 env.window=env;
-function run(test){vm.runInNewContext(source.replace(/\}\)\(\);\s*$/,'\n'+test+'\n})();'),env);assert.equal(depth,0)}
+function run(test){vm.runInNewContext(dimension,env);vm.runInNewContext(source.replace(/\}\)\(\);\s*$/,'\n'+test+'\n})();'),env);assert.equal(depth,0)}
 run(`start();keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');`);
 console.log('Movement, projection and frame smoke test passed.');
 run(`start();for(const kind of Object.keys(types)){spawnEnemy(kind,60,40);paintEnemy(enemies.at(-1))}paintPilot();render();`);
@@ -69,3 +71,5 @@ run(`start();walls=[];player.need=999;for(const n of [1,3,5,10,50]){dropCoin(0,0
  hitEnemy(sovereign,sovereign.maxHp*3,'#fff');assert.ok(sovereign.dead);
 `);
 console.log('Five XP currencies, Abyss phase attacks and boss defeat passed.');
+
+run(`start();for(const cameraMode of ['dimension','tactical']){gameSettings.camera=cameraMode;for(mapIndex=0;mapIndex<8;mapIndex++){makeWorld();render()}const v=movementVector(1,0);assert.ok(v.x>0);if(cameraMode==='dimension')assert.ok(Math.abs(.15*v.x+.68*v.y)<.0001)}`);

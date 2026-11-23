@@ -31,6 +31,8 @@ with sync_playwright() as playwright:
         page.locator("#achievementsBackBtn").tap()
         page.locator("#settingsBtn").tap()
         page.locator("#fxBtn").tap()
+        if width < height:
+            page.locator("#cameraBtn").tap()
         page.locator("#settingsBackBtn").tap()
         page.locator("summary").tap()
         fixture = {"game":"rift-runner-evolution","formatVersion":1,"progress":{"cores":47,"best":19,"upgrades":{"armor":2}}}
@@ -64,7 +66,7 @@ with sync_playwright() as playwright:
     page = browser.new_page(viewport={"width":844,"height":390})
     html = (root/"index.html").read_text().replace("showBalance();\n})();","""showBalance();
     window.previewBiome=i=>{start();mapIndex=i;makeWorld();player.invuln=999;bannerTime=0;$('banner').style.opacity=0;
-    walls=walls.filter(w=>Math.hypot(w.x,w.y)>370);walls.push({x:86,y:-24,w:106,h:48,detail:.4});
+    updateHUD();walls=walls.filter(w=>Math.hypot(w.x,w.y)>370);walls.push({x:86,y:-24,w:106,h:48,detail:.4});
     spawnEnemy(i===7?'abyss':'hunter',-108,-42);setMode('pause');ui.pause.classList.add('hidden');render()};
     window.stress=()=>{start();player.invuln=999;walls=[];enemies=[];for(let i=0;i<120;i++)spawnEnemy('drone',60+i%15*14,-130+Math.floor(i/15)*28)};
     })();""")
