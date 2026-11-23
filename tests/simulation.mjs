@@ -199,7 +199,9 @@ console.log('Pass: rapid Void combat stays bounded and frame calculations remain
 t.run(`start('endless');const originalBestWave=meta.stats.bestWave;assert.equal(runMode,'endless');assert.equal(mapIndex,ENDLESS_BIOME);
  assert.equal(themes[mapIndex].name,'ECLIPSE CITADEL');assert.equal(wave,1);
  assert.equal(wavePhase,'spawn');assert.equal(voidActive,false);assert.equal(endlessBossCount,0);
- assert.ok(walls.length>=30&&rifts.length>=5&&decos.length>50,'Unique arena geometry exists');
+ assert.ok(walls.length>=25&&rifts.length>=5&&decos.length>=45,'Compact arena geometry exists');
+ assert.equal(ENDLESS_HALF_SIZE,965);assert.equal(ENDLESS_SPAWN_MULTIPLIER,2.5);
+ assert.ok(walls.every(w=>Math.abs(w.x+w.w/2)<930&&Math.abs(w.y+w.h/2)<930),'Cover is within smaller arena');
  assert.equal(insideWall(0,0,175),false,'Spawn center is unobstructed');
  updateHUD();assert.ok($('wave').textContent.includes('ENDLESS'));assert.ok($('battleMetrics').textContent.includes('2.5× XP'));
  player.xp=0;player.need=99;gainXp(2);assert.equal(player.xp,5,'XP is 2.5x exactly');
@@ -226,3 +228,34 @@ t.run(`start('endless');player.droneCount=0;player.invuln=999;
  player.need=99;player.xp=0;gainXp(2);assert.equal(player.xp,2,'Classic XP is unchanged');
 `);
 console.log('Pass: independent elite/supply timers, growing threat, separate endless high score and legacy-compatible saves.');
+
+// ENDLESS 2.5X SPAWN CADENCE, HORDES, AND PERFORMANCE LIMITS.
+t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;
+ enemies=[];walls=[];invalidateNavigation();spawnTimer=.001;
+ update(.005);assert.ok(spawnTimer>0&&spawnTimer<.85/ENDLESS_SPAWN_MULTIPLIER*1.2,'2.5x enemy spawn cadence');
+ assert.equal(enemies.length,1);
+ const limit=ENDLESS_HALF_SIZE;player.x=limit-20;player.y=0;moveSolid(player,1000,0);assert.ok(player.x<=limit-player.r+1e-5);
+ const t=runMode;start('normal');assert.equal(runMode,'normal');player.x=1400;moveSolid(player,1000,0);assert.ok(player.x>1400,'Classic arena remains larger');
+`);
+console.log('Pass: 2.5x Endless cadence and compact-only boundaries.');
+t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;
+ enemies=[];walls=[];invalidateNavigation();spawnTimer=999;endlessHordeClock=.001;
+ update(.005);assert.ok(endlessHordeCount>=1,'At least one squad arrived together');
+ assert.ok(enemies.length>=2,'A multi-enemy horde was spawned');
+ const cap=endlessEnemyCap();assert.ok(cap<=ENDLESS_BASE_CAP);
+ enemies=[];for(let i=0;i<cap+15;i++)spawnEnemy('drone',100+i%10*9,50+i%8*9);
+ assert.equal(enemies.length,cap,'The cap holds during packed hordes');
+ gameSettings.fx='low';assert.equal(endlessEnemyCap(),Math.min(endlessDynamicCap,58));
+ gameSettings.fx='balanced';endlessDynamicCap=52;assert.equal(endlessEnemyCap(),52);
+ render();assert.equal(wave,1);assert.equal(voidActive,false);
+`);
+console.log('Pass: grouped hordes, bounded enemy count, performance settings and classic independence.');
+
+t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;spawnTimer=999;endlessHordeClock=999;endlessBossClock=999;endlessSupplyClock=999;
+ walls=[];invalidateNavigation();enemies=[];
+ for(let i=0;i<ENDLESS_BASE_CAP+20;i++)spawnEnemy('drone',-420+(i%10)*72,-430+Math.floor(i/10)*68);
+ assert.equal(enemies.length,ENDLESS_BASE_CAP,'Endless enemy population stops at cap');
+ for(let i=0;i<100;i++){update(.016);render()}
+ assert.ok(enemies.length<=ENDLESS_BASE_CAP);assert.ok(Number.isFinite(player.hp));
+`);
+console.log('Pass: 82-foe bounded combat simulation and renderer remain stable.');

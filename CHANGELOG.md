@@ -1,5 +1,14 @@
 # Changelog
 
+## Evolution 4.0 — Compact Endless Horde / 2.5× Spawning
+
+- Reduced Endless's dedicated Eclipse Citadel arena to approximately **1,930 × 1,930** world units, with interior concentric rings, redesigned cover, hazards, caches, and a visible perimeter. Normal mode's arena dimensions are unchanged.
+- Made continuous Endless enemy spawns **2.5× faster** than the previous mode's interval while keeping the existing **2.5× XP** gain.
+- Added periodic directional horde squads of 2–8 enemies with an on-screen announcement, alongside the usual nonstop spawn stream.
+- Capped active Endless foes at **82** (Balanced Effects) or **58** (Low Effects), with a simple frame-time governor that can lower the cap to 52 on slow devices and gradually restore it if performance recovers. This prioritizes playability over unbounded enemy populations.
+- Reduced Endless environmental decoration and checked that horde spawns appear away from the player when near the arena boundary. Preserves Classic Waves, Void Breaches, achievements, coin tiers, the existing save schema and Endless records.
+
+
 ## Evolution 4.0 — Endless Horde (separate mode)
 
 - Added a new **∞ ENDLESS HORDE · 2.5× XP** button on the title screen, alongside the unchanged Classic Wave Mode.

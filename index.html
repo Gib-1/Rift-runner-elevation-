@@ -136,7 +136,7 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 <div id="hud"><div class="hudrow"><div class="hudleft"><div class="hlabel"><span>HULL INTEGRITY</span><span id="hpText">100 / 100</span></div><div class="track"><div class="fill" id="hpFill"></div></div><div id="xpbox"><div class="hlabel"><span id="levelText">LVL 1</span><span id="xpText">0 / 16 XP</span></div><div class="track" style="height:7px"><div class="fill xpfill" id="xpFill"></div></div></div></div><div id="scorebox"><div class="tinycap">ELIMINATIONS</div><div id="killnum">0</div><div id="wave">WAVE 1</div><div id="time">0:00</div><div id="areaTag">RIFT WASTES</div><button id="weaponBtn" aria-label="Switch weapon">PULSE ▸</button></div><button id="pauseBtn" aria-label="Pause game">Ⅱ</button></div><div id="bossbar"><div class="bosslabel" id="bossName">RIFT GUARDIAN</div><div class="track"><div class="fill" id="bossfill"></div></div></div><div id="voidClock" role="timer" aria-label="Void breach time remaining"></div></div>
 <div id="voidTint" aria-hidden="true"></div><div id="banner"></div><div id="mapAlert"></div><div id="battleMetrics" aria-live="off"></div><div id="healthAlarm"></div>
 <div id="controls"><div id="moveZone"><div id="stick"><div id="knob"></div></div></div><div id="actions"><button class="action" id="novaBtn" aria-label="Nova ability">✦<small>NOVA</small><div id="novaProgress"><div id="novaInner"></div></div><span class="cool" id="novaCool"></span></button><button class="action" id="dashBtn" aria-label="Dash">➤<small>DASH</small><span class="cool" id="dashCool"></span></button><button class="action" id="shieldBtn" aria-label="Phase shield">⬡<small>SHIELD</small><span class="cool" id="shieldCool"></span></button><button class="action" id="gravBtn" aria-label="Gravity well">◎<small>GRAV</small><span class="cool" id="gravCool"></span></button></div></div>
-<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · VOID BREACH + ENDLESS HORDE</div><p class="description">Choose classic waves with 35-second Void Breaches, or survive nonstop hordes in an exclusive arena with 2.5× XP. Keep all six weapons, your orbiting drones, and your permanent upgrades.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">1</span><span style="color:#71c8ff">2</span><span style="color:#9fa1ff">3</span><span style="color:#79ffa5">5</span><span style="color:#ffcb60">10</span><span style="color:#fa99e6">15</span><span style="color:#b98bff">25</span><span style="color:#ff6fcf">50 MINI</span><span style="color:#ff96f4">75 VOID</span><span style="color:#ffd976">150 BOSS</span><span style="color:#ffffff">300 RARE</span><small>11 XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ CLASSIC · WAVE MODE</button><button class="primary" id="endlessBtn" aria-label="Start Endless Horde mode">∞ ENDLESS HORDE · 2.5× XP</button><p id="endlessHint">Nonstop enemies in the exclusive Eclipse Citadel arena. No waves or breaks; threats grow over time.</p><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button><button class="secondary" id="featuresBtn">✦ WHAT'S NEW · 35 FEATURES</button>
+<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · VOID BREACH + ENDLESS HORDE</div><p class="description">Choose classic waves with 35-second Void Breaches, or survive nonstop hordes in an exclusive arena with 2.5× XP. Keep all six weapons, your orbiting drones, and your permanent upgrades.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">1</span><span style="color:#71c8ff">2</span><span style="color:#9fa1ff">3</span><span style="color:#79ffa5">5</span><span style="color:#ffcb60">10</span><span style="color:#fa99e6">15</span><span style="color:#b98bff">25</span><span style="color:#ff6fcf">50 MINI</span><span style="color:#ff96f4">75 VOID</span><span style="color:#ffd976">150 BOSS</span><span style="color:#ffffff">300 RARE</span><small>11 XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ CLASSIC · WAVE MODE</button><button class="primary" id="endlessBtn" aria-label="Start Endless Horde mode">∞ ENDLESS HORDE · 2.5× XP</button><p id="endlessHint">Compact Eclipse Citadel arena. 2.5× faster spawns, organized hordes, and a performance-aware enemy limit.</p><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button><button class="secondary" id="featuresBtn">✦ WHAT'S NEW · 35 FEATURES</button>
 <div class="saveActions"><button id="exportSaveBtn" type="button">⬇ EXPORT SAVE</button><button id="importSaveBtn" type="button">⬆ IMPORT SAVE</button></div>
 <input id="importSaveInput" aria-label="Select a Rift Runner save backup" type="file" accept=".json,application/json" hidden>
 <p class="saveNote">Back up Rift Cores, permanent upgrades, achievements and best score. No personal details are included. Import replaces this browser's saved progress.</p>
@@ -159,7 +159,7 @@ try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null'
  gameSettings.damageNumbers=saved.damageNumbers!==false;gameSettings.zoom=['near','normal','far'].includes(saved.zoom)?saved.zoom:'normal';soundOn=saved.sound!==false}}catch(e){}
 function saveSettings(){try{localStorage.setItem('riftrunner_options_v1',JSON.stringify({...gameSettings,sound:soundOn}))}catch(e){}}
 const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),achievements:$('achievements'),settings:$('settings'),featureGuide:$('featureGuide'),pause:$('pauseOverlay'),over:$('gameOver')};
-let runMode='normal',endlessSupplyClock=45,endlessBossClock=100,endlessBossCount=0;
+let runMode='normal',endlessSupplyClock=45,endlessBossClock=100,endlessBossCount=0,endlessHordeClock=5,endlessHordeCount=0,endlessDynamicCap=82,endlessSlowFrames=0,endlessGoodFrames=0;
 let player,enemies=[],bullets=[],enemyBullets=[],gems=[],particles=[],texts=[],rings=[],beams=[],dashGhosts=[],supplyPods=[],novaFields=[],caches=[],rifts=[],stars=[],decos=[],hazards=[],wells=[],walls=[],zones=[],enemyFields=[],camera={x:0,y:0},timer=0,normalTime=0,wave=1,kills=0,spawnTimer=0,shotTimer=0,levelQueue=0,bannerTime=0,bannerLabel='',hudTimer=0,shake=0,killCombo=0,mapAlertTime=0,mapIndex=0,bossesDefeated=0,miniDefeated=0,banked=true,coresEarned=0,nextEnemyId=0,voidActive=false,voidRemaining=0,voidNextBiome=0,voidEncounters=0,voidBossCleared=false,waveElapsed=0,wavePhase='spawn',waveSweepRemaining=0,waveSweepCollected=0;
 const WAVE_SPAWN_SECONDS=19,WAVE_MIN_SECONDS=24,WAVE_SWEEP_SECONDS=1.15;
 let gameBest=0;try{gameBest=+(localStorage.getItem('riftrunner_best')||0)||0}catch(e){};
@@ -180,7 +180,7 @@ const themes=[
  {name:'VOID BREACH',center:'#351154',mid:'#170b35',edge:'#060415',grid:'#da67ff',rift:284,deco:'#6a3082',hazard:'#d351ff',wall:'#583070'},
  {name:'ECLIPSE CITADEL',center:'#163454',mid:'#100f33',edge:'#050817',grid:'#67f7f1',rift:182,deco:'#643b9e',hazard:'#bd7aff',wall:'#423a79'}
 ];
-const MAIN_BIOME_COUNT=8,VOID_BIOME=8,ENDLESS_BIOME=9,VOID_LENGTH=35,ENDLESS_XP_MULTIPLIER=2.5;
+const MAIN_BIOME_COUNT=8,VOID_BIOME=8,ENDLESS_BIOME=9,VOID_LENGTH=35,ENDLESS_XP_MULTIPLIER=2.5,ENDLESS_HALF_SIZE=965,ENDLESS_SPAWN_MULTIPLIER=2.5,ENDLESS_BASE_CAP=82;
 const coinTiers={1:{color:'#64dfff',r:6},2:{color:'#71c8ff',r:6.5},3:{color:'#9fa1ff',r:7},5:{color:'#79ffa5',r:8},10:{color:'#ffcb60',r:10},15:{color:'#fa99e6',r:10.5},25:{color:'#b98bff',r:12},50:{color:'#ff6fcf',r:14},75:{color:'#ff96f4',r:16},150:{color:'#ffdd79',r:19},300:{color:'#ffffff',r:21}};
 const EVO42_FEATURES=["Animated floating drone orbits", "Animated drone rotor wings", "Animated thruster exhaust", "Staggered independent drone fire", "Tracking drone turrets", "Drone recoil and muzzle flashes", "Visible moving drone bolts", "Drone target-lock reticles", "Drone overdrive streak mode", "Drone projectile interception", "Incendiary rounds", "Cryo slow rounds", "Armor disruption rounds", "Execution bonus damage", "Critical shockwaves", "Boss siphon repairs", "Ricochet shots", "Lingering Nova plasma", "Crushing Gravity Well", "Electrified Dash wake", "Shield cooldown recovery on eliminations", "Milestone level repairs", "Wave supply pod deployments", "Supply pod repair cells", "Supply pod XP caches", "Temporary rapid-fire supply module", "Temporary magnet supply module", "Temporary barrier supply module", "Supply pod opening shockwave", "Offscreen boss direction beacon", "Offscreen supply cache locator", "Kill combo tracker", "Adjustable camera zoom", "Low-hull warning overlay", "Next-wave countdown"];
 const weaponTypes={drone:{name:'ORBIT DRONE',color:'#74ffe7'},pulse:{name:'PULSE',color:'#71eaff'},arc:{name:'ARC REPEATER',color:'#d8aaff'},scatter:{name:'SCATTER',color:'#ffca68'},rail:{name:'RAIL LANCE',color:'#90ffb6'},tesla:{name:'TESLA REPEATER',color:'#84d9ff'},void:{name:'VOID CANNON',color:'#c992ff'}};
@@ -294,9 +294,9 @@ function damageCover(w,damage){if(!w.breakable)return;w.hp-=damage;
  burst(x,y,themes[mapIndex].grid,18,160);rings.push({x,y,r:0,max:70,life:.5,color:themes[mapIndex].grid});
  dropCoin(x,y,1);dropCoin(x,y,3);
 }
-function moveSolid(obj,dx,dy){const steps=Math.max(1,Math.ceil(Math.max(Math.abs(dx),Math.abs(dy))/16));for(let i=0;i<steps;i++){
- if(Math.abs(dx)>1e-9){obj.x=clamp(obj.x+dx/steps,-1880+obj.r,1880-obj.r);for(const w of walls)if(obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h&&obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w)obj.x=(dx>=0?w.x-obj.r:w.x+w.w+obj.r)}
- if(Math.abs(dy)>1e-9){obj.y=clamp(obj.y+dy/steps,-1880+obj.r,1880-obj.r);for(const w of walls)if(obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w&&obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h)obj.y=(dy>=0?w.y-obj.r:w.y+w.h+obj.r)}
+function moveSolid(obj,dx,dy){const steps=Math.max(1,Math.ceil(Math.max(Math.abs(dx),Math.abs(dy))/16)),limit=runMode==='endless'?ENDLESS_HALF_SIZE:1880;for(let i=0;i<steps;i++){
+ if(Math.abs(dx)>1e-9){obj.x=clamp(obj.x+dx/steps,-limit+obj.r,limit-obj.r);for(const w of walls)if(obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h&&obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w)obj.x=(dx>=0?w.x-obj.r:w.x+w.w+obj.r)}
+ if(Math.abs(dy)>1e-9){obj.y=clamp(obj.y+dy/steps,-limit+obj.r,limit-obj.r);for(const w of walls)if(obj.x+obj.r>w.x&&obj.x-obj.r<w.x+w.w&&obj.y+obj.r>w.y&&obj.y-obj.r<w.y+w.h)obj.y=(dy>=0?w.y-obj.r:w.y+w.h+obj.r)}
  }}
 // Cached flow-field navigation routes enemies around solid cover without per-enemy A* every frame.
 const NAV_CELL=64,NAV_MIN=-1888,NAV_N=59,NAV_COUNT=NAV_N*NAV_N,NAV_UNREACHABLE=65535;
@@ -342,33 +342,45 @@ function routeAroundWalls(enemy){
  return {x:dx/mag,y:dy/mag};
 }
 function makeEndlessArena(){
- // Four concentric rings and radial neon structures define a dedicated arena.
- // The central 325 units remain completely unobstructed for fair starts.
- for(let i=0;i<220;i++)stars.push({x:rand(-1970,1970),y:rand(-1970,1970),r:rand(.8,2.6),a:rand(.17,.7)});
- for(const radius of [520,950,1400]){
-  const segments=radius===520?12:radius===950?18:24;
+ // Compact arena: 1,930 x 1,930 world units instead of the ordinary 3,760-square map.
+ // Three concentric circuits leave the 300-unit spawn center completely unobstructed.
+ for(let i=0;i<145;i++)stars.push({x:rand(-1020,1020),y:rand(-1020,1020),r:rand(.8,2.4),a:rand(.17,.65)});
+ for(const [radius,segments] of [[345,10],[585,14],[810,18]]){
   for(let i=0;i<segments;i++){
-   const a=TWO*i/segments,dist=radius+(i%3-1)*28,x=Math.cos(a)*dist,y=Math.sin(a)*dist;
-   if(i%3===0){rifts.push({x,y,r:32+(i%4)*6,phase:a,hue:180});continue}
-   const wide=i%2===0, w=wide?94:40,h=wide?34:90;
+   const a=TWO*i/segments,dist=radius+(i%3-1)*16,x=Math.cos(a)*dist,y=Math.sin(a)*dist;
+   if(i%4===0){rifts.push({x,y,r:25+(i%4)*5,phase:a,hue:180});continue}
+   const wide=i%2===0,w=wide?68:31,h=wide?30:67;
    const block={x:x-w/2,y:y-h/2,w,h,detail:.72,breakable:i%5===0,hp:i%5===0?170:Infinity};block.maxHp=block.hp;
    walls.push(block);
   }
  }
- // Tall energy beacons and broken hull fragments form distinctive landmark lanes.
- for(let i=0;i<78;i++){
-  const a=i*TWO/78,dist=340+(i%7)*216;
-  decos.push({x:Math.cos(a)*dist,y:Math.sin(a)*dist,size:18+(i%5)*11,rot:a,t:i%2?.83:.38});
+ for(let i=0;i<50;i++){
+  const a=i*TWO/50,dist=290+(i%6)*112;
+  decos.push({x:Math.cos(a)*dist,y:Math.sin(a)*dist,size:15+(i%5)*9,rot:a,t:i%2?.83:.38});
  }
- for(let i=0;i<16;i++){
-  const a=i*TWO/16,dist=725+(i%3)*260;
-  hazards.push({x:Math.cos(a)*dist,y:Math.sin(a)*dist,r:40+i%3*12,phase:a});
+ for(let i=0;i<10;i++){
+  const a=i*TWO/10,dist=510+(i%3)*110;
+  hazards.push({x:Math.cos(a)*dist,y:Math.sin(a)*dist,r:33+i%3*9,phase:a});
  }
- for(let i=0;i<13;i++){
-  const a=i*TWO/13,dist=390+(i%4)*305,x=Math.cos(a)*dist,y=Math.sin(a)*dist;
+ for(let i=0;i<10;i++){
+  const a=i*TWO/10,dist=370+(i%3)*170,x=Math.cos(a)*dist,y=Math.sin(a)*dist;
   if(!insideWall(x,y,30))caches.push({x,y,r:17,opened:false,phase:a});
  }
 }
+function endlessEnemyCap(){return Math.min(endlessDynamicCap,gameSettings.fx==='low'?58:ENDLESS_BASE_CAP)}
+function endlessSpawnPoint(angle,distance,radius=18){
+ const limit=ENDLESS_HALF_SIZE-Math.max(60,radius+10);
+ let result={x:0,y:0};
+ for(let attempt=0;attempt<10;attempt++){
+  const a=angle+attempt*2.399963;
+  const x=clamp(player.x+Math.cos(a)*distance,-limit,limit),y=clamp(player.y+Math.sin(a)*distance,-limit,limit);
+  result={x,y};
+  if(hypot(x-player.x,y-player.y)>=Math.min(distance*.65,290)&&!insideWall(x,y,radius+6))return result;
+ }
+ // At arena corners, spawn on the opposite side instead of next to the player.
+ return {x:clamp(-player.x*.7,-limit,limit),y:clamp(-player.y*.7,-limit,limit)};
+}
+
 function makeWorld(){supplyPods=[];novaFields=[];invalidateNavigation();const theme=themes[mapIndex];stars=[];rifts=[];decos=[];hazards=[];walls=[];caches=[];zones=[];enemyFields=[];
  if(runMode==='endless'){makeEndlessArena();return}
  for(let i=0;i<300;i++)stars.push({x:rand(-2200,2200),y:rand(-2200,2200),r:rand(.6,2.2),a:rand(.14,.6)});
@@ -393,7 +405,7 @@ function makeWorld(){supplyPods=[];novaFields=[];invalidateNavigation();const th
   caches.push({x,y,r:17,opened:false,phase:rand(0,TWO)})}
 }
 makeWorld();
-function reset(){banked=false;coresEarned=0;bossesDefeated=0;miniDefeated=0;nextEnemyId=0;mapIndex=runMode==='endless'?ENDLESS_BIOME:0;endlessSupplyClock=45;endlessBossClock=100;endlessBossCount=0;normalTime=0;voidActive=false;voidRemaining=0;voidNextBiome=0;voidEncounters=0;voidBossCleared=false;waveElapsed=0;wavePhase='spawn';waveSweepRemaining=0;waveSweepCollected=0;$('voidTint').style.opacity=0;$('voidClock').style.display='none';mapAlertTime=0;$('mapAlert').textContent='';
+function reset(){banked=false;coresEarned=0;bossesDefeated=0;miniDefeated=0;nextEnemyId=0;mapIndex=runMode==='endless'?ENDLESS_BIOME:0;endlessSupplyClock=45;endlessBossClock=100;endlessBossCount=0;endlessHordeClock=5;endlessHordeCount=0;endlessDynamicCap=ENDLESS_BASE_CAP;endlessSlowFrames=0;endlessGoodFrames=0;normalTime=0;voidActive=false;voidRemaining=0;voidNextBiome=0;voidEncounters=0;voidBossCleared=false;waveElapsed=0;wavePhase='spawn';waveSweepRemaining=0;waveSweepCollected=0;$('voidTint').style.opacity=0;$('voidClock').style.display='none';mapAlertTime=0;$('mapAlert').textContent='';
  const u=meta.upgrades,h=u.armor,d=u.attack,t=u.thrusters,m=u.magnet;
  player={x:0,y:0,r:17,hp:120+h*16,maxHp:120+h*16,speed:235*(1+t*.06),damage:25*(1+d*.10),fire:.40*(1-u.firing*.05),shots:1,bulletSpeed:740*(1+u.ballistics*.08),magnet:140+m*28,
   level:1,xp:0,need:16,invuln:0,dashCd:0,dashBaseCd:3.4-u.dashCore*.18,dashing:0,dx:1,dy:0,aim:0,moveX:0,moveY:0,dashTrailClock:0,afterDash:0,targetId:null,shotKick:0,
@@ -435,11 +447,16 @@ const types={
 };
 const majorBosses=['boss','colossus','abyss','phantom','tempest','brood','voidking'];
 const miniBosses=['ravager','hunter','sentinel'];
-function spawnEnemy(kind,x0,y0){if(enemies.length>138||!player||(runMode!=='endless'&&!voidActive&&wavePhase!=='spawn'))return;
+function spawnEnemy(kind,x0,y0){if(!player||enemies.length>138||(runMode==='endless'&&enemies.length>=endlessEnemyCap())||(runMode!=='endless'&&!voidActive&&wavePhase!=='spawn'))return;
  const threat=runMode==='endless'?Math.min(25,1+Math.floor(timer/40)):wave;
  if(!kind){const pool=['drone','drone','drone','dart'];if(threat>=2)pool.push('shooter','splitter','bomber');if(threat>=3)pool.push('tank','wisp','charger');if(threat>=4)pool.push('orbiter','stalker');if(threat>=5)pool.push('sniper','leech','bulwark');if(threat>=6)pool.push('mender','miner','strider');if(threat>=7)pool.push('sapper');if(threat>=8)pool.push('nullifier');kind=pool[Math.floor(Math.random()*pool.length)]}
  const spec=types[kind];if(!spec)return;const a=rand(0,TWO),r=Math.max(SW,SH)*.68+rand(70,190);const hp=spec.hp*(1+Math.max(0,threat-1)*.12);
  let x=x0??clamp(player.x+Math.cos(a)*r,-1770,1770),y=y0??clamp(player.y+Math.sin(a)*r,-1770,1770);
+ if(runMode==='endless'){
+  if(x0===undefined&&y0===undefined){const point=endlessSpawnPoint(a,Math.min(540,Math.max(SW,SH)*.7),spec.r);x=point.x;y=point.y}
+  x=clamp(x,-ENDLESS_HALF_SIZE+spec.r+8,ENDLESS_HALF_SIZE-spec.r-8);
+  y=clamp(y,-ENDLESS_HALF_SIZE+spec.r+8,ENDLESS_HALF_SIZE-spec.r-8);
+ }
  if(insideWall(x,y,spec.r+8)){for(let i=0;i<12;i++){const theta=rand(0,TWO);const cx=x+Math.cos(theta)*rand(50,140),cy=y+Math.sin(theta)*rand(50,140);if(!insideWall(cx,cy,spec.r+8)){x=cx;y=cy;break}}}
  enemies.push({id:++nextEnemyId,kind,x,y,r:spec.r,hp,maxHp:hp,speed:spec.speed*(1+Math.min(threat*.024,.37)),damage:spec.dmg,col:spec.col,boss:!!spec.boss,mini:!!spec.mini,phase:rand(0,TWO),shot:rand(.6,2.1),skill:rand(2.8,5),bossPhase:1,teleport:rand(2,4),mineTimer:rand(2,4),avoid:0,avoidSign:Math.random()<.5?1:-1,pathClock:0,pathHeading:null,flash:0,hitPulse:0,vx:0,vy:0,dead:false})
 }
@@ -474,7 +491,7 @@ function updateDrones(dt){
 }
 const SUPPLY_TYPES=['repair','xp','rapid','magnet','barrier'];
 function spawnSupplyPod(){if(!player||supplyPods.length>=4)return;
- for(let attempt=0;attempt<16;attempt++){const a=rand(0,TWO),radius=rand(130,275),x=clamp(player.x+Math.cos(a)*radius,-1770,1770),y=clamp(player.y+Math.sin(a)*radius,-1770,1770);
+ for(let attempt=0;attempt<16;attempt++){const a=rand(0,TWO),radius=rand(130,275),limit=runMode==='endless'?ENDLESS_HALF_SIZE-50:1770,x=clamp(player.x+Math.cos(a)*radius,-limit,limit),y=clamp(player.y+Math.sin(a)*radius,-limit,limit);
   if(insideWall(x,y,25)||supplyPods.some(p=>hypot(p.x-x,p.y-y)<90))continue;
   supplyPods.push({x,y,r:20,type:SUPPLY_TYPES[(wave-2)%SUPPLY_TYPES.length],life:55,phase:rand(0,TWO)});floater(x,y-28,'SUPPLY POD','#f6f0a9');return}
 }
@@ -815,22 +832,42 @@ function exitVoid(){
  advanceWave(wave+1);banner('ENTERING '+themes[mapIndex].name);
 }
 function updateEndlessHorde(dt){
- // There is no wave clock, no between-wave pause, and no Void transition.
- const threat=Math.min(25,1+Math.floor(timer/40));
+ // Keep continuous spawns at 2.5x the previous cadence, with extra grouped incursions.
+ // A dynamic population cap bounds CPU cost on mid-range Android phones.
+ const threat=Math.min(25,1+Math.floor(timer/40)),cap=endlessEnemyCap();
  spawnTimer-=dt;
  if(spawnTimer<=0){
-  if(enemies.length<108){spawnEnemy();if(threat>=4&&enemies.length<90&&Math.random()<Math.min(.55,(threat-3)*.045))spawnEnemy()}
-  spawnTimer=Math.max(.23,.85-(threat-1)*.033)*rand(.82,1.19);
+  if(enemies.length<cap){spawnEnemy();if(threat>=4&&enemies.length<cap-5&&Math.random()<Math.min(.35,(threat-3)*.035))spawnEnemy()}
+  spawnTimer=Math.max(.23,.85-(threat-1)*.033)*rand(.82,1.19)/ENDLESS_SPAWN_MULTIPLIER;
+ }
+ // Organized squads appear together from a single entrance direction. The spawn
+ // function's same cap, clearance, and obstacle rules apply to every squadmate.
+ endlessHordeClock-=dt;
+ if(endlessHordeClock<=0){
+  const maxSquad=Math.min(8,4+Math.floor(threat/6)),squad=Math.min(maxSquad,enemies.length<cap-8?cap-enemies.length:Math.max(0,Math.min(3,cap-enemies.length)));
+  if(squad>=2){
+   const point=endlessSpawnPoint(rand(0,TWO),Math.min(545,Math.max(SW,SH)*.73),23);
+   let created=0;
+   for(let i=0;i<squad;i++){
+    const a=TWO*i/squad+endlessHordeCount*.53,dist=21+Math.floor(i/4)*31;
+    const x=clamp(point.x+Math.cos(a)*dist,-ENDLESS_HALF_SIZE+48,ENDLESS_HALF_SIZE-48),y=clamp(point.y+Math.sin(a)*dist,-ENDLESS_HALF_SIZE+48,ENDLESS_HALF_SIZE-48);
+    if(insideWall(x,y,22))continue;
+    const before=enemies.length;spawnEnemy(undefined,x,y);if(enemies.length>before)created++;
+   }
+   if(created>=2){endlessHordeCount++;rings.push({x:point.x,y:point.y,r:0,max:76,life:.45,color:'#d8a4ff'});banner('HORDE INBOUND · '+created+' HOSTILES')}
+  }
+  endlessHordeClock=Math.max(4.5,7.2-threat*.1);
  }
  endlessSupplyClock-=dt;
  if(endlessSupplyClock<=0){spawnSupplyPod();endlessSupplyClock=47}
  endlessBossClock-=dt;
  if(endlessBossClock<=0){
   endlessBossCount++;
-  if(enemies.length<92){const kind=endlessBossCount%3===0?majorBosses[(Math.floor(endlessBossCount/3)-1)%majorBosses.length]:miniBosses[(endlessBossCount-1)%miniBosses.length];spawnEnemy(kind);banner('ELITE THREAT · '+types[kind].name)}
+  if(enemies.length<cap-5){const kind=endlessBossCount%3===0?majorBosses[(Math.floor(endlessBossCount/3)-1)%majorBosses.length]:miniBosses[(endlessBossCount-1)%miniBosses.length];spawnEnemy(kind);banner('ELITE THREAT · '+types[kind].name)}
   endlessBossClock=105;
  }
 }
+
 function update(dt){
  timer+=dt;
  if(runMode==='endless')updateEndlessHorde(dt);
@@ -996,7 +1033,7 @@ let dx=player.x-e.x,dy=player.y-e.y,dist=hypot(dx,dy)||1;
 function updateHUD(){if(!player)return;
  $('hpText').textContent=`${Math.ceil(player.hp)} / ${Math.ceil(player.maxHp)}`;$('hpFill').style.width=clamp(player.hp/player.maxHp*100,0,100)+'%';$('xpText').textContent=`${Math.floor(player.xp)} / ${player.need} XP`;$('levelText').textContent=`LVL ${player.level}`;$('xpFill').style.width=clamp(player.xp/player.need*100,0,100)+'%';$('killnum').textContent=kills;$('wave').textContent=runMode==='endless'?'∞ ENDLESS':voidActive?'VOID · '+Math.ceil(voidRemaining)+'s':wavePhase==='clear'?'WAVE '+wave+' · CLEAR':wavePhase==='sweep'?'WAVE '+wave+' · XP':'WAVE '+wave;$('time').textContent=fmtTime(timer);$('areaTag').textContent=themes[mapIndex].name;
  $('voidClock').style.display=voidActive?'block':'none';$('voidClock').textContent=voidActive?'VOID BREACH  ·  '+Math.ceil(voidRemaining)+'s LEFT':'';$('weaponBtn').textContent=weaponTypes[player.weapon].name+' ▸';
- $('battleMetrics').style.display=voidActive?'none':'';$('battleMetrics').textContent=(runMode==='endless'?'∞ THREAT '+Math.min(25,1+Math.floor(timer/40))+' · 2.5× XP  ·  ':'')+'◈ '+player.droneCount+' DRONE'+(player.droneCount===1?'':'S')+(player.droneOverdrive>0?' · OVERDRIVE '+Math.ceil(player.droneOverdrive)+'s':'')+(player.combo>1?'  ·  COMBO x'+Math.min(player.combo,999):'')+(runMode==='endless'?'  ·  '+enemies.length+' FOES':voidActive?'  ·  VOID SURGE '+Math.ceil(voidRemaining)+'s':wavePhase==='sweep'?'  ·  COLLECTING XP':wavePhase==='clear'?'  ·  CLEAR '+enemies.length+' FOES': '  ·  SPAWN '+Math.ceil(WAVE_SPAWN_SECONDS-waveElapsed)+'s');
+ $('battleMetrics').style.display=voidActive?'none':'';$('battleMetrics').textContent=(runMode==='endless'?'∞ THREAT '+Math.min(25,1+Math.floor(timer/40))+' · 2.5× XP  ·  ':'')+'◈ '+player.droneCount+' DRONE'+(player.droneCount===1?'':'S')+(player.droneOverdrive>0?' · OVERDRIVE '+Math.ceil(player.droneOverdrive)+'s':'')+(player.combo>1?'  ·  COMBO x'+Math.min(player.combo,999):'')+(runMode==='endless'?'  ·  '+enemies.length+' FOES · '+endlessHordeCount+' HORDES':voidActive?'  ·  VOID SURGE '+Math.ceil(voidRemaining)+'s':wavePhase==='sweep'?'  ·  COLLECTING XP':wavePhase==='clear'?'  ·  CLEAR '+enemies.length+' FOES': '  ·  SPAWN '+Math.ceil(WAVE_SPAWN_SECONDS-waveElapsed)+'s');
  $('healthAlarm').style.opacity=mode==='play'&&player.hp/player.maxHp<.27?String(.25+.09*Math.sin(timer*6)):0;
  for(const [id,cd] of [['dashCool',player.dashCd],['shieldCool',player.shieldCd],['gravCool',player.gravCd]]){const el=$(id);el.style.display=cd>.1?'flex':'none';el.textContent=cd.toFixed(1)}
  $('novaInner').style.width=player.nova+'%';$('novaBtn').classList.toggle('ready',player.nova>=100);$('novaCool').style.display='none';const boss=enemies.find(e=>e.boss&&!e.mini&&!e.dead)||enemies.find(e=>e.boss&&!e.dead);$('bossbar').style.display=boss?'block':'none';if(boss){$('bossfill').style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';$('bossName').textContent=types[boss.kind].name+(boss.kind==='abyss'?' · PHASE '+boss.bossPhase:'')}
@@ -1006,16 +1043,16 @@ function poly(x,y,r,n,rot){ctx.beginPath();for(let i=0;i<n;i++){const a=rot+i*TW
 function drawBackground(){const key=mapIndex+':'+SW+':'+SH;if(bgCacheKey!==key){const th=themes[mapIndex];bgGradient=ctx.createRadialGradient(SW*.52,SH*.36,20,SW*.52,SH*.5,Math.max(SW,SH)*.8);bgGradient.addColorStop(0,th.center);bgGradient.addColorStop(.65,th.mid);bgGradient.addColorStop(1,th.edge);bgCacheKey=key}ctx.fillStyle=bgGradient;ctx.fillRect(0,0,SW,SH)}
 function cameraScale(){return gameSettings.zoom==='near'?.98:gameSettings.zoom==='far'?.73:.86} // world only, touch buttons keep their size
 function render(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,SW,SH);drawBackground();const cx=mode==='menu'?Math.sin(performance.now()*.00009)*100:camera.x,cy=mode==='menu'?Math.cos(performance.now()*.00007)*80:camera.y;ctx.save();ctx.translate(Math.round(SW/2+(gameSettings.screenShake?rand(-shake,shake):0)),Math.round(SH/2+(gameSettings.screenShake?rand(-shake,shake):0)));const CAMERA_ZOOM=cameraScale();ctx.scale(CAMERA_ZOOM,CAMERA_ZOOM);ctx.translate(-cx,-cy);
-const viewW=SW/CAMERA_ZOOM,viewH=SH/CAMERA_ZOOM;const l=cx-viewW/2-70,r=cx+viewW/2+70,t=cy-viewH/2-70,b=cy+viewH/2+70;ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.14;ctx.lineWidth=1;ctx.beginPath();for(let x=Math.floor(l/75)*75;x<r;x+=75){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/75)*75;y<b;y+=75){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.globalAlpha=1;ctx.strokeStyle='rgba(89,215,254,.08)';ctx.beginPath();for(let x=Math.floor(l/450)*450;x<r;x+=450){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/450)*450;y<b;y+=450){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.36;ctx.lineWidth=9;ctx.strokeRect(-1900,-1900,3800,3800);ctx.globalAlpha=1;
+const viewW=SW/CAMERA_ZOOM,viewH=SH/CAMERA_ZOOM;const l=cx-viewW/2-70,r=cx+viewW/2+70,t=cy-viewH/2-70,b=cy+viewH/2+70;ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.14;ctx.lineWidth=1;ctx.beginPath();for(let x=Math.floor(l/75)*75;x<r;x+=75){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/75)*75;y<b;y+=75){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.globalAlpha=1;ctx.strokeStyle='rgba(89,215,254,.08)';ctx.beginPath();for(let x=Math.floor(l/450)*450;x<r;x+=450){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/450)*450;y<b;y+=450){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.36;ctx.lineWidth=9;ctx.strokeRect(runMode==='endless'?-ENDLESS_HALF_SIZE:-1900,runMode==='endless'?-ENDLESS_HALF_SIZE:-1900,runMode==='endless'?ENDLESS_HALF_SIZE*2:3800,runMode==='endless'?ENDLESS_HALF_SIZE*2:3800);ctx.globalAlpha=1;
 if(runMode==='endless'){
  ctx.save();ctx.strokeStyle='#69f6ed';ctx.globalAlpha=.25;ctx.lineWidth=5;
- for(const rad of [245,480,750,1030,1410,1700]){
+ for(const rad of [190,355,575,805]){
   if(cx>rad+viewW||cx< -rad-viewW||cy>rad+viewH||cy< -rad-viewH)continue;
   ctx.beginPath();ctx.arc(0,0,rad,0,TWO);ctx.stroke();
  }
  ctx.globalAlpha=.35;ctx.lineWidth=3;ctx.strokeStyle='#b78aff';
  for(let i=0;i<12;i++){
-  const a=i*Math.PI/6, x1=Math.cos(a)*260,y1=Math.sin(a)*260,x2=Math.cos(a)*1680,y2=Math.sin(a)*1680;
+  const a=i*Math.PI/6, x1=Math.cos(a)*200,y1=Math.sin(a)*200,x2=Math.cos(a)*890,y2=Math.sin(a)*890;
   ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();
  }
  ctx.strokeStyle='#b7e9ff';ctx.globalAlpha=.66;ctx.lineWidth=6;
@@ -1090,7 +1127,12 @@ if(mode==='play'&&player){
  }
  if(mode==='menu'){ctx.fillStyle='rgba(4,9,24,.18)';ctx.fillRect(0,0,SW,SH)}
 }
-function frame(now){const dt=Math.min(Math.max((now-last)/1000,0),.034);last=now;if(!document.hidden){if(mode==='play')update(dt);render()}requestAnimationFrame(frame)}requestAnimationFrame(frame);
+function frame(now){const rawDt=Math.max((now-last)/1000,0),dt=Math.min(rawDt,.034);last=now;
+ if(runMode==='endless'&&mode==='play'&&rawDt<.25){
+  if(rawDt>.031){endlessSlowFrames++;endlessGoodFrames=0;if(endlessSlowFrames>=18){endlessDynamicCap=Math.max(52,endlessDynamicCap-8);endlessSlowFrames=0}}
+  else if(rawDt<.022){endlessGoodFrames++;endlessSlowFrames=0;if(endlessGoodFrames>=250){endlessDynamicCap=Math.min(ENDLESS_BASE_CAP,endlessDynamicCap+4);endlessGoodFrames=0}}
+  else{endlessSlowFrames=Math.max(0,endlessSlowFrames-1);endlessGoodFrames=0}
+ }if(!document.hidden){if(mode==='play')update(dt);render()}requestAnimationFrame(frame)}requestAnimationFrame(frame);
 function resetJoy(){joy.x=0;joy.y=0;joy.id=null;$('stick').style.left='';$('stick').style.top='';$('stick').style.bottom='';$('stick').style.opacity='.75';$('knob').style.transform='translate(0px,0px)'}
 const zone=$('moveZone');function updateJoy(e){const dx=e.clientX-joy.startX,dy=e.clientY-joy.startY,d=hypot(dx,dy),radius=45,scale=d>radius?radius/d:1;const xx=dx*scale,yy=dy*scale;joy.x=xx/radius;joy.y=yy/radius;$('knob').style.transform=`translate(${xx}px,${yy}px)`}
 zone.addEventListener('pointerdown',e=>{if(mode!=='play'||joy.id!==null)return;e.preventDefault();joy.id=e.pointerId;joy.startX=e.clientX;joy.startY=e.clientY;try{zone.setPointerCapture(e.pointerId)}catch(err){};$('stick').style.left=(e.clientX-64)+'px';$('stick').style.top=(e.clientY-64)+'px';$('stick').style.bottom='auto';$('stick').style.opacity='1';updateJoy(e)});
