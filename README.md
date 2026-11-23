@@ -23,6 +23,14 @@ The browser save keys `riftrunner_evolution_v1` and `riftrunner_best` are unchan
 
 The standalone build was smoke-tested in headless Chromium at landscape and portrait viewports: starting, pausing, menus, achievements and Hangar, 3.0/4.0-style save migration and backup import/export, all six weapon selections and firing, projected keyboard and synthetic touch movement, abilities, XP leveling, boss HUD, and all eight biome render variants. A renderer-only 100-enemy load check ran without JS errors. Real Android frame rates, full boss-fight playthroughs, and long-duration battle performance are **not** established by these browser checks.
 
+### Command deck and tactical camera
+
+A projected three-quarter battlefield with depth-sorted cover, directional armored units, biome-specific structures and new weapon effects. The command deck features an original orbital gate illustration embedded in the HTML. Open **Save management** on the title screen to transfer progress.
+
+Run `node tests/simulation.mjs` for isolated gameplay and migration checks. With Python Playwright and its Chromium installed, `python tests/browser.py` tests portrait and landscape play, touch positioning, save transfer and dense combat. It saves screenshots and measures headless desktop frame intervals. Physical Android performance requires device testing.
+
+Choose **Settings → Camera** to switch between the Dimension Shift and Tactical views. Both share the same combat simulation and save.
+
 ## Evolution 4.0 — Complete six-phase overhaul
 
 - **Phase 1 — Combat Reborn:** smoother movement, smarter auto-targeting, Dash trails, improved hit feedback and swept projectile collisions.
