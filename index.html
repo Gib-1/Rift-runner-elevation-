@@ -136,7 +136,7 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 <div id="hud"><div class="hudrow"><div class="hudleft"><div class="hlabel"><span>HULL INTEGRITY</span><span id="hpText">100 / 100</span></div><div class="track"><div class="fill" id="hpFill"></div></div><div id="xpbox"><div class="hlabel"><span id="levelText">LVL 1</span><span id="xpText">0 / 16 XP</span></div><div class="track" style="height:7px"><div class="fill xpfill" id="xpFill"></div></div></div></div><div id="scorebox"><div class="tinycap">ELIMINATIONS</div><div id="killnum">0</div><div id="wave">WAVE 1</div><div id="time">0:00</div><div id="areaTag">RIFT WASTES</div><button id="weaponBtn" aria-label="Switch weapon">PULSE ▸</button></div><button id="pauseBtn" aria-label="Pause game">Ⅱ</button></div><div id="bossbar"><div class="bosslabel" id="bossName">RIFT GUARDIAN</div><div class="track"><div class="fill" id="bossfill"></div></div></div><div id="voidClock" role="timer" aria-label="Void breach time remaining"></div></div>
 <div id="voidTint" aria-hidden="true"></div><div id="banner"></div><div id="mapAlert"></div><div id="battleMetrics" aria-live="off"></div><div id="healthAlarm"></div>
 <div id="controls"><div id="moveZone"><div id="stick"><div id="knob"></div></div></div><div id="actions"><button class="action" id="novaBtn" aria-label="Nova ability">✦<small>NOVA</small><div id="novaProgress"><div id="novaInner"></div></div><span class="cool" id="novaCool"></span></button><button class="action" id="dashBtn" aria-label="Dash">➤<small>DASH</small><span class="cool" id="dashCool"></span></button><button class="action" id="shieldBtn" aria-label="Phase shield">⬡<small>SHIELD</small><span class="cool" id="shieldCool"></span></button><button class="action" id="gravBtn" aria-label="Gravity well">◎<small>GRAV</small><span class="cool" id="gravCool"></span></button></div></div>
-<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · VOID BREACH + ENDLESS HORDE</div><p class="description">Choose classic waves with 35-second Void Breaches, or survive nonstop hordes in an exclusive arena with 2.5× XP. Keep all six weapons, your orbiting drones, and your permanent upgrades.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">1</span><span style="color:#71c8ff">2</span><span style="color:#9fa1ff">3</span><span style="color:#79ffa5">5</span><span style="color:#ffcb60">10</span><span style="color:#fa99e6">15</span><span style="color:#b98bff">25</span><span style="color:#ff6fcf">50 MINI</span><span style="color:#ff96f4">75 VOID</span><span style="color:#ffd976">150 BOSS</span><span style="color:#ffffff">300 RARE</span><small>11 XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ CLASSIC · WAVE MODE</button><button class="primary" id="endlessBtn" aria-label="Start Endless Horde mode">∞ ENDLESS HORDE · 2.5× XP</button><p id="endlessHint">Compact Eclipse Citadel arena. 2.5× faster spawns, organized hordes, and a performance-aware enemy limit.</p><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button><button class="secondary" id="featuresBtn">✦ WHAT'S NEW · 35 FEATURES</button>
+<div class="overlay" id="menu"><div class="panel"><div id="brand">SOLO MOBILE GAME</div><div class="title">RIFT<br>RUNNER</div><div class="kicker">EVOLUTION 4.0 · VOID BREACH + ENDLESS HORDE</div><p class="description">Choose classic waves with 35-second Void Breaches, or survive nonstop hordes in an exclusive arena with 2.5× XP. Keep all six weapons, your orbiting drones, and your permanent upgrades.</p><div class="instructions"><span class="chip">◉ Left thumb: move</span><span class="chip">➤ Dash</span><span class="chip">✦ Nova blast</span><span class="chip">⚡ Auto-fire</span><span class="chip">⬡ Shield</span><span class="chip">◎ Gravity well</span></div><div class="xpLegend"><span style="color:#64dfff">1</span><span style="color:#71c8ff">2</span><span style="color:#9fa1ff">3</span><span style="color:#79ffa5">5</span><span style="color:#ffcb60">10</span><span style="color:#fa99e6">15</span><span style="color:#b98bff">25</span><span style="color:#ff6fcf">50 MINI</span><span style="color:#ff96f4">75 VOID</span><span style="color:#ffd976">150 BOSS</span><span style="color:#ffffff">300 RARE</span><small>11 XP COIN TIERS</small></div><button class="primary" id="startBtn">▶ CLASSIC · WAVE MODE</button><button class="primary" id="endlessBtn" aria-label="Start Endless Horde mode">∞ ENDLESS HORDE · 2.5× XP</button><p id="endlessHint">Compact Eclipse Citadel: 5× spawn rate, nonstop hordes, mini-boss every 65 kills, boss every 115, and a triple-boss raid every 1,000 kills.</p><button class="secondary" id="hangarBtn">◆ PERMANENT UPGRADES</button><button class="secondary" id="achievementsBtn">★ ACHIEVEMENTS & CHALLENGES</button><button class="secondary" id="settingsBtn">⚙ GAME SETTINGS</button><button class="secondary" id="featuresBtn">✦ WHAT'S NEW · 35 FEATURES</button>
 <div class="saveActions"><button id="exportSaveBtn" type="button">⬇ EXPORT SAVE</button><button id="importSaveBtn" type="button">⬆ IMPORT SAVE</button></div>
 <input id="importSaveInput" aria-label="Select a Rift Runner save backup" type="file" accept=".json,application/json" hidden>
 <p class="saveNote">Back up Rift Cores, permanent upgrades, achievements and best score. No personal details are included. Import replaces this browser's saved progress.</p>
@@ -159,7 +159,7 @@ try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null'
  gameSettings.damageNumbers=saved.damageNumbers!==false;gameSettings.zoom=['near','normal','far'].includes(saved.zoom)?saved.zoom:'normal';soundOn=saved.sound!==false}}catch(e){}
 function saveSettings(){try{localStorage.setItem('riftrunner_options_v1',JSON.stringify({...gameSettings,sound:soundOn}))}catch(e){}}
 const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),achievements:$('achievements'),settings:$('settings'),featureGuide:$('featureGuide'),pause:$('pauseOverlay'),over:$('gameOver')};
-let runMode='normal',endlessSupplyClock=45,endlessBossClock=100,endlessBossCount=0,endlessHordeClock=5,endlessHordeCount=0,endlessDynamicCap=82,endlessSlowFrames=0,endlessGoodFrames=0;
+let runMode='normal',endlessSupplyClock=45,endlessMilestoneQueue=[],endlessHordeClock=5,endlessHordeCount=0,endlessDynamicCap=82,endlessSlowFrames=0,endlessGoodFrames=0;
 let player,enemies=[],bullets=[],enemyBullets=[],gems=[],particles=[],texts=[],rings=[],beams=[],dashGhosts=[],supplyPods=[],novaFields=[],caches=[],rifts=[],stars=[],decos=[],hazards=[],wells=[],walls=[],zones=[],enemyFields=[],camera={x:0,y:0},timer=0,normalTime=0,wave=1,kills=0,spawnTimer=0,shotTimer=0,levelQueue=0,bannerTime=0,bannerLabel='',hudTimer=0,shake=0,killCombo=0,mapAlertTime=0,mapIndex=0,bossesDefeated=0,miniDefeated=0,banked=true,coresEarned=0,nextEnemyId=0,voidActive=false,voidRemaining=0,voidNextBiome=0,voidEncounters=0,voidBossCleared=false,waveElapsed=0,wavePhase='spawn',waveSweepRemaining=0,waveSweepCollected=0;
 const WAVE_SPAWN_SECONDS=19,WAVE_MIN_SECONDS=24,WAVE_SWEEP_SECONDS=1.15;
 let gameBest=0;try{gameBest=+(localStorage.getItem('riftrunner_best')||0)||0}catch(e){};
@@ -180,7 +180,7 @@ const themes=[
  {name:'VOID BREACH',center:'#351154',mid:'#170b35',edge:'#060415',grid:'#da67ff',rift:284,deco:'#6a3082',hazard:'#d351ff',wall:'#583070'},
  {name:'ECLIPSE CITADEL',center:'#163454',mid:'#100f33',edge:'#050817',grid:'#67f7f1',rift:182,deco:'#643b9e',hazard:'#bd7aff',wall:'#423a79'}
 ];
-const MAIN_BIOME_COUNT=8,VOID_BIOME=8,ENDLESS_BIOME=9,VOID_LENGTH=35,ENDLESS_XP_MULTIPLIER=2.5,ENDLESS_HALF_SIZE=965,ENDLESS_SPAWN_MULTIPLIER=2.5,ENDLESS_BASE_CAP=82;
+const MAIN_BIOME_COUNT=8,VOID_BIOME=8,ENDLESS_BIOME=9,VOID_LENGTH=35,ENDLESS_XP_MULTIPLIER=2.5,ENDLESS_HALF_SIZE=965,ENDLESS_SPAWN_MULTIPLIER=5,ENDLESS_BASE_CAP=82,ENDLESS_ELITE_RESERVE=8;
 const coinTiers={1:{color:'#64dfff',r:6},2:{color:'#71c8ff',r:6.5},3:{color:'#9fa1ff',r:7},5:{color:'#79ffa5',r:8},10:{color:'#ffcb60',r:10},15:{color:'#fa99e6',r:10.5},25:{color:'#b98bff',r:12},50:{color:'#ff6fcf',r:14},75:{color:'#ff96f4',r:16},150:{color:'#ffdd79',r:19},300:{color:'#ffffff',r:21}};
 const EVO42_FEATURES=["Animated floating drone orbits", "Animated drone rotor wings", "Animated thruster exhaust", "Staggered independent drone fire", "Tracking drone turrets", "Drone recoil and muzzle flashes", "Visible moving drone bolts", "Drone target-lock reticles", "Drone overdrive streak mode", "Drone projectile interception", "Incendiary rounds", "Cryo slow rounds", "Armor disruption rounds", "Execution bonus damage", "Critical shockwaves", "Boss siphon repairs", "Ricochet shots", "Lingering Nova plasma", "Crushing Gravity Well", "Electrified Dash wake", "Shield cooldown recovery on eliminations", "Milestone level repairs", "Wave supply pod deployments", "Supply pod repair cells", "Supply pod XP caches", "Temporary rapid-fire supply module", "Temporary magnet supply module", "Temporary barrier supply module", "Supply pod opening shockwave", "Offscreen boss direction beacon", "Offscreen supply cache locator", "Kill combo tracker", "Adjustable camera zoom", "Low-hull warning overlay", "Next-wave countdown"];
 const weaponTypes={drone:{name:'ORBIT DRONE',color:'#74ffe7'},pulse:{name:'PULSE',color:'#71eaff'},arc:{name:'ARC REPEATER',color:'#d8aaff'},scatter:{name:'SCATTER',color:'#ffca68'},rail:{name:'RAIL LANCE',color:'#90ffb6'},tesla:{name:'TESLA REPEATER',color:'#84d9ff'},void:{name:'VOID CANNON',color:'#c992ff'}};
@@ -405,7 +405,7 @@ function makeWorld(){supplyPods=[];novaFields=[];invalidateNavigation();const th
   caches.push({x,y,r:17,opened:false,phase:rand(0,TWO)})}
 }
 makeWorld();
-function reset(){banked=false;coresEarned=0;bossesDefeated=0;miniDefeated=0;nextEnemyId=0;mapIndex=runMode==='endless'?ENDLESS_BIOME:0;endlessSupplyClock=45;endlessBossClock=100;endlessBossCount=0;endlessHordeClock=5;endlessHordeCount=0;endlessDynamicCap=ENDLESS_BASE_CAP;endlessSlowFrames=0;endlessGoodFrames=0;normalTime=0;voidActive=false;voidRemaining=0;voidNextBiome=0;voidEncounters=0;voidBossCleared=false;waveElapsed=0;wavePhase='spawn';waveSweepRemaining=0;waveSweepCollected=0;$('voidTint').style.opacity=0;$('voidClock').style.display='none';mapAlertTime=0;$('mapAlert').textContent='';
+function reset(){banked=false;coresEarned=0;bossesDefeated=0;miniDefeated=0;nextEnemyId=0;mapIndex=runMode==='endless'?ENDLESS_BIOME:0;endlessSupplyClock=45;endlessMilestoneQueue=[];endlessHordeClock=5;endlessHordeCount=0;endlessDynamicCap=ENDLESS_BASE_CAP;endlessSlowFrames=0;endlessGoodFrames=0;normalTime=0;voidActive=false;voidRemaining=0;voidNextBiome=0;voidEncounters=0;voidBossCleared=false;waveElapsed=0;wavePhase='spawn';waveSweepRemaining=0;waveSweepCollected=0;$('voidTint').style.opacity=0;$('voidClock').style.display='none';mapAlertTime=0;$('mapAlert').textContent='';
  const u=meta.upgrades,h=u.armor,d=u.attack,t=u.thrusters,m=u.magnet;
  player={x:0,y:0,r:17,hp:120+h*16,maxHp:120+h*16,speed:235*(1+t*.06),damage:25*(1+d*.10),fire:.40*(1-u.firing*.05),shots:1,bulletSpeed:740*(1+u.ballistics*.08),magnet:140+m*28,
   level:1,xp:0,need:16,invuln:0,dashCd:0,dashBaseCd:3.4-u.dashCore*.18,dashing:0,dx:1,dy:0,aim:0,moveX:0,moveY:0,dashTrailClock:0,afterDash:0,targetId:null,shotKick:0,
@@ -450,7 +450,10 @@ const miniBosses=['ravager','hunter','sentinel'];
 function spawnEnemy(kind,x0,y0){if(!player||enemies.length>138||(runMode==='endless'&&enemies.length>=endlessEnemyCap())||(runMode!=='endless'&&!voidActive&&wavePhase!=='spawn'))return;
  const threat=runMode==='endless'?Math.min(25,1+Math.floor(timer/40)):wave;
  if(!kind){const pool=['drone','drone','drone','dart'];if(threat>=2)pool.push('shooter','splitter','bomber');if(threat>=3)pool.push('tank','wisp','charger');if(threat>=4)pool.push('orbiter','stalker');if(threat>=5)pool.push('sniper','leech','bulwark');if(threat>=6)pool.push('mender','miner','strider');if(threat>=7)pool.push('sapper');if(threat>=8)pool.push('nullifier');kind=pool[Math.floor(Math.random()*pool.length)]}
- const spec=types[kind];if(!spec)return;const a=rand(0,TWO),r=Math.max(SW,SH)*.68+rand(70,190);const hp=spec.hp*(1+Math.max(0,threat-1)*.12);
+ const spec=types[kind];if(!spec)return;
+ // Reserve eight Endless population slots for milestone bosses, even at maximum density.
+ if(runMode==='endless'&&!spec.boss&&enemies.length>=Math.max(1,endlessEnemyCap()-ENDLESS_ELITE_RESERVE))return;
+ const a=rand(0,TWO),r=Math.max(SW,SH)*.68+rand(70,190);const hp=spec.hp*(1+Math.max(0,threat-1)*.12);
  let x=x0??clamp(player.x+Math.cos(a)*r,-1770,1770),y=y0??clamp(player.y+Math.sin(a)*r,-1770,1770);
  if(runMode==='endless'){
   if(x0===undefined&&y0===undefined){const point=endlessSpawnPoint(a,Math.min(540,Math.max(SW,SH)*.7),spec.r);x=point.x;y=point.y}
@@ -540,7 +543,9 @@ function killed(e){if(e.dead)return;e.dead=true;kills++;player.combo=(player.com
  // Regular enemies produce 2–4 coins; bosses award one distinctive guaranteed coin.
  if(e.boss)dropCoin(e.x,e.y,e.mini?50:150);
  else{const count=2+Math.floor(Math.random()*3),value=dropValue(e);for(let i=0;i<count;i++)dropCoin(e.x,e.y,value)}
- if(Math.random()<(player.hp<player.maxHp*.48?.07:.025)||e.boss)gems.push({x:e.x,y:e.y,r:11,val:0,heal:true,life:22,phase:0});if(kills%25===0)banner(`${kills} ELIMINATIONS`)
+ if(Math.random()<(player.hp<player.maxHp*.48?.07:.025)||e.boss)gems.push({x:e.x,y:e.y,r:11,val:0,heal:true,life:22,phase:0});
+ if(runMode==='endless')queueEndlessKillMilestones();
+ if(kills%25===0)banner(`${kills} ELIMINATIONS`)
 }
 
 const upgradeData=[
@@ -831,20 +836,50 @@ function exitVoid(){
  $('mapAlert').textContent='BREACH CLOSED · '+themes[mapIndex].name;mapAlertTime=3.2;
  advanceWave(wave+1);banner('ENTERING '+themes[mapIndex].name);
 }
-function updateEndlessHorde(dt){
- // Keep continuous spawns at 2.5x the previous cadence, with extra grouped incursions.
- // A dynamic population cap bounds CPU cost on mid-range Android phones.
- const threat=Math.min(25,1+Math.floor(timer/40)),cap=endlessEnemyCap();
- spawnTimer-=dt;
- if(spawnTimer<=0){
-  if(enemies.length<cap){spawnEnemy();if(threat>=4&&enemies.length<cap-5&&Math.random()<Math.min(.35,(threat-3)*.035))spawnEnemy()}
-  spawnTimer=Math.max(.23,.85-(threat-1)*.033)*rand(.82,1.19)/ENDLESS_SPAWN_MULTIPLIER;
+// Endless elite encounters follow kill counts, not time. A queue prevents milestone
+// bosses from disappearing when the arena is temporarily at its enemy limit.
+function queueEndlessKillMilestones(){
+ if(runMode!=='endless')return;
+ if(kills%65===0)endlessMilestoneQueue.push({at:kills,kinds:[miniBosses[(kills/65-1)%miniBosses.length]],tier:'mini'});
+ if(kills%115===0)endlessMilestoneQueue.push({at:kills,kinds:[majorBosses[(kills/115-1)%majorBosses.length]],tier:'major'});
+ if(kills%1000===0)endlessMilestoneQueue.push({at:kills,kinds:['abyss','hunter','sentinel'],tier:'raid'});
+}
+function releaseEndlessKillMilestones(){
+ if(runMode!=='endless')return;
+ // At most two encounters per frame. An entire 1000-kill raid is spawned as a group.
+ for(let n=0;n<2&&endlessMilestoneQueue.length;n++){
+  const event=endlessMilestoneQueue[0];
+  if(enemies.length+event.kinds.length>endlessEnemyCap())break;
+  const heading=rand(0,TWO),distance=Math.min(500,Math.max(SW,SH)*.67);
+  for(let i=0;i<event.kinds.length;i++){
+   const kind=event.kinds[i],angle=heading+(i-(event.kinds.length-1)/2)*.28;
+   const spot=endlessSpawnPoint(angle,distance,types[kind].r);
+   spawnEnemy(kind,spot.x,spot.y);
+   rings.push({x:spot.x,y:spot.y,r:0,max:85,life:.6,color:event.tier==='raid'?'#ff81e8':'#ffc08e'});
+  }
+  endlessMilestoneQueue.shift();
+  if(event.tier==='raid'){banner('1000 KILLS · BOSS + 2 MINI-BOSSES');shake=Math.max(shake,14);sfx(190,'sawtooth',.34,.1)}
+  else if(event.tier==='major')banner(event.at+' KILLS · BOSS INCOMING');
+  else banner(event.at+' KILLS · MINI-BOSS INCOMING');
  }
- // Organized squads appear together from a single entrance direction. The spawn
- // function's same cap, clearance, and obstacle rules apply to every squadmate.
+}
+function updateEndlessHorde(dt){
+ // 5x the original continuous spawn cadence, with grouped incursions. Normal enemies
+ // stop at the reserved-population threshold; elite milestone spawns use those slots.
+ const threat=Math.min(25,1+Math.floor(timer/40)),cap=endlessEnemyCap(),normalCap=Math.max(1,cap-ENDLESS_ELITE_RESERVE);
+ releaseEndlessKillMilestones();
+ spawnTimer-=dt;
+ let attempts=0;
+ while(spawnTimer<=0&&attempts++<4){
+  if(enemies.length>=normalCap){spawnTimer=Math.max(spawnTimer,.04);break}
+  spawnEnemy();
+  if(threat>=4&&enemies.length<normalCap-5&&Math.random()<Math.min(.35,(threat-3)*.035))spawnEnemy();
+  spawnTimer+=Math.max(.23,.85-(threat-1)*.033)*rand(.82,1.19)/ENDLESS_SPAWN_MULTIPLIER;
+ }
  endlessHordeClock-=dt;
  if(endlessHordeClock<=0){
-  const maxSquad=Math.min(8,4+Math.floor(threat/6)),squad=Math.min(maxSquad,enemies.length<cap-8?cap-enemies.length:Math.max(0,Math.min(3,cap-enemies.length)));
+  const available=Math.max(0,normalCap-enemies.length),maxSquad=Math.min(8,4+Math.floor(threat/6));
+  const squad=Math.min(maxSquad,available);
   if(squad>=2){
    const point=endlessSpawnPoint(rand(0,TWO),Math.min(545,Math.max(SW,SH)*.73),23);
    let created=0;
@@ -860,12 +895,6 @@ function updateEndlessHorde(dt){
  }
  endlessSupplyClock-=dt;
  if(endlessSupplyClock<=0){spawnSupplyPod();endlessSupplyClock=47}
- endlessBossClock-=dt;
- if(endlessBossClock<=0){
-  endlessBossCount++;
-  if(enemies.length<cap-5){const kind=endlessBossCount%3===0?majorBosses[(Math.floor(endlessBossCount/3)-1)%majorBosses.length]:miniBosses[(endlessBossCount-1)%miniBosses.length];spawnEnemy(kind);banner('ELITE THREAT · '+types[kind].name)}
-  endlessBossClock=105;
- }
 }
 
 function update(dt){
@@ -1033,7 +1062,7 @@ let dx=player.x-e.x,dy=player.y-e.y,dist=hypot(dx,dy)||1;
 function updateHUD(){if(!player)return;
  $('hpText').textContent=`${Math.ceil(player.hp)} / ${Math.ceil(player.maxHp)}`;$('hpFill').style.width=clamp(player.hp/player.maxHp*100,0,100)+'%';$('xpText').textContent=`${Math.floor(player.xp)} / ${player.need} XP`;$('levelText').textContent=`LVL ${player.level}`;$('xpFill').style.width=clamp(player.xp/player.need*100,0,100)+'%';$('killnum').textContent=kills;$('wave').textContent=runMode==='endless'?'∞ ENDLESS':voidActive?'VOID · '+Math.ceil(voidRemaining)+'s':wavePhase==='clear'?'WAVE '+wave+' · CLEAR':wavePhase==='sweep'?'WAVE '+wave+' · XP':'WAVE '+wave;$('time').textContent=fmtTime(timer);$('areaTag').textContent=themes[mapIndex].name;
  $('voidClock').style.display=voidActive?'block':'none';$('voidClock').textContent=voidActive?'VOID BREACH  ·  '+Math.ceil(voidRemaining)+'s LEFT':'';$('weaponBtn').textContent=weaponTypes[player.weapon].name+' ▸';
- $('battleMetrics').style.display=voidActive?'none':'';$('battleMetrics').textContent=(runMode==='endless'?'∞ THREAT '+Math.min(25,1+Math.floor(timer/40))+' · 2.5× XP  ·  ':'')+'◈ '+player.droneCount+' DRONE'+(player.droneCount===1?'':'S')+(player.droneOverdrive>0?' · OVERDRIVE '+Math.ceil(player.droneOverdrive)+'s':'')+(player.combo>1?'  ·  COMBO x'+Math.min(player.combo,999):'')+(runMode==='endless'?'  ·  '+enemies.length+' FOES · '+endlessHordeCount+' HORDES':voidActive?'  ·  VOID SURGE '+Math.ceil(voidRemaining)+'s':wavePhase==='sweep'?'  ·  COLLECTING XP':wavePhase==='clear'?'  ·  CLEAR '+enemies.length+' FOES': '  ·  SPAWN '+Math.ceil(WAVE_SPAWN_SECONDS-waveElapsed)+'s');
+ $('battleMetrics').style.display=voidActive?'none':'';$('battleMetrics').textContent=(runMode==='endless'?'∞ THREAT '+Math.min(25,1+Math.floor(timer/40))+' · 2.5× XP  ·  ':'')+'◈ '+player.droneCount+' DRONE'+(player.droneCount===1?'':'S')+(player.droneOverdrive>0?' · OVERDRIVE '+Math.ceil(player.droneOverdrive)+'s':'')+(player.combo>1?'  ·  COMBO x'+Math.min(player.combo,999):'')+(runMode==='endless'?'  ·  '+enemies.length+' FOES · ELITE IN '+Math.min(65-kills%65,115-kills%115)+' KILLS':voidActive?'  ·  VOID SURGE '+Math.ceil(voidRemaining)+'s':wavePhase==='sweep'?'  ·  COLLECTING XP':wavePhase==='clear'?'  ·  CLEAR '+enemies.length+' FOES': '  ·  SPAWN '+Math.ceil(WAVE_SPAWN_SECONDS-waveElapsed)+'s');
  $('healthAlarm').style.opacity=mode==='play'&&player.hp/player.maxHp<.27?String(.25+.09*Math.sin(timer*6)):0;
  for(const [id,cd] of [['dashCool',player.dashCd],['shieldCool',player.shieldCd],['gravCool',player.gravCd]]){const el=$(id);el.style.display=cd>.1?'flex':'none';el.textContent=cd.toFixed(1)}
  $('novaInner').style.width=player.nova+'%';$('novaBtn').classList.toggle('ready',player.nova>=100);$('novaCool').style.display='none';const boss=enemies.find(e=>e.boss&&!e.mini&&!e.dead)||enemies.find(e=>e.boss&&!e.dead);$('bossbar').style.display=boss?'block':'none';if(boss){$('bossfill').style.width=Math.max(0,boss.hp/boss.maxHp*100)+'%';$('bossName').textContent=types[boss.kind].name+(boss.kind==='abyss'?' · PHASE '+boss.bossPhase:'')}
