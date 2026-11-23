@@ -6,12 +6,22 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Endless Horde — Fivefold Hordes and Kill-Based Bosses
+
+- **5× continuous spawn rate:** Endless now uses 5× the original spawn cadence (up from the previous 2.5× setting). The existing **2.5× XP** bonus is unchanged. A bounded catch-up loop prevents low-FPS frames from creating an unlimited spawn backlog.
+- **Mini-boss every 65 kills:** a Rift Ravager, Rift Hunter, or Iron Sentinel appears at elimination 65, 130, 195, etc.
+- **Main boss every 115 kills:** a rotating major boss appears at elimination 115, 230, 345, etc.
+- **1,000-kill showdown:** at kill 1,000 (and again at 2,000, 3,000, etc.), one Abyss Sovereign boss and two mini-bosses spawn together. Regular 65-/115-kill milestones also remain active.
+- **Guaranteed encounters within the enemy cap:** regular enemies leave eight reserved elite slots, and boss encounters queue until the slots are free. Balanced remains limited to 82 active foes; Low Effects remains limited to 58, with adaptive performance fallback.
+- **No timed elite bosses:** Endless bosses now depend on eliminations, not an elapsed-time timer. Supply pods are still time-based. All milestone counts reset with each new run.
+- Classic Mode and its 35-second Void Breaches are unchanged. Progress and save backups stay compatible.
+
 ## Endless Horde — Compact Arena and Faster Hordes
 
 - **Smaller Eclipse Citadel:** the Endless-only movement boundary is now approximately **1,930 × 1,930 world units**, down from the former 3,760 × 3,760 range; rings, cover, caches, and hazards are arranged inside the smaller space. Classic Mode keeps its original map size.
-- **2.5× faster enemy spawning:** the continuous spawn interval is divided by 2.5 compared with the previous Endless build, including as the threat level rises. This is separate from the existing **2.5× XP multiplier**.
+- **5× faster enemy spawning:** the continuous spawn interval is divided by 5 relative to the original Endless rate (twice the prior compact arena update). This is separate from the existing **2.5× XP multiplier**.
 - **Organized horde groups:** squads of 2–8 enemies periodically arrive from one direction, in addition to the nonstop stream. Squad sizes increase with survival threat, but groups stop adding enemies when the population is full.
-- **Mobile-performance guardrails:** active Endless foes are capped at **82** under Balanced Effects, **58** under Low Effects, and the cap can dynamically drop to **52** after sustained slow frames. Spawning pauses at the cap; there is no guarantee of 2.5× more active enemies or an exact FPS on every device. Rendering props were reduced to fit the smaller arena.
+- **Mobile-performance guardrails:** active Endless foes are capped at **82** under Balanced Effects, **58** under Low Effects, and the cap can dynamically drop to **52** after sustained slow frames. Spawning pauses at the cap; there is no guarantee of 5× more active enemies or an exact FPS on every device. Rendering props were reduced to fit the smaller arena.
 - Existing Classic Waves, the 35-second Void event, weapons, drones, achievements, permanent upgrades, 11 coin types, 2.5× Endless XP, and the separate Endless high score are unchanged. No save migration required.
 
 ## Evolution 4.0 — Endless Horde mode
@@ -19,7 +29,7 @@ https://gib-1.github.io/Rift-runner-elevation-/
 Two independent run modes are available from the title screen:
 
 - **Classic · Wave Mode:** the original wave progression, collectible XP sweep after enemy-clear, Void Breach interludes between biomes, and the eight original rotating biomes. Classic XP and wave achievements are unchanged.
-- **Endless Horde · 2.5× XP:** a separate playable **Eclipse Citadel** arena with hand-structured concentric rings, radial energy architecture, arena-specific neon materials, cover, loot caches and ambient hazards. Enemies spawn continuously without wave breaks or biome transitions, and their variety, health and attack frequency increase with survival time. Supply pods arrive every ~47 seconds, and mini-bosses / bosses can appear at longer time intervals, without stopping the horde. Every source of player XP is multiplied by exactly 2.5 while in Endless, including coins and caches. Standard mode remains 1× XP. Enemy numbers and visual effects remain bounded for mobile performance.
+- **Endless Horde · 2.5× XP:** a separate playable **Eclipse Citadel** arena with hand-structured concentric rings, radial energy architecture, arena-specific neon materials, cover, loot caches and ambient hazards. Enemies spawn continuously without wave breaks or biome transitions, and their variety, health and attack frequency increase with survival time. Supply pods arrive every ~47 seconds, and mini-bosses and bosses spawn at the fixed elimination milestones above, without stopping the horde. Every source of player XP is multiplied by exactly 2.5 while in Endless, including coins and caches. Standard mode remains 1× XP. Enemy numbers and visual effects remain bounded for mobile performance.
 
 Endless has its own elimination record, stored under the existing `riftrunner_evolution_v1` save profile in `stats.bestEndless`. It is included in portable version-1 save backups. Existing saved progress and old backups work with a default Endless record of zero. The existing normal-run best score and Wave 8 achievement remain exclusive to Classic runs. Both modes award Rift Cores using the usual kill/boss formula.
 

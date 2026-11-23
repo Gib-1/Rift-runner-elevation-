@@ -198,9 +198,9 @@ console.log('Pass: rapid Void combat stays bounded and frame calculations remain
 // ENDLESS HORDE: isolated from normal wave transitions and Void Breaches.
 t.run(`start('endless');const originalBestWave=meta.stats.bestWave;assert.equal(runMode,'endless');assert.equal(mapIndex,ENDLESS_BIOME);
  assert.equal(themes[mapIndex].name,'ECLIPSE CITADEL');assert.equal(wave,1);
- assert.equal(wavePhase,'spawn');assert.equal(voidActive,false);assert.equal(endlessBossCount,0);
+ assert.equal(wavePhase,'spawn');assert.equal(voidActive,false);assert.equal(endlessMilestoneQueue.length,0);
  assert.ok(walls.length>=25&&rifts.length>=5&&decos.length>=45,'Compact arena geometry exists');
- assert.equal(ENDLESS_HALF_SIZE,965);assert.equal(ENDLESS_SPAWN_MULTIPLIER,2.5);
+ assert.equal(ENDLESS_HALF_SIZE,965);assert.equal(ENDLESS_SPAWN_MULTIPLIER,5);
  assert.ok(walls.every(w=>Math.abs(w.x+w.w/2)<930&&Math.abs(w.y+w.h/2)<930),'Cover is within smaller arena');
  assert.equal(insideWall(0,0,175),false,'Spawn center is unobstructed');
  updateHUD();assert.ok($('wave').textContent.includes('ENDLESS'));assert.ok($('battleMetrics').textContent.includes('2.5× XP'));
@@ -216,9 +216,9 @@ t.run(`start('endless');const originalBestWave=meta.stats.bestWave;assert.equal(
 console.log('Pass: independent Endless mode, distinct arena, continuous spawns, HUD and exact 2.5x XP.');
 
 t.run(`start('endless');player.droneCount=0;player.invuln=999;
- enemies=[];walls=[];spawnTimer=999;endlessBossClock=.01;endlessSupplyClock=.01;
- update(.03);assert.ok(enemies.some(e=>e.boss),'Elite enemies arrive without wave changes');
- assert.equal(endlessBossCount,1);assert.equal(wave,1);assert.ok(supplyPods.length===1,'Timed supply drops operate without waves');
+ enemies=[];walls=[];spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=.01;
+ update(.03);assert.equal(wave,1);assert.ok(supplyPods.length===1,'Timed supply drops operate without waves');
+ assert.equal(enemies.filter(e=>e.boss).length,0,'Elite bosses are kill-triggered, not spawned on a time clock');
  timer=400;enemies=[];spawnEnemy('tank',160,80);assert.ok(enemies[0].hp>200,'Difficulty scales over survival time');
  wavePhase='sweep';waveElapsed=24;update(.03);assert.equal(wave,1);assert.equal(voidActive,false);assert.equal(mapIndex,ENDLESS_BIOME);
  const classicBest=gameBest;kills=87;saveBest();assert.equal(meta.stats.bestEndless,87);assert.equal(gameBest,classicBest);
@@ -227,35 +227,80 @@ t.run(`start('endless');player.droneCount=0;player.invuln=999;
  start('normal');assert.equal(runMode,'normal');assert.equal(mapIndex,0);assert.equal(wave,1);
  player.need=99;player.xp=0;gainXp(2);assert.equal(player.xp,2,'Classic XP is unchanged');
 `);
-console.log('Pass: independent elite/supply timers, growing threat, separate endless high score and legacy-compatible saves.');
+console.log('Pass: independent supply timer, growing threat, separate Endless high score, and old saves.');
 
 // ENDLESS 2.5X SPAWN CADENCE, HORDES, AND PERFORMANCE LIMITS.
 t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;
  enemies=[];walls=[];invalidateNavigation();spawnTimer=.001;
- update(.005);assert.ok(spawnTimer>0&&spawnTimer<.85/ENDLESS_SPAWN_MULTIPLIER*1.2,'2.5x enemy spawn cadence');
+ update(.005);assert.ok(spawnTimer>0&&spawnTimer<.85/ENDLESS_SPAWN_MULTIPLIER*1.2,'5x enemy spawn cadence');
  assert.equal(enemies.length,1);
  const limit=ENDLESS_HALF_SIZE;player.x=limit-20;player.y=0;moveSolid(player,1000,0);assert.ok(player.x<=limit-player.r+1e-5);
- const t=runMode;start('normal');assert.equal(runMode,'normal');player.x=1400;moveSolid(player,1000,0);assert.ok(player.x>1400,'Classic arena remains larger');
+ const t=runMode;start('normal');assert.equal(runMode,'normal');walls=[];player.x=1400;moveSolid(player,1000,0);assert.ok(player.x>1400,'Classic arena remains larger');
 `);
-console.log('Pass: 2.5x Endless cadence and compact-only boundaries.');
+console.log('Pass: 5x Endless spawn cadence and compact-only boundaries.');
 t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;
  enemies=[];walls=[];invalidateNavigation();spawnTimer=999;endlessHordeClock=.001;
  update(.005);assert.ok(endlessHordeCount>=1,'At least one squad arrived together');
  assert.ok(enemies.length>=2,'A multi-enemy horde was spawned');
  const cap=endlessEnemyCap();assert.ok(cap<=ENDLESS_BASE_CAP);
  enemies=[];for(let i=0;i<cap+15;i++)spawnEnemy('drone',100+i%10*9,50+i%8*9);
- assert.equal(enemies.length,cap,'The cap holds during packed hordes');
+ assert.equal(enemies.length,cap-ENDLESS_ELITE_RESERVE,'Eight elite slots stay open during packed hordes');
  gameSettings.fx='low';assert.equal(endlessEnemyCap(),Math.min(endlessDynamicCap,58));
  gameSettings.fx='balanced';endlessDynamicCap=52;assert.equal(endlessEnemyCap(),52);
  render();assert.equal(wave,1);assert.equal(voidActive,false);
 `);
 console.log('Pass: grouped hordes, bounded enemy count, performance settings and classic independence.');
 
-t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;spawnTimer=999;endlessHordeClock=999;endlessBossClock=999;endlessSupplyClock=999;
+t.run(`start('endless');player.invuln=999;player.droneCount=0;shotTimer=999;spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=999;
  walls=[];invalidateNavigation();enemies=[];
  for(let i=0;i<ENDLESS_BASE_CAP+20;i++)spawnEnemy('drone',-420+(i%10)*72,-430+Math.floor(i/10)*68);
- assert.equal(enemies.length,ENDLESS_BASE_CAP,'Endless enemy population stops at cap');
+ assert.equal(enemies.length,ENDLESS_BASE_CAP-ENDLESS_ELITE_RESERVE,'Common enemies leave eight reserve slots');
  for(let i=0;i<100;i++){update(.016);render()}
  assert.ok(enemies.length<=ENDLESS_BASE_CAP);assert.ok(Number.isFinite(player.hp));
 `);
-console.log('Pass: 82-foe bounded combat simulation and renderer remain stable.');
+console.log('Pass: dense Endless combat remains bounded and renderer stable.');
+
+// NEW: Kill-based elites and 1000-kill triple encounter, independent of Classic mode.
+t.run(`start('endless');walls=[];invalidateNavigation();player.invuln=999;player.droneCount=0;
+ spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=999;enemies=[];
+ kills=64;spawnEnemy('drone',200,0);killed(enemies.at(-1));
+ assert.equal(endlessMilestoneQueue.length,1);assert.equal(endlessMilestoneQueue[0].tier,'mini');
+ enemies=[];update(.016);assert.equal(endlessMilestoneQueue.length,0);
+ assert.equal(enemies.filter(e=>e.boss&&e.mini).length,1,'65th elimination summons a mini-boss');
+ const miniKind=enemies.find(e=>e.boss&&e.mini).kind;
+ update(.016);assert.equal(enemies.filter(e=>e.boss&&e.mini).length,1,'No repeat summon at same kill count');
+ enemies=[];kills=114;spawnEnemy('drone',200,0);killed(enemies.at(-1));enemies=[];
+ update(.016);assert.equal(enemies.filter(e=>e.boss&&!e.mini).length,1,'115th elimination summons a major boss');
+ assert.ok(miniKind&&enemies[0].kind);
+`);
+console.log('Pass: exactly one mini-boss every 65 kills and a major boss every 115 kills.');
+
+t.run(`start('endless');walls=[];invalidateNavigation();player.invuln=999;player.droneCount=0;
+ spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=999;enemies=[];
+ kills=999;spawnEnemy('drone',220,0);killed(enemies.at(-1));enemies=[];
+ assert.equal(endlessMilestoneQueue.length,1);assert.equal(endlessMilestoneQueue[0].tier,'raid');
+ update(.016);assert.equal(endlessMilestoneQueue.length,0);
+ assert.equal(enemies.filter(e=>e.boss&&!e.mini).length,1,'1,000 kills summons one main boss');
+ assert.equal(enemies.filter(e=>e.boss&&e.mini).length,2,'1,000 kills summons two mini-bosses');
+ assert.ok(enemies.every(e=>Math.abs(e.x)<=ENDLESS_HALF_SIZE&&Math.abs(e.y)<=ENDLESS_HALF_SIZE));
+ assert.equal(wave,1);assert.equal(voidActive,false);
+`);
+console.log('Pass: 1000-kill raid contains exactly one boss and two mini-bosses.');
+
+t.run(`start('endless');walls=[];invalidateNavigation();player.invuln=999;player.droneCount=0;
+ spawnTimer=999;endlessHordeClock=999;endlessSupplyClock=999;enemies=[];
+ // Fill all elite slots with bosses, then verify new milestones remain queued.
+ const cap=endlessEnemyCap(),normalCap=cap-ENDLESS_ELITE_RESERVE;
+ for(let i=0;i<normalCap;i++)spawnEnemy('drone',i%15*22,50+Math.floor(i/15)*25);
+ assert.equal(enemies.length,normalCap);
+ for(let i=0;i<ENDLESS_ELITE_RESERVE;i++)spawnEnemy('hunter',180+i*12,140);
+ assert.equal(enemies.length,cap);
+ kills=64;const target=enemies.find(e=>!e.boss);killed(target);
+ assert.equal(endlessMilestoneQueue.length,1);
+ update(.016);assert.equal(endlessMilestoneQueue.length,1,'Elites remain queued until room opens');
+ const residentBoss=enemies.find(e=>e.boss);residentBoss.dead=true;enemies=enemies.filter(e=>!e.dead);
+ update(.016);assert.equal(endlessMilestoneQueue.length,0,'Queued boss summons when room becomes available');
+ assert.ok(enemies.length<=endlessEnemyCap(),'Population cap is never exceeded');
+ start('normal');assert.equal(endlessMilestoneQueue.length,0,'Kill milestone queue resets in Classic');
+`);
+console.log('Pass: population-capped boss queue and clean mode restart.');
