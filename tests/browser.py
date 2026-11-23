@@ -63,6 +63,9 @@ with sync_playwright() as playwright:
     # Seed a dense battle through a test-only instrumented response.
     page = browser.new_page(viewport={"width":844,"height":390})
     html = (root/"index.html").read_text().replace("showBalance();\n})();","""showBalance();
+    window.previewBiome=i=>{start();mapIndex=i;makeWorld();player.invuln=999;bannerTime=0;$('banner').style.opacity=0;
+    walls=walls.filter(w=>Math.hypot(w.x,w.y)>370);walls.push({x:86,y:-24,w:106,h:48,detail:.4});
+    spawnEnemy(i===7?'abyss':'hunter',-108,-42);setMode('pause');ui.pause.classList.add('hidden');render()};
     window.stress=()=>{start();player.invuln=999;walls=[];enemies=[];for(let i=0;i<120;i++)spawnEnemy('drone',60+i%15*14,-130+Math.floor(i/15)*28)};
     })();""")
     page.route(url+"/", lambda route:route.fulfill(content_type="text/html",body=html))
@@ -70,5 +73,9 @@ with sync_playwright() as playwright:
     intervals=page.evaluate("""()=>new Promise(done=>{let last=performance.now(),samples=[];function tick(t){samples.push(t-last);last=t;if(samples.length>=120)done(samples.slice(5));else requestAnimationFrame(tick)}requestAnimationFrame(tick)})""")
     print("Headless desktop Chromium, 120 enemies seeded. Median frame interval (ms)",round(statistics.median(intervals),1),"p95",round(sorted(intervals)[int(len(intervals)*.95)],1))
     page.screenshot(path=shots / "dense-battle.png")
+    for index in range(8):
+        page.evaluate("(i)=>previewBiome(i)",index)
+        page.wait_for_timeout(150)
+        page.screenshot(path=shots / f"biome-{index}.png")
     browser.close()
 server.shutdown()

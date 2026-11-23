@@ -25,7 +25,7 @@ class Element{
 const nodes=new Map();
 const node=id=>{if(!nodes.has(id))nodes.set(id,new Element());return nodes.get(id)};
 const data=new Map();
-const env={console,assert,performance,innerWidth:844,innerHeight:390,devicePixelRatio:2,
+const env={navigator:{},console,assert,performance,Image:class {},innerWidth:844,innerHeight:390,devicePixelRatio:2,
  document:{getElementById:node,createElement:()=>new Element(),addEventListener:noop},requestAnimationFrame:noop,
  localStorage:{getItem:k=>data.get(k),setItem:(k,v)=>data.set(k,v)},addEventListener:noop};
 env.window=env;
@@ -62,3 +62,10 @@ run(`start();for(let i=0;i<8;i++){timer=(4+i*4)*24-.01;update(.025);assert.equal
  walls=[];enemies=[];for(let i=0;i<130;i++)spawnEnemy('drone',160+i%12*12,Math.floor(i/12)*15);
  for(let i=0;i<30;i++){update(.016);render()}assert.ok(Number.isFinite(player.hp));`);
 console.log('3.0/4.0 fixtures, purchases, level choice, results, biome rotation, boss phases and dense simulation passed.');
+run(`start();walls=[];player.need=999;for(const n of [1,3,5,10,50]){dropCoin(0,0,n);Object.assign(gems.at(-1),{x:0,y:0,vx:0,vy:0})}
+ update(.016);assert.equal(player.xp,69);assert.equal(gems.length,0);
+ spawnEnemy('abyss',120,10);const sovereign=enemies.at(-1);
+ for(const [fraction,phase] of [[.98,1],[.50,2],[.15,3]]){sovereign.hp=sovereign.maxHp*fraction;update(.016);assert.equal(sovereign.bossPhase,phase);castSkill(sovereign);render()}
+ hitEnemy(sovereign,sovereign.maxHp*3,'#fff');assert.ok(sovereign.dead);
+`);
+console.log('Five XP currencies, Abyss phase attacks and boss defeat passed.');
