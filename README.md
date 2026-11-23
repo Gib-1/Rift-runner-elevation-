@@ -6,6 +6,15 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 4.0 — Endless Horde mode
+
+Two independent run modes are available from the title screen:
+
+- **Classic · Wave Mode:** the original wave progression, collectible XP sweep after enemy-clear, Void Breach interludes between biomes, and the eight original rotating biomes. Classic XP and wave achievements are unchanged.
+- **Endless Horde · 2.5× XP:** a separate playable **Eclipse Citadel** arena with hand-structured concentric rings, radial energy architecture, arena-specific neon materials, cover, loot caches and ambient hazards. Enemies spawn continuously without wave breaks or biome transitions, and their variety, health and attack frequency increase with survival time. Supply pods arrive every ~47 seconds, and mini-bosses / bosses can appear at longer time intervals, without stopping the horde. Every source of player XP is multiplied by exactly 2.5 while in Endless, including coins and caches. Standard mode remains 1× XP. Enemy numbers and visual effects remain bounded for mobile performance.
+
+Endless has its own elimination record, stored under the existing `riftrunner_evolution_v1` save profile in `stats.bestEndless`. It is included in portable version-1 save backups. Existing saved progress and old backups work with a default Endless record of zero. The existing normal-run best score and Wave 8 achievement remain exclusive to Classic runs. Both modes award Rift Cores using the usual kill/boss formula.
+
 ## Evolution 4.0 — Targeted Flight, Wave Clearance & XP Sweep
 
 - **Ship turns toward the firing target:** the player craft follows its current target between auto-shots, and its nose snaps to the actual firing direction when a projectile or Tesla beam is fired. Moving and dashing do not force the ship to face away from an enemy it is shooting.

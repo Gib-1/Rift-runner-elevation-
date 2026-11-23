@@ -60,8 +60,9 @@ try:
             print(f"Passed {width}x{height} browser menus, import/export, combat controls, and screenshots")
         # Render the short interlude in a real browser without putting test hooks in production code.
         preview_html=(root/"index.html").read_text()
-        assert "showBalance();\n})();" in preview_html
-        preview_html=preview_html.replace("showBalance();\n})();", """showBalance();
+        injection_point="showBalance();$('endlessBestLine').textContent='ENDLESS RECORD · '+meta.stats.bestEndless+' eliminations';\n})();"
+        assert injection_point in preview_html
+        preview_html=preview_html.replace(injection_point, """showBalance();$('endlessBestLine').textContent='ENDLESS RECORD · '+meta.stats.bestEndless+' eliminations';
         window.__triggerVoid=()=>{start();advanceWave(4);waveElapsed=24;wavePhase='clear';enemies=[];player.invuln=999;update(.02);waveSweepRemaining=.01;update(.02)};
         window.__finishVoid=()=>{voidRemaining=.01;update(.02)};
         })();""")
@@ -85,6 +86,28 @@ try:
             assert not pg.locator("#voidClock").is_visible()
             assert not errors, errors
             ctx.close()
+        # A separate browser context verifies Endless never loads normal wave UI.
+        for width,height in ((844,390),(390,844)):
+            ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=ctx.new_page();errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.goto(url)
+            assert pg.locator("#endlessBtn").is_visible()
+            pg.screenshot(path=screenshots/f"endless-menu-{width}.png")
+            pg.locator("#endlessBtn").tap()
+            pg.wait_for_function("document.querySelector('#wave').textContent.includes('ENDLESS')")
+            assert "ECLIPSE CITADEL" in pg.locator("#areaTag").inner_text()
+            assert "2.5× XP" in pg.locator("#battleMetrics").inner_text()
+            assert not pg.locator("#voidClock").is_visible()
+            pg.wait_for_timeout(1900)
+            assert "ENDLESS" in pg.locator("#wave").inner_text()
+            pg.screenshot(path=screenshots/f"endless-game-{width}.png")
+            pg.locator("#pauseBtn").tap()
+            assert pg.locator("#resumeBtn").is_visible()
+            pg.locator("#resumeBtn").tap()
+            assert not errors,errors
+            ctx.close()
+            print(f"Passed {width}x{height} Endless arena, nonstop HUD, pause and screenshot checks")
         browser.close()
 finally:
     server.shutdown()
