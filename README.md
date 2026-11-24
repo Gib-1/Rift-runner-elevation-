@@ -6,7 +6,20 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
-## Visual Redesign — Phase 1: Style Settings Foundation (latest)
+## Visual Redesign — Phases 2–3: Playable Ship and Basic Enemy Styles (current)
+
+The game's Settings > Visual Style selector now changes **actual gameplay artwork** across both Classic and Endless. **Normal remains the exact original ship and enemy shapes.** The four optional styles each have distinct, lightweight Canvas 2D ship and common-enemy designs:
+
+- **Military Sci-Fi:** armored interceptor, grounded metal hulls, gun barrels, tracks and reinforced enemy plating.
+- **Neon Cyberpunk:** dark angular ships, bright energy traces, luminous enemy outlines and glowing reactor cores.
+- **Dark Cosmic Sci-Fi:** alien ship silhouette, fractured purple energy, strange enemy cores and shadowed armor.
+- **Hybrid:** tactical armored ships combined with neon circuits and cosmic cracks; distinct enemy silhouettes.
+
+The Phase 2 ship changes and Phase 3 enemy designs are both included. **Redesigned Enemies** switches common-enemy artwork on/off independently; the ship remains in its selected style. **Animated Ship Armor & Thrusters** and **Enhanced Style Effects** continue controlling ship and enemy embellishments, with Low Effects reducing rendering cost. Fifteen basic enemy kinds have dedicated role-based silhouettes: drone, dart, tank, shooter, wisp, splitter, sniper, leech, charger, bomber, orbiter, bulwark, stalker, mender and miner. Elite/specialist enemies, Void troops, bosses, drones, weapons and arenas retain their original look until later phases.
+
+Styles and toggles still save to `riftrunner_options_v1`; existing progress, backup format, hitboxes, difficulty, XP, upgrades, bosses and normal/endless rules are unchanged. No textures, 3D engine or remote assets are required. The visual redesign has been tested in portrait and landscape, with 70-enemy rendering smoke tests.
+
+## Visual Redesign — Phase 1: Style Settings Foundation (historical)
 
 Open **GAME SETTINGS** from the main menu or pause screen. Choose exactly one visual style:
 
@@ -18,7 +31,7 @@ Open **GAME SETTINGS** from the main menu or pause screen. Choose exactly one vi
 
 The selected style has a lightweight in-settings swatch/preview and saves immediately in existing **`riftrunner_options_v1`**. Three independent ON/OFF options are also saved there: **Redesigned Enemies**, **Animated Ship Armor & Thrusters**, and **Enhanced Style Effects**. Returning to Normal requires no reset; all five styles are mutually exclusive. Settings are available during Classic and Endless runs via Pause > Settings, and the Back button returns to the prior screen.
 
-**Phase 1 is settings-only.** Alternative artwork is **not yet drawn during gameplay**: the original Normal graphics remain in both modes for now. Phases 2–7 will implement the player, enemies, bosses, drones, weapons and environments using these saved preferences. The switches are future artwork preferences; the existing BALANCED/LOW effects, camera zoom, sound, screen shake and combat text controls still work as before.
+**At its original release, Phase 1 was settings-only.** Phases 2–3 now implement real player-ship and basic-enemy artwork; advanced enemies, bosses, drones, weapons and environments remain for Phases 4–7. Normal keeps the existing original shapes. The switches now control ship and common-enemy visual settings; the existing BALANCED/LOW effects, camera zoom, sound, screen shake and combat text controls still work as before.
 
 This change makes no changes to physics, enemies, XP, upgrades, hitboxes, saves or save backup format. Previous settings automatically default to Normal and ON for the three new switches. Preferences are local to each device and are not part of portable gameplay backups.
 
