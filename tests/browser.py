@@ -41,18 +41,21 @@ try:
             page.locator("#styleOption-hybrid").tap()
             assert page.locator("#styleOption-hybrid").get_attribute("aria-checked")=="true"
             assert page.locator("#styleOption-cosmic").get_attribute("aria-checked")=="false"
-            for toggle in ("#styleEnemiesBtn","#styleArmorBtn","#styleEffectsBtn"):
+            page.locator("#styleEnemiesBtn").tap()
+            assert page.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
+            assert page.locator("#styleEnemiesBtn .switchValue").inner_text()=="LINKED"
+            for toggle in ("#styleArmorBtn","#styleEffectsBtn"):
                 page.locator(toggle).tap()
                 assert page.locator(toggle).get_attribute("aria-checked")=="false"
             stored=page.evaluate("JSON.parse(localStorage.getItem('riftrunner_options_v1'))")
             assert stored['visualStyle']=='hybrid'
-            assert not stored['styleEnemies'] and not stored['styleArmor'] and not stored['styleEffects']
+            assert stored['styleEnemies'] and not stored['styleArmor'] and not stored['styleEffects']
             page.screenshot(path=screenshots/f"phase1-visual-settings-{width}.png")
             page.locator("#settingsBackBtn").tap()
             page.reload(wait_until="domcontentloaded")
             page.locator("#settingsBtn").tap()
             assert page.locator("#styleOption-hybrid").get_attribute("aria-checked")=="true"
-            assert page.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="false"
+            assert page.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
             assert page.locator("#styleArmorBtn").get_attribute("aria-checked")=="false"
             assert page.locator("#styleEffectsBtn").get_attribute("aria-checked")=="false"
             page.locator("#fxBtn").tap()
@@ -222,7 +225,9 @@ try:
                 pg.screenshot(path=screenshots/f"full-world-style-settings-{style}-{width}.png")
             assert len(seen_panels)==5,seen_panels
             assert len(seen_previews)==5,"Five distinct scene previews expected"
-            for toggle in ("styleEnemiesBtn","styleArmorBtn","styleEffectsBtn"):
+            pg.locator("#styleEnemiesBtn").tap()
+            assert pg.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
+            for toggle in ("styleArmorBtn","styleEffectsBtn"):
                 pg.locator("#"+toggle).tap()
                 assert pg.locator("#"+toggle).get_attribute("aria-checked")=="false"
             pg.locator("#settingsBackBtn").tap()
@@ -230,7 +235,8 @@ try:
             assert pg.evaluate("document.documentElement.getAttribute('data-art-style')")=="hybrid"
             assert "HYBRID" in pg.locator("#menuArtTag").inner_text()
             pg.locator("#settingsBtn").tap()
-            for toggle in ("styleEnemiesBtn","styleArmorBtn","styleEffectsBtn"):
+            assert pg.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
+            for toggle in ("styleArmorBtn","styleEffectsBtn"):
                 assert pg.locator("#"+toggle).get_attribute("aria-checked")=="false"
                 pg.locator("#"+toggle).tap()
             pg.locator("#settingsBackBtn").tap()
@@ -250,6 +256,72 @@ try:
             context.close()
             print(f"Passed {width}x{height} all five full-world styles, CSS palettes, preview art, persisted toggles and in-run switching")
 
+        # Phase 4 gallery directly renders the SAME sprites used in combat, across styles.
+        # Inspect a style switch after selecting Normal with enemy-art turned off.
+        for width,height in ((844,390),(390,844)):
+            context=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=context.new_page();errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.goto(url)
+            pg.locator("#settingsBtn").tap()
+            assert pg.locator("[data-phase4-kind]").count()==5
+            signatures={}
+            for style in ("normal","military","neon","cosmic","hybrid"):
+                pg.locator("#styleOption-"+style).tap()
+                models=pg.locator("[data-phase4-kind]").evaluate_all("els=>els.map(el=>({kind:el.dataset.phase4Kind,signature:el.toDataURL().slice(0,1200),size:el.toDataURL().length}))")
+                assert len(models)==5,models
+                assert all(model["size"]>1200 for model in models),models
+                signatures[style]=[model["signature"] for model in models]
+                assert pg.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
+                if style!="normal":assert pg.locator("#styleEnemiesBtn .switchValue").inner_text()=="LINKED"
+                pg.locator("#phase4GalleryHeading").scroll_into_view_if_needed()
+                pg.screenshot(path=screenshots/f"phase4-gallery-{style}-{width}.png")
+            assert len({tuple(v) for v in signatures.values()})==5,"Each visual style must show distinct enemy models"
+            pg.locator("#styleOption-normal").tap()
+            pg.locator("#styleEnemiesBtn").tap()
+            assert pg.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="false"
+            pg.locator("#styleOption-military").tap()
+            assert pg.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="true"
+            assert not errors,errors
+            context.close()
+            print(f"Passed Phase 4 {width}x{height}: 5 real specialist previews × 5 themes, automatic enemy linking, Normal fallback")
+
+        # Render in-game specialists and capture proof for four art styles and Normal.
+        base_html=(root/"index.html").read_text()
+        hook="""
+        window.__phase4Encounter=(style,fx)=>{
+          start('endless');player.invuln=999;player.droneCount=0;player.aura=0;
+          enemies=[];bullets=[];enemyBullets=[];beams=[];rings=[];walls=[];zones=[];wells=[];
+          camera.x=0;camera.y=0;shake=0;timer=10;
+          gameSettings.visualStyle=style;gameSettings.styleEnemies=style!=='normal';
+          gameSettings.fx=fx;gameSettings.styleEffects=fx!=='low';applyVisualTheme();
+          const kinds=[...PHASE4_SPECIALISTS];
+          for(let i=0;i<kinds.length;i++){
+           spawnEnemy(kinds[i],-190+i*96,0);
+           const e=enemies.at(-1);e.x=-190+i*96;e.y=0;e.r=types[kinds[i]].r*1.6;
+           e.flash=0;e.teleport=.6;e.mineTimer=.4;e.shot=.2;e.guard=1;
+           e.charge={windup:.3,vx:1,vy:0};
+          }
+          render();return {enemyKinds:enemies.map(e=>e.kind),hp:enemies.map(e=>e.hp)};
+        };
+        """
+        assert base_html.count("function frame(now)")==1
+        custom_html=base_html.replace("function frame(now)",hook+"\nfunction frame(now)",1)
+        for width,height in ((844,390),(390,844)):
+            ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=ctx.new_page();errs=[]
+            pg.on("pageerror",lambda err:errs.append(str(err)))
+            pg.route(url,lambda route:route.fulfill(content_type="text/html",body=custom_html))
+            pg.goto(url)
+            for style in ("normal","military","neon","cosmic","hybrid"):
+                e=pg.evaluate("style=>window.__phase4Encounter(style,'balanced')",style)
+                assert len(e["enemyKinds"])==5,e
+                pg.screenshot(path=screenshots/f"phase4-combat-{style}-{width}.png")
+            low=pg.evaluate("window.__phase4Encounter('neon','low')")
+            assert len(low["enemyKinds"])==5
+            assert not errs,errs
+            ctx.close()
+            print(f"Passed Phase 4 {width}x{height}: advanced enemy combat and warning animations, Normal, Low FX")
         browser.close()
 finally:
     server.shutdown()

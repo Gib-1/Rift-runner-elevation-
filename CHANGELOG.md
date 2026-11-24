@@ -6,7 +6,17 @@
 
 # Changelog
 
-## Five Visual Worlds — Full Art Overhaul (current)
+## Visual Redesign — Phase 4: Advanced Enemy Fleets (current)
+
+- Replaced the generic elite silhouette on **Blinkblade, Prism Gunner, Ironclad, Stormweaver and Swarm Carrier** with five bespoke archetypes, drawn in four clearly differentiated visual styles, for 20 distinctive specialist variants.
+- Added cosmetic wind-up cues driven by existing combat state: Blinkblade teleport circle, Prism's three muzzle chargers, Ironclad shield/charge plating, Stormweaver warning halo and Swarm Carrier's three visible drones.
+- Added **Advanced Enemy Hangar** inside Game Settings, with five actual renderer-based model previews which change with the selected world theme. The preview uses the identical function as combat.
+- Force redesigned enemy art ON for all four non-Normal world themes, including old saved preferences with stale enemy-art OFF settings. Normal still shows the original enemy forms and allows the original toggle state.
+- Kept style-specific world, UI, ships, 36 total enemy kinds, major/miniboss art, drone art and weapons from the previously deployed Five Visual Worlds release.
+- No gameplay balance or spawn changes. Existing 5× Endless spawning, 2.5× Endless XP, 65/115/1,000 kill boss milestones, 2.5× Coin Rain, Classic waves, Void Breaches, old saves and portable JSON backups remain compatible.
+- Tested five specialists × four styles × Balanced/Low Effects × idle/warning/impact frames, legacy option migration, normal sprite fallback and gameplay invariants in Node. Chromium rendered portrait and landscape previews and 50 active specialists in Low Effects without JavaScript errors. Browser CI runs full mobile/desktop, save, gameplay and gallery checks before deployment.
+
+## Five Visual Worlds — Full Art Overhaul (previous release)
 
 - Rebuilt the five-mode art selector so all alternative modes restyle **the full game**: menus, HUD, game-over, achievements, Hangar, upgrades, interactive buttons, stage palettes, grids, cover, hazards, rifts, pickups, XP coins, player, drones, weapons, enemy bullets and visual effects.
 - Drew distinct Military, Neon, Dark Cosmic and Hybrid variants for **all 36 enemy kinds**, including the five new specialists, Void troops, mini-bosses and major bosses. Preserve original Normal shapes and original enemy art with the Redesigned Enemies switch OFF.

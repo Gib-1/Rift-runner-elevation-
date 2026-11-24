@@ -7,7 +7,7 @@
 <meta name="description" content="Rift Runner Evolution 4.0: five full visual worlds, all-new themed fleets, enemies, arenas and HUD, plus Endless Horde, Coin Rain and offline mobile play.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
-<title>RIFT RUNNER: EVOLUTION 4.0 — Five Visual Worlds</title>
+<title>RIFT RUNNER: EVOLUTION 4.0 — Advanced Enemy Fleets</title>
 <style>
 :root{--ink:#eaf9ff;--muted:#8ea9c6;--cyan:#59e8fb;--line:rgba(114,205,255,.22);--panel:rgba(8,19,37,.93)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -153,6 +153,14 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 #voidTint{position:fixed;inset:0;pointer-events:none;z-index:2;opacity:0;background:radial-gradient(ellipse at center,transparent 36%,rgba(128,22,172,.36) 100%);transition:opacity .35s ease}
 @media(max-height:430px){#voidClock{position:fixed;top:calc(env(safe-area-inset-top,0px) + 118px);left:10px;font-size:10px;margin:0;padding:5px 9px;max-width:34%}}
 
+/* PHASE 4 — readable specialist silhouettes in Settings, even on narrow phones. */
+.specialistGallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:10px 0 13px}
+.specialistGallery figure{margin:0;min-width:0;overflow:hidden;background:var(--art-inner,#08182b);border:1px solid var(--art-outline,#426b88);border-radius:12px;padding:8px 6px 7px;text-align:center}
+.specialistGallery canvas{display:block;width:100%;max-height:103px;object-fit:contain;aspect-ratio:16/11;margin:auto}
+.specialistGallery figcaption{font-size:11px;font-weight:950;letter-spacing:.4px;color:var(--art-primary,#a6edff)}
+.specialistGallery figcaption small{display:block;font-size:10px;line-height:1.4;letter-spacing:0;color:var(--art-muted,#b5cde0);font-weight:650}
+.specialistGallery figure:last-child:nth-child(odd){grid-column:1/-1;justify-self:stretch}
+@media (min-width:700px){.specialistGallery{grid-template-columns:repeat(3,minmax(0,1fr))}.specialistGallery figure:last-child:nth-child(odd){grid-column:auto}}
 /* ART DIRECTOR 4.0 — four complete worlds; default Normal has NO style overrides. */
 html[data-art-style="military"]{--art-light:#e9eddc;--art-muted:#bcc8b7;--art-primary:#d0e2ac;--art-secondary:#ffbc6a;--art-outline:#879d6a;--art-surface:#17231d;--art-surface-2:#2b3b31;--art-inner:#0b1714;--art-aura:#93b17d;--art-corner:5px;--art-font:ui-monospace,Consolas,monospace;--art-overlay:rgba(5,13,10,.82)}
 html[data-art-style="neon"]{--art-light:#e9faff;--art-muted:#afc7fb;--art-primary:#3bf7fe;--art-secondary:#ff51c9;--art-outline:#ea4cd5;--art-surface:#170e3d;--art-surface-2:#301052;--art-inner:#080621;--art-aura:#e94ff8;--art-corner:15px;--art-font:system-ui,-apple-system,sans-serif;--art-overlay:rgba(12,2,32,.79)}
@@ -249,22 +257,31 @@ html[data-art-style]:not([data-art-style="normal"]) #time,html[data-art-style]:n
 <div class="overlay hidden" id="featureGuide"><div class="panel" style="max-height:91dvh;overflow-y:auto;text-align:left"><h2 class="sectiontitle" style="text-align:center">ENEMY UPRISING + COIN RAIN</h2><p class="sub" style="text-align:center">35 Drone Armada improvements plus 5 new enemy types, 20 run upgrades, and 10 permanent upgrades</p><ol id="featureGuideList" style="font-size:13px;line-height:1.8;color:#d1eefa;padding-left:22px"></ol><button class="primary" id="featuresBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Customize your appearance and performance without resetting progress.</p>
 <section class="styleSection" aria-labelledby="visualStyleHeading">
-<h3 id="visualStyleHeading">VISUAL STYLE · COMPLETE ART THEMES</h3>
-<p class="styleSectionIntro">Change the ENTIRE look instantly: arena colors, ship, all enemies and bosses, drones, projectiles, menus, HUD and effects. Normal is the original game.</p>
+<h3 id="visualStyleHeading">VISUAL STYLE · PHASE 4 SPECIALIST FLEETS</h3>
+<p class="styleSectionIntro">Change the entire world, fleet, enemies and bosses instantly. Phase 4 adds five unmistakable advanced-enemy silhouettes and attack warning cues. Normal keeps the original game.</p>
 <div class="styleOptions" role="radiogroup" aria-label="Visual style">
-<button class="visualStyleCard" id="styleOption-normal" data-style="normal" type="button" role="radio" aria-checked="true"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Normal</strong><small>Original palette, shapes and UI</small></span></button>
-<button class="visualStyleCard" id="styleOption-military" data-style="military" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Military Sci-Fi</strong><small>Olive tactical battlefield + armored fleet</small></span></button>
-<button class="visualStyleCard" id="styleOption-neon" data-style="neon" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Neon Cyberpunk</strong><small>Magenta/cyan cyberpunk world</small></span></button>
-<button class="visualStyleCard" id="styleOption-cosmic" data-style="cosmic" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Dark Cosmic Sci-Fi</strong><small>Purple alien Void world</small></span></button>
-<button class="visualStyleCard" id="styleOption-hybrid" data-style="hybrid" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Hybrid</strong><small>Teal/gold cosmic-tech world</small></span></button>
+<button class="visualStyleCard" id="styleOption-normal" data-style="normal" type="button" role="radio" aria-checked="true"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Normal</strong><small>Original palette, shapes, enemies and UI</small></span></button>
+<button class="visualStyleCard" id="styleOption-military" data-style="military" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Military Sci-Fi</strong><small>Olive tactical battlefield + armored fleet + styled enemies</small></span></button>
+<button class="visualStyleCard" id="styleOption-neon" data-style="neon" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Neon Cyberpunk</strong><small>Magenta/cyan cyberpunk world + styled enemies</small></span></button>
+<button class="visualStyleCard" id="styleOption-cosmic" data-style="cosmic" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Dark Cosmic Sci-Fi</strong><small>Purple alien Void world + styled enemies</small></span></button>
+<button class="visualStyleCard" id="styleOption-hybrid" data-style="hybrid" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Hybrid</strong><small>Teal/gold cosmic-tech world + styled enemies</small></span></button>
 </div>
 <div id="visualPreview" data-style="normal" role="status" aria-live="polite"><span class="stylePreviewShip" aria-hidden="true">◆</span><span class="stylePreviewCopy"><strong id="visualPreviewName">NORMAL · ORIGINAL</strong><small id="visualPreviewDesc">Original game graphics remain active.</small></span></div>
 <canvas id="styleDemo" width="720" height="250" aria-label="Live preview of the selected art theme, with ship, enemies and arena"></canvas>
+<h3 id="phase4GalleryHeading">PHASE 4 · ADVANCED ENEMY HANGAR</h3>
+<p class="styleSectionIntro">These five enemy models match the selected theme during Classic and Endless battles. Their shapes and warning cues show what each enemy does.</p>
+<div class="specialistGallery" role="group" aria-labelledby="phase4GalleryHeading">
+  <figure><canvas data-phase4-kind="blinkblade" width="160" height="110" aria-label="Blinkblade teleporting striker model"></canvas><figcaption>BLINKBLADE<small>Teleport striker</small></figcaption></figure>
+  <figure><canvas data-phase4-kind="prismgun" width="160" height="110" aria-label="Prism Gunner triple volley model"></canvas><figcaption>PRISM GUNNER<small>Triple volley</small></figcaption></figure>
+  <figure><canvas data-phase4-kind="ironclad" width="160" height="110" aria-label="Ironclad armored charger model"></canvas><figcaption>IRONCLAD<small>Shield + charge</small></figcaption></figure>
+  <figure><canvas data-phase4-kind="stormweaver" width="160" height="110" aria-label="Stormweaver storm caster model"></canvas><figcaption>STORMWEAVER<small>Area warning</small></figcaption></figure>
+  <figure><canvas data-phase4-kind="swarmcarrier" width="160" height="110" aria-label="Swarm Carrier three-pod model"></canvas><figcaption>SWARM CARRIER<small>3 drone pods</small></figcaption></figure>
+</div>
 <h3>ARTWORK OPTIONS</h3>
-<button class="styleSwitch" id="styleEnemiesBtn" type="button" role="switch" aria-checked="true"><span>Redesigned enemies</span><span class="switchValue">ON</span></button>
+<button class="styleSwitch" id="styleEnemiesBtn" type="button" role="switch" aria-checked="true"><span>Styled enemies (linked to style)</span><span class="switchValue">ON</span></button>
 <button class="styleSwitch" id="styleArmorBtn" type="button" role="switch" aria-checked="true"><span>Animated ship armor &amp; thrusters</span><span class="switchValue">ON</span></button>
 <button class="styleSwitch" id="styleEffectsBtn" type="button" role="switch" aria-checked="true"><span>Enhanced style effects</span><span class="switchValue">ON</span></button>
-<p class="stylePhaseNotice" id="stylePhaseNotice">All four alternative looks now cover the full game. Normal retains the original art. These options change appearance only—not difficulty, hitboxes, damage, progression or saves.</p>
+<p class="stylePhaseNotice" id="stylePhaseNotice">Phase 4 adds five unique specialist fleets with attack warning cues in all four styles. Normal retains the original art. These options change appearance only—not difficulty, hitboxes, damage, progression or saves.</p>
 </section>
 <h3 class="tinycap" style="text-align:left;margin-top:18px">PERFORMANCE &amp; ACCESSIBILITY</h3>
 <div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="zoomBtn" type="button">CAMERA: NORMAL</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Preferences are saved on this device only; your progress and backup format do not change.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
@@ -288,7 +305,7 @@ try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null'
  gameSettings.fx=saved.fx==='low'?'low':'balanced';gameSettings.screenShake=saved.screenShake!==false;
  gameSettings.damageNumbers=saved.damageNumbers!==false;gameSettings.zoom=['near','normal','far'].includes(saved.zoom)?saved.zoom:'normal';
  gameSettings.visualStyle=Object.prototype.hasOwnProperty.call(VISUAL_STYLES,saved.visualStyle)?saved.visualStyle:'normal';
- gameSettings.styleEnemies=saved.styleEnemies!==false;gameSettings.styleArmor=saved.styleArmor!==false;gameSettings.styleEffects=saved.styleEffects!==false;
+ gameSettings.styleEnemies=gameSettings.visualStyle!=='normal'||saved.styleEnemies!==false;gameSettings.styleArmor=saved.styleArmor!==false;gameSettings.styleEffects=saved.styleEffects!==false;
  soundOn=saved.sound!==false}}catch(e){}
 function saveSettings(){try{localStorage.setItem('riftrunner_options_v1',JSON.stringify({...gameSettings,sound:soundOn}))}catch(e){}}
 const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),achievements:$('achievements'),settings:$('settings'),featureGuide:$('featureGuide'),pause:$('pauseOverlay'),over:$('gameOver')};
@@ -1526,6 +1543,177 @@ function drawStyledBasicEnemy(e,style){
 
 // Full-theme elite art: all specialist enemies, Void threats and bosses share coherent
 // outlines with their faction but retain distinct role markers. No gameplay changes.
+// PHASE 4 — five bespoke advanced-enemy silhouettes in every optional art world.
+// Cosmetics ONLY: no position, collision, attack, speed, HP, save or damage mutation.
+// Clear role cues use silhouette + glowing core + limited pre-existing cooldown tells.
+const PHASE4_SPECIALISTS=Object.freeze(['blinkblade','prismgun','ironclad','stormweaver','swarmcarrier']);
+const PHASE4_ROLE_LABELS=Object.freeze({
+ blinkblade:'PHASE STRIKER',prismgun:'TRIPLE VOLLEY',ironclad:'ARMORED CHARGER',
+ stormweaver:'STORM CASTER',swarmcarrier:'SWARM TRANSPORT'
+});
+const PHASE4_ART=Object.freeze({
+ military:{base:'#27342d',wing:'#405044',armor:'#7b9078',edge:'#ddedc2',core:'#ffc572',warning:'#ffb765',detail:'#192820'},
+ neon:{base:'#0a1235',wing:'#171048',armor:'#4c1a70',edge:'#4ef7ff',core:'#ff62d8',warning:'#fff07b',detail:'#07172f'},
+ cosmic:{base:'#221134',wing:'#3e205c',armor:'#59337b',edge:'#d2a7ff',core:'#ff88d5',warning:'#ffe09b',detail:'#10091e'},
+ hybrid:{base:'#18323b',wing:'#275460',armor:'#54717b',edge:'#79ffe9',core:'#ffc26f',warning:'#ff9abf',detail:'#142238'}
+});
+function drawPhase4Specialist(e,style,g=ctx){
+ const p=PHASE4_ART[style];if(!p||!PHASE4_SPECIALISTS.includes(e.kind))return false;
+ const fx=gameSettings.styleEffects&&gameSettings.fx!=='low',t=fx?timer:0;
+ const s=Math.max(0.45,Math.min(3,(e.r||20)/26));
+ const pulse=fx?(0.7+0.3*Math.sin(t*7+(e.phase||0))):.85;
+ const active=e.flash>0;
+ g.save();g.scale(s,s);g.lineJoin='round';g.lineCap='round';g.lineWidth=2;
+ g.shadowBlur=fx?6:0;g.shadowColor=p.core;
+ const fill=active?'#f8ffff':p.base;
+ function polygon(points,color=fill,stroke=p.edge,width=2){
+  g.beginPath();g.moveTo(points[0],points[1]);for(let i=2;i<points.length;i+=2)g.lineTo(points[i],points[i+1]);g.closePath();g.fillStyle=color;g.fill();if(stroke){g.strokeStyle=stroke;g.lineWidth=width;g.stroke()}
+ }
+ function ln(x1,y1,x2,y2,color=p.edge,width=2){g.strokeStyle=color;g.lineWidth=width;g.beginPath();g.moveTo(x1,y1);g.lineTo(x2,y2);g.stroke()}
+ function circle(x,y,r,color=p.core){g.fillStyle=color;g.beginPath();g.arc(x,y,r,0,TWO);g.fill()}
+ function ring(x,y,r,color=p.edge,width=2,start=0,end=TWO){g.strokeStyle=color;g.lineWidth=width;g.beginPath();g.arc(x,y,r,start,end);g.stroke()}
+ function rect(x,y,w,h,color=p.armor){g.fillStyle=color;g.fillRect(x,y,w,h)}
+ function reactor(x=0,y=0,r=5){circle(x,y,r,p.core);circle(x,y,Math.max(1.6,r*.38),'#fff9ea')}
+ switch(e.kind){
+ case 'blinkblade':{
+  // Needle fighter with two separated prongs; visibly not a round or hex enemy.
+  if(style==='military'){
+   polygon([-27,-17,-14,-24,9,-13,35,-22,27,-6,13,0,27,6,35,22,9,13,-14,24,-27,17,-20,0],p.wing,p.edge);
+   polygon([-23,-8,10,-7,25,0,10,7,-23,8,-13,0],fill,p.armor);
+   polygon([19,-13,39,-19,31,-8],p.armor,p.core);polygon([19,13,39,19,31,8],p.armor,p.core);
+   for(const y of [-13,13])ln(-16,y,8,y,p.warning,2);
+  }else if(style==='neon'){
+   polygon([-28,-20,-5,-13,15,-25,39,-13,18,-6,7,0,18,6,39,13,15,25,-5,13,-28,20,-15,0],p.wing,p.edge,2.7);
+   polygon([-18,-5,8,-6,27,0,8,6,-18,5],fill,p.core);
+   ln(8,-19,36,-12,p.core,3);ln(8,19,36,12,p.core,3);ln(-14,0,20,0,p.edge,1.5);
+  }else if(style==='cosmic'){
+   g.fillStyle=p.wing;g.strokeStyle=p.edge;g.lineWidth=2.8;g.beginPath();g.moveTo(-26,-6);g.quadraticCurveTo(-9,-37,35,-27);g.quadraticCurveTo(9,-13,31,-4);g.lineTo(11,0);g.lineTo(31,4);g.quadraticCurveTo(9,13,35,27);g.quadraticCurveTo(-9,37,-26,6);g.closePath();g.fill();g.stroke();
+   polygon([-21,0,5,-12,23,0,5,12],fill,p.core);ln(2,-20,27,-22,p.warning,2);ln(2,20,27,22,p.warning,2);
+  }else{
+   polygon([-30,-18,-13,-25,10,-12,30,-26,39,-13,18,-3,34,0,18,3,39,13,30,26,10,12,-13,25,-30,18,-14,0],p.wing,p.edge);
+   polygon([-23,-7,11,-8,29,0,11,8,-23,7],fill,p.armor);
+   for(const y of [-17,17]){ln(12,y,33,y*.85,p.core,3);circle(-12,y*.55,2.4,p.edge)}
+  }
+  reactor(-5,0,4.4);
+  const countdown=e.teleport??999;
+  if(countdown>0&&countdown<1.15){g.save();g.globalAlpha=.5+.4*pulse;g.setLineDash([5,5]);ring(0,0,34,p.warning,3);g.setLineDash([]);g.restore()}
+  if(active){ring(0,0,31,p.core,2.5)}
+  break;
+ }
+ case 'prismgun':{
+  // Three visibly independent forward emitters: triple-shot silhouette.
+  if(style==='military'){
+   polygon([-27,-17,11,-20,27,-9,22,9,11,20,-27,17,-33,0],p.wing,p.edge);
+   polygon([-23,-9,8,-12,23,0,8,12,-23,9],fill,p.armor);
+   for(const y of [-12,0,12]){rect(5,y-4,32,8,p.armor);rect(26,y-2,11,4,p.warning)}
+   for(const y of [-16,16]){ln(-22,y,0,y,p.edge,2)}
+  }else if(style==='neon'){
+   polygon([-29,-19,2,-27,23,-8,28,0,23,8,2,27,-29,19,-20,0],p.wing,p.core,2.6);
+   polygon([-23,-8,8,-15,22,0,8,15,-23,8],fill,p.edge);
+   for(const y of [-13,0,13]){ln(10,y,41,y,p.edge,3);circle(39,y,3,p.core)}
+   ln(-16,-15,9,-11,p.core,2);ln(-16,15,9,11,p.core,2);
+  }else if(style==='cosmic'){
+   polygon([-29,-12,-12,-28,12,-17,29,-4,29,4,12,17,-12,28,-29,12],p.wing,p.edge);
+   polygon([-22,0,0,-15,17,0,0,15],fill,p.core);
+   for(const y of [-15,0,15]){circle(17,y,7,p.armor);ring(17,y,7,p.edge,2.2);circle(17,y,3,p.core);ln(23,y,39,y,p.warning,2)}
+  }else{
+   polygon([-29,-20,-8,-24,17,-15,29,-6,24,0,29,6,17,15,-8,24,-29,20,-19,0],p.wing,p.edge);
+   polygon([-23,-8,3,-14,21,0,3,14,-23,8],fill,p.armor);
+   for(const y of [-13,0,13]){rect(9,y-3.3,30,6.6,p.core);rect(31,y-2,8,4,p.edge)}
+   ln(-17,-15,6,-10,p.warning,2);ln(-17,15,6,10,p.warning,2);
+  }
+  reactor(-7,0,5.5);
+  if((e.shot??999)<.46){g.save();g.globalAlpha=.4+.5*pulse;for(const y of [-13,0,13])ring(38,y,6,p.warning,2);g.restore()}
+  break;
+ }
+ case 'ironclad':{
+  // Large slab-armored carrier with obvious forward ram and shield plates.
+  if(style==='military'){
+   polygon([-34,-22,18,-26,30,-17,39,-7,39,7,30,17,18,26,-34,22,-40,0],p.wing,p.edge,2.6);
+   rect(-32,-24,45,9,p.armor);rect(-32,15,45,9,p.armor);
+   polygon([-29,-12,10,-18,30,-10,34,0,30,10,10,18,-29,12],fill,p.edge);
+   rect(12,-14,17,28,p.armor);rect(29,-10,7,20,p.warning);
+   for(const y of [-22,22])for(let x=-26;x<13;x+=11)ln(x,y-3,x+4,y+3,p.detail,2);
+  }else if(style==='neon'){
+   polygon([-34,-21,12,-29,34,-15,40,0,34,15,12,29,-34,21,-40,0],p.wing,p.core,2.7);
+   polygon([-30,-12,7,-19,28,-9,34,0,28,9,7,19,-30,12],fill,p.edge);
+   for(const y of [-17,17])ln(-28,y,19,y,p.edge,3.2);
+   polygon([25,-15,44,-8,44,8,25,15],p.armor,p.core);ln(38,-6,38,6,p.warning,3);
+  }else if(style==='cosmic'){
+   polygon([-39,-14,-26,-31,9,-28,32,-15,45,0,32,15,9,28,-26,31,-39,14],p.wing,p.edge,2.6);
+   polygon([-31,0,-15,-19,16,-16,32,0,16,16,-15,19],fill,p.core);
+   for(const y of [-24,24]){ring(-6,y,13,p.armor,4,Math.PI,0);circle(10,y*.62,3,p.warning)}
+   polygon([22,-18,42,-7,42,7,22,18],p.armor,p.edge);
+  }else{
+   polygon([-34,-21,-12,-30,16,-24,36,-11,44,0,36,11,16,24,-12,30,-34,21,-39,0],p.wing,p.edge,2.7);
+   polygon([-29,-12,8,-21,28,-12,35,0,28,12,8,21,-29,12],fill,p.armor);
+   for(const y of [-19,19]){rect(-23,y-4,45,8,p.armor);rect(-6,y-2,15,4,p.core)}
+   polygon([24,-16,47,-6,47,6,24,16],p.armor,p.warning);ln(34,-8,34,8,p.edge,3);
+  }
+  reactor(-9,0,7);
+  if(e.guard>0){g.save();g.globalAlpha=.65+.25*pulse;ring(0,0,40,p.warning,3,Math.PI*.72,Math.PI*1.28);ring(0,0,40,p.warning,3,-.28*Math.PI,.28*Math.PI);g.restore()}
+  if(e.charge&&e.charge.windup>0){g.save();g.globalAlpha=.55+.35*pulse;for(const y of [-8,0,8])ln(40,y,48,y*.45,p.warning,2.5);g.restore()}
+  break;
+ }
+ case 'stormweaver':{
+  // Four radial coils and a central storm spindle, visible windup before zone cast.
+  if(style==='military'){
+   polygon([-18,-21,12,-23,24,-11,32,0,24,11,12,23,-18,21,-31,0],p.wing,p.edge);
+   for(const y of [-22,22]){rect(-11,y-6,24,12,p.armor);circle(1,y,5,p.core)}
+   for(const x of [-24,24]){circle(x,0,6,p.armor);circle(x,0,2.3,p.warning)}
+  }else if(style==='neon'){
+   polygon([0,-34,12,-13,33,-4,12,8,0,34,-12,8,-33,-4,-12,-13],p.wing,p.edge,2.8);
+   for(let a=0;a<4;a++){const angle=a*TWO/4;const x=Math.cos(angle)*27,y=Math.sin(angle)*27;circle(x,y,5,p.core);ln(Math.cos(angle)*13,Math.sin(angle)*13,x,y,p.edge,2.4)}
+   polygon([0,-21,17,0,0,21,-17,0],fill,p.core);
+  }else if(style==='cosmic'){
+   polygon([0,-34,8,-21,26,-25,19,-7,35,0,19,7,26,25,8,21,0,34,-8,21,-26,25,-19,7,-35,0,-19,-7,-26,-25,-8,-21],p.wing,p.edge);
+   ring(0,0,25,p.core,2.4,0,TWO);
+   for(let i=0;i<6;i++){const a=i*TWO/6;circle(Math.cos(a)*24,Math.sin(a)*24,2.5,p.warning)}
+  }else{
+   polygon([-26,-16,-8,-30,18,-20,29,-10,34,0,29,10,18,20,-8,30,-26,16,-34,0],p.wing,p.edge);
+   polygon([-11,-14,11,-18,22,0,11,18,-11,14,-21,0],fill,p.core);
+   for(let i=0;i<4;i++){const a=i*TWO/4+Math.PI/4;const x=Math.cos(a)*29,y=Math.sin(a)*29;circle(x,y,5,p.armor);ln(x*.52,y*.52,x,y,p.warning,2.2)}
+  }
+  ring(0,0,13,p.edge,2.5);reactor(0,0,6);
+  const ready=(e.mineTimer??999)<1.25;
+  if(ready){g.save();g.globalAlpha=.5+.4*pulse;ring(0,0,36,p.warning,2.8);for(let i=0;i<4;i++){const a=i*TWO/4+t*.25;const x=Math.cos(a)*36,y=Math.sin(a)*36;ln(x*.72,y*.72,x,y,p.warning,2)}g.restore()}
+  else if(fx){ring(0,0,31,p.armor,1.6,.4,2.5)}
+  break;
+ }
+ case 'swarmcarrier':{
+  // Broad mothership: three glowing detachable pods and a central launch hatch.
+  if(style==='military'){
+   polygon([-35,-22,1,-30,31,-23,42,-11,42,11,31,23,1,30,-35,22,-40,0],p.wing,p.edge);
+   polygon([-30,-13,15,-20,33,-10,33,10,15,20,-30,13],fill,p.armor);
+   rect(-33,-17,14,34,p.armor);rect(21,-12,15,24,p.armor);
+  }else if(style==='neon'){
+   polygon([-41,-11,-18,-29,0,-32,23,-23,42,-11,30,-4,37,0,30,4,42,11,23,23,0,32,-18,29,-41,11],p.wing,p.core,2.5);
+   polygon([-30,-9,8,-21,29,0,8,21,-30,9],fill,p.edge);
+   ln(-23,-16,18,-12,p.core,2);ln(-23,16,18,12,p.core,2);
+  }else if(style==='cosmic'){
+   g.fillStyle=p.wing;g.strokeStyle=p.edge;g.lineWidth=2.7;g.beginPath();g.moveTo(-37,0);g.quadraticCurveTo(-31,-37,11,-31);g.quadraticCurveTo(33,-28,45,-8);g.quadraticCurveTo(20,-1,45,8);g.quadraticCurveTo(33,28,11,31);g.quadraticCurveTo(-31,37,-37,0);g.closePath();g.fill();g.stroke();
+   polygon([-30,0,-7,-21,24,0,-7,21],fill,p.core);
+  }else{
+   polygon([-37,-23,-3,-31,24,-25,41,-12,44,0,41,12,24,25,-3,31,-37,23,-43,0],p.wing,p.edge,2.7);
+   polygon([-29,-13,15,-22,35,0,15,22,-29,13],fill,p.armor);
+   for(const y of [-18,18])ln(-23,y,13,y,p.warning,2.7);
+  }
+  // Three incubator pods remain clearly visible in both low and balanced modes.
+  const podPositions=[[-13,-20],[-13,20],[23,0]];
+  for(let i=0;i<3;i++){
+   const [x,y]=podPositions[i],wobble=fx?Math.sin(t*2.6+i*2)*1.5:0;
+   circle(x,y+wobble,8.5,p.armor);ring(x,y+wobble,8.5,p.edge,2.3);
+   circle(x,y+wobble,4.1,p.core);circle(x+1,y+wobble-1,1.5,'#fff9ee');
+  }
+  polygon([-4,-10,12,-9,19,0,12,9,-4,10],p.detail,p.warning,2);
+  ln(0,-5,12,-5,p.core,1.8);ln(0,5,12,5,p.core,1.8);
+  if(fx){g.save();g.globalAlpha=.35+.27*pulse;ring(3,0,35,p.core,1.6,Math.PI*.25,Math.PI*.75);g.restore()}
+  break;
+ }
+ }
+ g.restore();return true;
+}
+
 function drawThemeEliteEnemy(e,style){
  const pal=artPalette();if(!pal)return;
  const fx=gameSettings.styleEffects&&gameSettings.fx!=='low';
@@ -1657,7 +1845,7 @@ for(const beam of beams){ctx.save();ctx.globalAlpha=clamp(beam.life/beam.max,0,1
 for(const b of enemyBullets){ctx.fillStyle=artPalette()?.enemy||(b.col||'#ff92cc');ctx.shadowBlur=artPalette()&&!gameSettings.styleEffects?0:12;ctx.shadowColor=artPalette()?.enemy||(b.col||'#ff4a9d');ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,TWO);ctx.fill()}ctx.shadowBlur=0;
 for(const e of enemies){if(e.x<l-90||e.x>r+90||e.y<t-90||e.y>b+90)continue;ctx.save();ctx.translate(e.x,e.y);if(e.hitPulse>0){const scale=1+e.hitPulse*.65;ctx.scale(scale,scale)}ctx.rotate(Math.atan2(player.y-e.y,player.x-e.x));ctx.shadowBlur=e.boss?25:10;ctx.shadowColor=e.col;ctx.fillStyle=e.flash>0?'#ffffff':e.col;ctx.strokeStyle='#fff8';ctx.lineWidth=2;
 const styledEnemy=gameSettings.styleEnemies&&gameSettings.visualStyle!=='normal';
-if(styledEnemy){if(!e.boss&&PHASE3_BASIC_TYPES.has(e.kind))drawStyledBasicEnemy(e,gameSettings.visualStyle);else drawThemeEliteEnemy(e,gameSettings.visualStyle)}else{
+if(styledEnemy){if(!e.boss&&PHASE3_BASIC_TYPES.has(e.kind))drawStyledBasicEnemy(e,gameSettings.visualStyle);else if(!e.boss&&PHASE4_SPECIALISTS.includes(e.kind))drawPhase4Specialist(e,gameSettings.visualStyle);else drawThemeEliteEnemy(e,gameSettings.visualStyle)}else{
 if(['drone','shooter','sniper','leech','mender','miner','orbiter','sapper','nullifier','voidlancer','prismgun','stormweaver'].includes(e.kind)){poly(0,0,e.r,6,Math.PI/6);ctx.fill();ctx.stroke();ctx.fillStyle='#172642';poly(0,0,e.r*.48,6,Math.PI/6);ctx.fill()}else if(['dart','wisp','charger','stalker','bomber','strider','voidrunner','blinkblade'].includes(e.kind)){poly(0,0,e.r+2,3,0);ctx.fill();ctx.stroke()}else if(['tank','splitter','bulwark','ironclad','swarmcarrier'].includes(e.kind)){poly(0,0,e.r,8,Math.PI/8);ctx.fill();ctx.stroke();ctx.fillStyle='#1a2354';poly(0,0,e.r*.62,8,Math.PI/8);ctx.fill()}else{poly(0,0,e.r,10,Math.PI/10+e.phase*.2);ctx.fill();ctx.stroke();ctx.fillStyle='#37204c';poly(0,0,e.r*.65,7,e.phase*.4);ctx.fill();ctx.fillStyle='#f7ddff';ctx.beginPath();ctx.arc(0,0,11,0,TWO);ctx.fill()}
 }ctx.shadowBlur=0;
 // Original specialist accent art is retained only in Normal/legacy enemy mode.
@@ -1793,6 +1981,29 @@ function renderStyleDemo(){
  dc.font='bold 12px system-ui';dc.fillStyle=c2;dc.fillText('LIVE WORLD PALETTE  ·  SHIP  ·  ENEMIES  ·  HUD',25,h-16);
 }
 
+function renderPhase4Gallery(){
+ const skin=artPalette(),style=gameSettings.visualStyle;
+ for(const tile of document.querySelectorAll('[data-phase4-kind]')){
+  const kind=tile.dataset.phase4Kind,g=tile.getContext('2d');if(!g)continue;
+  const w=tile.width,h=tile.height;g.setTransform(1,0,0,1,0,0);g.clearRect(0,0,w,h);
+  g.fillStyle=skin?.panel||'#12243c';g.fillRect(0,0,w,h);
+  g.strokeStyle=skin?.grid||'#416c9a';g.globalAlpha=.2;g.lineWidth=1;
+  for(let x=0;x<w;x+=20){g.beginPath();g.moveTo(x,0);g.lineTo(x,h);g.stroke()}
+  for(let y=0;y<h;y+=20){g.beginPath();g.moveTo(0,y);g.lineTo(w,y);g.stroke()}
+  g.globalAlpha=1;g.save();g.translate(w/2,h/2+4);
+  if(style==='normal'){
+   const shape=kind==='blinkblade'?3:kind==='ironclad'||kind==='swarmcarrier'?8:6;
+   g.fillStyle=({blinkblade:'#ef84ff',prismgun:'#6af5ff',ironclad:'#ffc088',stormweaver:'#b9a1ff',swarmcarrier:'#b5f881'})[kind];
+   g.strokeStyle='#fafaff';g.lineWidth=2.5;g.beginPath();
+   const rad=kind==='ironclad'?31:27;
+   for(let i=0;i<shape;i++){const a=i*TWO/shape;if(i===0)g.moveTo(Math.cos(a)*rad,Math.sin(a)*rad);else g.lineTo(Math.cos(a)*rad,Math.sin(a)*rad)}
+   g.closePath();g.fill();g.stroke();
+  }else{
+   drawPhase4Specialist({kind,r:29,phase:0,flash:0,teleport:.6,shot:.22,mineTimer:.35,guard:1,charge:{windup:.5}},style,g);
+  }
+  g.restore();
+ }
+}
 function refreshSettings(){applyVisualTheme();
  $('fxBtn').textContent='VISUAL EFFECTS: '+gameSettings.fx.toUpperCase();
  $('shakeBtn').textContent='SCREEN SHAKE: '+(gameSettings.screenShake?'ON':'OFF');
@@ -1806,15 +2017,18 @@ function refreshSettings(){applyVisualTheme();
  }
  $('visualPreview').setAttribute('data-style',gameSettings.visualStyle);
  $('visualPreviewName').textContent=active.name.toUpperCase();
- $('visualPreviewDesc').textContent=active.summary;renderStyleDemo();
+ $('visualPreviewDesc').textContent=active.summary;renderStyleDemo();renderPhase4Gallery();
  for(const [button,key] of [['styleEnemiesBtn','styleEnemies'],['styleArmorBtn','styleArmor'],['styleEffectsBtn','styleEffects']]){
   const b=$(button),enabled=gameSettings[key];b.setAttribute('aria-checked',String(enabled));
-  b.querySelector('.switchValue').textContent=enabled?'ON':'OFF';
+  b.querySelector('.switchValue').textContent=(key==='styleEnemies'&&gameSettings.visualStyle!=='normal')?'LINKED':(enabled?'ON':'OFF');
  }
 }
 function chooseVisualStyle(id){if(!Object.prototype.hasOwnProperty.call(VISUAL_STYLES,id))return;
- gameSettings.visualStyle=id;saveSettings();refreshSettings();}
+ gameSettings.visualStyle=id;
+ if(id!=='normal')gameSettings.styleEnemies=true;
+ saveSettings();refreshSettings();}
 function toggleStyleSetting(key){if(!['styleEnemies','styleArmor','styleEffects'].includes(key))return;
+ if(key==='styleEnemies'&&gameSettings.visualStyle!=='normal'){gameSettings.styleEnemies=true;saveSettings();refreshSettings();return;}
  gameSettings[key]=!gameSettings[key];saveSettings();refreshSettings();}
 
 function openSettings(){settingsReturnMode=mode==='pause'?'pause':'menu';refreshSettings();setMode('settings')}

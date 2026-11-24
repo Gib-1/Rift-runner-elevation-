@@ -6,7 +6,25 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
-## Five Visual Worlds — Full Art Overhaul (current)
+## Visual Redesign — Phase 4: Advanced Enemy Fleets (current)
+
+Five advanced regular enemies now have bespoke, easily distinguishable **Canvas 2D chassis** in every optional visual style, rather than the generic shape previously shared by most advanced units:
+
+| Enemy | New silhouette | Existing attack cue shown graphically |
+| --- | --- | --- |
+| Blinkblade | Twin phase blades / sharp two-pronged interceptor | Broken teleport ring near the end of its existing teleport timer |
+| Prism Gunner | Three independent forward emitter barrels | Charged muzzle rings just before its triple projectile burst |
+| Ironclad | Layered heavy plating / shielded ram | Lit shield plating and a forward charge-warning pattern |
+| Stormweaver | Four radial energy coils / center reactor | Spinning lightning halo as its next hazard cast approaches |
+| Swarm Carrier | Large broad carrier hull with three glowing pods | Three visible incubation pods signaling the existing split-on-defeat mechanic |
+
+Military Sci-Fi uses olive tactical hulls and amber warnings; Neon Cyberpunk uses cyan/magenta emitters and angular shapes; Dark Cosmic uses curved violet alien plating and runes; Hybrid combines teal metal, gold cores and energy traces. These **change automatically with GAME SETTINGS > VISUAL STYLE**, in Classic and Endless. Older saved style preferences are normalized so non-Normal themes cannot accidentally leave enemies on Normal art. **Normal always retains original gameplay sprites**.
+
+**New in Settings:** the Phase 4 Advanced Enemy Hangar displays five preview cards rendered by the same drawing code used in combat—no separate misleading mockups or external image downloads. On-screen enemy cues use the enemies' **existing timers**; the renderer does not change their attacks, health, damage, speed, physics, AI, collisions or spawn rate. Low Effects uses reduced glow and a static pose for optional decorative movement. Changing visuals never edits the permanent progress key or version-1 save backup.
+
+Research basis: emphasize readable **shape/pattern** in addition to color and use consistent attack telegraphs; avoid unnecessary Canvas state/glow work in dense combat. References: MDN Canvas Optimization, Xbox Accessibility Guideline 103, Game Developer (Enemy Attacks and Telegraphing).
+
+## Five Visual Worlds — Full Art Overhaul (previous release)
 
 **GAME SETTINGS > VISUAL STYLE** now changes the appearance of the **entire live game**, not only the player or a few common enemy sprites. The Normal option preserves the original game's color scheme, ship, enemies and HUD. Four optional complete themes are available:
 
