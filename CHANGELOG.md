@@ -6,7 +6,16 @@
 
 # Changelog
 
-## Visual Redesign — Phases 2–3: Player Ship and Basic Enemies (latest)
+## Five Visual Worlds — Full Art Overhaul (current)
+
+- Rebuilt the five-mode art selector so all alternative modes restyle **the full game**: menus, HUD, game-over, achievements, Hangar, upgrades, interactive buttons, stage palettes, grids, cover, hazards, rifts, pickups, XP coins, player, drones, weapons, enemy bullets and visual effects.
+- Drew distinct Military, Neon, Dark Cosmic and Hybrid variants for **all 36 enemy kinds**, including the five new specialists, Void troops, mini-bosses and major bosses. Preserve original Normal shapes and original enemy art with the Redesigned Enemies switch OFF.
+- Introduced dramatic faction-specific battlefield patterns: military tactical markings, neon circuitry, cosmic runes and dimensional rings, and hybrid industrial/energy geometry; retained per-biome identity and low-effects fallback.
+- Added a large scene preview and unmistakable color changes in Settings, UI, browser theme color and the main menu. Applying a preference also updates the menu and active HUD instantly. Retains exclusive styles and all three independent artwork switches.
+- Protected old saves and version-1 progress export/import, Coin Rain 2.5x physical coins, Endless 5x enemy cadence and 2.5x XP, boss milestones, Classic/Void behavior and all purchased upgrades.
+- Added explicit visual-style simulation coverage of all 36 enemies across four alternative skins and all-five-settings persistence, menu/HUD restyling and portrait/landscape Chromium coverage. Locally exercised 76-enemy render stress with Balanced/Low effects, without JavaScript errors.
+
+## Visual Redesign — Phases 2–3: Player Ship and Basic Enemies (previous release)
 
 - Activated four **in-game** player-ship variants—Military Sci-Fi, Neon Cyberpunk, Dark Cosmic Sci-Fi and Hybrid—with differentiated hulls, wing shapes, engines, line details and cosmetic Void effects; **Normal remains the original ship drawing**.
 - Redesigned fifteen **common enemies** with different role-specific silhouettes: scouts, drones, gunners, armored tanks, chargers, bombers, splitters and support units. Each silhouette uses the selected style's palette, and preserves original unit-color attack cues.
