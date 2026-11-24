@@ -25,10 +25,10 @@ try:
             assert "EVOLUTION 4.0" in page.locator(".kicker").inner_text()
             page.screenshot(path=screenshots/f"4.0-menu-{width}.png")
             page.locator("#featuresBtn").tap()
-            assert page.locator("#featureGuideList li").count()==35
+            assert page.locator("#featureGuideList li").count()==39
             page.locator("#featuresBackBtn").tap()
             page.locator("#hangarBtn").tap()
-            assert page.locator(".shopItem").count()==26
+            assert page.locator(".shopItem").count()==36
             page.locator("#hangarBackBtn").tap()
             page.locator("#achievementsBtn").tap()
             assert page.locator(".achievementItem").count()==7
