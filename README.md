@@ -6,7 +6,25 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
-## Visual Redesign — Phases 2–3: Playable Ship and Basic Enemy Styles (current)
+## Five Visual Worlds — Full Art Overhaul (current)
+
+**GAME SETTINGS > VISUAL STYLE** now changes the appearance of the **entire live game**, not only the player or a few common enemy sprites. The Normal option preserves the original game's color scheme, ship, enemies and HUD. Four optional complete themes are available:
+
+| Appearance | World / arena | Player, fleet and UI |
+| --- | --- | --- |
+| Normal | Original biome palettes | Original shapes and interface |
+| Military Sci-Fi | Olive industrial battlefields, tactical markers, amber hazards | Armored ships, reinforced enemies, blocky military interfaces |
+| Neon Cyberpunk | Fuchsia/cyan circuitry, glowing arena geometry | Sharp neon ships, luminous bosses, holographic purple panels |
+| Dark Cosmic Sci-Fi | Violet dimensional rings, arcane sectors and alien landscapes | Cosmic fighters, alien enemies/bosses, mysterious purple UI |
+| Hybrid | Teal/gold arenas with purple technology and varied biome accents | Metal/energy fleet, gold and teal HUD with Void design |
+
+The chosen look is applied immediately and saved under the existing `riftrunner_options_v1` key. **All 36 enemy types**—basic, specialized, Void, minibosses and major bosses—have faction-specific models when **Redesigned Enemies** is ON. The player ship, drones, enemy projectiles, weapons, pickups, XP coins, walls, cover, background, rifts, hazards, overlays, Hangar, upgrade cards, and HUD also use the selected appearance. A larger scene preview in Settings lets you inspect the look before playing. Each of the ten original arena/biome identities remains visible through the chosen theme.
+
+**Independent switches:** Redesigned Enemies turns off alternate enemy silhouettes; Animated Ship Armor & Thrusters controls animated engine tails; Enhanced Style Effects controls embellishments and glow. **Low Effects** reduces effects on weaker devices. Styles can be switched from the main menu or during a paused Classic/Endless run.
+
+Visual themes do **not** change hitboxes, movement, enemy AI, health, damage, weapons, XP, permanent upgrades, boss milestones or progression. The original saved profile, option key and portable version-1 JSON backup compatibility remain unchanged. No external textures, network access or 3D engine are needed. Tested in Chromium portrait/landscape, including normal and low effects, 36 enemy kinds, and dense battles of up to 76 enemies; performance on particular phones can still vary.
+
+## Visual Redesign — Phases 2–3: Playable Ship and Basic Enemy Styles (previous release)
 
 The game's Settings > Visual Style selector now changes **actual gameplay artwork** across both Classic and Endless. **Normal remains the exact original ship and enemy shapes.** The four optional styles each have distinct, lightweight Canvas 2D ship and common-enemy designs:
 
