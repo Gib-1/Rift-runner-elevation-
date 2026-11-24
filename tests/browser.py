@@ -159,6 +159,48 @@ try:
             assert not errors,errors
             ctx.close()
             print(f"Passed {width}x{height} kill-triggered mini-boss, boss, and triple raid")
+        # Phase 3: distinct common-enemy art, true Normal fallback, independent enemy toggle.
+        # These hooks only modify the test-only HTML served in Playwright, never index.html.
+        phase3_hook="""
+        window.__phase3Smoke=(style,enabled)=>{
+          start('endless');player.invuln=999;player.droneCount=0;player.aura=0;
+          enemies=[];bullets=[];enemyBullets=[];beams=[];rings=[];walls=[];zones=[];wells=[];
+          camera.x=0;camera.y=0;shake=0;timer=9;
+          const basic=[...PHASE3_BASIC_TYPES];
+          for(let i=0;i<basic.length;i++){
+            spawnEnemy(basic[i],-104+(i%5)*52,-91+Math.floor(i/5)*79);
+            const e=enemies[enemies.length-1];e.x=-104+(i%5)*52;e.y=-91+Math.floor(i/5)*79;e.guard=0;e.hitPulse=0;e.flash=0;
+          }
+          for(const kind of ['blinkblade','prismgun','ironclad','stormweaver','swarmcarrier','boss']){
+            spawnEnemy(kind,350,350);
+          }
+          gameSettings.visualStyle=style;gameSettings.styleEnemies=enabled;
+          const previous=drawStyledBasicEnemy;let draws=0;
+          drawStyledBasicEnemy=(enemy,variant)=>{draws++;return previous(enemy,variant)};
+          render();drawStyledBasicEnemy=previous;
+          return {draws,styledKinds:basic.length,total:enemies.length,mode:runMode};
+        };
+        """
+        assert preview_html.count("function frame(now)")==1
+        phase3_html=preview_html.replace('function frame(now)',phase3_hook+'\nfunction frame(now)',1)
+        for width,height in ((844,390),(390,844)):
+            ctx=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=ctx.new_page();errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.route(url,lambda route:route.fulfill(content_type="text/html",body=phase3_html))
+            pg.goto(url)
+            for style in ('normal','military','neon','cosmic','hybrid'):
+                result=pg.evaluate("style=>window.__phase3Smoke(style,true)",style)
+                assert result['styledKinds']==15,result
+                assert result['draws']==(0 if style=='normal' else 15),result
+                if style=='hybrid':pg.screenshot(path=screenshots/f"phase3-hybrid-basic-enemies-{width}.png")
+                if style!='normal':
+                    fallback=pg.evaluate("style=>window.__phase3Smoke(style,false)",style)
+                    assert fallback['draws']==0,fallback
+            assert not errors,errors
+            ctx.close()
+            print(f"Passed {width}x{height} Phase 3 common enemy renderer and toggle-off fallback")
+
         browser.close()
 finally:
     server.shutdown()
