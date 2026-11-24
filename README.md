@@ -6,6 +6,15 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Evolution 4.0 — Enemy Uprising + Coin Rain (latest)
+
+- **Five additional regular enemies** join the existing roster in Classic and Endless Mode, unlocked as threat rises: **Blinkblade** (teleports near you), **Prism Gunner** (triple projectile volleys), **Ironclad** (temporary armor guard and charge attack), **Stormweaver** (telegraphed hazard zones), and **Swarm Carrier** (releases three Dart enemies when defeated during active spawning or Endless). In a Classic wave's final clear phase, carriers do not spawn new enemies, preserving the no-new-spawns rule. Each enemy has its own 2D silhouette accent.
+- **20 more run-upgrade choices** bring the run pool from **62 to 82**, with options covering XP collection, damage, survivability, drones and abilities. **Coin Rain · 5× Loot** is a one-time option offered at the first early level-ups (level 2 or 3): defeating regular enemies creates five times as many XP coins, and mini-bosses/bosses produce five 50/150-XP coins respectively. It stacks with the existing Endless **2.5× XP multiplier**.
+- **10 more permanent Hangar upgrades** bring the Hangar from **26 to 36** items. New purchases can increase XP earnings, add coins from regular enemies, improve drone fire rate/range, strengthen Dash and Nova, add Shield shockwaves, raise rare-coin drop chances, start with a brief barrier, and boost Rift Cores. All still use the existing purchase level cap (5) and in-game currency.
+- **Mobile loot governor:** at most 340 visible gems in Balanced Effects or 210 in Low Effects. Any XP coin whose visual cannot be added is **credited immediately** instead of being discarded. Low Effects also reduces coin glow cost.
+- **Backward-compatible saves:** existing keys `riftrunner_evolution_v1` and `riftrunner_best` and portable format-1 backups remain supported. New permanent upgrades default to level zero for old players, and purchasing them does not wipe existing purchases.
+- **All previous content remains:** 5× Endless spawn rate, 65/115/1000-kill bosses, 35-second Void Breaches, Classic wave-clear XP sweep, player weapon-facing, six weapons and orbiting drones.
+
 ## Endless Horde — Fivefold Hordes and Kill-Based Bosses
 
 - **5× continuous spawn rate:** Endless now uses 5× the original spawn cadence (up from the previous 2.5× setting). The existing **2.5× XP** bonus is unchanged. A bounded catch-up loop prevents low-FPS frames from creating an unlimited spawn backlog.
