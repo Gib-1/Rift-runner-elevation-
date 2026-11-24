@@ -1,11 +1,17 @@
+## Evolution 4.0 — Coin Rain tuning
+
+- Reduced Coin Rain from 5× to **2.5× physical XP-coin drops**. Fractional half-coins carry across kills, so two single-coin boss rewards grant 2 then 3 coins instead of always rounding up.
+- Preserved the independent Endless enemy 5× spawn-rate multiplier, Endless 2.5× XP value multiplier, and overflow XP protection.
+- Updated the menu, level-up card, README, and tests without changing save keys or upgrade IDs.
+
 # Changelog
 
 ## Evolution 4.0 — Enemy Uprising + Coin Rain
 
 - Five unique enemies introduced: Blinkblade (teleport), Prism Gunner (3-way ranged bursts), Ironclad (temporary guard and charge), Stormweaver (hazard spells), and Swarm Carrier (three Dart minions upon defeat). Available to both Classic and Endless as difficulty grows; new distinct animated accent geometry on each unit.
-- Run upgrade pool grows from **62 to 82** with **20 new** choices: 5× Coin Rain drops, XP multiplier, extra coins, XP-triggered repairs, stronger pickup magnet, boosted drone rate/range/interception, hull repair and regeneration, Shield blast, Dash wake, Nova/Groundwell improvements, critical tuning, weapon reactor, boss bonus, electricity aura, movement speed, and elimination Nova charge. Coin Rain is deliberately offered at level 2–3 so players can test it easily.
+- Run upgrade pool grows from **62 to 82** with **20 new** choices: 2.5× Coin Rain drops, XP multiplier, extra coins, XP-triggered repairs, stronger pickup magnet, boosted drone rate/range/interception, hull repair and regeneration, Shield blast, Dash wake, Nova/Groundwell improvements, critical tuning, weapon reactor, boss bonus, electricity aura, movement speed, and elimination Nova charge. Coin Rain is deliberately offered at level 2–3 so players can test it easily.
 - Permanent Hangar grows from **26 to 36** choices. Added: Experience Matrix, Fortune Harvester, Orbital Accelerator, Extended Drone Radar, Kinetic Dash Reactor, Nova Charge Coil, Aegis Shock Field, Rare Coin Scanner, Emergency Barrier Cell, and Salvage Array. All have functioning persistent levels 0–5 with legacy save defaults.
-- Coin Rain multiplies *number of XP coins* by exactly five for ordinary and boss enemies. Includes a 340 Balanced / 210 Low Effects XP-gem cap; when full, overflow XP is granted immediately so high-density Endless waves never erase earned XP. Gem glow is cheaper on low-end devices.
+- Coin Rain multiplies *number of XP coins* by 2.5 over time for ordinary and boss enemies, carrying fractional halves between drops. Includes a 340 Balanced / 210 Low Effects XP-gem cap; when full, overflow XP is granted immediately so high-density Endless waves never erase earned XP. Gem glow is cheaper on low-end devices.
 - Classic Wave and Void Breach transitions, all six weapons and drone mechanics, Endless 5× spawn rate and kill-based bosses, save import/export format and progression preserved.
 
 ## Evolution 4.0 — 5× Endless Spawning & Kill-Milestone Boss Encounters
