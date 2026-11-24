@@ -34,8 +34,8 @@ function makeEnv(seed={}){
 }
 const t=makeEnv();
 t.run(`
- start();assert.equal(player.maxHp,120);assert.equal(player.damage,25);assert.equal(player.droneCount,1);assert.equal(EVO42_FEATURES.length,35);assert.equal(cameraScale(),.86);
- assert.equal(Object.keys(weaponTypes).length,7);assert.equal(shopData.length,26);assert.equal(upgradeData.length,62);
+ start();assert.equal(player.maxHp,120);assert.equal(player.damage,25);assert.equal(player.droneCount,1);assert.equal(EVO42_FEATURES.length,39);assert.equal(cameraScale(),.86);
+ assert.equal(Object.keys(weaponTypes).length,7);assert.equal(shopData.length,36);assert.equal(upgradeData.length,82);
  assert.equal(MAIN_BIOME_COUNT,8);assert.equal(themes.length,10);assert.equal(coinTiers[150].r,19);
  keyboard.add('ArrowRight');update(.03);assert.ok(player.x>0);render();togglePause();assert.equal(mode,'pause');
 `);
@@ -88,7 +88,7 @@ t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;
  enemyBullets=[{x:pos.x-5,y:pos.y,vx:380,vy:0,r:5,dmg:20,life:1}];update(.02);assert.equal(enemyBullets.length,0,'Drone intercepts projectiles');
 `);
 console.log('Pass: drone orbit, aim, moving bolts, interception, and render.');
-t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;assert.equal(upgradeData.length,62);
+t.run(`start();walls=[];enemies=[];spawnTimer=999;shotTimer=999;assert.equal(upgradeData.length,82);
  for(const id of ['flameRounds','cryoRounds','disruptRounds','executeRounds','critShock','bossSiphon','ricochetRounds','novaAfter','gravityCrush','dashWake','shieldRecharge','levelRepair']){
  const option=upgradeData.find(v=>v.id===id);assert.ok(option,id);option.apply();assert.ok(player[id]>0,id);
  }
@@ -304,3 +304,63 @@ t.run(`start('endless');walls=[];invalidateNavigation();player.invuln=999;player
  start('normal');assert.equal(endlessMilestoneQueue.length,0,'Kill milestone queue resets in Classic');
 `);
 console.log('Pass: population-capped boss queue and clean mode restart.');
+
+
+// ENEMY UPRISING + COIN RAIN: verify all five enemies with their distinctive abilities.
+t.run(`start('normal');walls=[];invalidateNavigation();enemies=[];spawnTimer=999;shotTimer=999;player.droneCount=0;player.invuln=999;
+ for(const kind of ['blinkblade','prismgun','ironclad','stormweaver','swarmcarrier']){
+  spawnEnemy(kind,220,0);assert.ok(enemies.some(e=>e.kind===kind),kind)}
+ render();assert.ok(coinTiers[300].r>0);
+ const blade=enemies.find(e=>e.kind==='blinkblade');blade.teleport=-1;blade.x=240;blade.y=0;const bx=blade.x,by=blade.y;update(.016);
+ assert.ok(blade.teleport>0,'Blinkblade teleport cooldown resets');assert.ok(Math.hypot(blade.x-bx,blade.y-by)>10,'Blinkblade blinks');
+ const gun=enemies.find(e=>e.kind==='prismgun');gun.shot=-1;gun.x=260;gun.y=30;const n=enemyBullets.length;update(.016);
+ assert.ok(enemyBullets.length>=n+3,'Prism Gunner fires 3-way bursts');
+ const clad=enemies.find(e=>e.kind==='ironclad');clad.x=320;clad.y=10;clad.mineTimer=-1;update(.016);
+ assert.ok(clad.guard>0&&clad.charge,'Ironclad raises guard and charges');
+ const weaver=enemies.find(e=>e.kind==='stormweaver');weaver.x=270;weaver.y=40;weaver.mineTimer=-1;
+ const before=zones.length;update(.016);assert.ok(zones.length>before,'Stormweaver creates area-denial hazard');
+ const swarm=enemies.find(e=>e.kind==='swarmcarrier');const previous=enemies.filter(e=>e.kind==='dart').length;
+ wavePhase='spawn';killed(swarm);assert.ok(enemies.filter(e=>e.kind==='dart').length>=previous+3,'Swarm Carrier splits into 3 drones');
+`);
+console.log('Pass: five distinctive enemy behaviors: teleport, burst, charge, hazards, carrier splits.');
+
+t.run(`start('normal');player.droneCount=0;walls=[];invalidateNavigation();enemies=[];gems=[];spawnTimer=999;shotTimer=999;
+ const rain=upgradeData.find(u=>u.id==='coinRain');assert.ok(rain&&rain.ok());rain.apply();assert.equal(player.coinRain,1);
+ spawnEnemy('drone',200,0);const one=enemies.at(-1);killed(one);
+ assert.ok(gems.filter(g=>!g.heal).length>=10&&gems.filter(g=>!g.heal).length<=20,'2-4 basic coins times five');
+ gems=[];spawnEnemy('hunter',150,0);killed(enemies.at(-1));
+ assert.equal(gems.filter(g=>g.val===50).length,5,'Mini-boss gives five 50-XP coins with Coin Rain');
+ gems=[];spawnEnemy('abyss',160,0);killed(enemies.at(-1));
+ assert.equal(gems.filter(g=>g.val===150).length,5,'Boss gives five 150-XP coins with Coin Rain');
+ gems=[];player.xp=0;player.need=999999;gameSettings.fx='low';for(let i=0;i<230;i++)dropCoin(0,0,5);
+ assert.equal(gems.length,210,'Low Effects coin limit enforced');assert.equal(player.xp,100,'Overflow grants full XP credit');
+ gameSettings.fx='balanced';
+`);
+console.log('Pass: 5x Coin Rain drops for ordinary and boss enemies; no XP lost at mobile cap.');
+
+const perkSave={cores:1200,upgrades:{armor:3,attack:2,xpMatrix:4,luckyDrops:2,droneFrequency:3,droneReach:2,
+  kineticCore:2,novaCoil:2,shieldReflector:2,coinAmplifier:2,emergencyHull:2,scavengerArray:4}};
+const permProfile=makeEnv({riftrunner_evolution_v1:JSON.stringify(perkSave)});
+permProfile.run(`assert.equal(shopData.length,36);assert.equal(upgradeData.length,82);
+ for(const id of ['xpMatrix','luckyDrops','droneFrequency','droneReach','kineticCore','novaCoil','shieldReflector','coinAmplifier','emergencyHull','scavengerArray'])
+  assert.ok(shopData.some(v=>v.id===id),id);
+ start('normal');assert.equal(player.xpBonus,1.48);assert.equal(player.extraCoinDrops,2);
+ assert.ok(player.droneFireBoost>0&&player.droneRangeBoost>0&&player.dashWake>0&&player.novaGain>1);
+ assert.ok(player.shieldPulse>0&&player.shield>0);player.need=999;gainXp(100);
+ assert.ok(Math.abs(player.xp-148)<.00001,'Permanent XP bonus increases coin value');
+ const old=validateBackup({game:BACKUP_GAME,formatVersion:1,progress:{cores:12,upgrades:{armor:2},best:1}});
+ assert.equal(old.upgrades.xpMatrix,0,'Legacy backups default all new purchases safely');
+`);
+console.log('Pass: all ten permanent upgrades, XP scaling, and backward-compatible save validation.');
+
+t.run(`start();walls=[];player.droneCount=0;enemies=[];spawnTimer=999;shotTimer=999;
+ for(const id of ['xpAccelerator','extraCoinDrops','xpHealing','xpGravity','droneFireBoost','droneRangeBoost',
+ 'droneGuard','plasmaHull','surgeRegen','barrierNova','crashDash','novaSupercell','gravityAmplifier',
+ 'precisionRail','fusionCore','bossBreakerX','ionCascade','velocityRig','novaBattery']){
+  const perk=upgradeData.find(u=>u.id===id);assert.ok(perk,id);perk.apply();}
+ assert.ok(player.xpBonus>1&&player.extraCoinDrops>0&&player.xpHealing>0&&player.droneFireBoost>0);
+ assert.ok(player.shieldPulse>0&&player.novaGain>1&&player.aura>0&&player.novaKillBonus>0);
+ player.level=2;showUpgrade();assert.ok($('upgradeList').children.some(v=>v.children[1]?.children.some(x=>String(x.textContent).includes('COIN RAIN'))),'Coin Rain is available early');
+ render();
+`);
+console.log('Pass: all twenty run perks and discoverable early Coin Rain choice.');
