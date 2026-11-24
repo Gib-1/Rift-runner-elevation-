@@ -6,6 +6,22 @@ A mobile-first, single-file cosmic survival roguelite. Play in a modern browser,
 
 https://gib-1.github.io/Rift-runner-elevation-/
 
+## Visual Redesign — Phase 1: Style Settings Foundation (latest)
+
+Open **GAME SETTINGS** from the main menu or pause screen. Choose exactly one visual style:
+
+- **Normal** (default): the current original shapes, ship, enemies, and effects.
+- **Military Sci-Fi**: future armored ships, mechanical details and tactical enemy silhouettes.
+- **Neon Cyberpunk**: future neon hull details, illuminated thrusters and enemy accents.
+- **Dark Cosmic Sci-Fi**: future alien forms, dark palettes and Void corruption.
+- **Hybrid**: future military armor mixed with neon and cosmic aesthetics.
+
+The selected style has a lightweight in-settings swatch/preview and saves immediately in existing **`riftrunner_options_v1`**. Three independent ON/OFF options are also saved there: **Redesigned Enemies**, **Animated Ship Armor & Thrusters**, and **Enhanced Style Effects**. Returning to Normal requires no reset; all five styles are mutually exclusive. Settings are available during Classic and Endless runs via Pause > Settings, and the Back button returns to the prior screen.
+
+**Phase 1 is settings-only.** Alternative artwork is **not yet drawn during gameplay**: the original Normal graphics remain in both modes for now. Phases 2–7 will implement the player, enemies, bosses, drones, weapons and environments using these saved preferences. The switches are future artwork preferences; the existing BALANCED/LOW effects, camera zoom, sound, screen shake and combat text controls still work as before.
+
+This change makes no changes to physics, enemies, XP, upgrades, hitboxes, saves or save backup format. Previous settings automatically default to Normal and ON for the three new switches. Preferences are local to each device and are not part of portable gameplay backups.
+
 ## Evolution 4.0 — Enemy Uprising + Coin Rain (latest)
 
 - **Five additional regular enemies** join the existing roster in Classic and Endless Mode, unlocked as threat rises: **Blinkblade** (teleports near you), **Prism Gunner** (triple projectile volleys), **Ironclad** (temporary armor guard and charge attack), **Stormweaver** (telegraphed hazard zones), and **Swarm Carrier** (releases three Dart enemies when defeated during active spawning or Endless). In a Classic wave's final clear phase, carriers do not spawn new enemies, preserving the no-new-spawns rule. Each enemy has its own 2D silhouette accent.
