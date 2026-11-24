@@ -376,3 +376,35 @@ invalidPrefs.run(`assert.equal(gameSettings.visualStyle,'normal');assert.equal(g
  chooseVisualStyle('__proto__');assert.equal(gameSettings.visualStyle,'normal');
  toggleStyleSetting('untrustedKey');assert.equal(gameSettings.styleEffects,true);`);
 console.log('Pass: Phase 1 visual-style options, exclusive selection, toggles, persistence, legacy settings, input validation, both modes.');
+
+// Phase 3: four style-specific common-enemy silhouettes, including Phase 2 ship art.
+const visualArt=makeEnv();
+visualArt.run(`
+ assert.equal(PHASE3_BASIC_TYPES.size,15);
+ assert.equal(Object.keys(PHASE3_PALETTES).length,4);
+ assert.ok(!PHASE3_BASIC_TYPES.has('blinkblade'));
+ assert.ok(!PHASE3_BASIC_TYPES.has('voidrunner'));
+ assert.ok(!PHASE3_BASIC_TYPES.has('boss'));
+ assert.equal(gameSettings.visualStyle,'normal');
+ start('endless');enemies=[];walls=[];player.droneCount=0;player.invuln=999;
+ const core=[...PHASE3_BASIC_TYPES];
+ for(let i=0;i<core.length;i++){
+  spawnEnemy(core[i],-110+(i%5)*55,-85+Math.floor(i/5)*75);
+ }
+ assert.equal(enemies.length,15);
+ for(const style of ['normal','military','neon','cosmic','hybrid']){
+  gameSettings.visualStyle=style;
+  gameSettings.styleEnemies=true;
+  gameSettings.styleEffects=true;
+  gameSettings.fx='balanced';render();
+  gameSettings.styleEffects=false;render();
+  gameSettings.styleEnemies=false;render();
+  gameSettings.styleEnemies=true;gameSettings.fx='low';render();
+ }
+ assert.equal(enemies.length,15,'Cosmetic changes must not spawn or remove enemies');
+ assert.ok(enemies.every(e=>e.hp>0),'Cosmetic changes do not damage enemies');
+ assert.equal(player.hp,player.maxHp,'Cosmetic changes do not damage the player');
+ start('normal');gameSettings.visualStyle='military';gameSettings.styleEnemies=true;
+ spawnEnemy('drone',100,10);render();
+`);
+console.log('Pass: Phase 3 15 basic enemy styles in four appearances, Normal and toggle-off fallback, low-effects rendering and mode independence.');

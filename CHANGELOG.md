@@ -6,6 +6,15 @@
 
 # Changelog
 
+## Visual Redesign — Phases 2–3: Player Ship and Basic Enemies (latest)
+
+- Activated four **in-game** player-ship variants—Military Sci-Fi, Neon Cyberpunk, Dark Cosmic Sci-Fi and Hybrid—with differentiated hulls, wing shapes, engines, line details and cosmetic Void effects; **Normal remains the original ship drawing**.
+- Redesigned fifteen **common enemies** with different role-specific silhouettes: scouts, drones, gunners, armored tanks, chargers, bombers, splitters and support units. Each silhouette uses the selected style's palette, and preserves original unit-color attack cues.
+- Made **Redesigned Enemies** immediately effective for those fifteen common types: switching it off restores their original drawings, without changing the player's ship choice.
+- Kept the five newer specialist enemies, Void soldiers, mini-/major bosses, drones, weapon effects and environments in their Phase 1 appearance for later art passes.
+- Built the art in lightweight Canvas 2D. Balanced and Low Effects remain functional. No AI, damage, health, hitbox, spawn, XP, upgrades, wave, Endless, save or backup-format changes.
+- Regressed legacy saves, weapon use, Classic/Endless, 2.5× Coin Rain, kill-triggered bosses, 35-second Void Breaches and the existing Settings UI. Browser-tested portrait/landscape, all five options and the enemy toggle, plus bounded 70-enemy rendering.
+
 ## Visual Redesign — Phase 1: Settings Foundation
 
 - Added five selectable visual style preferences to GAME SETTINGS: Normal (default), Military Sci-Fi, Neon Cyberpunk, Dark Cosmic Sci-Fi and Hybrid. Only one style can be selected at a time.
