@@ -22,7 +22,7 @@ function makeEnv(seed={}){
  const elements=new Map();const node=id=>{if(!elements.has(id))elements.set(id,new Element());return elements.get(id)};
  const storage=new Map(Object.entries(seed));
  const env={assert,console,performance,innerWidth:844,innerHeight:390,devicePixelRatio:1.4,requestAnimationFrame:noop,addEventListener:noop,navigator:{},
-  document:{hidden:false,getElementById:node,createElement:()=>new Element(),addEventListener:noop},
+  document:{hidden:false,getElementById:node,createElement:()=>new Element(),addEventListener:noop,querySelectorAll:()=>[]},
   localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,String(v)),removeItem:k=>storage.delete(k)}
  };
  env.window=env;
@@ -336,7 +336,7 @@ styles.run(`
  openSettings();assert.equal(mode,'settings');assert.equal(settingsReturnMode,'menu');
  $('styleOption-cosmic').events.click();assert.equal(gameSettings.visualStyle,'cosmic');
  $('styleOption-hybrid').events.click();assert.equal(gameSettings.visualStyle,'hybrid');
- $('styleEnemiesBtn').events.click();assert.equal(gameSettings.styleEnemies,false);
+ $('styleEnemiesBtn').events.click();assert.equal(gameSettings.styleEnemies,true,'Advanced enemies auto-match the selected style');
  $('styleArmorBtn').events.click();assert.equal(gameSettings.styleArmor,false);
  $('styleEffectsBtn').events.click();assert.equal(gameSettings.styleEffects,false);
  assert.equal(gameSettings.fx,'balanced');
@@ -353,11 +353,11 @@ styles.run(`
  render();
 `);
 const persisted=JSON.parse(styles.storage.get('riftrunner_options_v1'));
-assert.equal(persisted.visualStyle,'normal');assert.equal(persisted.styleEnemies,false);
+assert.equal(persisted.visualStyle,'normal');assert.equal(persisted.styleEnemies,true);
 const reload=makeEnv({riftrunner_options_v1:JSON.stringify({...persisted,visualStyle:'military',fx:'low',zoom:'far',sound:false})});
 reload.run(`
  assert.equal(gameSettings.visualStyle,'military');
- assert.equal(gameSettings.styleEnemies,false);
+ assert.equal(gameSettings.styleEnemies,true);
  assert.equal(gameSettings.styleArmor,false);
  assert.equal(gameSettings.styleEffects,false);
  assert.equal(gameSettings.fx,'low');assert.equal(gameSettings.zoom,'far');assert.equal(soundOn,false);
@@ -455,3 +455,49 @@ skinEnv.run(`
  assert.equal(typesToCheck.length,36);
 `);
 console.log('Pass: every one of 36 enemy types—including bosses—renders in all four new art styles.');
+
+
+// PHASE 4: five fully distinct specialist models, readably telegraphed using the
+// existing enemy state/cooldowns. Never mutates gameplay or save data.
+const phase4=makeEnv({riftrunner_options_v1:JSON.stringify({visualStyle:'neon',styleEnemies:false,fx:'low'})});
+phase4.run(`
+ assert.equal(gameSettings.visualStyle,'neon');
+ assert.equal(gameSettings.styleEnemies,true,'Old preferences cannot leave an alternate theme with original enemies');
+ assert.equal(PHASE4_SPECIALISTS.length,5);
+ assert.equal(new Set(PHASE4_SPECIALISTS).size,5);
+ assert.equal(Object.keys(PHASE4_ART).length,4);
+ assert.deepEqual(PHASE4_SPECIALISTS.map(k=>!!types[k]),[true,true,true,true,true]);
+ start('endless');walls=[];enemies=[];player.invuln=999;player.droneCount=0;
+ spawnTimer=999;endlessHordeClock=999;
+ for(let i=0;i<PHASE4_SPECIALISTS.length;i++){
+  const kind=PHASE4_SPECIALISTS[i];spawnEnemy(kind,-135+i*65,0);
+  assert.equal(enemies.at(-1).kind,kind);
+ }
+ const original=enemies.map(e=>({id:e.id,kind:e.kind,x:e.x,y:e.y,hp:e.hp,r:e.r,speed:e.speed,damage:e.damage}));
+ const originalKills=kills,originalXp=player.xp,originalCores=meta.cores;
+ for(const style of ['military','neon','cosmic','hybrid']){
+  gameSettings.visualStyle=style;gameSettings.styleEnemies=true;
+  for(const fx of ['low','balanced']){
+   gameSettings.fx=fx;gameSettings.styleEffects=fx==='balanced';
+   for(const e of enemies){
+    for(const state of ['idle','warning','impact']){
+     e.flash=state==='impact'?.15:0;e.teleport=state==='warning'?.5:4;
+     e.mineTimer=state==='warning'?.25:4;e.shot=state==='warning'?.1:2;
+     e.guard=state==='warning'?1:0;e.charge=state==='warning'?{windup:.4,vx:1,vy:0}:null;
+     const drawn=drawPhase4Specialist(e,style);assert.equal(drawn,true,style+' '+e.kind);
+    }
+   }
+   render();
+  }
+ }
+ assert.equal(drawPhase4Specialist(enemies[0],'normal'),false);
+ assert.equal(drawPhase4Specialist({...enemies[0],kind:'drone'},'military'),false);
+ for(const [i,e] of enemies.entries()){
+  const old=original[i];for(const key of ['id','kind','x','y','hp','r','speed','damage'])assert.equal(e[key],old[key],key+' '+old.kind);
+ }
+ assert.equal(kills,originalKills);assert.equal(player.xp,originalXp);assert.equal(meta.cores,originalCores);
+ chooseVisualStyle('normal');toggleStyleSetting('styleEnemies');assert.equal(gameSettings.styleEnemies,false);
+ chooseVisualStyle('cosmic');assert.equal(gameSettings.styleEnemies,true);
+ toggleStyleSetting('styleEnemies');assert.equal(gameSettings.styleEnemies,true);
+`);
+console.log('Pass: Phase 4 all 5 specialists × 4 visual styles × 2 FX levels × 3 attack phases; old settings normalized, zero stat/saving changes.');
