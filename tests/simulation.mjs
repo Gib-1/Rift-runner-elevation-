@@ -408,3 +408,50 @@ visualArt.run(`
  spawnEnemy('drone',100,10);render();
 `);
 console.log('Pass: Phase 3 15 basic enemy styles in four appearances, Normal and toggle-off fallback, low-effects rendering and mode independence.');
+
+// Full-world visual themes: graphics must change without altering gameplay or saves.
+const skinEnv=makeEnv();
+skinEnv.run(`
+ assert.deepEqual(Object.keys(ART_PALETTES).sort(),['cosmic','hybrid','military','neon']);
+ assert.equal(Object.keys(VISUAL_STYLES).length,5);
+ start('endless');assert.equal(ENDLESS_SPAWN_MULTIPLIER,5);
+ assert.equal(ENDLESS_XP_MULTIPLIER,2.5);
+ const baseColor=themes[ENDLESS_BIOME].center;
+ let themedCenters=new Set();
+ for(const style of Object.keys(VISUAL_STYLES)){
+  gameSettings.visualStyle=style;applyVisualTheme();
+  const th=artStageTheme();assert.equal(th.name,'ECLIPSE CITADEL');
+  assert.equal(artPalette()===null,style==='normal');
+  if(style==='normal')assert.equal(th.center,baseColor);
+  else {assert.notEqual(th.center,baseColor);themedCenters.add(th.center)}
+  for(const fx of ['low','balanced']){
+   gameSettings.fx=fx;gameSettings.styleEnemies=true;
+   gameSettings.styleEffects=fx==='balanced';gameSettings.styleArmor=true;
+   renderStyleDemo();render();
+   gameSettings.styleEnemies=false;render();
+   gameSettings.styleEnemies=true;
+  }
+ }
+ assert.equal(themedCenters.size,4,'Four alternative stage palettes must be distinct');
+ assert.equal(Object.keys(ART_THEMES_CACHE).length,0,'Cache is a Map, not object');
+`);
+console.log('Pass: five distinct saved style choices, alternative arena palettes, low-effects fallback and Normal preservation.');
+
+skinEnv.run(`
+ start('endless');walls=[];player.invuln=999;player.droneCount=3;
+ const typesToCheck=Object.keys(types);
+ for(const style of ['military','neon','cosmic','hybrid']){
+  gameSettings.visualStyle=style;gameSettings.styleEnemies=true;
+  gameSettings.fx='balanced';gameSettings.styleEffects=true;
+  for(const kind of typesToCheck){
+   const e={...types[kind],kind,x:140,y:0,flash:0,phase:1,id:17,r:types[kind].r};
+   if(PHASE3_BASIC_TYPES.has(kind))drawStyledBasicEnemy(e,style);
+   else drawThemeEliteEnemy(e,style);
+  }
+  drawThemeDrone({flash:0},false);
+  drawThemeDrone({flash:.12},true);
+  render();
+ }
+ assert.equal(typesToCheck.length,36);
+`);
+console.log('Pass: every one of 36 enemy types—including bosses—renders in all four new art styles.');
