@@ -201,6 +201,55 @@ try:
             ctx.close()
             print(f"Passed {width}x{height} Phase 3 common enemy renderer and toggle-off fallback")
 
+        # Full-world art overhaul: ensure the entire page changes—not just a sprite swatch.
+        for width,height in ((844,390),(390,844)):
+            context=browser.new_context(viewport={"width":width,"height":height},has_touch=True)
+            pg=context.new_page();errors=[]
+            pg.on("pageerror",lambda error:errors.append(str(error)))
+            pg.goto(url,wait_until="domcontentloaded")
+            pg.locator("#settingsBtn").tap()
+            assert pg.locator("#styleDemo").get_attribute("width")=="720"
+            seen_panels=set(); seen_previews=set()
+            for style in ("normal","military","neon","cosmic","hybrid"):
+                pg.locator("#styleOption-"+style).tap()
+                selected=pg.evaluate("document.documentElement.getAttribute('data-art-style')")
+                assert selected==(None if style=="normal" else style),(style,selected)
+                preview=pg.locator("#styleDemo").evaluate("c=>c.toDataURL()")
+                assert len(preview)>1000
+                seen_previews.add(preview)
+                panel_color=pg.locator("#settings .panel").evaluate("el=>getComputedStyle(el).borderColor")
+                seen_panels.add(panel_color)
+                pg.screenshot(path=screenshots/f"full-world-style-settings-{style}-{width}.png")
+            assert len(seen_panels)==5,seen_panels
+            assert len(seen_previews)==5,"Five distinct scene previews expected"
+            for toggle in ("styleEnemiesBtn","styleArmorBtn","styleEffectsBtn"):
+                pg.locator("#"+toggle).tap()
+                assert pg.locator("#"+toggle).get_attribute("aria-checked")=="false"
+            pg.locator("#settingsBackBtn").tap()
+            pg.reload(wait_until="domcontentloaded")
+            assert pg.evaluate("document.documentElement.getAttribute('data-art-style')")=="hybrid"
+            assert "HYBRID" in pg.locator("#menuArtTag").inner_text()
+            pg.locator("#settingsBtn").tap()
+            for toggle in ("styleEnemiesBtn","styleArmorBtn","styleEffectsBtn"):
+                assert pg.locator("#"+toggle).get_attribute("aria-checked")=="false"
+                pg.locator("#"+toggle).tap()
+            pg.locator("#settingsBackBtn").tap()
+            pg.locator("#endlessBtn").tap()
+            pg.wait_for_function("document.querySelector('#wave').textContent.includes('ENDLESS')")
+            assert "HYBRID" in pg.locator("#hudArtTag").inner_text()
+            pg.screenshot(path=screenshots/f"full-world-hybrid-endless-{width}.png")
+            pg.locator("#pauseBtn").tap()
+            pg.locator("#pauseSettingsBtn").tap()
+            pg.locator("#styleOption-military").tap()
+            assert pg.evaluate("document.documentElement.getAttribute('data-art-style')")=="military"
+            pg.locator("#settingsBackBtn").tap()
+            assert pg.locator("#resumeBtn").is_visible()
+            pg.locator("#resumeBtn").tap()
+            assert pg.locator("#hudArtTag").inner_text().upper()=="MILITARY SCI-FI"
+            assert not errors,errors
+            context.close()
+            print(f"Passed {width}x{height} all five full-world styles, CSS palettes, preview art, persisted toggles and in-run switching")
+
         browser.close()
 finally:
     server.shutdown()
