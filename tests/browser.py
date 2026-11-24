@@ -34,6 +34,27 @@ try:
             assert page.locator(".achievementItem").count()==7
             page.locator("#achievementsBackBtn").tap()
             page.locator("#settingsBtn").tap()
+            assert page.locator(".visualStyleCard").count()==5
+            assert page.locator("#styleOption-normal").get_attribute("aria-checked")=="true"
+            page.locator("#styleOption-cosmic").tap()
+            assert page.locator("#visualPreviewName").inner_text()=="DARK COSMIC SCI-FI"
+            page.locator("#styleOption-hybrid").tap()
+            assert page.locator("#styleOption-hybrid").get_attribute("aria-checked")=="true"
+            assert page.locator("#styleOption-cosmic").get_attribute("aria-checked")=="false"
+            for toggle in ("#styleEnemiesBtn","#styleArmorBtn","#styleEffectsBtn"):
+                page.locator(toggle).tap()
+                assert page.locator(toggle).get_attribute("aria-checked")=="false"
+            stored=page.evaluate("JSON.parse(localStorage.getItem('riftrunner_options_v1'))")
+            assert stored['visualStyle']=='hybrid'
+            assert not stored['styleEnemies'] and not stored['styleArmor'] and not stored['styleEffects']
+            page.screenshot(path=screenshots/f"phase1-visual-settings-{width}.png")
+            page.locator("#settingsBackBtn").tap()
+            page.reload(wait_until="domcontentloaded")
+            page.locator("#settingsBtn").tap()
+            assert page.locator("#styleOption-hybrid").get_attribute("aria-checked")=="true"
+            assert page.locator("#styleEnemiesBtn").get_attribute("aria-checked")=="false"
+            assert page.locator("#styleArmorBtn").get_attribute("aria-checked")=="false"
+            assert page.locator("#styleEffectsBtn").get_attribute("aria-checked")=="false"
             page.locator("#fxBtn").tap()
             page.locator("#zoomBtn").tap()
             assert "FAR" in page.locator("#zoomBtn").inner_text()
@@ -53,6 +74,10 @@ try:
                 page.locator("#"+action).tap()
             page.screenshot(path=screenshots/f"4.0-game-{width}.png")
             page.locator("#pauseBtn").tap()
+            assert page.locator("#resumeBtn").is_visible()
+            page.locator("#pauseSettingsBtn").tap()
+            assert page.locator("#styleOption-hybrid").get_attribute("aria-checked")=="true"
+            page.locator("#settingsBackBtn").tap()
             assert page.locator("#resumeBtn").is_visible()
             page.locator("#resumeBtn").tap()
             assert not errors,errors

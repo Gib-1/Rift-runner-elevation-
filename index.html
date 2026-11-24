@@ -113,6 +113,29 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 .achievementItem strong{font-size:14px}.achievementItem small{font-size:11px;color:#adc9df;line-height:1.35}
 .settingList{display:flex;flex-direction:column;gap:3px;margin:14px 0}.settingList button{margin-top:6px}
 #settings .panel{max-height:92dvh;overflow-y:auto;scrollbar-width:thin}
+/* Phase 1: saved visual-style preferences. Artwork is developed in later phases. */
+.styleSection{margin:15px 0 16px;text-align:left}
+.styleSection h3{font-size:12px;letter-spacing:1.4px;color:#aff0ff;font-weight:950;margin:0 0 7px}
+.styleSectionIntro{font-size:11px;color:#a9c9e3;line-height:1.45;margin:0 0 10px}
+.styleOptions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.visualStyleCard{display:flex;align-items:flex-start;gap:9px;min-width:0;min-height:69px;text-align:left;padding:10px 8px;border:1px solid #476b8b;border-radius:12px;background:#102742;color:#e5f6ff;cursor:pointer}
+.visualStyleCard.isSelected{background:#173958;border-color:#77e9ff;box-shadow:inset 0 0 0 1px rgba(104,240,255,.32)}
+.visualStyleCard:focus-visible,.styleSwitch:focus-visible{outline:3px solid #9af5ff;outline-offset:2px}
+.styleSwatch{display:block;width:19px;height:19px;flex:0 0 19px;border:1px solid #b0ceea77;border-radius:5px;background:linear-gradient(135deg,var(--style-color,#6ce8ff),#0a172a)}
+.visualStyleCard strong{display:block;font-size:11px;line-height:1.3;font-weight:950;letter-spacing:.1px}
+.visualStyleCard small{display:block;font-size:10px;color:#bbd0e5;margin-top:4px;line-height:1.28}
+.visualStyleCard[data-style="normal"]{--style-color:#73dafa}.visualStyleCard[data-style="military"]{--style-color:#8aa994}.visualStyleCard[data-style="neon"]{--style-color:#ff67cc}.visualStyleCard[data-style="cosmic"]{--style-color:#a078ff}.visualStyleCard[data-style="hybrid"]{--style-color:#f1b66c}
+#visualPreview{--preview-color:#70e3ff;display:flex;align-items:center;gap:12px;padding:12px;margin:12px 0;border:1px solid color-mix(in srgb,var(--preview-color),transparent 52%);border-radius:12px;background:linear-gradient(105deg,rgba(11,32,56,.95),rgba(22,28,53,.8));min-height:62px}
+#visualPreview[data-style="military"]{--preview-color:#9dbfa9}#visualPreview[data-style="neon"]{--preview-color:#ff69d7}#visualPreview[data-style="cosmic"]{--preview-color:#ae85ff}#visualPreview[data-style="hybrid"]{--preview-color:#ffbe76}
+.stylePreviewShip{font-size:29px;color:var(--preview-color);text-shadow:0 0 13px var(--preview-color);line-height:1;flex:0 0 32px;text-align:center}
+.stylePreviewCopy strong{display:block;font-size:12px;color:#fff}.stylePreviewCopy small{display:block;font-size:10px;color:#b9d0e6;line-height:1.45;margin-top:4px}
+.styleSwitch{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;padding:10px 11px;margin-top:7px;border:1px solid #406384;border-radius:11px;background:#102640;text-align:left;font-size:12px;font-weight:800}
+.styleSwitch .switchValue{flex:0 0 auto;padding:4px 10px;background:#183451;border:1px solid #4a7191;border-radius:20px;color:#c1d9f0;font-size:10px;letter-spacing:.5px}
+.styleSwitch[aria-checked="true"] .switchValue{background:#165b62;border-color:#61c9bc;color:#c5fff0}
+.stylePhaseNotice{font-size:11px;color:#9fc7dc;line-height:1.5;margin:10px 0 0}
+#settingsBackBtn{position:sticky;bottom:0;z-index:1;box-shadow:0 -9px 22px #06101c}
+@media(max-width:325px){.styleOptions{grid-template-columns:1fr}.visualStyleCard{min-height:49px}}
+
 @media (max-height:500px){#menu .secondary{padding:9px;font-size:13px}#menu .primary{padding:11px}#menu .panel{padding:13px}#menu .kicker{margin:6px 0}#settings .panel{padding:12px}}
 /* Drone Armada: low-cost HUD extensions, never block touch input. */
 #battleMetrics{position:fixed;z-index:4;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translateX(-50%);pointer-events:none;color:#b7f9ff;font-size:10px;letter-spacing:1.1px;font-weight:900;text-shadow:0 2px 9px #000,0 0 9px #1ad5d5;white-space:nowrap;text-align:center;opacity:.9}
@@ -145,7 +168,26 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 <div class="overlay hidden" id="hangar"><div class="panel"><div id="evoMode">THE HANGAR</div><h2 class="sectiontitle">PERMANENT EVOLUTION</h2><p class="sub">Earn Rift Cores after each run. Buy upgrades that carry into every future mission.</p><div id="hangarBalance" class="tinycap"></div><div id="hangarProgress" class="shopProgress"></div><div id="shopItems"></div><button class="secondary" id="hangarBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="achievements"><div class="panel"><h2 class="sectiontitle">CHALLENGES</h2><p class="sub" id="achievementCount">Achievements and Rift Core rewards</p><div id="achievementItems"></div><button class="secondary" id="achievementsBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="featureGuide"><div class="panel" style="max-height:91dvh;overflow-y:auto;text-align:left"><h2 class="sectiontitle" style="text-align:center">ENEMY UPRISING + COIN RAIN</h2><p class="sub" style="text-align:center">35 Drone Armada improvements plus 5 new enemy types, 20 run upgrades, and 10 permanent upgrades</p><ol id="featureGuideList" style="font-size:13px;line-height:1.8;color:#d1eefa;padding-left:22px"></ol><button class="primary" id="featuresBackBtn">← BACK</button></div></div>
-<div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Change mobile performance and accessibility without resetting progress.</p><div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="zoomBtn" type="button">CAMERA: NORMAL</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Settings save only on this device.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
+<div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Customize your appearance and performance without resetting progress.</p>
+<section class="styleSection" aria-labelledby="visualStyleHeading">
+<h3 id="visualStyleHeading">VISUAL STYLE · PHASE 1</h3>
+<p class="styleSectionIntro">Choose one appearance. Normal preserves the original shapes; the other styles are saved for the upcoming redesign phases.</p>
+<div class="styleOptions" role="radiogroup" aria-label="Visual style">
+<button class="visualStyleCard" id="styleOption-normal" data-style="normal" type="button" role="radio" aria-checked="true"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Normal</strong><small>Original shapes · ready</small></span></button>
+<button class="visualStyleCard" id="styleOption-military" data-style="military" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Military Sci-Fi</strong><small>Armor &amp; tactical ships</small></span></button>
+<button class="visualStyleCard" id="styleOption-neon" data-style="neon" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Neon Cyberpunk</strong><small>Energy &amp; glowing outlines</small></span></button>
+<button class="visualStyleCard" id="styleOption-cosmic" data-style="cosmic" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Dark Cosmic Sci-Fi</strong><small>Alien &amp; Void corruption</small></span></button>
+<button class="visualStyleCard" id="styleOption-hybrid" data-style="hybrid" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Hybrid</strong><small>Armor + neon + cosmic</small></span></button>
+</div>
+<div id="visualPreview" data-style="normal" role="status" aria-live="polite"><span class="stylePreviewShip" aria-hidden="true">◆</span><span class="stylePreviewCopy"><strong id="visualPreviewName">NORMAL · ORIGINAL</strong><small id="visualPreviewDesc">Original game graphics remain active.</small></span></div>
+<h3>FUTURE ARTWORK OPTIONS</h3>
+<button class="styleSwitch" id="styleEnemiesBtn" type="button" role="switch" aria-checked="true"><span>Redesigned enemies</span><span class="switchValue">ON</span></button>
+<button class="styleSwitch" id="styleArmorBtn" type="button" role="switch" aria-checked="true"><span>Animated ship armor &amp; thrusters</span><span class="switchValue">ON</span></button>
+<button class="styleSwitch" id="styleEffectsBtn" type="button" role="switch" aria-checked="true"><span>Enhanced style effects</span><span class="switchValue">ON</span></button>
+<p class="stylePhaseNotice" id="stylePhaseNotice">Phase 1 sets up your preferences. New player, enemy, drone, and arena appearances will be added in Phases 2–7. These switches do not change gameplay yet.</p>
+</section>
+<h3 class="tinycap" style="text-align:left;margin-top:18px">PERFORMANCE &amp; ACCESSIBILITY</h3>
+<div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="zoomBtn" type="button">CAMERA: NORMAL</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Preferences are saved on this device only; your progress and backup format do not change.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="pauseOverlay"><div class="panel"><h2 class="sectiontitle">MISSION PAUSED</h2><p class="sub">Your progress is safe while this screen is open.</p><button class="primary" id="resumeBtn">▶ RESUME</button><button class="secondary" id="restartPauseBtn">RESTART RUN</button><button class="secondary" id="pauseSettingsBtn">⚙ SETTINGS</button><button class="secondary" id="quitBtn">MAIN MENU</button></div></div>
 <div class="overlay hidden" id="gameOver"><div class="panel"><div class="tinycap">MISSION REPORT</div><h2 class="sectiontitle" style="margin-top:11px">RIFT COLLAPSED</h2><div id="finalScore">0</div><div class="tinycap">ENEMIES DEFEATED</div><div id="finalStats"></div><div id="earnedLine" style="font-size:15px;font-weight:900;color:#8af2fa;margin:-10px 0 16px"></div><button class="primary" id="retryBtn">↻ PLAY AGAIN</button><button class="secondary" id="menuBtn">MAIN MENU</button></div></div>
 <script>
@@ -153,10 +195,21 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const TWO=Math.PI*2,rand=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),hypot=Math.hypot;
 let SW=innerWidth,SH=innerHeight,DPR=1,last=performance.now(),mode='menu',soundOn=true,audio=null;
-let gameSettings={fx:'balanced',screenShake:true,damageNumbers:true,zoom:'normal'};
+// Visual-style preferences are ready for future art passes; do not alter gameplay draw calls in Phase 1.
+const VISUAL_STYLES=Object.freeze({
+ normal:{name:'Normal',summary:'Original game graphics are active.'},
+ military:{name:'Military Sci-Fi',summary:'Armored player and tactical enemies are planned for later phases.'},
+ neon:{name:'Neon Cyberpunk',summary:'Glowing ships and neon enemies are planned for later phases.'},
+ cosmic:{name:'Dark Cosmic Sci-Fi',summary:'Corrupted cosmic ships and enemies are planned for later phases.'},
+ hybrid:{name:'Hybrid',summary:'Military armor, neon energy and cosmic corruption are planned for later phases.'}
+});
+let gameSettings={fx:'balanced',screenShake:true,damageNumbers:true,zoom:'normal',visualStyle:'normal',styleEnemies:true,styleArmor:true,styleEffects:true};
 try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null');if(saved&&typeof saved==='object'){
  gameSettings.fx=saved.fx==='low'?'low':'balanced';gameSettings.screenShake=saved.screenShake!==false;
- gameSettings.damageNumbers=saved.damageNumbers!==false;gameSettings.zoom=['near','normal','far'].includes(saved.zoom)?saved.zoom:'normal';soundOn=saved.sound!==false}}catch(e){}
+ gameSettings.damageNumbers=saved.damageNumbers!==false;gameSettings.zoom=['near','normal','far'].includes(saved.zoom)?saved.zoom:'normal';
+ gameSettings.visualStyle=Object.prototype.hasOwnProperty.call(VISUAL_STYLES,saved.visualStyle)?saved.visualStyle:'normal';
+ gameSettings.styleEnemies=saved.styleEnemies!==false;gameSettings.styleArmor=saved.styleArmor!==false;gameSettings.styleEffects=saved.styleEffects!==false;
+ soundOn=saved.sound!==false}}catch(e){}
 function saveSettings(){try{localStorage.setItem('riftrunner_options_v1',JSON.stringify({...gameSettings,sound:soundOn}))}catch(e){}}
 const ui={hud:$('hud'),controls:$('controls'),menu:$('menu'),upgrades:$('upgrades'),hangar:$('hangar'),achievements:$('achievements'),settings:$('settings'),featureGuide:$('featureGuide'),pause:$('pauseOverlay'),over:$('gameOver')};
 let runMode='normal',endlessSupplyClock=45,endlessMilestoneQueue=[],endlessHordeClock=5,endlessHordeCount=0,endlessDynamicCap=82,endlessSlowFrames=0,endlessGoodFrames=0;
@@ -1306,7 +1359,24 @@ function refreshSettings(){
  $('damageNumsBtn').textContent='COMBAT TEXT: '+(gameSettings.damageNumbers?'ON':'OFF');$('zoomBtn').textContent='CAMERA: '+gameSettings.zoom.toUpperCase();
  $('soundBtn').textContent='SOUND: '+(soundOn?'ON':'OFF');
  $('settingsSoundBtn').textContent='SOUND: '+(soundOn?'ON':'OFF');
+ const active=VISUAL_STYLES[gameSettings.visualStyle]||VISUAL_STYLES.normal;
+ for(const id of Object.keys(VISUAL_STYLES)){
+  const b=$('styleOption-'+id),selected=id===gameSettings.visualStyle;
+  b.setAttribute('aria-checked',String(selected));b.classList.toggle('isSelected',selected);
+ }
+ $('visualPreview').setAttribute('data-style',gameSettings.visualStyle);
+ $('visualPreviewName').textContent=active.name.toUpperCase();
+ $('visualPreviewDesc').textContent=active.summary;
+ for(const [button,key] of [['styleEnemiesBtn','styleEnemies'],['styleArmorBtn','styleArmor'],['styleEffectsBtn','styleEffects']]){
+  const b=$(button),enabled=gameSettings[key];b.setAttribute('aria-checked',String(enabled));
+  b.querySelector('.switchValue').textContent=enabled?'ON':'OFF';
+ }
 }
+function chooseVisualStyle(id){if(!Object.prototype.hasOwnProperty.call(VISUAL_STYLES,id))return;
+ gameSettings.visualStyle=id;saveSettings();refreshSettings();}
+function toggleStyleSetting(key){if(!['styleEnemies','styleArmor','styleEffects'].includes(key))return;
+ gameSettings[key]=!gameSettings[key];saveSettings();refreshSettings();}
+
 function openSettings(){settingsReturnMode=mode==='pause'?'pause':'menu';refreshSettings();setMode('settings')}
 function toggleSound(){soundOn=!soundOn;if(soundOn)audioInit();saveSettings();refreshSettings()}
 $('featuresBtn').addEventListener('click',()=>{const list=$('featureGuideList');if(!list.children.length){for(const text of EVO42_FEATURES){const li=document.createElement('li');li.textContent=text;list.append(li)}}setMode('featureGuide')});$('featuresBackBtn').addEventListener('click',goMenu);$('settingsBtn').addEventListener('click',openSettings);$('pauseSettingsBtn').addEventListener('click',openSettings);
@@ -1314,6 +1384,10 @@ $('settingsBackBtn').addEventListener('click',()=>setMode(settingsReturnMode));
 $('fxBtn').addEventListener('click',()=>{gameSettings.fx=gameSettings.fx==='low'?'balanced':'low';saveSettings();resize();refreshSettings()});
 $('shakeBtn').addEventListener('click',()=>{gameSettings.screenShake=!gameSettings.screenShake;saveSettings();refreshSettings()});
 $('damageNumsBtn').addEventListener('click',()=>{gameSettings.damageNumbers=!gameSettings.damageNumbers;saveSettings();refreshSettings()});$('zoomBtn').addEventListener('click',()=>{const modes=['normal','far','near'];gameSettings.zoom=modes[(modes.indexOf(gameSettings.zoom)+1)%modes.length];saveSettings();refreshSettings()});
+for(const id of Object.keys(VISUAL_STYLES))$('styleOption-'+id).addEventListener('click',()=>chooseVisualStyle(id));
+$('styleEnemiesBtn').addEventListener('click',()=>toggleStyleSetting('styleEnemies'));
+$('styleArmorBtn').addEventListener('click',()=>toggleStyleSetting('styleArmor'));
+$('styleEffectsBtn').addEventListener('click',()=>toggleStyleSetting('styleEffects'));
 $('soundBtn').addEventListener('click',toggleSound);$('settingsSoundBtn').addEventListener('click',toggleSound);refreshSettings();
 window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(e.code))e.preventDefault();keyboard.add(e.code);if(e.repeat)return;if(e.code==='Space')dash();if(e.code==='KeyE')nova();if(e.code==='KeyQ')shield();if(e.code==='KeyR')gravity();if(e.code==='KeyF')cycleWeapon();if(e.code==='Escape')togglePause();if(e.code==='Enter'&&mode==='menu')start('normal');else if(e.code==='Enter'&&mode==='over')start()});window.addEventListener('keyup',e=>keyboard.delete(e.code));window.addEventListener('blur',()=>{keyboard.clear();if(mode==='play')setMode('pause')});document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode==='play')setMode('pause')});
 window.addEventListener('contextmenu',e=>e.preventDefault());
