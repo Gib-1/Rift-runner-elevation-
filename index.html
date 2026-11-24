@@ -113,7 +113,7 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 .achievementItem strong{font-size:14px}.achievementItem small{font-size:11px;color:#adc9df;line-height:1.35}
 .settingList{display:flex;flex-direction:column;gap:3px;margin:14px 0}.settingList button{margin-top:6px}
 #settings .panel{max-height:92dvh;overflow-y:auto;scrollbar-width:thin}
-/* Phase 1: saved visual-style preferences. Artwork is developed in later phases. */
+/* Phase 3: player and common-enemy style passes; advanced enemies and bosses stay original until later phases. */
 .styleSection{margin:15px 0 16px;text-align:left}
 .styleSection h3{font-size:12px;letter-spacing:1.4px;color:#aff0ff;font-weight:950;margin:0 0 7px}
 .styleSectionIntro{font-size:11px;color:#a9c9e3;line-height:1.45;margin:0 0 10px}
@@ -170,21 +170,21 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 <div class="overlay hidden" id="featureGuide"><div class="panel" style="max-height:91dvh;overflow-y:auto;text-align:left"><h2 class="sectiontitle" style="text-align:center">ENEMY UPRISING + COIN RAIN</h2><p class="sub" style="text-align:center">35 Drone Armada improvements plus 5 new enemy types, 20 run upgrades, and 10 permanent upgrades</p><ol id="featureGuideList" style="font-size:13px;line-height:1.8;color:#d1eefa;padding-left:22px"></ol><button class="primary" id="featuresBackBtn">← BACK</button></div></div>
 <div class="overlay hidden" id="settings"><div class="panel"><h2 class="sectiontitle">GAME SETTINGS</h2><p class="sub">Customize your appearance and performance without resetting progress.</p>
 <section class="styleSection" aria-labelledby="visualStyleHeading">
-<h3 id="visualStyleHeading">VISUAL STYLE · PHASE 1</h3>
-<p class="styleSectionIntro">Choose one appearance. Normal preserves the original shapes; the other styles are saved for the upcoming redesign phases.</p>
+<h3 id="visualStyleHeading">VISUAL STYLE · PHASE 3</h3>
+<p class="styleSectionIntro">Choose one appearance. Normal keeps the original shapes. The other four styles now redesign your player ship and common enemies.</p>
 <div class="styleOptions" role="radiogroup" aria-label="Visual style">
 <button class="visualStyleCard" id="styleOption-normal" data-style="normal" type="button" role="radio" aria-checked="true"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Normal</strong><small>Original shapes · ready</small></span></button>
-<button class="visualStyleCard" id="styleOption-military" data-style="military" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Military Sci-Fi</strong><small>Armor &amp; tactical ships</small></span></button>
-<button class="visualStyleCard" id="styleOption-neon" data-style="neon" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Neon Cyberpunk</strong><small>Energy &amp; glowing outlines</small></span></button>
-<button class="visualStyleCard" id="styleOption-cosmic" data-style="cosmic" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Dark Cosmic Sci-Fi</strong><small>Alien &amp; Void corruption</small></span></button>
-<button class="visualStyleCard" id="styleOption-hybrid" data-style="hybrid" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Hybrid</strong><small>Armor + neon + cosmic</small></span></button>
+<button class="visualStyleCard" id="styleOption-military" data-style="military" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Military Sci-Fi</strong><small>Armored player & basic enemies live</small></span></button>
+<button class="visualStyleCard" id="styleOption-neon" data-style="neon" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Neon Cyberpunk</strong><small>Neon player & basic enemies live</small></span></button>
+<button class="visualStyleCard" id="styleOption-cosmic" data-style="cosmic" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Dark Cosmic Sci-Fi</strong><small>Cosmic player & basic enemies live</small></span></button>
+<button class="visualStyleCard" id="styleOption-hybrid" data-style="hybrid" type="button" role="radio" aria-checked="false"><span class="styleSwatch" aria-hidden="true"></span><span><strong>Hybrid</strong><small>Hybrid player & basic enemies live</small></span></button>
 </div>
 <div id="visualPreview" data-style="normal" role="status" aria-live="polite"><span class="stylePreviewShip" aria-hidden="true">◆</span><span class="stylePreviewCopy"><strong id="visualPreviewName">NORMAL · ORIGINAL</strong><small id="visualPreviewDesc">Original game graphics remain active.</small></span></div>
-<h3>FUTURE ARTWORK OPTIONS</h3>
+<h3>ARTWORK OPTIONS</h3>
 <button class="styleSwitch" id="styleEnemiesBtn" type="button" role="switch" aria-checked="true"><span>Redesigned enemies</span><span class="switchValue">ON</span></button>
 <button class="styleSwitch" id="styleArmorBtn" type="button" role="switch" aria-checked="true"><span>Animated ship armor &amp; thrusters</span><span class="switchValue">ON</span></button>
 <button class="styleSwitch" id="styleEffectsBtn" type="button" role="switch" aria-checked="true"><span>Enhanced style effects</span><span class="switchValue">ON</span></button>
-<p class="stylePhaseNotice" id="stylePhaseNotice">Phase 1 sets up your preferences. New player, enemy, drone, and arena appearances will be added in Phases 2–7. These switches do not change gameplay yet.</p>
+<p class="stylePhaseNotice" id="stylePhaseNotice">Phases 2–3 are live: the ship and common enemies use your selected style. Normal keeps original graphics. Advanced enemies, bosses, drones, and arenas will be redesigned in later phases.</p>
 </section>
 <h3 class="tinycap" style="text-align:left;margin-top:18px">PERFORMANCE &amp; ACCESSIBILITY</h3>
 <div class="settingList"><button class="secondary" id="fxBtn" type="button">VISUAL EFFECTS: BALANCED</button><button class="secondary" id="shakeBtn" type="button">SCREEN SHAKE: ON</button><button class="secondary" id="damageNumsBtn" type="button">COMBAT TEXT: ON</button><button class="secondary" id="zoomBtn" type="button">CAMERA: NORMAL</button><button class="secondary" id="settingsSoundBtn" type="button">SOUND: ON</button></div><p class="saveNote">Low Effects reduces particles and rendering resolution. Preferences are saved on this device only; your progress and backup format do not change.</p><button class="primary" id="settingsBackBtn">← BACK</button></div></div>
@@ -195,13 +195,13 @@ button{font:inherit;color:inherit;border:0;cursor:pointer;touch-action:manipulat
 const $=id=>document.getElementById(id),canvas=$('game'),ctx=canvas.getContext('2d',{alpha:false});
 const TWO=Math.PI*2,rand=(a,b)=>a+Math.random()*(b-a),clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),hypot=Math.hypot;
 let SW=innerWidth,SH=innerHeight,DPR=1,last=performance.now(),mode='menu',soundOn=true,audio=null;
-// Visual-style preferences are ready for future art passes; do not alter gameplay draw calls in Phase 1.
+// Preferences control live ship art (Phase 2) and basic-enemy art (Phase 3); default normal retains original drawings.
 const VISUAL_STYLES=Object.freeze({
  normal:{name:'Normal',summary:'Original game graphics are active.'},
- military:{name:'Military Sci-Fi',summary:'Armored player and tactical enemies are planned for later phases.'},
- neon:{name:'Neon Cyberpunk',summary:'Glowing ships and neon enemies are planned for later phases.'},
- cosmic:{name:'Dark Cosmic Sci-Fi',summary:'Corrupted cosmic ships and enemies are planned for later phases.'},
- hybrid:{name:'Hybrid',summary:'Military armor, neon energy and cosmic corruption are planned for later phases.'}
+ military:{name:'Military Sci-Fi',summary:'Armored player and common enemies are live. Advanced enemies later.'},
+ neon:{name:'Neon Cyberpunk',summary:'Glowing player and common enemies are live. Advanced enemies later.'},
+ cosmic:{name:'Dark Cosmic Sci-Fi',summary:'Cosmic player and common enemies are live. Advanced enemies later.'},
+ hybrid:{name:'Hybrid',summary:'Hybrid player and common enemies are live. Advanced enemies later.'}
 });
 let gameSettings={fx:'balanced',screenShake:true,damageNumbers:true,zoom:'normal',visualStyle:'normal',styleEnemies:true,styleArmor:true,styleEffects:true};
 try{const saved=JSON.parse(localStorage.getItem('riftrunner_options_v1')||'null');if(saved&&typeof saved==='object'){
@@ -1201,6 +1201,176 @@ function updateHUD(){if(!player)return;
 function poly(x,y,r,n,rot){ctx.beginPath();for(let i=0;i<n;i++){const a=rot+i*TWO/n;const px=x+Math.cos(a)*r,py=y+Math.sin(a)*r;i?ctx.lineTo(px,py):ctx.moveTo(px,py)}ctx.closePath()}
 function drawBackground(){const key=mapIndex+':'+SW+':'+SH;if(bgCacheKey!==key){const th=themes[mapIndex];bgGradient=ctx.createRadialGradient(SW*.52,SH*.36,20,SW*.52,SH*.5,Math.max(SW,SH)*.8);bgGradient.addColorStop(0,th.center);bgGradient.addColorStop(.65,th.mid);bgGradient.addColorStop(1,th.edge);bgCacheKey=key}ctx.fillStyle=bgGradient;ctx.fillRect(0,0,SW,SH)}
 function cameraScale(){return gameSettings.zoom==='near'?.98:gameSettings.zoom==='far'?.73:.86} // world only, touch buttons keep their size
+
+function drawNormalPlayerShip(){
+ ctx.shadowBlur=19;ctx.shadowColor=voidActive?'#f18bff':player.dashing>0?'#a9ffff':'#55cfff';ctx.fillStyle=voidActive?'#4e2b79':'#2d89e0';ctx.strokeStyle=voidActive?'#f39dff':'#a6f4ff';ctx.lineWidth=2.4;
+ ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(15,16);ctx.lineTo(0,10);ctx.lineTo(-15,16);ctx.closePath();ctx.fill();ctx.stroke();
+ ctx.fillStyle='#fbffff';ctx.beginPath();ctx.moveTo(0,-23);ctx.lineTo(4,-15);ctx.lineTo(-4,-15);ctx.closePath();ctx.fill();
+ ctx.fillStyle='#daffff';ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(5,4);ctx.lineTo(0,1);ctx.lineTo(-5,4);ctx.closePath();ctx.fill();
+ if(voidActive){
+  ctx.shadowBlur=7;ctx.shadowColor='#d657ff';ctx.strokeStyle='#e991ff';ctx.lineWidth=1.6+Math.sin(timer*13)*.3;ctx.beginPath();
+  ctx.moveTo(-4,-15);ctx.lineTo(0,-6);ctx.lineTo(-6,1);ctx.lineTo(-1,7);ctx.lineTo(-4,13);
+  ctx.moveTo(6,-9);ctx.lineTo(1,-1);ctx.lineTo(8,5);ctx.lineTo(4,11);
+  ctx.moveTo(-9,9);ctx.lineTo(-3,5);ctx.stroke();
+ }
+}
+function drawStyledThruster(x,y,w,h,color,animated,fx,intensity=1){
+ const flick=animated?(0.72+Math.sin(timer*18+x*.2)*0.28):0.72;
+ const len=h*(0.72+flick*0.9)*intensity;
+ ctx.save();
+ ctx.translate(x,y);
+ if(fx){ctx.shadowBlur=12;ctx.shadowColor=color;}
+ ctx.globalAlpha=.55+.25*flick;
+ ctx.fillStyle=color;
+ ctx.beginPath();ctx.moveTo(-w/2,0);ctx.lineTo(0,len);ctx.lineTo(w/2,0);ctx.closePath();ctx.fill();
+ ctx.globalAlpha=.92;
+ ctx.fillStyle='#f9ffff';
+ ctx.beginPath();ctx.moveTo(-w*.24,0);ctx.lineTo(0,len*.58);ctx.lineTo(w*.24,0);ctx.closePath();ctx.fill();
+ ctx.restore();
+}
+function drawStyledPlayerShip(style){
+ if(style==='normal'){drawNormalPlayerShip();return;}
+ const animated=gameSettings.styleArmor;
+ const fx=gameSettings.styleEffects&&gameSettings.fx!=='low';
+ const pulse=animated?(0.5+0.5*Math.sin(timer*4.6)):0.5;
+ let hull='#456',stroke='#fff',wing='#234',core='#fff',trim='#9ff',engine='#7ff',energy='#7ff',shadow='#59e8fb';
+ if(style==='military'){hull=voidActive?'#5c3b74':'#4f6770';wing=voidActive?'#41274f':'#2f434a';stroke=voidActive?'#efb0ff':'#d6efe7';core=voidActive?'#ffd8ff':'#eaf8f3';trim=voidActive?'#d883ff':'#8fe1c0';engine=voidActive?'#c98aff':'#ffb465';energy=voidActive?'#ff9ef2':'#85d1b0';shadow=voidActive?'#d67bff':'#9fd1c0';}
+ else if(style==='neon'){hull=voidActive?'#4b2270':'#091e36';wing=voidActive?'#381756':'#05111f';stroke=voidActive?'#ffc1ff':'#56f7ff';core='#ffffff';trim=voidActive?'#ff86ff':'#ff4dd2';engine=voidActive?'#bf89ff':'#58d3ff';energy=voidActive?'#df86ff':'#8efff6';shadow=voidActive?'#dc7fff':'#57f7ff';}
+ else if(style==='cosmic'){hull=voidActive?'#62308d':'#27163f';wing=voidActive?'#36134f':'#110a1f';stroke=voidActive?'#ffc0ff':'#caa6ff';core='#f5edff';trim=voidActive?'#ff8fed':'#9667ff';engine=voidActive?'#ff80dd':'#8c7cff';energy=voidActive?'#ffd4ff':'#c18fff';shadow=voidActive?'#ff87ef':'#a67dff';}
+ else if(style==='hybrid'){hull=voidActive?'#5d357d':'#3a4d5c';wing=voidActive?'#3b1c55':'#1b2733';stroke=voidActive?'#ffd0ff':'#baf2ff';core='#fbffff';trim=voidActive?'#ff89e7':'#ffb85c';engine=voidActive?'#db8bff':'#69f2ff';energy=voidActive?'#ffd8ff':'#a1ffe4';shadow=voidActive?'#ff95ea':'#69efff';}
+ ctx.shadowBlur=fx?20:8;ctx.shadowColor=shadow;
+ ctx.fillStyle=wing;ctx.strokeStyle=stroke;ctx.lineWidth=2.2;
+ if(style==='military'){
+  ctx.beginPath();ctx.moveTo(-18,14);ctx.lineTo(-27,17);ctx.lineTo(-20,-2);ctx.lineTo(-8,5);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.moveTo(18,14);ctx.lineTo(27,17);ctx.lineTo(20,-2);ctx.lineTo(8,5);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=hull;ctx.beginPath();ctx.moveTo(0,-26);ctx.lineTo(10,-10);ctx.lineTo(14,8);ctx.lineTo(8,20);ctx.lineTo(-8,20);ctx.lineTo(-14,8);ctx.lineTo(-10,-10);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=trim;ctx.fillRect(-16,-8,5,11);ctx.fillRect(11,-8,5,11);
+  ctx.fillStyle=core;ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(5,-13);ctx.lineTo(0,-9);ctx.lineTo(-5,-13);ctx.closePath();ctx.fill();
+  ctx.fillStyle=energy;ctx.fillRect(-3,-1,6,12);
+ }
+ else if(style==='neon'){
+  ctx.beginPath();ctx.moveTo(-19,14);ctx.lineTo(-25,6);ctx.lineTo(-11,-10);ctx.lineTo(-4,3);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.moveTo(19,14);ctx.lineTo(25,6);ctx.lineTo(11,-10);ctx.lineTo(4,3);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=hull;ctx.beginPath();ctx.moveTo(0,-27);ctx.lineTo(11,-8);ctx.lineTo(9,12);ctx.lineTo(0,21);ctx.lineTo(-9,12);ctx.lineTo(-11,-8);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.strokeStyle=trim;ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(0,18);ctx.moveTo(-8,-4);ctx.lineTo(8,-4);ctx.moveTo(-14,8);ctx.lineTo(-5,12);ctx.moveTo(14,8);ctx.lineTo(5,12);ctx.stroke();
+  ctx.fillStyle=core;ctx.beginPath();ctx.arc(0,-14,4.5,0,Math.PI*2);ctx.fill();ctx.fillStyle=energy;ctx.fillRect(-3,0,6,10);
+ }
+ else if(style==='cosmic'){
+  ctx.beginPath();ctx.moveTo(-17,13);ctx.lineTo(-28,13);ctx.lineTo(-15,-6);ctx.lineTo(-7,3);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.moveTo(17,13);ctx.lineTo(28,13);ctx.lineTo(15,-6);ctx.lineTo(7,3);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=hull;ctx.beginPath();ctx.moveTo(0,-25);ctx.lineTo(11,-11);ctx.lineTo(12,10);ctx.lineTo(0,21);ctx.lineTo(-12,10);ctx.lineTo(-11,-11);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=trim;ctx.globalAlpha=.68+.22*pulse;for(const off of [-7,0,7]){ctx.beginPath();ctx.arc(off*.55,off-6,1.8,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+  ctx.strokeStyle=energy;ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(-4,-18);ctx.lineTo(0,-9);ctx.lineTo(-5,0);ctx.lineTo(2,9);ctx.moveTo(6,-13);ctx.lineTo(2,-4);ctx.lineTo(8,5);ctx.stroke();
+  ctx.fillStyle=core;ctx.beginPath();ctx.ellipse(0,-13,4.5,6,0,0,Math.PI*2);ctx.fill();
+ }
+ else if(style==='hybrid'){
+  ctx.beginPath();ctx.moveTo(-18,14);ctx.lineTo(-26,10);ctx.lineTo(-20,-4);ctx.lineTo(-7,4);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.moveTo(18,14);ctx.lineTo(26,10);ctx.lineTo(20,-4);ctx.lineTo(7,4);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.fillStyle=hull;ctx.beginPath();ctx.moveTo(0,-27);ctx.lineTo(11,-11);ctx.lineTo(13,8);ctx.lineTo(6,20);ctx.lineTo(-6,20);ctx.lineTo(-13,8);ctx.lineTo(-11,-11);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.strokeStyle=trim;ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(-8,6);ctx.lineTo(-13,14);ctx.moveTo(8,6);ctx.lineTo(13,14);ctx.moveTo(-4,-15);ctx.lineTo(4,-15);ctx.stroke();
+  ctx.strokeStyle=energy;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-2,-21);ctx.lineTo(1,-8);ctx.lineTo(-3,3);ctx.lineTo(2,11);ctx.moveTo(7,-10);ctx.lineTo(2,-2);ctx.lineTo(8,8);ctx.stroke();
+  ctx.fillStyle=core;ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(5,-14);ctx.lineTo(0,-8);ctx.lineTo(-5,-14);ctx.closePath();ctx.fill();
+ }
+ if(animated){
+  drawStyledThruster(-8,17,6,11,engine,animated,fx,1);
+  drawStyledThruster(8,17,6,11,engine,animated,fx,1);
+  if(style==='neon'||style==='hybrid')drawStyledThruster(0,20,5,9,energy,animated,fx,.85);
+ }
+ if(fx){
+  ctx.globalAlpha=.14+.08*pulse;ctx.fillStyle=energy;ctx.beginPath();ctx.ellipse(0,9,12,7,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+ }
+ if(voidActive && style!=='cosmic'){
+  ctx.strokeStyle='#ee94ff';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(-5,-14);ctx.lineTo(-1,-5);ctx.lineTo(-6,2);ctx.lineTo(-1,8);ctx.moveTo(6,-10);ctx.lineTo(2,-2);ctx.lineTo(8,6);ctx.stroke();
+ }
+}
+function drawPlayerShip(){const style=gameSettings.visualStyle||'normal';drawStyledPlayerShip(style);ctx.globalAlpha=1;ctx.shadowBlur=0;}
+
+
+// Phase 3: lightweight enemy silhouettes. Shapes are drawn around each enemy's existing
+// collision center; gameplay hitboxes, statistics, AI and movement are unchanged.
+const PHASE3_BASIC_TYPES=new Set(['drone','dart','tank','shooter','wisp','splitter','sniper','leech','charger','bomber','orbiter','bulwark','stalker','mender','miner']);
+const PHASE3_PALETTES={
+ military:{hull:'#3c535b',side:'#1d3039',line:'#c1d8cc',mark:'#ffc17d',core:'#a4f3db'},
+ neon:{hull:'#101b35',side:'#090f26',line:'#53ebff',mark:'#ff5bcb',core:'#bcffff'},
+ cosmic:{hull:'#2b173e',side:'#170d2a',line:'#c29aff',mark:'#ff79dc',core:'#ece0ff'},
+ hybrid:{hull:'#34485c',side:'#182433',line:'#a1edee',mark:'#ef9de1',core:'#ffcc88'}
+};
+function drawStyledBasicEnemy(e,style){
+ const pal=PHASE3_PALETTES[style];if(!pal)return;
+ const fx=gameSettings.styleEffects&&gameSettings.fx!=='low';
+ const flash=e.flash>0,emphasis=e.col;
+ const pulse=0.83+0.17*Math.sin(e.phase*2+e.id*.3);
+ ctx.save();ctx.scale(e.r/20,e.r/20);
+ ctx.lineWidth=1.85;ctx.shadowBlur=fx?4:0;ctx.shadowColor=emphasis;
+ const face=flash?'#ffffff':pal.hull,side=flash?'#f7faff':pal.side;
+ function shape(points,fill,stroke=pal.line){
+  ctx.beginPath();ctx.moveTo(points[0],points[1]);for(let n=2;n<points.length;n+=2)ctx.lineTo(points[n],points[n+1]);ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.stroke();
+ }
+ function orb(x,y,r,col){ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,r,0,TWO);ctx.fill()}
+ function line(x1,y1,x2,y2,col=pal.mark,width=2){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.lineWidth=width;ctx.strokeStyle=col;ctx.stroke()}
+ function plate(x,y,w,h,col=side){ctx.fillStyle=col;ctx.fillRect(x,y,w,h)}
+ const kind=e.kind;
+ // Thin high-speed interceptors: swept wings, long needle-shaped nose.
+ if(['dart','wisp','stalker'].includes(kind)){
+  shape([23,0,0,-10,-18,-15,-11,0,-18,15,0,10],side);
+  shape([19,0,-4,-5,-13,0,-4,5],face);
+  line(-11,-11,-1,-5);line(-11,11,-1,5);
+  orb(1,0,2.7,emphasis);
+  if(kind==='wisp'){orb(-10,0,2.3,pal.core)}
+ }
+ // Medium drones and orbiting scouts: four rotors around a diamond reactor.
+ else if(['drone','orbiter'].includes(kind)){
+  for(const y of [-14,14])for(const x of [-12,12]){orb(x,y,4,side);orb(x,y,2.1,pal.mark)}
+  shape([20,0,3,-12,-15,0,3,12],face);
+  plate(-12,-4,19,8,side);orb(0,0,4.1,emphasis);
+  line(11,-7,11,7,pal.mark,2.1);
+ }
+ // Ranged units: visible forward barrels and stabilized side pods.
+ else if(['shooter','sniper'].includes(kind)){
+  shape([10,-12,-9,-15,-17,-6,-17,6,-9,15,10,12,17,0],side);
+  shape([12,-7,-5,-9,-12,0,-5,9,12,7],face);
+  plate(10,-5,13,4,pal.line);plate(10,2,13,4,pal.line);
+  orb(-3,0,4.2,emphasis);
+  if(kind==='sniper'){plate(14,-1.7,10,3.4,pal.mark);line(-9,-10,-4,-6,pal.core)}
+ }
+ // Heavy armor: broad side tracks, segmented plating and a central cannon.
+ else if(['tank','bulwark'].includes(kind)){
+  shape([13,-17,-14,-17,-19,-12,-19,12,-14,17,13,17,19,9,19,-9],side);
+  plate(-17,-20,30,7,face);plate(-17,13,30,7,face);
+  shape([13,0,6,-11,-10,-10,-15,0,-10,10,6,11],face);
+  plate(4,-3,20,6,pal.mark);orb(-5,0,5,emphasis);
+  line(-11,-16,7,-16,pal.line,1.4);line(-11,16,7,16,pal.line,1.4);
+ }
+ // Chargers: forward armored ram, aggressive pointed fins.
+ else if(kind==='charger'){
+  shape([25,0,7,-18,-4,-9,-15,-14,-12,0,-15,14,-4,9,7,18],side);
+  shape([22,0,-5,-8,-12,0,-5,8],face);
+  line(7,-12,16,-3,pal.mark);line(7,12,16,3,pal.mark);
+  orb(-6,0,3.4,emphasis);
+ }
+ // Bombers, miners and splitters: segmented capsules with warning stripes.
+ else if(['bomber','miner','splitter'].includes(kind)){
+  shape([12,-16,-12,-16,-20,-7,-20,7,-12,16,12,16,20,7,20,-7],face);
+  shape([8,-11,-11,-11,-16,0,-11,11,8,11,14,0],side);
+  line(-8,-12,4,-12,pal.mark,3);line(-8,12,4,12,pal.mark,3);
+  orb(0,0,6.3,emphasis);orb(0,0,2.8,pal.core);
+  if(kind==='splitter'){orb(-12,0,2.5,pal.mark);orb(12,0,2.5,pal.mark)}
+ }
+ // Support/mender/leech: radial shield panels with a high-contrast core.
+ else if(['mender','leech'].includes(kind)){
+  shape([18,0,10,-12,-4,-17,-18,-8,-18,8,-4,17,10,12],side);
+  shape([12,0,4,-11,-10,-9,-15,0,-10,9,4,11],face);
+  plate(-9,-2,18,4,pal.mark);plate(-2,-9,4,18,pal.mark);
+  orb(0,0,5.1,emphasis);orb(0,0,2.5,pal.core);
+  if(kind==='leech'){line(-15,-6,-20,-14,pal.mark);line(-15,6,-20,14,pal.mark)}
+ }
+ // Color identity and attack readability remain tied to each enemy's original tint.
+ ctx.globalAlpha=fx?(.72*pulse):.78;
+ orb(-11,0,2.2,pal.mark);
+ ctx.globalAlpha=1;
+ ctx.restore();
+}
+
 function render(){ctx.setTransform(DPR,0,0,DPR,0,0);ctx.clearRect(0,0,SW,SH);drawBackground();const cx=mode==='menu'?Math.sin(performance.now()*.00009)*100:camera.x,cy=mode==='menu'?Math.cos(performance.now()*.00007)*80:camera.y;ctx.save();ctx.translate(Math.round(SW/2+(gameSettings.screenShake?rand(-shake,shake):0)),Math.round(SH/2+(gameSettings.screenShake?rand(-shake,shake):0)));const CAMERA_ZOOM=cameraScale();ctx.scale(CAMERA_ZOOM,CAMERA_ZOOM);ctx.translate(-cx,-cy);
 const viewW=SW/CAMERA_ZOOM,viewH=SH/CAMERA_ZOOM;const l=cx-viewW/2-70,r=cx+viewW/2+70,t=cy-viewH/2-70,b=cy+viewH/2+70;ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.14;ctx.lineWidth=1;ctx.beginPath();for(let x=Math.floor(l/75)*75;x<r;x+=75){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/75)*75;y<b;y+=75){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.globalAlpha=1;ctx.strokeStyle='rgba(89,215,254,.08)';ctx.beginPath();for(let x=Math.floor(l/450)*450;x<r;x+=450){ctx.moveTo(x,t);ctx.lineTo(x,b)}for(let y=Math.floor(t/450)*450;y<b;y+=450){ctx.moveTo(l,y);ctx.lineTo(r,y)}ctx.stroke();ctx.strokeStyle=themes[mapIndex].grid;ctx.globalAlpha=.36;ctx.lineWidth=9;ctx.strokeRect(runMode==='endless'?-ENDLESS_HALF_SIZE:-1900,runMode==='endless'?-ENDLESS_HALF_SIZE:-1900,runMode==='endless'?ENDLESS_HALF_SIZE*2:3800,runMode==='endless'?ENDLESS_HALF_SIZE*2:3800);ctx.globalAlpha=1;
 if(runMode==='endless'){
@@ -1245,8 +1415,10 @@ for(const beam of beams){ctx.save();ctx.globalAlpha=clamp(beam.life/beam.max,0,1
  ctx.beginPath();ctx.moveTo(beam.x1,beam.y1);const mx=(beam.x1+beam.x2)*.5+Math.sin(timer*48)*9,my=(beam.y1+beam.y2)*.5+Math.cos(timer*54)*9;ctx.lineTo(mx,my);ctx.lineTo(beam.x2,beam.y2);ctx.stroke();ctx.restore()}
 for(const b of enemyBullets){ctx.fillStyle=b.col||'#ff92cc';ctx.shadowBlur=12;ctx.shadowColor=b.col||'#ff4a9d';ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,TWO);ctx.fill()}ctx.shadowBlur=0;
 for(const e of enemies){if(e.x<l-90||e.x>r+90||e.y<t-90||e.y>b+90)continue;ctx.save();ctx.translate(e.x,e.y);if(e.hitPulse>0){const scale=1+e.hitPulse*.65;ctx.scale(scale,scale)}ctx.rotate(Math.atan2(player.y-e.y,player.x-e.x));ctx.shadowBlur=e.boss?25:10;ctx.shadowColor=e.col;ctx.fillStyle=e.flash>0?'#ffffff':e.col;ctx.strokeStyle='#fff8';ctx.lineWidth=2;
+const styledBasic=!e.boss&&gameSettings.styleEnemies&&gameSettings.visualStyle!=='normal'&&PHASE3_BASIC_TYPES.has(e.kind);
+if(styledBasic){drawStyledBasicEnemy(e,gameSettings.visualStyle)}else{
 if(['drone','shooter','sniper','leech','mender','miner','orbiter','sapper','nullifier','voidlancer','prismgun','stormweaver'].includes(e.kind)){poly(0,0,e.r,6,Math.PI/6);ctx.fill();ctx.stroke();ctx.fillStyle='#172642';poly(0,0,e.r*.48,6,Math.PI/6);ctx.fill()}else if(['dart','wisp','charger','stalker','bomber','strider','voidrunner','blinkblade'].includes(e.kind)){poly(0,0,e.r+2,3,0);ctx.fill();ctx.stroke()}else if(['tank','splitter','bulwark','ironclad','swarmcarrier'].includes(e.kind)){poly(0,0,e.r,8,Math.PI/8);ctx.fill();ctx.stroke();ctx.fillStyle='#1a2354';poly(0,0,e.r*.62,8,Math.PI/8);ctx.fill()}else{poly(0,0,e.r,10,Math.PI/10+e.phase*.2);ctx.fill();ctx.stroke();ctx.fillStyle='#37204c';poly(0,0,e.r*.65,7,e.phase*.4);ctx.fill();ctx.fillStyle='#f7ddff';ctx.beginPath();ctx.arc(0,0,11,0,TWO);ctx.fill()}
-ctx.shadowBlur=0;
+}ctx.shadowBlur=0;
 // Outline accents differentiate the five new units without expensive shaders.
 if(e.kind==='blinkblade'){ctx.strokeStyle='#fff0ff';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-e.r,-e.r*.45);ctx.lineTo(-e.r*.35,0);ctx.lineTo(-e.r,e.r*.45);ctx.moveTo(e.r,-e.r*.45);ctx.lineTo(e.r*.35,0);ctx.lineTo(e.r,e.r*.45);ctx.stroke()}
 else if(e.kind==='prismgun'){ctx.fillStyle='#e6ffff';ctx.fillRect(2,-4,e.r+11,8);ctx.fillStyle='#74ffff';ctx.fillRect(e.r+8,-3,6,6)}
@@ -1272,13 +1444,7 @@ if(player){
   if(d.flash>0){ctx.globalAlpha=d.flash/.14;ctx.shadowBlur=15;ctx.fillStyle='#faffea';poly(0,-20,8,5,timer*25);ctx.fill();ctx.globalAlpha=1}ctx.restore();
   if(d.lock>=0&&j===0&&gameSettings.fx!=='low'){const e=enemies.find(e=>e.id===d.lock&&!e.dead);if(e){ctx.save();ctx.strokeStyle=col;ctx.globalAlpha=.28;ctx.lineWidth=1.4;ctx.setLineDash([4,6]);ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(e.x,e.y);ctx.stroke();ctx.setLineDash([]);ctx.beginPath();ctx.arc(e.x,e.y,e.r+7,0,TWO);ctx.stroke();ctx.restore()}}
  }
- ctx.save();ctx.translate(player.x,player.y);ctx.rotate(player.aim+Math.PI/2);if(player.invuln>0&&Math.sin(performance.now()*.045)>0)ctx.globalAlpha=.45;ctx.shadowBlur=19;ctx.shadowColor=voidActive?'#f18bff':player.dashing>0?'#a9ffff':'#55cfff';ctx.fillStyle=voidActive?'#4e2b79':'#2d89e0';ctx.strokeStyle=voidActive?'#f39dff':'#a6f4ff';ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(0,-22);ctx.lineTo(15,16);ctx.lineTo(0,10);ctx.lineTo(-15,16);ctx.closePath();ctx.fill();ctx.stroke();ctx.fillStyle='#fbffff';ctx.beginPath();ctx.moveTo(0,-23);ctx.lineTo(4,-15);ctx.lineTo(-4,-15);ctx.closePath();ctx.fill();ctx.fillStyle='#daffff';ctx.beginPath();ctx.moveTo(0,-10);ctx.lineTo(5,4);ctx.lineTo(0,1);ctx.lineTo(-5,4);ctx.closePath();ctx.fill();if(voidActive){
-  // Cosmetic lightning fractures pulse on the hull; no changes to player stats or hitbox.
-  ctx.shadowBlur=7;ctx.shadowColor='#d657ff';ctx.strokeStyle='#e991ff';ctx.lineWidth=1.6+Math.sin(timer*13)*.3;ctx.beginPath();
-  ctx.moveTo(-4,-15);ctx.lineTo(0,-6);ctx.lineTo(-6,1);ctx.lineTo(-1,7);ctx.lineTo(-4,13);
-  ctx.moveTo(6,-9);ctx.lineTo(1,-1);ctx.lineTo(8,5);ctx.lineTo(4,11);
-  ctx.moveTo(-9,9);ctx.lineTo(-3,5);ctx.stroke();
- }ctx.globalAlpha=1;ctx.shadowBlur=0;ctx.restore();if(player.shotKick>0){ctx.save();ctx.strokeStyle='#d5feff';ctx.lineWidth=3;ctx.globalAlpha=clamp(player.shotKick/.105,0,1)*.85;ctx.beginPath();ctx.moveTo(player.x+Math.cos(player.aim)*24,player.y+Math.sin(player.aim)*24);ctx.lineTo(player.x+Math.cos(player.aim)*37,player.y+Math.sin(player.aim)*37);ctx.stroke();ctx.restore()}if(player.shield>0){ctx.strokeStyle='#7bffd1';ctx.lineWidth=4;ctx.shadowBlur=20;ctx.shadowColor='#7bffd1';ctx.beginPath();ctx.arc(player.x,player.y,player.r+17+Math.sin(performance.now()*.01)*2,0,TWO);ctx.stroke();ctx.shadowBlur=0}ctx.strokeStyle='rgba(112,225,255,.21)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(player.x,player.y,player.magnet,0,TWO);ctx.stroke()}
+ ctx.save();ctx.translate(player.x,player.y);ctx.rotate(player.aim+Math.PI/2);if(player.invuln>0&&Math.sin(performance.now()*.045)>0)ctx.globalAlpha=.45;drawPlayerShip();ctx.restore();if(player.shotKick>0){ctx.save();const shotColor=(gameSettings.visualStyle==='neon')?'#7efbff':(gameSettings.visualStyle==='cosmic')?'#d9a5ff':(gameSettings.visualStyle==='hybrid')?'#ffe39b':'#d5feff';ctx.strokeStyle=shotColor;ctx.lineWidth=3;ctx.globalAlpha=clamp(player.shotKick/.105,0,1)*.85;ctx.beginPath();ctx.moveTo(player.x+Math.cos(player.aim)*24,player.y+Math.sin(player.aim)*24);ctx.lineTo(player.x+Math.cos(player.aim)*37,player.y+Math.sin(player.aim)*37);ctx.stroke();ctx.restore()}if(player.shield>0){ctx.strokeStyle='#7bffd1';ctx.lineWidth=4;ctx.shadowBlur=20;ctx.shadowColor='#7bffd1';ctx.beginPath();ctx.arc(player.x,player.y,player.r+17+Math.sin(performance.now()*.01)*2,0,TWO);ctx.stroke();ctx.shadowBlur=0}ctx.strokeStyle='rgba(112,225,255,.21)';ctx.lineWidth=1.5;ctx.beginPath();ctx.arc(player.x,player.y,player.magnet,0,TWO);ctx.stroke()}
 for(const rg of rings){ctx.strokeStyle=rg.color;ctx.globalAlpha=clamp(rg.life/.65,0,1);ctx.lineWidth=7*rg.life/.65;ctx.shadowBlur=19;ctx.shadowColor=rg.color;ctx.beginPath();ctx.arc(rg.x,rg.y,rg.r,0,TWO);ctx.stroke()}ctx.globalAlpha=1;ctx.shadowBlur=0;
 ctx.textAlign='center';ctx.font='900 15px system-ui';for(const t of texts){ctx.globalAlpha=clamp(t.life/.7,0,1);ctx.fillStyle=t.color;ctx.fillText(t.value,t.x,t.y)}ctx.globalAlpha=1;ctx.restore();
 if(mode==='play'&&player){
