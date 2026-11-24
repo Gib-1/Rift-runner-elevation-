@@ -6,6 +6,15 @@
 
 # Changelog
 
+## Visual Redesign — Phase 1: Settings Foundation
+
+- Added five selectable visual style preferences to GAME SETTINGS: Normal (default), Military Sci-Fi, Neon Cyberpunk, Dark Cosmic Sci-Fi and Hybrid. Only one style can be selected at a time.
+- Added a small in-settings visual preview and three independently saved ON/OFF switches: Redesigned Enemies, Animated Ship Armor & Thrusters, and Enhanced Style Effects.
+- Added immediate, validated preference persistence using the existing `riftrunner_options_v1` localStorage key; older/invalid settings load with safe defaults and retain original FX, zoom, sound, shake and combat text choices.
+- Added a scrollable, touch-accessible Settings layout with a sticky Back control; preserve menu/paused return navigation in both modes.
+- **Foundation only:** the new style selector and switches intentionally do not modify gameplay visuals until the appropriate later redesign phases. Normal remains visually unchanged, and this patch adds no gameplay assets or runtime render cost.
+- Kept all existing content, XP and Coin Rain values, Classic and Endless systems, permanent purchases, gameplay save keys and version-1 backup format unmodified. Added automated preference, persistence, backwards-compatibility and responsive UI tests.
+
 ## Evolution 4.0 — Enemy Uprising + Coin Rain
 
 - Five unique enemies introduced: Blinkblade (teleport), Prism Gunner (3-way ranged bursts), Ironclad (temporary guard and charge), Stormweaver (hazard spells), and Swarm Carrier (three Dart minions upon defeat). Available to both Classic and Endless as difficulty grows; new distinct animated accent geometry on each unit.
